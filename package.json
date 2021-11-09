@@ -1,0 +1,44 @@
+{
+  "name": "bertin",
+  "version": "0.0.1",
+  "description": "Thematic mapping",
+  "main": "lib/index.js",
+  "module": "src/index.js",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neocarto/bertin.git"
+  },
+  "keywords": [
+    "cartography",
+    "geography",
+    "semiology",
+    "maps"
+  ],
+  "author": "Nicolas Lambert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neocarto/bertin/issues"
+  },
+  "homepage": "https://github.com/neocarto/bertin#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "rollup": "^2.59.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "d3": "^7.1.1",
+    "d3-geo-projection": "^4.0.0",
+    "d3-geo-scale-bar": "^1.1.1"
+  },
+    "scripts": {
+      "build": "rollup -c",
+      "prepare": "npm run build"
+    }
+}
