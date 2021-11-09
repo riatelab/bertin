@@ -1,47 +1,87 @@
-//imports
+// Imports
 import * as d3selection from "d3-selection";
 import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
+//const { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight } = require("./helpers/layout");
+import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
+
 
 // function
-export function layer({
-  projection = d3.geoPatterson(), // a D3 projection; null for pre-projected geometry
-  features, // a GeoJSON feature collection
-  outline = projection && projection.rotate ? { type: "Sphere" } : null, // a GeoJSON object for the background
-  width = 1000, // outer width, in pixels
-  height,
-  fill = "#cc76c9", // fill color for outline
-  stroke = "white" // stroke color for borders
+export function layer2({
+  features, // Compulsory
+  width = 1000,
+  projection = d3.geoPatterson(),
+  fill = "#d47ae6",
+  stroke = "white",
+  strokewidth = 0.5,
+  fillopacity = 1,
+  header = null,
+  footer = null,
+  graticule = null,
+  outline = null
+  //scalebar = null
 } = {}) {
-  // height auto
-  if (height === undefined) {
-    let ref;
-    //  outline === null ? (ref = features) : (ref = outline);
-    outline === null ? (ref = features) : (ref = { type: "Sphere" });
-    //height = 400;
-    const [[x0, y0], [x1, y1]] = d3.geoPath(projection.fitWidth(width, ref))
-      .bounds(ref);
-    const dy = Math.ceil(y1 - y0),
-      l = Math.min(Math.ceil(x1 - x0), dy);
-    projection.scale((projection.scale() * (l - 1)) / l).precision(0.2);
-    height = dy;
+  // heights
+  let height = getHeight(features, projection, width, outline);
+
+  let heightHeader = 0;
+  if (header) {
+    if (header.text) {
+      heightHeader = 20;
+    }
+    if (header.fontsize) {
+      heightHeader = header.fontsize;
+    }
   }
+
+  let heightFooter = 0;
+  if (footer) {
+    if (footer.text) {
+      heightFooter = 20;
+    }
+    if (footer.fontsize) {
+      heightFooter = footer.fontsize;
+    }
+  }
+
+  // Path
   const path = d3.geoPath(projection);
 
-  const svg = d3.create("svg")
+  // svg document
+  const svg = d3
+    .create("svg")
     .attr("width", width)
-    .attr("height", height)
-    .attr("viewBox", [0, 0, width, height])
+    .attr("height", height + heightHeader + heightFooter)
+    .attr("viewBox", [
+      0,
+      -heightHeader,
+      width,
+      height + heightHeader + heightFooter
+    ])
     .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
-  if (outline != null) {
-    svg
-      .append("path")
-      .attr("fill", "#c2dcf0")
-      .attr("stroke", "none")
-      .attr("d", path(outline));
+  // Outline (fill)
+  if (outline) {
+    plotOutline(svg, projection, {
+      fill: outline.fill,
+      stroke: "none",
+      strokewidth: "none"
+    });
   }
+
+  // Graticule
+  if (graticule) {
+    plotGraticule(svg, projection, {
+      stroke: graticule.stroke,
+      strokewidth: graticule.strokewidth,
+      strokeopacity: graticule.strokeopacity,
+      strokedasharray: graticule.strokedasharray,
+      step: graticule.step
+    });
+  }
+
+  // Layer
   svg
     .append("g")
     .selectAll("path")
@@ -49,7 +89,48 @@ export function layer({
     .join("path")
     .attr("d", path)
     .attr("fill", fill)
-    .attr("stroke", stroke);
+    .attr("stroke", stroke)
+    .attr("stroke-width", strokewidth)
+    .attr("fill-opacity", fillopacity);
+  //.attr("transform", `translate(0,${header.fontsize})`);
+
+  // Outline (stroke)
+  if (outline) {
+    plotOutline(svg, projection, {
+      fill: "none",
+      stroke: outline.stroke,
+      strokewidth: outline.strokewidth
+    });
+  }
+
+  // Header
+
+  if (header) {
+    plotHeader(svg, width, {
+      fontsize: header.fontsize,
+      text: header.text,
+      fill: header.fill
+    });
+  }
+
+  // Footer
+
+  if (footer) {
+    plotFooter(svg, width, height, {
+      fontsize: footer.fontsize,
+      text: footer.text,
+      fill: footer.fill
+    });
+  }
+
+  // Scalebar
+  // if (scalebar) {
+  //   plotScalebar(svg, projection, width, height, {
+  //     x: scalebar.x,
+  //     y: scalebar.y,
+  //     dist: scalebar.dist
+  //   });
+  // }
 
   return Object.assign(svg.node(), {});
 }

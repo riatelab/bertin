@@ -5,7 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
 // header
-function plotHeader(selection, width, options = {}) {
+export function plotHeader(selection, width, options = {}) {
   let fontsize;
   if (options.text) {
     fontsize = 20;
@@ -30,7 +30,7 @@ selection
 }
 
 // Footer
-function plotFooter(selection, width, height, options = {}) {
+export function plotFooter(selection, width, height, options = {}) {
   let fontsize;
   if (options.text) {
     fontsize = 15;
@@ -55,7 +55,7 @@ selection
 }
 
 // Graticule
-function plotGraticule(selection, projection, options = {}) {
+export function plotGraticule(selection, projection, options = {}) {
   let stroke = options.stroke ? options.stroke : "white";
   let strokewidth = options.strokewidth ? options.strokewidth : 0.8;
   let strokeopacity = options.strokeopacity ? options.strokeopacity : 0.5;
@@ -76,7 +76,7 @@ function plotGraticule(selection, projection, options = {}) {
 }
 
 // outline
-function plotOutline(selection, projection, options = {}) {
+export function plotOutline(selection, projection, options = {}) {
   let fill = options.fill ? options.fill : "#add8f7";
   let stroke = options.stroke ? options.stroke : "none";
   let strokewidth = options.strokewidth ? options.strokewidth : 1;
@@ -90,7 +90,7 @@ function plotOutline(selection, projection, options = {}) {
 }
 
 // Height
-function getHeight(features, projection, width, outline) {
+export function getHeight(features, projection, width, outline) {
   let ref;
   let d;
 
@@ -111,4 +111,4 @@ function getHeight(features, projection, width, outline) {
   return height;
 }
 
-module.exports = { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight };
+//module.exports = { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight };
