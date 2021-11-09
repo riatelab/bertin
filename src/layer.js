@@ -8,7 +8,7 @@ import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./
 
 
 // function
-export function layer2({
+export function layer({
   features, // Compulsory
   width = 1000,
   projection = d3.geoPatterson(),
