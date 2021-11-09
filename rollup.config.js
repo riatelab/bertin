@@ -10,7 +10,7 @@ export default {
         format: 'iife',
         file: 'js/main.iife.min.js',
         // les modules iife doivent être nommés afin de pouvoir y faire référence depuis d'autres modules
-        name: 'bertin'
+        name: 'bertinjs'
     },
     plugins: [
         commonjs(), // prise en charge de require
