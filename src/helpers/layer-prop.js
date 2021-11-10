@@ -23,7 +23,7 @@ export function propLayer(selection, projection, features, options = {}){
   let fillopacity = options.fillopacity ? options.fillopacity : 1;
   let radius = options.radius ? options.radius : 40;
 
-  let coords = getcenters(countries, "ISO3_CODE", d3.geoPatterson(), true);
+  let coords = getcenters(features, id, d3.geoPatterson(), true);
 
   selection
     .append("g")

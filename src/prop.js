@@ -96,8 +96,8 @@ export function prop({
       stroke: stroke,
       strokewidth: strokewidth,
       fillopacity: fillopacity,
-      id: "ISO3_CODE",
-      radius: 10
+      id: id,
+      radius: radius
     });
   }
   // -----------------------------------------------
