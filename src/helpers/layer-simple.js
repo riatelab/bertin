@@ -27,12 +27,15 @@ export function simpleLayer(selection, projection, features, options = {}) {
     stroke = options.stroke
       ? options.stroke
       : cols[Math.floor(Math.random() * cols.length)];
-    fill = fill ? options.fill : "none";
+    fill = options.fill ? options.fill : "none";
     strokewidth = options.strokewidth ? options.strokewidth : 1;
   }
 
   selection
     .append("g")
+    .attr(":inkscape:groupmode", "layer")
+    .attr("id", "simple layer")
+    .attr(":inkscape:label", "simple layer")
     .selectAll("path")
     .data(features.features)
     .join("path")
@@ -40,5 +43,6 @@ export function simpleLayer(selection, projection, features, options = {}) {
     .attr("fill", fill)
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity);
+    .attr("fill-opacity", fillopacity)
+    .attr("clip-path", "url(#clip)");
 }

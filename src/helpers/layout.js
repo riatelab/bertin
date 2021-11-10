@@ -16,9 +16,13 @@ export function plotHeader(selection, width, options = {}) {
   let text = options.text ? options.text : "";
   let fill = options.fill ? options.fill : "#9e9696";
 
-selection
+  selection
+    .append("g")
+    .attr(":inkscape:groupmode", "layer")
+    .attr("id", "header")
+    .attr(":inkscape:label", "header")
     .append("text")
-    .text(text)
+    .text(options.text)
     .attr("x", width / 2)
     .attr("y", -fontsize / 2)
     .attr("font-family", "sans-serif")
@@ -26,7 +30,8 @@ selection
     .attr("text-anchor", "middle")
     .attr("fill", fill)
     .attr("dominant-baseline", "middle")
-    .style("font-size", fontsize)
+    .style("font-size", options.fontsize)
+    .attr("fill-opacity", 1);
 }
 
 // Footer
@@ -41,9 +46,13 @@ export function plotFooter(selection, width, height, options = {}) {
   let text = options.text ? options.text : "";
   let fill = options.fill ? options.fill : "#9e9696";
 
-selection
+  selection
+    .append("g")
+    .attr(":inkscape:groupmode", "layer")
+    .attr("id", "footer")
+    .attr(":inkscape:label", "footer")
     .append("text")
-    .text(text)
+    .text(options.text)
     .attr("x", width / 2)
     .attr("y", height + fontsize / 2)
     .attr("font-family", "sans-serif")
@@ -64,6 +73,9 @@ export function plotGraticule(selection, projection, options = {}) {
   step = Array.isArray(step) ? step : [step, step];
   selection
     .append("g")
+    .attr(":inkscape:groupmode", "layer")
+    .attr("id", "graticule")
+    .attr(":inkscape:label", "graticule")
     .append("path")
     .datum(d3.geoGraticule().step(step))
     .attr("d", d3.geoPath(projection))
@@ -72,7 +84,8 @@ export function plotGraticule(selection, projection, options = {}) {
     .style("stroke", stroke)
     .style("stroke-width", strokewidth)
     .style("stroke-opacity", strokeopacity)
-    .style("stroke-dasharray", strokedasharray);
+    .style("stroke-dasharray", strokedasharray)
+    .attr("clip-path", "url(#clip)");
 }
 
 // outline
@@ -82,11 +95,15 @@ export function plotOutline(selection, projection, options = {}) {
   let strokewidth = options.strokewidth ? options.strokewidth : 1;
   selection
     .append("g")
+    .attr(":inkscape:groupmode", "layer")
+    .attr("id", "outline")
+    .attr(":inkscape:label", "outline")
     .append("path")
     .attr("d", d3.geoPath(projection)({ type: "Sphere" }))
     .attr("fill", fill)
     .attr("stroke", stroke)
-    .attr("stroke-width", strokewidth);
+    .attr("stroke-width", strokewidth)
+    .attr("clip-path", "url(#clip)");
 }
 
 // Height
