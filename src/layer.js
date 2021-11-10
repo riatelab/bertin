@@ -6,7 +6,6 @@ const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 //const { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight } = require("./helpers/layout");
 import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 import { simpleLayer } from "./helpers/layer-simple.js";
-import { figuration } from "./helpers/utils.js";
 
 // function
 export function layer({
