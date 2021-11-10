@@ -5,7 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 import { propLayer } from "./helpers/layer-prop.js";
-import { getcenters } from "./helpers/utils.js";
+//import { getcenters } from "./helpers/utils.js";
 
 // Nicolas Lambert, 2021
 export function prop({
