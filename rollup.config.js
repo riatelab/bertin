@@ -45,7 +45,7 @@ export default {
     input: 'src/index.js',
     output: {
         format: 'iife',
-        file: 'dist/index.js',
+        file: 'dist/index.min.js',
         name: 'bertin'
     },
     plugins: [
