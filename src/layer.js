@@ -45,8 +45,6 @@ export function layer({
     }
   }
 
-  // Path
-  const path = d3.geoPath(projection);
 
   // svg document
   const svg = d3

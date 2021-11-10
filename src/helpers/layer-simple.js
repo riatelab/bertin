@@ -27,7 +27,7 @@ export function simpleLayer(selection, projection, features, options = {}) {
     stroke = options.stroke
       ? options.stroke
       : cols[Math.floor(Math.random() * cols.length)];
-    fill = options.fill ? options.fill : "none";
+    fill = fill ? options.fill : "none";
     strokewidth = options.strokewidth ? options.strokewidth : 1;
   }
 
