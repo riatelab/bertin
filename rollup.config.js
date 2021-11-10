@@ -7,7 +7,7 @@ const iife = {
     input: 'src/index.js',
     output: {
         format: 'iife',
-        file: 'dist/main-${process.env.npm_package_version}.iife.min.js'',
+        file: 'dist/main-${process.env.npm_package_version}.iife.min.js',
         name: 'bertin'
     },
     plugins: [
