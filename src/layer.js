@@ -5,7 +5,8 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 //const { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight } = require("./helpers/layout");
 import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
-
+import { simpleLayer } from "./helpers/layer-simple.js";
+import { figuration } from "./helpers/utils.js";
 
 // function
 export function layer({
@@ -82,17 +83,14 @@ export function layer({
   }
 
   // Layer
-  svg
-    .append("g")
-    .selectAll("path")
-    .data(features.features)
-    .join("path")
-    .attr("d", path)
-    .attr("fill", fill)
-    .attr("stroke", stroke)
-    .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity);
-  //.attr("transform", `translate(0,${header.fontsize})`);
+  if (features) {
+    simpleLayer(svg, projection, features, {
+      fill: fill,
+      stroke: stroke,
+      strokewidth: strokewidth,
+      fillopacity: fillopacity
+    });
+  }
 
   // Outline (stroke)
   if (outline) {
