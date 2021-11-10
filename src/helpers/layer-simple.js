@@ -1,4 +1,4 @@
-export function simpleLayer = (selection, projection, features, options = {}) {
+export function simpleLayer(selection, projection, features, options = {}) {
   let cols = [
     "#66c2a5",
     "#fc8d62",
