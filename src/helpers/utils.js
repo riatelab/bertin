@@ -5,7 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
 // To get the taype of the gemetries (z:zonal, l: linear, p:punctual)
-export function figuration(features) {
+export default function figuration(features) {
   let figuration = ["z", "l", "p"];
   let types = features.features.map((d) => d.geometry.type);
   types = Array.from(new Set(types));
@@ -28,7 +28,7 @@ export function figuration(features) {
 }
 
 // To compute polygon centroids
-export function getcenters(features, id, projection, largest) {
+export default function getcenters(features, id, projection, largest) {
   const largestPolygon = function (d) {
     var best = {};
     var bestArea = 0;
