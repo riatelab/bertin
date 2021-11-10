@@ -1,4 +1,5 @@
 // import * as d3selection from "d3-selection";
+import * as d3selection from "d3-selection";
 import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
