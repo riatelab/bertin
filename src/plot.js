@@ -10,6 +10,7 @@ import { addfooter } from "./footer.js";
 import { addheader } from "./header.js";
 import { layersimple } from "./layer-simple.js";
 import { getheight } from "./height.js";
+import { figuration } from "./figuration.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
