@@ -12,6 +12,7 @@ import { layersimple } from "./layer-simple.js";
 import { layerprop } from "./layer-prop.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
+import { getcenters } from "./centroids.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
