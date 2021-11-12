@@ -9,6 +9,7 @@ import { addoutline } from "./outline.js";
 import { addfooter } from "./footer.js";
 import { addheader } from "./header.js";
 import { layersimple } from "./layer-simple.js";
+import { layerprop } from "./layer-prop.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
 
@@ -98,6 +99,22 @@ export function plot({ params = {}, layers = {} } = {}) {
           fillopacity: layer.fillopacity
         });
       }
+
+      // prop layers
+if (layer.type == "prop") {
+  layerprop(svg, projection, {
+    geojson: layer.geojson,
+    id_geojson: layer.id_geojson,
+    data: layer.data,
+    id_data: layer.id_data,
+    var_data: layer.var_data,
+    k: layer.k,
+    fill: layer.fill,
+    stroke: layer.stroke,
+    strokewidth: layer.strokewidth,
+    fillopacity: layer.fillopacity
+  });
+}
 
       // Header
       if (layer.type == "header") {
