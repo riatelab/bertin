@@ -1,2 +1,2 @@
-export {layer} from "./layer.js";
-export {prop} from "./prop.js";
+export {plot} from "./plot.js";
+//export {prop} from "./prop.js";
