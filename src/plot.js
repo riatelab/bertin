@@ -90,7 +90,7 @@ export function plot({ params = {}, layers = {} } = {}) {
 
       // geojsons
       if (layer.type == "layer") {
-        simpleLayer(svg, projection, layer.geojson, {
+        layersimple(svg, projection, layer.geojson, {
           fill: layer.fill,
           stroke: layer.stroke,
           strokewidth: layer.strokewidth,
