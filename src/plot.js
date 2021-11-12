@@ -16,9 +16,6 @@ import { figuration } from "./figuration.js";
 
 export function plot({ params = {}, layers = {} } = {}) {
 
-  function plot({ params = {}, layers = {} } = {}) {
-    // default global paramaters
-
     let projection = params.projection ? params.projection : d3.geoPatterson();
     let width = params.width ? params.width : 1000;
 
