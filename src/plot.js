@@ -111,7 +111,7 @@ export function plot({ params = {}, layers = {} } = {}) {
 
   // Footer
   if (layer.type == "footer") {
-    addgooter(svg, width, height, {
+    addfooter(svg, width, height, {
       fontsize: footer.fontsize,
       text: footer.text,
       fill: footer.fill
