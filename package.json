@@ -1,6 +1,6 @@
 {
   "name": "bertin",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Thematic mapping",
   "main": "dist/index.js",
   "module": "src/index.js",
