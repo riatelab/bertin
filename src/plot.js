@@ -20,7 +20,7 @@ export function plot({ params = {}, layers = {} } = {}) {
     let width = params.width ? params.width : 1000;
 
     // optimal heights
-    let height = getheight(layers, projection, width);
+    let height = getheight(layers, extent, projection, width);
     let heightHeader = 0;
     let header = layers.find((d) => d.type == "header");
     if (header) {
