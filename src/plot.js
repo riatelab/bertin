@@ -18,6 +18,7 @@ export function plot({ params = {}, layers = {} } = {}) {
 
     let projection = params.projection ? params.projection : d3.geoPatterson();
     let width = params.width ? params.width : 1000;
+    let extent = params.extent ? params.extent : null;
 
     // optimal heights
     let height = getheight(layers, extent, projection, width);
