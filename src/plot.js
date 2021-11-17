@@ -14,6 +14,7 @@ import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
 import { getcenters } from "./centroids.js";
 import { shadow } from "./shadow.js";
+import { addscalebar } from "./scalebar.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
@@ -168,6 +169,16 @@ export function plot({ params = {}, layers = {} } = {}) {
   });
 
   // -----------------------------------------
+
+  // Scalebar
+  let scalebar = layers.find((d) => d.type == "scalebar");
+  if (scalebar) {
+    addscalebar(svg, projection, width, height, {
+      dist: scalebar.dist,
+      x: scalebar.x,
+      y: scalebar.y
+    });
+  }
 
   // Outline (stroke)
   if (outline) {
