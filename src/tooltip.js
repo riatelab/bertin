@@ -1,3 +1,6 @@
+import * as d3selection from "d3-selection";
+const d3 = Object.assign({}, d3selection);
+
 export function addtooltip(g, value){
   if (!value) return g.style("display", "none");
 
