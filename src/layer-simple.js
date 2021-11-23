@@ -49,25 +49,31 @@ export function layersimple(selection, projection, geojson, options = {}) {
     .attr("fill-opacity", fillopacity)
     .attr("clip-path", "url(#clip)")
     .on("touchmove mousemove", function (event, d) {
-      if (Array.isArray(tooltip)) {
+      if (tooltip != "") {
+        if (Array.isArray(tooltip)) {
+          selection
+            .select("#info")
+            .call(
+              addtooltip,
+              `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
+                tooltip[2]
+              }`
+            );
+        } else {
+          selection
+            .select("#info")
+            .call(addtooltip, `${d.properties[tooltip]}`);
+        }
+      }
+      if (tooltip != "") {
         selection
           .select("#info")
-          .call(
-            addtooltip,
-            `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
-              tooltip[2]
-            }`
-          );
-      } else {
-        selection.select("#info").call(addtooltip, `${d.properties[tooltip]}`);
+          .attr("transform", `translate(${d3.pointer(event, this)})`);
+        d3.select(this)
+          .attr("stroke-width", strokewidth + 0.5)
+          .attr("fill-opacity", fillopacity - 0.3)
+          .raise();
       }
-      selection
-        .select("#info")
-        .attr("transform", `translate(${d3.pointer(event, this)})`);
-      d3.select(this)
-        .attr("stroke-width", strokewidth + 0.5)
-        .attr("fill-opacity", fillopacity - 0.3)
-        .raise();
     })
     .on("touchend mouseleave", function () {
       selection.select("#info").call(addtooltip, null);

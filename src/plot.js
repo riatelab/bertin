@@ -119,7 +119,7 @@ export function plot({ params = {}, layers = {} } = {}) {
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
         fillopacity: layer.fillopacity,
-        tooltip:layer.tooltip
+        tooltip: layer.tooltip
       });
     }
 
