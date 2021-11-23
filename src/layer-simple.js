@@ -6,7 +6,7 @@ const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 import {figuration } from "./figuration.js";
 import {addtooltip } from "./tooltip.js";
 
-export function layersimple(selection, projection, features, options = {}) {
+export function layersimple(selection, projection, geojson, options = {}) {
   let cols = [
     "#66c2a5",
     "#fc8d62",
