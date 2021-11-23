@@ -189,6 +189,9 @@ export function plot({ params = {}, layers = {} } = {}) {
     });
   }
 
+  // Tootltip
+ svg.append("g").attr("id", "info").attr("class", "info");
+
   // build
   return Object.assign(svg.node(), {});
 }
