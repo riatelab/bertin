@@ -118,7 +118,8 @@ export function plot({ params = {}, layers = {} } = {}) {
         fill: layer.fill,
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity
+        fillopacity: layer.fillopacity,
+        tooltip:layer.tooltip
       });
     }
 
