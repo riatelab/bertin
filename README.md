@@ -48,4 +48,27 @@ bertin = require("https://bundle.run/bertin@0.0.34")
 * All these parameters are optional.*
 
 
-### diagnostic()
+### match()
+
+~~~js
+match(geojson, geom_id, data, data_id)
+~~~
+
+returns a chart showing the quality of the compatibility between the data and the basemap.
+
+
+~~~js
+match(geojson, geom_id, data, data_id).unmatched_data
+~~~
+
+returs an array containing data ids that cannot be joined to the basemap.
+
+On the same principle:
+
+~~~js
+match(geojson, geom_id, data, data_id).matched
+match(geojson, geom_id, data, data_id).unmatched_geom
+match(geojson, geom_id, data, data_id).unmatched_data
+match(geojson, geom_id, data, data_id).matched_data
+match(geojson, geom_id, data, data_id).matched_geom
+~~~
