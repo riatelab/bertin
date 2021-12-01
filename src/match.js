@@ -1,6 +1,7 @@
 // Imports
 import * as d3selection from "d3-selection";
-const d3 = Object.assign({}, d3selection);
+import * as d3scale from "d3-scale";
+const d3 = Object.assign({}, d3selection, d3scale);
 
 export function match(geojson, id_geojson, data, id_data) {
   let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
