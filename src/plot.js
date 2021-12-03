@@ -123,6 +123,21 @@ export function plot({ params = {}, layers = {} } = {}) {
       });
     }
 
+    // missing
+    if (layer.type == "missing") {
+      layermissing(svg, projection, {
+        geojson: layer.geojson,
+        id_geojson: layer.id_geojson,
+        data: layer.data,
+        id_data: layer.id_data,
+        var_data: layer.var_data,
+        fill: layer.fill,
+        stroke: layer.stroke,
+        strokewidth: layer.strokewidth,
+        fillopacity: layer.fillopacity
+      });
+    }
+
     // shadow
     if (layer.type == "shadow") {
       shadow(svg, projection, layer.geojson, defs, {
