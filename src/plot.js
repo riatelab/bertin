@@ -80,14 +80,14 @@ export function plot({ params = {}, layers = {} } = {}) {
   }
 
   // clipPath
-  svg
-    .append("clipPath")
-    .attr("id", "clip")
-    .append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", width)
-    .attr("height", height);
+  // svg
+  //   .append("clipPath")
+  //   .attr("id", "clip")
+  //   .append("rect")
+  //   .attr("x", 0)
+  //   .attr("y", 0)
+  //   .attr("width", width)
+  //   .attr("height", height);
 
   // Outline (fill)
   let outline = layers.find((d) => d.type == "outline");
@@ -146,7 +146,8 @@ export function plot({ params = {}, layers = {} } = {}) {
         fill: layer.fill,
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity
+        fillopacity: layer.fillopacity,
+        tooltip: layer.tooltip
       });
     }
 

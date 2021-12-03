@@ -47,7 +47,7 @@ export function layersimple(selection, projection, geojson, options = {}) {
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity)
-    .attr("clip-path", "url(#clip)")
+    //.attr("clip-path", "url(#clip)")
     .on("touchmove mousemove", function (event, d) {
       if (tooltip != "") {
         if (Array.isArray(tooltip)) {

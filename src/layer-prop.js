@@ -9,7 +9,6 @@ const d3 = Object.assign({}, d3selection, d3array,d3scale, d3geo, d3geoprojectio
 import {getcenters } from "./centroids.js";
 
 export function layerprop(selection, projection, options = {}) {
-
   let cols = [
     "#66c2a5",
     "#fc8d62",
@@ -32,6 +31,7 @@ export function layerprop(selection, projection, options = {}) {
   let stroke = options.stroke ? options.stroke : "white";
   let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
   let fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let tooltip = options.tooltip ? options.tooltip : "";
   //let radius = options.radius ? options.radius : 40;
 
   let coords = getcenters(geojson, id_geojson, projection, true);
@@ -51,6 +51,36 @@ export function layerprop(selection, projection, options = {}) {
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity)
-    .attr("transform", (d) => `translate(${coords.get(d[id_data])})`)
-    .attr("r", (d) => radius(d[var_data]));
+    //.attr("transform", (d) => `translate(${coords.get(d[id_data])})`)
+    .attr("cx", (d) => coords.get(d[id_data])[0])
+    .attr("cy", (d) => coords.get(d[id_data])[1])
+    .attr("r", (d) => radius(d[var_data]))
+    .on("touchmove mousemove", function (event, d) {
+      if (tooltip != "") {
+        if (Array.isArray(tooltip)) {
+          selection
+            .select("#info")
+            .call(
+              addtooltip,
+              `${d[tooltip[0]]}\n${d[tooltip[1]]}\n${tooltip[2]}`
+            );
+        } else {
+          selection.select("#info").call(addtooltip, `${d[tooltip]}`);
+        }
+      }
+      if (tooltip != "") {
+        selection
+          .select("#info")
+          .attr("transform", `translate(${d3.pointer(event, this)})`);
+        d3.select(this)
+          .attr("stroke-width", strokewidth + 0.5)
+          .attr("fill-opacity", fillopacity - 0.3);
+      }
+    })
+    .on("touchend mouseleave", function () {
+      selection.select("#info").call(addtooltip, null);
+      d3.select(this)
+        .attr("stroke-width", strokewidth)
+        .attr("fill-opacity", fillopacity);
+    });
 }
