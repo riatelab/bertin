@@ -5,7 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 import {figuration } from "./figuration.js";
 import {addtooltip } from "./tooltip.js";
 
-export function layermissing(selection, projection, options = {}) => {
+export function layermissing(selection, projection, options = {}){
   //layermissing = (options = {}) => {
   let geojson = options.geojson;
   let data = options.data;
