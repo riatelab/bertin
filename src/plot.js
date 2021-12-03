@@ -10,6 +10,7 @@ import { addfooter } from "./footer.js";
 import { addheader } from "./header.js";
 import { layersimple } from "./layer-simple.js";
 import { layerprop } from "./layer-prop.js";
+import { layermissing } from "./layer-missing.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
 import { getcenters } from "./centroids.js";
