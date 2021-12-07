@@ -84,11 +84,11 @@ match(geojson, geom_id, data, data_id).matched_geom
 <details><summary>type: text</summary>
 <p>
 
-Required
-
+<details>Required
 - x: position in x
 - y: position in y
 - text: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
+</details>
 
 Optional
 
