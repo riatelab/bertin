@@ -55,30 +55,49 @@ match(geojson, geom_id, data, data_id).matched_geom
 
 *All these parameters are optional.*
 
-<ins>type : outline</ins>
+<ins>type: outline</ins>
 
 * All these parameters are optional.
 
-<ins>type : graticule</ins>
+<ins>type: graticule</ins>
 
 * All these parameters are optional.*
 
-<ins>type : header</ins>
+<ins>type: header</ins>
 
 * All these parameters are optional.*
 
-<ins>type : footer</ins>
+<ins>type: footer</ins>
 
 * All these parameters are optional.*
 
-<ins>type : layer</ins>
+<ins>type: layer</ins>
 
 * All these parameters are optional.*
 
-<ins>type : prop</ins>
+<ins>type: prop</ins>
 
 * All these parameters are optional.*
+
+<ins>type: text</ins>
+
+Required
+
+- x: position in x
+- y: position in y
+- text: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
+
+Optional
+
+- fontsize: text size (default: 15)
+- margin: Margin around the text (default: 0)
+- anchor: Text anchor. start, middle, end (default: "start")
+- baseline: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
+- fill: Text color (default: "#474342")
+- stroke Stroke color (default: "none")
+- frame_fill: Frame background color (default:"none")
+- frame_stroke: Frame stroke color (default: "none")
+- frame_strokewidth. Thickness of the frame contour (default: 1)
+- frame_opacity: Frame opacity (default: 1)
 
 ### addtext
-
-xccc
