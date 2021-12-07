@@ -102,7 +102,6 @@ Optional
 - frame_stroke: Frame stroke color (default: "none")
 - frame_strokewidth. Thickness of the frame contour (default: 1)
 - frame_opacity: Frame opacity (default: 1)
-```
 
 Example
 
