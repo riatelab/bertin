@@ -1,7 +1,7 @@
 import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 
-export addtext = function (selection, options = {}){
+export function addtext(selection, options = {}){
   let x = options.x;
   let y = options.y;
   let text = options.text ? options.text : "Your text here!";
