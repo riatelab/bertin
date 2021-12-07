@@ -90,8 +90,8 @@ Required
 Optional
 
 ```
-- fontsize: text size (default: 15)
-- margin: Margin around the text (default: 0)
+**fontsize**: text size (default: 15)
+**margin**: Margin around the text (default: 0)
 - anchor: Text anchor. start, middle, end (default: "start")
 - baseline: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
 - fill: Text color (default: "#474342")
