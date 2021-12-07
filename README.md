@@ -81,6 +81,9 @@ match(geojson, geom_id, data, data_id).matched_geom
 
 <ins>type: text</ins>
 
+<details><summary>type: text</summary>
+<p>
+
 Required
 
 - x: position in x
@@ -89,9 +92,8 @@ Required
 
 Optional
 
-```
-**fontsize**: text size (default: 15)
-**margin**: Margin around the text (default: 0)
+- fontsize: text size (default: 15)
+- margin: Margin around the text (default: 0)
 - anchor: Text anchor. start, middle, end (default: "start")
 - baseline: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
 - fill: Text color (default: "#474342")
@@ -108,4 +110,5 @@ Example
 
 ~~~
 
-### addtext
+</p>
+</details>
