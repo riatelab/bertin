@@ -16,6 +16,7 @@ import { figuration } from "./figuration.js";
 import { getcenters } from "./centroids.js";
 import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
+import { addtext } from "./text.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
@@ -123,6 +124,26 @@ export function plot({ params = {}, layers = {} } = {}) {
         tooltip: layer.tooltip
       });
     }
+
+    // text note
+if (layer.type == "text") {
+  addtext(svg, {
+    x: layer.x,
+    y: layer.y,
+    text: layer.text,
+    fill: layer.fill,
+    stroke: layer.stroke,
+    fontsize: layer.fontsize,
+    margin: layer.margin,
+    anchor: layer.anchor, // start, middle, end
+    baseline: layer.baseline, // baseline, middle, hanging
+    frame_fill: layer.frame_fill,
+    frame_stroke: layer.frame_stroke,
+    frame_opacity: layer.frame_opacity,
+    frame_strokewidth: layer.frame_strokewidth
+  });
+}
+
 
     // missing
     if (layer.type == "missing") {
