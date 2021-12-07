@@ -89,6 +89,7 @@ Required
 
 Optional
 
+```
 - fontsize: text size (default: 15)
 - margin: Margin around the text (default: 0)
 - anchor: Text anchor. start, middle, end (default: "start")
@@ -99,5 +100,12 @@ Optional
 - frame_stroke: Frame stroke color (default: "none")
 - frame_strokewidth. Thickness of the frame contour (default: 1)
 - frame_opacity: Frame opacity (default: 1)
+```
+
+Example
+
+~~~js
+
+~~~
 
 ### addtext
