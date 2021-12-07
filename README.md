@@ -75,6 +75,21 @@ match(geojson, geom_id, data, data_id).matched_geom
 
 * All these parameters are optional.*
 
+Example
+
+~~~js
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="http://localhost/npm_test/bertin/index.min.js"></script>
+<script>
+  d3.json(
+  "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson"
+).then(r =>
+document.body.appendChild(bertin.plot({
+  layers: [{ type: "layer", geojson: r,  tooltip: ["CNTR_ID", "CNTR_NAME", ""] }]
+})));
+</script>
+~~~
+
 <ins>type: prop</ins>
 
 * All these parameters are optional.*
