@@ -2,7 +2,7 @@
 
 ***An easy to use wrapper around d3js to facilitate the process of making thematic maps***
 
-Why Bertin ?
+### Why Bertin ?
 
 Jacques Bertin (1918 - 2010) is a French cartographer, whose work on "graphic semiology" has been crucial....
 
