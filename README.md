@@ -27,12 +27,25 @@ bertin = require("https://bundle.run/bertin@0.0.34")
 <b>plot</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 Plot is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 
-<b>outline</b>() [Examples](https://observablehq.com/@d3/d3-extent)
+### Global parameters
 
+### Layers
 
-<details><summary><b>type: text</b></summary>
+<details><summary>type: outline</summary>
 xxxx
 </details>
+
+
+<details><summary>type: text</summary>
+xxxx
+</details>
+
+### Legend
+
+xxxx
+
+_______________
+
 
 #### Match() [source]() [examples]()
 
