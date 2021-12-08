@@ -48,7 +48,7 @@ bertin.plot({
 - extent: a feature defing the extent e.g. a country (default:null)
 - background: color of the background (default:"none")
 
-</detail>
+</details>
 
 #### Layers
 
@@ -87,7 +87,7 @@ bertin.plot({
 - <b>frame_strokewidth</b>: thickness of the frame contour (default: 1)
 - <b>frame_opacity</b>: frame opacity (default: 1)
 
-</detail>
+</details>
 
 #### Legend
 
