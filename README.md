@@ -149,6 +149,8 @@ bertin.plot({
 </details>
 
 
+#### Missing
+
 
 #### Outline
 
@@ -170,6 +172,10 @@ bertin.plot({
 - <b>strokewidth</b>: stroke width (default: 1)
 
 </details>
+
+#### Prop
+
+#### Shadow
 
 #### Texts
 
