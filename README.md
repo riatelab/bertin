@@ -29,7 +29,7 @@ Plot is the main function of the library. It allows you to make various thematic
 
 **Global parameters**
 
-In section *params* we define the global parameters of the map: its size, projection, background color, etc.
+In section *params* we define the global parameters of the map: its size, projection, background color, etc. This section is optionnal.
 
 ~~~js
 bertin.plot({
