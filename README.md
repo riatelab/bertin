@@ -27,7 +27,7 @@ bertin = require("https://bundle.run/bertin@0.0.34")
 <b>plot</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 Plot is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 
-**Global parameters**
+#### Global parameters
 
 In section *params* we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
 
@@ -43,16 +43,37 @@ bertin.plot({
 
 <details><summary>See parameters</summary>
 
-- <b>projection</b>: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
-- <b>width</b>: width of the map (default:1000);
-- <b>extent</b>: a feature defing the extent e.g. a country (default:null)
-- <b>background</b>: color of the background (default:"none")
+-<b>projection</b>: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
+-<b>width</b>: width of the map (default:1000);
+-<b>extent</b>: a feature defing the extent e.g. a country (default:null)
+-<b>background</b>: color of the background (default:"none")
 
 </details>
 
-#### Layers
+#### header
 
-**Texts**
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
+
+~~~js
+bertin.plot({
+  layers: [{
+        type: "header",
+        text: "Title of the map",
+        fontsize: 40
+  }]
+})
+~~~
+
+<details><summary>See parameters</summary>
+
+-<b>fontsize</b>: size of the text (default:20)
+-<b>text</b>: text to be displayed (default:"")
+-<b>fill</b>: color of the text (default:"#9e9696")
+
+</details>
+
+
+#### Texts
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
 
