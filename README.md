@@ -27,7 +27,26 @@ bertin = require("https://bundle.run/bertin@0.0.34")
 <b>plot</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 Plot is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 
-#### Global parameters
+**Global parameters**
+
+In this section we define the global parameters of the map: its size, projection, background color, etc. 
+
+~~~js
+bertin.plot({
+  params: {
+    projection: d3.geoBertin1953(),
+    width: 750,
+  },
+  layers: [...]
+})
+~~~
+
+<details><summary>See parameters</summary>
+
+- projection: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
+- width: width of the map (default:1000);
+- extent: a feature defing the extent e.g. a country (default:null)
+- background: color of the background (default:"none")
 
 #### Layers
 
@@ -58,51 +77,15 @@ bertin.plot({
 - <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - <b>text</b>: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
 - <b>fontsize</b>: text size (default: 15)
-- <b>margin</b>: Margin around the text (default: 0)
-- <b>anchor</b>: Text anchor. start, middle, end (default: "start")
+- <b>margin</b>: margin around the text (default: 0)
+- <b>anchor</b>: text anchor. start, middle, end (default: "start")
 - <b>baseline</b>: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
-- <b>fill</b>: Text color (default: "#474342")
-- <b>stroke</b>: Stroke color (default: "none")
-- <b>frame_fill</b>: Frame background color (default:"none")
-- <b>frame_stroke</b>: Frame stroke color (default: "none")
-- <b>frame_strokewidth</b>: Thickness of the frame contour (default: 1)
-- <b>frame_opacity</b>: Frame opacity (default: 1)
-
-<details><summary>type: text</summary>
-
-
-<br/>
-The text layer....
-
-Parameters:
-
-- <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
-- <b>text</b>: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
-- <b>fontsize</b>: text size (default: 15)
-- <b>margin</b>: Margin around the text (default: 0)
-- <b>anchor</b>: Text anchor. start, middle, end (default: "start")
-- <b>baseline</b>: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
-- <b>fill</b>: Text color (default: "#474342")
-- <b>stroke</b>: Stroke color (default: "none")
-- <b>frame_fill</b>: Frame background color (default:"none")
-- <b>frame_stroke</b>: Frame stroke color (default: "none")
-- <b>frame_strokewidth</b>: Thickness of the frame contour (default: 1)
-- <b>frame_opacity</b>: Frame opacity (default: 1)
-
-Example
-
-https://observablehq.com/d/95fcfac18b213daf
-
-</details>
-
-<details><summary>type: outline</summary>
-xxxx
-</details>
-
-
-<details><summary>type: text</summary>
-xxxx
-</details>
+- <b>fill</b>: text color (default: "#474342")
+- <b>stroke</b>: stroke color (default: "none")
+- <b>frame_fill</b>: frame background color (default:"none")
+- <b>frame_stroke</b>: frame stroke color (default: "none")
+- <b>frame_strokewidth</b>: thickness of the frame contour (default: 1)
+- <b>frame_opacity</b>: frame opacity (default: 1)
 
 #### Legend
 
