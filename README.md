@@ -53,6 +53,10 @@ document.body.appendChild(bertin.plot({
 ### ➡️ In Observable
 
 ~~~js
+d3 = require("d3@7", "d3-geo-projection@4")
+~~~
+
+~~~js
 countries = d3.json(
   "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson"
 )
