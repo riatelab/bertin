@@ -34,7 +34,9 @@ Plot is the main function of the library. It allows you to make various thematic
 
 <details><summary>type: text</summary>
 
-<p>The text layer....</p>
+<p>
+The text layer....
+</p>
 
 Parameters:
 
