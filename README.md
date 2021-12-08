@@ -114,9 +114,7 @@ document.body.appendChild(bertin.plot({
 
 Example
 
-~~~js
-
-~~~
+https://observablehq.com/d/95fcfac18b213daf
 
 </p>
 </details>
