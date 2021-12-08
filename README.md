@@ -22,6 +22,62 @@ https://observablehq.com/d/4113b173ec452c29
 bertin = require("https://bundle.run/bertin@0.0.34")
 ~~~
 
+## Example
+
+### In browser
+
+~~~js
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+<script src="http://localhost/npm_test/bertin/index.min.js"></script>
+
+<script>
+
+let geojson =   "./world.geojson"
+
+d3.json(geojson).then(r =>
+document.body.appendChild(bertin.plot({
+  params: {
+    projection: d3.geoVanDerGrinten4()
+  },
+  layers: [
+      {type: "layer", geojson: r,  tooltip: ["ISO3", "NAMEen", ""] },
+      {type:"outline"},
+      {type:"graticule"}
+    ]
+})));
+
+</script>
+~~~
+
+### In Observable
+
+~~~js
+countries = d3.json(
+  "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson"
+)
+~~~
+
+
+~~~js
+bertin.plot({
+  params: {
+    projection: d3.geoBertin1953()
+  },
+  layers: [
+    {
+      type: "layer",
+      geojson: countries,
+      fill: "#e6acdf",
+      tooltip: ["CNTR_ID", "CNTR_NAME", ""]
+    },
+
+    { type: "outline" },
+    { type: "graticule", step: [0, 90], stroke: "blue", strokewidth: 2 }
+  ]
+})
+~~~
+
 ## Documentation
 
 <b>plot</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
