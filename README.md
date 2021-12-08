@@ -34,6 +34,7 @@ Plot is the main function of the library. It allows you to make various thematic
 
 <details><summary>type: text</summary>
 
+<p>
 - <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - <b>text</b>: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
 - <b>fontsize</b>: text size (default: 15)
@@ -46,6 +47,7 @@ Plot is the main function of the library. It allows you to make various thematic
 - <b>frame_stroke</b>: Frame stroke color (default: "none")
 - <b>frame_strokewidth</b>: Thickness of the frame contour (default: 1)
 - <b>frame_opacity</b>: Frame opacity (default: 1)
+</p>
 
 Example
 
