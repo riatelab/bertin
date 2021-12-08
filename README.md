@@ -24,7 +24,13 @@ bertin = require("https://bundle.run/bertin@0.0.34")
 
 ## Documentation
 
-<a name="minIndex" href="#minIndex">#</a> d3.<b>minIndex</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/minIndex.js), [Examples](https://observablehq.com/@d3/d3-extent)
+<b>plot</b>()...
+
+### G
+
+### Layers
+
+<b>outline</b>() [Source](https://github.com/d3/d3-array/blob/main/src/minIndex.js), [Examples](https://observablehq.com/@d3/d3-extent)
 
 
 #### Match() [source]() [examples]()
