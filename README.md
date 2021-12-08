@@ -120,6 +120,41 @@ bertin.plot({
 
 </details>
 
+#### Layer
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js).
+
+~~~js
+countries = d3.json(
+  "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson"
+)
+~~~
+
+~~~js
+bertin.plot({
+  layers: [
+    {
+      type: "layer",
+      geojson: countries,
+      fill: "#e6acdf",
+      tooltip: ["CNTR_ID", "CNTR_NAME", ""]
+    }
+  ]
+})
+~~~
+
+<details><summary>See parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>fill</b>: fill color (default: a random color)
+- <b>stroke</b>: stroke color (default: "white")
+- <b>strokewidth</b> stroke width (default:0.5)
+- <b>fillopacity</b>: fill opacity (default:1)
+- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+
+</details>
+
+
 
 #### Outline
 
@@ -180,89 +215,3 @@ bertin.plot({
 </details>
 
 #### Legend
-
-xxxx
-
-_______________
-
-
-#### Match() [source]() [examples]()
-
-**match()** returns a chart showing the quality of the compatibility between the data and the basemap.
-
-~~~js
-match(geojson, geom_id, data, data_id)
-~~~
-
-with
-
-- geojson: a geojson
-- geom_id: id for geometries
-- data: data file in json
-- data_id: id for data
-
-~~~js
-match(countries, geom_id, maddison, data_id).unmatched_data
-~~~
-
-returs an array containing data ids that cannot be joined to the basemap.
-
-On the same principle:
-
-~~~js
-match(geojson, geom_id, data, data_id).matched
-match(geojson, geom_id, data, data_id).unmatched_geom
-match(geojson, geom_id, data, data_id).unmatched_data
-match(geojson, geom_id, data, data_id).matched_data
-match(geojson, geom_id, data, data_id).matched_geom
-~~~
-
-
-### plot()
-
-<ins>Global parameters</ins>
-
-- width: wdth of the map (default: 1000)
-- projection: map projection (default: d3.geoPatterson())
-- extent: a geojson to determine the extent of the map (default:null)
-
-*All these parameters are optional.*
-
-<ins>type: outline</ins>
-
-* All these parameters are optional.
-
-<ins>type: graticule</ins>
-
-* All these parameters are optional.*
-
-<ins>type: header</ins>
-
-* All these parameters are optional.*
-
-<ins>type: footer</ins>
-
-* All these parameters are optional.*
-
-<ins>type: layer</ins>
-
-* All these parameters are optional.*
-
-Example
-
-~~~js
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="http://localhost/npm_test/bertin/index.min.js"></script>
-<script>
-  d3.json(
-  "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson"
-).then(r =>
-document.body.appendChild(bertin.plot({
-  layers: [{ type: "layer", geojson: r,  tooltip: ["CNTR_ID", "CNTR_NAME", ""] }]
-})));
-</script>
-~~~
-
-<ins>type: prop</ins>
-
-* All these parameters are optional.*
