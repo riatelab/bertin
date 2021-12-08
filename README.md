@@ -29,7 +29,7 @@ Plot is the main function of the library. It allows you to make various thematic
 
 **Global parameters**
 
-In section *params* we define the global parameters of the map: its size, projection, background color, etc. This section is optional.
+In section *params* we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
 
 ~~~js
 bertin.plot({
