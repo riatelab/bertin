@@ -66,7 +66,6 @@ countries = d3.json(
 )
 ~~~
 
-
 ~~~js
 bertin.plot({
   params: {
@@ -85,6 +84,10 @@ bertin.plot({
   ]
 })
 ~~~
+
+### ➡️ Tutorials
+
+https://observablehq.com/d/8fc1cb198f9d1017?collection=@neocartocnrs/bertin
 
 ## 3. Documentation
 
