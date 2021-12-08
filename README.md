@@ -33,7 +33,7 @@ Plot is the main function of the library. It allows you to make various thematic
 
 **Texts**
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin)
 
 ~~~js
 bertin.plot({
@@ -51,7 +51,7 @@ bertin.plot({
 })
 ~~~
 
-https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin
+
 
 <details><summary>See parameters</summary>
 
