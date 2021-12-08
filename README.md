@@ -99,14 +99,8 @@ document.body.appendChild(bertin.plot({
 <details><summary>type: text</summary>
 <p>
 
-Required
-
-- x: position in x
-- y: position in y
+- position: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - text: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
-
-Optional
-
 - fontsize: text size (default: 15)
 - margin: Margin around the text (default: 0)
 - anchor: Text anchor. start, middle, end (default: "start")
