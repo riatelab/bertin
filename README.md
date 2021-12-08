@@ -8,7 +8,7 @@
 
 https://observablehq.com/d/4113b173ec452c29
 
-## Installation
+## 1. Installation
 
 ### ➡️ In browser
 
@@ -22,7 +22,7 @@ https://observablehq.com/d/4113b173ec452c29
 bertin = require("https://bundle.run/bertin@0.0.34")
 ~~~
 
-## How to use?
+## 2. How to use?
 
 ### ➡️ In browser
 
@@ -82,7 +82,7 @@ bertin.plot({
 })
 ~~~
 
-## Documentation
+## 3. Documentation
 
 <b>plot</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 Plot is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
