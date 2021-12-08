@@ -31,6 +31,28 @@ Plot is the main function of the library. It allows you to make various thematic
 
 #### Layers
 
+
+<details><summary>type: text</summary>
+
+- <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
+- <b>text</b>: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
+- <b>fontsize</b>: text size (default: 15)
+- <b>margin</b>: Margin around the text (default: 0)
+- <b>anchor</b>: Text anchor. start, middle, end (default: "start")
+- <b>baseline</b>: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
+- <b>fill</b>: Text color (default: "#474342")
+- <b>stroke</b>: Stroke color (default: "none")
+- <b>frame_fill</b>: Frame background color (default:"none")
+- <b>frame_stroke</b>: Frame stroke color (default: "none")
+- <b>frame_strokewidth</b>: Thickness of the frame contour (default: 1)
+- <b>frame_opacity</b>: Frame opacity (default: 1)
+
+Example
+
+https://observablehq.com/d/95fcfac18b213daf
+
+</details>
+
 <details><summary>type: outline</summary>
 xxxx
 </details>
@@ -127,31 +149,3 @@ document.body.appendChild(bertin.plot({
 <ins>type: prop</ins>
 
 * All these parameters are optional.*
-
-<ins>type: text</ins>
-
-<details><summary>type: text</summary>
-<p>
-
-position: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
-
-text: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
-
-fontsize: text size (default: 15)
-
-  - margin: Margin around the text (default: 0)
-- anchor: Text anchor. start, middle, end (default: "start")
-- baseline: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
-- fill: Text color (default: "#474342")
-- stroke Stroke color (default: "none")
-- frame_fill: Frame background color (default:"none")
-- frame_stroke: Frame stroke color (default: "none")
-- frame_strokewidth. Thickness of the frame contour (default: 1)
-- frame_opacity: Frame opacity (default: 1)
-
-Example
-
-https://observablehq.com/d/95fcfac18b213daf
-
-</p>
-</details>
