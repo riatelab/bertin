@@ -10,13 +10,13 @@ https://observablehq.com/d/4113b173ec452c29
 
 ## Installation
 
-### - In browser
+### ➡️ In browser
 
 ```html
 <script src="index.min.js" charset="utf-8"></script>
 ```
 
-### - In observable
+### ➡️ In observable
 
 ~~~js
 bertin = require("https://bundle.run/bertin@0.0.34")
@@ -24,7 +24,7 @@ bertin = require("https://bundle.run/bertin@0.0.34")
 
 ## How to use?
 
-### - In browser
+### ➡️ In browser
 
 ~~~js
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -50,7 +50,7 @@ document.body.appendChild(bertin.plot({
 </script>
 ~~~
 
-### - In Observable
+### ➡️ In Observable
 
 ~~~js
 countries = d3.json(
