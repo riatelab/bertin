@@ -29,7 +29,7 @@ Plot is the main function of the library. It allows you to make various thematic
 
 **Global parameters**
 
-In this section we define the global parameters of the map: its size, projection, background color, etc.
+In section *params* we define the global parameters of the map: its size, projection, background color, etc.
 
 ~~~js
 bertin.plot({
@@ -43,10 +43,10 @@ bertin.plot({
 
 <details><summary>See parameters</summary>
 
-- projection: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
-- width: width of the map (default:1000);
-- extent: a feature defing the extent e.g. a country (default:null)
-- background: color of the background (default:"none")
+- <b>projection</b>: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
+- <b>width</b>: width of the map (default:1000);
+- <b>extent</b>: a feature defing the extent e.g. a country (default:null)
+- <b>background</b>: color of the background (default:"none")
 
 </details>
 
