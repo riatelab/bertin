@@ -35,6 +35,24 @@ Plot is the main function of the library. It allows you to make various thematic
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
 
+~~~js
+bertin.plot({
+  layers: [
+    {
+      type: "text",
+      text: "bottomright",
+      position: "bottomright",
+      fontsize: 20,
+      baseline: "middle",
+      frame_stroke: "red",
+      margin: 4
+    }
+  ]
+})
+~~~
+
+https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin
+
 <details><summary>See parameters</summary>
 
 - <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
