@@ -127,9 +127,8 @@ export function plot({ params = {}, layers = {} } = {}) {
 
     // text note
 if (layer.type == "text") {
-  addtext(svg, {
-    x: layer.x,
-    y: layer.y,
+  addtext(svg, width, height, {
+    position: layer.position,
     text: layer.text,
     fill: layer.fill,
     stroke: layer.stroke,
