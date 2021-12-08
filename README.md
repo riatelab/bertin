@@ -50,6 +50,29 @@ bertin.plot({
 
 </details>
 
+#### footer
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
+
+~~~js
+bertin.plot({
+  layers: [{
+        type: "footer",
+        text: "Source: Worldbank, 2021",
+        fontsize: 10
+  }]
+})
+~~~
+
+<details><summary>See parameters</summary>
+
+- <b>fontsize</b>: size of the text (default:15)
+- <b>text</b>: text to be displayed (default:"")
+- <b>fill</b>: color of the text (default:"#9e9696")
+
+</details>
+
+
 #### header
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
