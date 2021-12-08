@@ -29,7 +29,7 @@ Plot is the main function of the library. It allows you to make various thematic
 
 **Global parameters**
 
-In this section we define the global parameters of the map: its size, projection, background color, etc. 
+In this section we define the global parameters of the map: its size, projection, background color, etc.
 
 ~~~js
 bertin.plot({
@@ -47,6 +47,8 @@ bertin.plot({
 - width: width of the map (default:1000);
 - extent: a feature defing the extent e.g. a country (default:null)
 - background: color of the background (default:"none")
+
+</detail>
 
 #### Layers
 
@@ -70,8 +72,6 @@ bertin.plot({
 })
 ~~~
 
-
-
 <details><summary>See parameters</summary>
 
 - <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
@@ -86,6 +86,8 @@ bertin.plot({
 - <b>frame_stroke</b>: frame stroke color (default: "none")
 - <b>frame_strokewidth</b>: thickness of the frame contour (default: 1)
 - <b>frame_opacity</b>: frame opacity (default: 1)
+
+</detail>
 
 #### Legend
 
