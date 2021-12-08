@@ -96,6 +96,24 @@ bertin.plot({
 </details>
 
 
+#### Outline
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
+
+~~~js
+bertin.plot({
+  layers: [{
+        type: "outline",
+        fill: "#4269ad"
+  }]
+})
+~~~
+
+- <b>fill</b>: fill color of the outline (default: "#add8f7")
+- <b>stroke</b>: stroke color (default:"none")
+- <b>strokewidth</b>: stroke width (default: 1)
+
+
 #### Texts
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
