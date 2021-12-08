@@ -122,20 +122,14 @@ bertin.plot({
 
 #### Layer
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js).
-
-~~~js
-countries = d3.json(
-  "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson"
-)
-~~~
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example](https://observablehq.com/d/d59855d7cc99f6e5?collection=@neocartocnrs/bertin)
 
 ~~~js
 bertin.plot({
   layers: [
     {
       type: "layer",
-      geojson: countries,
+      geojson: *a geojson here*,
       fill: "#e6acdf",
       tooltip: ["CNTR_ID", "CNTR_NAME", ""]
     }
