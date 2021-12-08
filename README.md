@@ -1,8 +1,6 @@
 # bertin
 
-***bertin.js is an easy to use wrapper around d3js to facilitate the process of making thematic maps for the web***
-
-bertin.js is an easy to use wrapper around d3js to facilitate the process of making thematic maps for the web. It works within [Observable](https://observablehq.com/)
+***An easy to use wrapper around d3js to facilitate the process of making thematic maps***
 
 ## Testing phase
 
@@ -24,9 +22,11 @@ https://observablehq.com/d/4113b173ec452c29
 bertin = require("https://bundle.run/bertin@0.0.34")
 ~~~
 
+## Documentation
 
 
-## Match() [source]() [examples]()
+
+#### Match() [source]() [examples]()
 
 **match()** returns a chart showing the quality of the compatibility between the data and the basemap.
 
