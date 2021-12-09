@@ -221,7 +221,7 @@ bertin.plot({
 
 #### Match
 
-Function to evaluate the quality of a join between the data and the background map. It returns a chart. [Example](https://github.com/neocarto/bertin/blob/main/src/match.js)
+Function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca)
 
 ~~~js
 let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
@@ -230,14 +230,12 @@ let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
 *.matched* returns an array containing matched ids
 
 ~~~js
-// to draw the chart
 testjoin.matched
 ~~~
 
 *.matched_data* returns an array containing matched data ids
 
 ~~~js
-// to draw the chart
 testjoin.matched_data
 ~~~
 
