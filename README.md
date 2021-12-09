@@ -219,10 +219,67 @@ bertin.plot({
 
 </details>
 
+#### Match
+
+Function to evaluate the quality of a join between the data and the background map. It returns a chart. [Example](https://github.com/neocarto/bertin/blob/main/src/match.js)
+
+~~~js
+let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
+~~~
+
+*.matched* returns an array containing matched ids
+
+~~~js
+// to draw the chart
+testjoin.matched
+~~~
+
+*.matched_data* returns an array containing matched data ids
+
+~~~js
+// to draw the chart
+testjoin.matched_data
+~~~
+
+*.unmatched_data* returns an array containing unmatched data ids
+
+~~~js
+testjoin.unmatched_data
+~~~
+
+*.unmatched_geom* returns an array containing unmatched geom ids
+
+~~~js
+testjoin.unmatched_geom
+~~~
+
+<details><summary>See parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b/>data</b>: a geoj (<ins>compulsory<ins>)
+- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+
+</details>
+
 
 #### Missing
 
 Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what this function is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
+
+~~~js
+plot({
+  layers: [
+    {
+      type: "missing",
+      geojson: countries,
+      id_geojson: "ISO3_CODE",
+      data: maddison,
+      id_data: "countrycode",
+      var_data: "pop"
+  ]
+})
+~~~
 
 <details><summary>See parameters</summary>
 
@@ -263,6 +320,22 @@ bertin.plot({
 
 Fonction pour creer une couche par symboles proportionnels [Source](https://github.com/neocarto/bertin/blob/main/src/layer-prop.js)
 
+~~~js
+  plot({
+    layers: [
+      {
+        type: "prop",
+        geojson: countries,
+        id_geojson: "ISO3_CODE",
+        data: maddison,
+        id_data: "countrycode",
+        var_data: "pop",
+        k: 60,
+        tooltip: ["country", "pop", "(inh.)"]
+    ]
+  })
+~~~
+
 <details><summary>See parameters</summary>
 
 - <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
@@ -279,10 +352,22 @@ Fonction pour creer une couche par symboles proportionnels [Source](https://gith
 
 </details>
 
-
 #### Shadow
 
 This function allows you to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
+
+~~~js
+plot({
+  layers: [
+    {
+      type: "shadow",
+      geojson: JPN,
+      dx: 5,
+      dy: 5
+    },
+  ]
+})
+~~~
 
 <details><summary>See parameters</summary>
 
@@ -330,5 +415,3 @@ bertin.plot({
 - <b>frame_opacity</b>: frame opacity (default: 1)
 
 </details>
-
-#### Legend
