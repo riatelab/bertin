@@ -222,6 +222,21 @@ bertin.plot({
 
 #### Missing
 
+Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what this function is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
+
+<details><summary>See parameters</summary>
+
+- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b/>data</b>: a geoj (<ins>compulsory<ins>)
+- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b/>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b/>fill</b>: fill color (default: "white")
+- <b/>stroke</b>: stroke color (default: "white")
+- <b/>strokewidth</b>: stroke width (default: 0.5)
+- <b/>fillopacity</b>: fill opacity (default: 1)
+
+</details>
 
 #### Outline
 
@@ -246,7 +261,38 @@ bertin.plot({
 
 #### Prop
 
+Fonction pour creer une couche par symboles proportionnels [Source](https://github.com/neocarto/bertin/blob/main/src/layer-prop.js)
+
+<details><summary>See parameters</summary>
+
+- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b/>data</b>: a geoj (<ins>compulsory<ins>)
+- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b/>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b/>k</b>: size of the largest circle (defaul:50)
+- <b/>fill</b>: fill color (default: random color)
+- <b/>stroke</b>: stroke color (default: "white")
+- <b/>strokewidth</b>: stroke width (default: 0.5)
+- <b/>fillopacity</b>: fill opacity (default: 1)
+- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+
+</details>
+
+
 #### Shadow
+
+This function allows you to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
+
+<details><summary>See parameters</summary>
+
+- <b>col</b>: color (default: "#35383d")
+- <b>dx</b>: shift in x (default: 3)
+- <b>dy</b>: shift in y (default: 3)
+- <b>stdDeviation</b> blur (default: 1.5)
+- <b>opacity</b>: opacity (default: 0.7)
+
+</details>
 
 #### Texts
 
