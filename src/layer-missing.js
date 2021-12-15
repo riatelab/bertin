@@ -54,7 +54,7 @@ export function layermissing(selection, projection, options = {}){
    y: options.leg_y,
    w: options.leg_w,
    h: options.leg_h,
-   text: options.leg_text,
+   text: options.leg_text ?  options.leg_text : "Missing data",
    fontsize: options.leg_fontsize2,
    stroke: options.leg_stroke,
    fillopacity: options.leg_fillopacity
