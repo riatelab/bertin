@@ -350,6 +350,19 @@ Fonction pour creer une couche par symboles proportionnels [Source](https://gith
 - <b/>fillopacity</b>: fill opacity (default: 1)
 - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
 
+Parameters of the legend
+
+- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b/>leg_fill</b>: color of the circles (default: "none")
+- <b/>leg_stroke</b>: stroke of the circles (default: "black")
+- <b/>leg_strokewidth</b>: stoke-width (default: 0.8)
+- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b/>leg_title</b>: title of the legend (default var_data)
+- <b/>leg_round</b>: number of digits after the decimal point (default: undefined)
+- <b/>leg_fontsize</b>: title legend font size (default: 14)
+- <b/>leg_fontsize2</b>: values font size (default: 10)
+
 </details>
 
 #### Shadow

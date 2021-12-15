@@ -5,6 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 import * as d3array from "d3-array";
 import * as d3scale from "d3-scale";
 import {addtooltip } from "./tooltip.js";
+import {legcircles } from "./leg-circles.js";
 
 const d3 = Object.assign({}, d3selection, d3array,d3scale, d3geo, d3geoprojection);
 import {getcenters } from "./centroids.js";
@@ -84,4 +85,30 @@ export function layerprop(selection, projection, options = {}) {
         .attr("stroke-width", strokewidth)
         .attr("fill-opacity", fillopacity);
     });
+
+    // Legend
+  let array = data.map((d) => +d[var_data]);
+  let values = [
+    d3.min(array),
+    radius.invert(k / 3),
+    radius.invert(k / 1.5),
+    //radius.invert(k / 3),
+    d3.max(array)
+  ];
+
+  legcircles(selection, {
+    x: options.leg_x,
+    y: options.leg_y,
+    round: options.leg_round,
+    k: k,
+    stroke: options.leg_stroke,
+    fill: options.leg_fill,
+    strokewidth: options.leg_strokewidth,
+    txtcol: options.leg_txtcol,
+    title: options.leg_title,
+    fontsize: options.leg_fontsize,
+    fontsize2: options.leg_fontsize2,
+    title: options.leg_title ? options.leg_title : var_data,
+    values: values
+  });
 }
