@@ -5,6 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 import {figuration } from "./figuration.js";
 import {addtooltip } from "./tooltip.js";
+import {legbox } from "./leg-box.js";
 
 export function layermissing(selection, projection, options = {}){
   //layermissing = (options = {}) => {
