@@ -5,6 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 import {figuration } from "./figuration.js";
 import {addtooltip } from "./tooltip.js";
+import {legbox } from "./leg-box.js";
 
 export function layersimple(selection, projection, geojson, options = {}) {
   let cols = [
@@ -82,4 +83,21 @@ export function layersimple(selection, projection, geojson, options = {}) {
         .attr("fill-opacity", fillopacity)
         .lower();
     });
+
+    // Legend
+
+ legbox(selection, {
+   x: options.leg_x,
+   y: options.leg_y,
+   w: options.leg_w,
+   h: options.leg_h,
+   title: options.leg_title,
+   text: options.leg_text,
+   fontsize: options.leg_fontsize,
+   fontsize2: options.leg_fontsize2,
+   stroke: options.leg_stroke,
+   fill: options.leg_fill,
+   strokewidth: options.leg_strokewidth,
+   txtcol: options.leg_txtcol
+ });
 }
