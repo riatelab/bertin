@@ -231,7 +231,7 @@ Parameters of the legend
 - <b/>leg_fontsize2</b>: values font size (default: 10)
 - <b/>leg_fill</b>: color of the box (same as the layer displayed)
 - <b/>leg_stroke</b>: stroke of the box (default: "black")
-- <b/>leg_strokewidth</b>: stroke-width (default: 0.8)
+- <b/>leg_strokewidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
 - <b/>leg_txtcol</b>: color of the texte (default: "#363636")
 
@@ -319,7 +319,7 @@ Parameters of the legend
 - <b/>leg_fontsize</b>: text font size (default: 10)
 - <b/>leg_fill</b>: color of the box (same as the layer displayed)
 - <b/>leg_stroke</b>: stroke of the box (default: "black")
-- <b/>leg_strokewidth</b>: stroke-width (default: 0.8)
+- <b/>leg_strokewidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
 - <b/>leg_txtcol</b>: color of the texte (default: "#363636")
 

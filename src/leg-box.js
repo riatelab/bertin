@@ -14,7 +14,7 @@ export function legbox(selection, options = {}){
   let stroke = options.stroke ? options.stroke : "black";
   let fill = options.fill ? options.fill : "#CCCCCC";
   let fillopacity = options.fillopacity ? options.fillopacity : 1;
-  let strokewidth = options.strokewidth ? options.strokewidth : 1;
+  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
   let txtcol = options.txtcol ? options.txtcol : "#363636";
 
   if (x != null && y != null) {
