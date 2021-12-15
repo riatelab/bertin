@@ -86,18 +86,21 @@ export function layersimple(selection, projection, geojson, options = {}) {
 
     // Legend
 
- legbox(selection, {
-   x: options.leg_x,
-   y: options.leg_y,
-   w: options.leg_w,
-   h: options.leg_h,
-   title: options.leg_title,
-   text: options.leg_text,
-   fontsize: options.leg_fontsize,
-   fontsize2: options.leg_fontsize2,
-   stroke: options.leg_stroke,
-   fill: options.leg_fill,
-   strokewidth: options.leg_strokewidth,
-   txtcol: options.leg_txtcol
- });
+     legbox(selection, {
+       x: options.leg_x,
+       y: options.leg_y,
+       w: options.leg_w,
+       h: options.leg_h,
+       title: options.leg_title,
+       text: options.leg_text,
+       fontsize: options.leg_fontsize,
+       fontsize2: options.leg_fontsize2,
+       stroke: options.leg_stroke,
+       fillopacity: options.leg_fillopacity
+         ? options.leg_fillopacity
+         : fillopacity,
+       fill: options.leg_fill ? options.leg_fill : fill,
+       strokewidth: options.leg_strokewidth,
+       txtcol: options.leg_txtcol
+     });
 }

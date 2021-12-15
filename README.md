@@ -225,7 +225,7 @@ Parameters of the legend
 - <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
-- <b/>leg_title</b>: title of the legend (default; "Title, year\n(units)")
+- <b/>leg_title</b>: title of the legend (default; null)
 - <b>leg_text</b>: text of the box (default: "text of the box")
 - <b/>leg_fontsize</b>: title legend font size (default: 14)
 - <b/>leg_fontsize2</b>: values font size (default: 10)

@@ -69,12 +69,12 @@ export function legcircles(selection, options = {}) {
 
     // Legend title
 
-    leg
-      .append("circle")
-      .attr("cx", x)
-      .attr("cy", y)
-      .attr("r", 4)
-      .attr("fill", "red");
+    // leg
+    //   .append("circle")
+    //   .attr("cx", x)
+    //   .attr("cy", y)
+    //   .attr("r", 4)
+    //   .attr("fill", "red");
 
     leg
       .append("g")
