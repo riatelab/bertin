@@ -309,6 +309,20 @@ plot({
 - <b/>strokewidth</b>: stroke width (default: 0.5)
 - <b/>fillopacity</b>: fill opacity (default: 1)
 
+Parameters of the legend
+
+- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_w</b>: width of the bof (default: 30)
+- <b>leg_h</b>: height of the bof (default:20)
+- <b>leg_text</b>: text of the box (default: "text of the box")
+- <b/>leg_fontsize</b>: text font size (default: 10)
+- <b/>leg_fill</b>: color of the box (same as the layer displayed)
+- <b/>leg_stroke</b>: stroke of the box (default: "black")
+- <b/>leg_strokewidth</b>: stroke-width (default: 0.8)
+- <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
+- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
+
 </details>
 
 #### Outline

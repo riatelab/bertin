@@ -48,4 +48,20 @@ export function layermissing(selection, projection, options = {}){
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity);
   //.attr("clip-path", "url(#clip)")
+
+  legbox(selection, {
+   x: options.leg_x,
+   y: options.leg_y,
+   w: options.leg_w,
+   h: options.leg_h,
+   text: options.leg_text,
+   fontsize: options.leg_fontsize2,
+   stroke: options.leg_stroke,
+   fillopacity: options.leg_fillopacity
+     ? options.leg_fillopacity
+     : fillopacity,
+   fill: fill,
+   strokewidth: options.leg_strokewidth,
+   txtcol: options.leg_txtcol
+ });
 }

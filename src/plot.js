@@ -168,7 +168,18 @@ if (layer.type == "text") {
         fill: layer.fill,
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity
+        fillopacity: layer.fillopacity,
+        leg_x: layer.leg_x,
+        leg_y: layer.leg_y,
+        leg_w: layer.leg_w,
+        leg_h: layer.leg_h,
+        leg_text: layer.leg_text,
+        leg_fontsize: layer.leg_fontsize,
+        leg_stroke: layer.leg_stroke,
+        leg_fillopacity: layer.fillopacity,
+        leg_fill: layer.fill,
+        leg_strokewidth: layer.leg_strokewidth,
+        leg_txtcol: layer.leg_txtcol
       });
     }
 
