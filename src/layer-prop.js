@@ -7,7 +7,7 @@ import * as d3scale from "d3-scale";
 import {addtooltip } from "./tooltip.js";
 import {legcircles } from "./leg-circles.js";
 
-const d3 = Object.assign({}, d3selection, d3array,d3scale, d3geo, d3geoprojection);
+const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
 import {getcenters } from "./centroids.js";
 
 export function layerprop(selection, projection, options = {}) {
