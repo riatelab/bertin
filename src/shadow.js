@@ -35,6 +35,15 @@ export function shadow(selection, projection, geojson, defs, options = {}) {
   //   col = options.col ? options.col : "none";
   // }
 
+  const path = d3.geoPath(projection);
+
+  selection
+    .append("clipPath")
+    .attr("id", "clip")
+    .append("path")
+    .datum({ type: "Sphere" })
+    .attr("d", path);
+
   selection
     .append("g")
     .attr(":inkscape:groupmode", "shadow")
@@ -42,11 +51,11 @@ export function shadow(selection, projection, geojson, defs, options = {}) {
     .attr(":inkscape:label", "shadow")
     .append("path")
     .datum(merged)
-    .attr("d", d3.geoPath(projection))
-    .attr("d", d3.geoPath(projection))
+    .attr("d", path)
     .attr("fill", fill)
     .attr("opacity", opacity)
     .attr("stroke", stroke)
+    .attr("clip-path", "url(#clip)")
     //.attr("clip-path", "url(#clip)")
     .attr("filter", "url(#blur)")
     .attr("transform", `translate(${dx} ${dy})`);
