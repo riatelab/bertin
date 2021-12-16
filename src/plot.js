@@ -138,6 +138,24 @@ export function plot({ params = {}, layers = {} } = {}) {
       });
     }
 
+    // typo layers
+if (layer.type == "typo") {
+  layertypo(svg, projection, {
+    geojson: layer.geojson,
+    data: layer.data,
+    id_geojson: layer.id_geojson,
+    id_data: layer.id_data,
+    var_data: layer.var_data,
+    colors: layer.colors,
+    pal: layer.pal,
+    col_missing: layer.col_missing,
+    stroke: layer.stroke,
+    strokewidth: layer.strokewidth,
+    fillopacity: layer.fillopacity,
+    tooltip: layer.tooltip
+  });
+}
+
     // text note
 if (layer.type == "text") {
   addtext(svg, width, height, {

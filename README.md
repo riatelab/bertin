@@ -467,3 +467,38 @@ bertin.plot({
 - <b>frame_opacity</b>: frame opacity (default: 1)
 
 </details>
+
+#### Typo
+
+Fuction to create a typology map [Source](https://github.com/neocarto/bertin/blob/main/src/layer-typo.js)
+
+~~~js
+  plot({
+    layers: [
+      {
+        type: "typo",
+        geojson: countries,
+        id_geojson: "ISO3_CODE",
+        data: maddison,
+        id_data: "countrycode",
+        var_data: "region"
+    ]
+  })
+~~~
+
+<details><summary>See parameters</summary>
+
+- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b/>data</b>: a geoj (<ins>compulsory<ins>)
+- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b/>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>colors</b>: An array containig n colos for n types (defaut: null)
+- <b>pal</b>: a palette of categorical colors (default: "Tableau10") [See](https://observablehq.com/@d3/color-schemes)
+- <b>col_missing</b>: Color for missing values (default "#f5f5f5")
+- <b>stroke</b>: sreoke color (default: "white")
+- <b>strokewidth</b>: Stroke width (default: 0.5)
+- <b>fillopacity</b>: Fill opacity (dafault: 1)
+- <b>tooltip</b>: - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+
+</details>
