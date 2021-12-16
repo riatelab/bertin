@@ -1,7 +1,8 @@
 import * as d3selection from "d3-selection";
 import * as d3geo from "d3-geo";
 import * as d3scale from "d3-scale";
-const d3 = Object.assign({}, d3selection, d3geo, d3scale);
+import * as d3array from "d3-array";
+const d3 = Object.assign({}, d3selection, d3array, d3geo, d3scale);
 
 export function layertypo(selection, projection, options = {}){
   let geojson = options.geojson;
