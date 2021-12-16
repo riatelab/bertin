@@ -36,6 +36,13 @@ export function layermissing(selection, projection, options = {}){
   }
 
   selection
+  .append("clipPath")
+  .attr("id", "clip")
+  .append("path")
+  .datum({ type: "Sphere" })
+  .attr("d", d3.geoPath(projection));
+
+  selection
     .append("g")
     .attr(":inkscape:groupmode", "layer")
     .attr("id", "missing")
@@ -47,8 +54,8 @@ export function layermissing(selection, projection, options = {}){
     .attr("fill", fill)
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity);
-  //.attr("clip-path", "url(#clip)")
+    .attr("fill-opacity", fillopacity)
+    .attr("clip-path", "url(#clip)")
 
   legbox(selection, {
    x: options.leg_x,

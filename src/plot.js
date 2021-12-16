@@ -71,6 +71,15 @@ export function plot({ params = {}, layers = {} } = {}) {
   // defs
   let defs = svg.append("defs");
 
+
+  // const clip = svg
+  // .append("clipPath")
+  // .attr("id", "clip")
+  // .append("path")
+  // .datum({ type: "Sphere" })
+  // .attr("d", d3.geoPath(projection));
+
+
   // Background color
   if (background) {
     svg
