@@ -56,12 +56,12 @@ export function plot({ params = {}, layers = {} } = {}) {
   const svg = d3
     .create("svg")
     .attr("width", width)
-    .attr("height", height + heightHeader + heightFooter)
+    .attr("height", height + headerdelta + heightFooter)
     .attr("viewBox", [
       0,
-      -heightHeader,
+      -headerdelta,
       width,
-      height + heightHeader + heightFooter
+      height + headerdelta + heightFooter
     ])
     .attr(
       "style",
