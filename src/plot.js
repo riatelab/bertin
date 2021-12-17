@@ -27,10 +27,11 @@ export function plot({ params = {}, layers = {} } = {}) {
   let projection = params.projection ? params.projection : d3.geoPatterson();
   let width = params.width ? params.width : 1000;
   let extent = params.extent ? params.extent : null;
+  let margin = params.margin ? params.margin : 1;
   let background = params.background;
 
   // optimal heights
-  let height = getheight(layers, extent, projection, width);
+  let height = getheight(layers, extent, margin, projection, width);
   let headerdelta = 0;
   let header = layers.find((d) => d.type == "header");
   if (header) {

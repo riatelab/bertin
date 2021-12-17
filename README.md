@@ -127,7 +127,8 @@ bertin.plot({
 
 - <b>projection</b>: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
 - <b>width</b>: width of the map (default:1000);
-- <b>extent</b>: a feature defing the extent e.g. a country (default:null)
+- <b>extent</b>: a feature defing the extent e.g. a country (default: null)
+- <b>margin</b>: margin around features to be displayed. This option can be usefull if the stroke is very heavy (default: 1)
 - <b>background</b>: color of the background (default:"none")
 
 </details>
