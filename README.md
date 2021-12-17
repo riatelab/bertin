@@ -531,4 +531,18 @@ Fuction to create a typology map [Source](https://github.com/neocarto/bertin/blo
 - <b>fillopacity</b>: Fill opacity (dafault: 1)
 - <b>tooltip</b>: - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
 
+Parameters of the legend
+
+- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_w</b>: width of the bof (default: 30)
+- <b>leg_h</b>: height of the bof (default:20)
+- <b/>leg_title</b>: title of the legend (default; null)
+- <b/>leg_fontsize</b>: title legend font size (default: 14)
+- <b/>leg_fontsize2</b>: values font size (default: 10)
+- <b/>leg_stroke</b>: stroke of the box (default: "black")
+- <b/>leg_strokewidth</b>: stroke-width (default: 0.5)
+- <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
+- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
+
 </details>
