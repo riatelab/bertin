@@ -155,7 +155,17 @@ if (layer.type == "typo") {
     stroke: layer.stroke,
     strokewidth: layer.strokewidth,
     fillopacity: layer.fillopacity,
-    tooltip: layer.tooltip
+    tooltip: layer.tooltip,
+    leg_x: layer.leg_x,
+    leg_y: layer.leg_y,
+    leg_title: layer.leg_title,
+    leg_fontsize: layer.leg_fontsize,
+    leg_fontsize2: layer.leg_fontsize2,
+    leg_stroke: layer.leg_stroke,
+    leg_fillopacity: layer.leg_fillopacity,
+    leg_strokewidth: layer.leg_strokewidth,
+    leg_txtcol: layer.leg_txtcol
+
   });
 }
 
