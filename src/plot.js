@@ -273,9 +273,9 @@ if (layer.type == "text") {
   let scalebar = layers.find((d) => d.type == "scalebar");
   if (scalebar) {
     addscalebar(svg, projection, width, height, {
-      dist: scalebar.dist,
       x: scalebar.x,
-      y: scalebar.y
+      y: scalebar.y,
+      units: scalebar.units
     });
   }
 
