@@ -411,6 +411,29 @@ Parameters of the legend
 
 </details>
 
+#### Scalebar
+
+This function allows you to display a sclaebar on the map [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js)
+
+  ~~~js
+  plot({
+    layers: [
+      {
+        type: "scalebar",
+        units: "miles"
+      },
+    ]
+  })
+  ~~~
+
+<details><summary>See parameters</summary>
+
+- <b/>x</b>: position in x (if this value is not filled, the legend is displayed on the left)
+- <b/>y</b>: position in x (if this value is not filled, the legend is displayed at the bottom)
+- <b/>units</b>: distance unit, miles or kilometers (default: "kilimeters")
+
+</details>
+
 #### Shadow
 
 This function allows you to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
