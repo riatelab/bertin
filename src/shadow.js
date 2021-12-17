@@ -48,8 +48,7 @@ export function shadow(selection, projection, geojson, clipid, defs, options = {
     .attr("fill", fill)
     .attr("opacity", opacity)
     .attr("stroke", stroke)
-    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
-    .attr("clip-path", `url(#clip_${clipid}_outline)`)
+    .attr("clip-path", `url(#clip_${clipid}`)
     .attr("filter", "url(#blur)")
     .attr("transform", `translate(${dx} ${dy})`);
 }

@@ -5,7 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
 // Graticule
-export function addgraticule(selection, projection, clipid, options = {}) {
+export function addgraticule(selection, projection, options = {}) {
   let stroke = options.stroke ? options.stroke : "white";
   let strokewidth = options.strokewidth ? options.strokewidth : 0.8;
   let strokeopacity = options.strokeopacity ? options.strokeopacity : 0.5;
@@ -20,8 +20,6 @@ export function addgraticule(selection, projection, clipid, options = {}) {
     .append("path")
     .datum(d3.geoGraticule().step(step))
     .attr("d", d3.geoPath(projection))
-    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
-    .attr("clip-path", "url(#clip)")
     .style("fill", "none")
     .style("stroke", stroke)
     .style("stroke-width", strokewidth)

@@ -49,8 +49,7 @@ selection
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity)
-    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
-    .attr("clip-path", `url(#clip_${clipid}_outline)`);
+    .attr("clip-path", `url(#clip_${clipid}`);
 
   legbox(selection, {
    x: options.leg_x,

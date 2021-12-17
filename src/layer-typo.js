@@ -56,8 +56,7 @@ export function layertypo(selection, projection, clipid, options = {}){
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity)
-    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
-    .attr("clip-path", `url(#clip_${clipid}_outline)`)
+    .attr("clip-path", `url(#clip_${clipid}`)
     .on("touchmove mousemove", function (event, d) {
       if (tooltip != "") {
         if (Array.isArray(tooltip)) {

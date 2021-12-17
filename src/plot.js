@@ -31,26 +31,26 @@ export function plot({ params = {}, layers = {} } = {}) {
 
   // optimal heights
   let height = getheight(layers, extent, projection, width);
-  let heightHeader = 0;
-  let header = layers.find((d) => d.type == "header");
-  if (header) {
-    if (header.text) {
-      heightHeader = 20;
-    }
-    if (header.fontsize) {
-      heightHeader = header.fontsize;
-    }
-  }
-  let heightFooter = 0;
-  let footer = layers.find((d) => d.type == "footer");
-  if (footer) {
-    if (footer.text) {
-      heightFooter = 20;
-    }
-    if (footer.fontsize) {
-      heightFooter = footer.fontsize;
-    }
-  }
+   let headerdelta = 0;
+   let header = layers.find((d) => d.type == "header");
+   if (header) {
+     if (header.text) {
+       headerdelta = 25 * header.text.split("\n").length + 10;
+     }
+     if (header.fontsize) {
+       headerdelta = header.fontsize * header.text.split("\n").length + 10;
+     }
+   }
+   let heightFooter = 0;
+   let footer = layers.find((d) => d.type == "footer");
+   if (footer) {
+     if (footer.text) {
+       heightFooter = 25;
+     }
+     if (footer.fontsize) {
+       heightFooter = footer.fontsize;
+     }
+   }
 
   // svg document
   const svg = d3
@@ -72,22 +72,13 @@ export function plot({ params = {}, layers = {} } = {}) {
   let defs = svg.append("defs");
 
   // Clip
-  const clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
-  svg
-    .append("clipPath")
-    .attr("id", `clip_${clipid}_outline`)
-    .append("path")
-    .datum({ type: "Sphere" })
-    .attr("d", d3.geoPath(projection));
-
-  svg
-    .append("clipPath")
-    .attr("id", `clip_${clipid}_rectangle`)
-    .append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", width)
-    .attr("height", height);
+const clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+svg
+  .append("clipPath")
+  .attr("id", `clip_${clipid}`)
+  .append("path")
+  .datum({ type: "Sphere" })
+  .attr("d", d3.geoPath(projection));
 
 
   // Background color
@@ -100,16 +91,6 @@ export function plot({ params = {}, layers = {} } = {}) {
       .attr("height", height)
       .attr("fill", background);
   }
-
-  // clipPath
-  // svg
-  //   .append("clipPath")
-  //   .attr("id", "clip")
-  //   .append("rect")
-  //   .attr("x", 0)
-  //   .attr("y", 0)
-  //   .attr("width", width)
-  //   .attr("height", height);
 
   // Outline (fill)
   let outline = layers.find((d) => d.type == "outline");
@@ -125,7 +106,7 @@ export function plot({ params = {}, layers = {} } = {}) {
   layers.reverse().forEach((layer) => {
     // Graticule
     if (layer.type == "graticule") {
-      addgraticule(svg, projection, {
+      addgraticule(svg, projection,  {
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
         strokeopacity: layer.strokeopacity,
@@ -136,7 +117,7 @@ export function plot({ params = {}, layers = {} } = {}) {
 
     // simple layers
     if (layer.type == "layer") {
-      layersimple(svg, projection, layer.geojson, {
+      layersimple(svg, projection, clipid, layer.geojson, {
         fill: layer.fill,
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
@@ -160,7 +141,7 @@ export function plot({ params = {}, layers = {} } = {}) {
 
     // typo layers
 if (layer.type == "typo") {
-  layertypo(svg, projection, {
+  layertypo(svg, projection, clipid,  {
     geojson: layer.geojson,
     data: layer.data,
     id_geojson: layer.id_geojson,
@@ -197,7 +178,7 @@ if (layer.type == "text") {
 
     // missing
     if (layer.type == "missing") {
-      layermissing(svg, projection, {
+      layermissing(svg, projection, clipid, {
         geojson: layer.geojson,
         id_geojson: layer.id_geojson,
         data: layer.data,
@@ -223,7 +204,7 @@ if (layer.type == "text") {
 
     // shadow
     if (layer.type == "shadow") {
-      shadow(svg, projection, layer.geojson, defs, {
+      shadow(svg, projection, layer.geojson, clipid, defs, {
         col: layer.col,
         dx: layer.dx,
         dy: layer.dy,
@@ -234,7 +215,7 @@ if (layer.type == "text") {
 
     // prop layers
     if (layer.type == "prop") {
-      layerprop(svg, projection, {
+      layerprop(svg, projection, clipid, {
         geojson: layer.geojson,
         id_geojson: layer.id_geojson,
         data: layer.data,
