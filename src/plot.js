@@ -71,13 +71,23 @@ export function plot({ params = {}, layers = {} } = {}) {
   // defs
   let defs = svg.append("defs");
 
+  // Clip
+  const clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+  svg
+    .append("clipPath")
+    .attr("id", `clip_${clipid}_outline`)
+    .append("path")
+    .datum({ type: "Sphere" })
+    .attr("d", d3.geoPath(projection));
 
-  // const clip = svg
-  // .append("clipPath")
-  // .attr("id", "clip")
-  // .append("path")
-  // .datum({ type: "Sphere" })
-  // .attr("d", d3.geoPath(projection));
+  svg
+    .append("clipPath")
+    .attr("id", `clip_${clipid}_rectangle`)
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", width)
+    .attr("height", height);
 
 
   // Background color

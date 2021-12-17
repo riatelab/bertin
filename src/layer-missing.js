@@ -7,7 +7,7 @@ import {figuration } from "./figuration.js";
 import {addtooltip } from "./tooltip.js";
 import {legbox } from "./leg-box.js";
 
-export function layermissing(selection, projection, options = {}){
+export function layermissing(selection, projection, clipid, options = {}){
   //layermissing = (options = {}) => {
   let geojson = options.geojson;
   let data = options.data;
@@ -35,14 +35,8 @@ export function layermissing(selection, projection, options = {}){
     strokewidth = options.strokewidth ? options.strokewidth : 1;
   }
 
-  selection
-  .append("clipPath")
-  .attr("id", "clip")
-  .append("path")
-  .datum({ type: "Sphere" })
-  .attr("d", d3.geoPath(projection));
 
-  selection
+selection
     .append("g")
     .attr(":inkscape:groupmode", "layer")
     .attr("id", "missing")
@@ -55,7 +49,8 @@ export function layermissing(selection, projection, options = {}){
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity)
-    .attr("clip-path", "url(#clip)")
+    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
+    .attr("clip-path", `url(#clip_${clipid}_outline)`);
 
   legbox(selection, {
    x: options.leg_x,

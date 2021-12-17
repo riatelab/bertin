@@ -9,7 +9,7 @@ const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 const topojson = Object.assign({}, topojsonserver, topojsonclient);
 import {figuration } from "./figuration.js";
 
-export function shadow(selection, projection, geojson, defs, options = {}) {
+export function shadow(selection, projection, geojson, clipid, defs, options = {}) {
   let col = options.col ? options.col : "#35383d";
   let dx = options.dx ? options.dx : 3;
   let dy = options.dy ? options.dy : 3;
@@ -38,13 +38,6 @@ export function shadow(selection, projection, geojson, defs, options = {}) {
   const path = d3.geoPath(projection);
 
   selection
-    .append("clipPath")
-    .attr("id", "clip")
-    .append("path")
-    .datum({ type: "Sphere" })
-    .attr("d", path);
-
-  selection
     .append("g")
     .attr(":inkscape:groupmode", "shadow")
     .attr("id", "simple layer")
@@ -55,8 +48,8 @@ export function shadow(selection, projection, geojson, defs, options = {}) {
     .attr("fill", fill)
     .attr("opacity", opacity)
     .attr("stroke", stroke)
-    .attr("clip-path", "url(#clip)")
-    //.attr("clip-path", "url(#clip)")
+    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
+    .attr("clip-path", `url(#clip_${clipid}_outline)`)
     .attr("filter", "url(#blur)")
     .attr("transform", `translate(${dx} ${dy})`);
 }

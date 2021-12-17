@@ -6,7 +6,7 @@ import * as d3scalechromatic from "d3-scale-chromatic";
 const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3scale);
 import {addtooltip } from "./tooltip.js";
 
-export function layertypo(selection, projection, options = {}){
+export function layertypo(selection, projection, clipid, options = {}){
   let geojson = options.geojson;
   let data = options.data;
   let id_geojson = options.id_geojson;
@@ -40,13 +40,6 @@ export function layertypo(selection, projection, options = {}){
   let path = d3.geoPath(projection);
 
   selection
-    .append("clipPath")
-    .attr("id", "clip")
-    .append("path")
-    .datum({ type: "Sphere" })
-    .attr("d", path);
-
-  selection
     .append("g")
     .attr(":inkscape:groupmode", "layer")
     .attr("id", "typo layer")
@@ -63,7 +56,8 @@ export function layertypo(selection, projection, options = {}){
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity)
-    .attr("clip-path", "url(#clip)")
+    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
+    .attr("clip-path", `url(#clip_${clipid}_outline)`)
     .on("touchmove mousemove", function (event, d) {
       if (tooltip != "") {
         if (Array.isArray(tooltip)) {
