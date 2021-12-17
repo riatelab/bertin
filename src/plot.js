@@ -31,42 +31,43 @@ export function plot({ params = {}, layers = {} } = {}) {
 
   // optimal heights
   let height = getheight(layers, extent, projection, width);
-   let headerdelta = 0;
-   let header = layers.find((d) => d.type == "header");
-   if (header) {
-     if (header.text) {
-       headerdelta = 25 * header.text.split("\n").length + 10;
-     }
-     if (header.fontsize) {
-       headerdelta = header.fontsize * header.text.split("\n").length + 10;
-     }
-   }
-   let heightFooter = 0;
-   let footer = layers.find((d) => d.type == "footer");
-   if (footer) {
-     if (footer.text) {
-       heightFooter = 25;
-     }
-     if (footer.fontsize) {
-       heightFooter = footer.fontsize;
-     }
-   }
+  let headerdelta = 0;
+  let header = layers.find((d) => d.type == "header");
+  if (header) {
+    if (header.text) {
+      headerdelta = 25 * header.text.split("\n").length + 10;
+    }
+    if (header.fontsize) {
+      headerdelta = header.fontsize * header.text.split("\n").length + 10;
+    }
+  }
+  let footerdelta = 0;
+  let footer = layers.find((d) => d.type == "footer");
+  if (footer) {
+    if (footer.text) {
+      footerdelta = 10 * footer.text.split("\n").length + 10;
+    }
+    if (footer.fontsize) {
+      footerdelta = footer.fontsize * footer.text.split("\n").length + 10;
+    }
+  }
 
   // svg document
   const svg = d3
     .create("svg")
     .attr("width", width)
-    .attr("height", height + headerdelta + heightFooter)
+    .attr("height", height + headerdelta + footerdelta)
     .attr("viewBox", [
       0,
       -headerdelta,
       width,
-      height + headerdelta + heightFooter
+      height + headerdelta + footerdelta
     ])
     .attr(
       "style",
       `max-width: 100%; height: auto; height: intrinsic; background-color: white;`
     );
+
 
   // defs
   let defs = svg.append("defs");
@@ -245,7 +246,10 @@ if (layer.type == "text") {
       addheader(svg, width, {
         fontsize: layer.fontsize,
         text: layer.text,
-        fill: layer.fill
+        fill: layer.fill,
+        background: layer.background,
+        backgroundopacity: layer.backgroundopacity,
+        anchor: layer.anchor
       });
     }
 
@@ -254,7 +258,10 @@ if (layer.type == "text") {
       addfooter(svg, width, height, {
         fontsize: layer.fontsize,
         text: layer.text,
-        fill: layer.fill
+        fill: layer.fill,
+        background: layer.background,
+        backgroundopacity: layer.backgroundopacity,
+        anchor: layer.anchor
       });
     }
   });
