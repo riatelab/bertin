@@ -2,7 +2,7 @@
 
 ***An easy to use wrapper around d3js to facilitate the process of making thematic maps***
 
-![](./img/example.png)
+![](./img/bertin_typo.png)
 
 ### Why Bertin ?
 
