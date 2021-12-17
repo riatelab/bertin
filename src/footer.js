@@ -17,7 +17,7 @@ export function addfooter(selection, width, height, options = {}) {
   let backgroundopacity = options.backgroundopacity
     ? options.backgroundopacity
     : 1;
-  let anchor = options.anchor ? options.anchor : "middle";
+  let anchor = options.anchor ? options.anchor : "end";
 
   const delta = fontsize * text.split("\n").length;
 

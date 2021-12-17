@@ -149,7 +149,7 @@ bertin.plot({
 <details><summary>See parameters</summary>
 
 - <b>text</b>: text to be displayed (default:"")
-- <b>anchor</b>: text anchor. start, middle, end (default:"middle")
+- <b>anchor</b>: text anchor. start, middle, end (default:"end")
 - <b>fontsize</b>: size of the text (default:15)
 - <b>fill</b>: color of the text (default:"#9e9696")
 - <b>background</b>: background color (default: "white")
