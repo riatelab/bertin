@@ -39,6 +39,7 @@
     "d3": "^7.1.1",
     "d3-geo-projection": "^4.0.0",
     "d3-geo-scale-bar": "^1.1.1",
+    "jenks": "^1.0.3",
     "topojson-client": "^3.1.0",
     "topojson-server": "^3.0.1"
   },
