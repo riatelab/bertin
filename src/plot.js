@@ -11,6 +11,7 @@ import { addheader } from "./header.js";
 import { layersimple } from "./layer-simple.js";
 import { layerprop } from "./layer-prop.js";
 import { layertypo } from "./layer-typo.js";
+import { layerchoro } from "./layer-choro.js";
 import { layermissing } from "./layer-missing.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
@@ -168,6 +169,28 @@ if (layer.type == "typo") {
 
   });
 }
+
+// choro layers
+if (layer.type == "choro") {
+  layerchoro(svg, projection, clipid, {
+    geojson: layer.geojson,
+    data: layer.data,
+    id_geojson: layer.id_geojson,
+    id_data: layer.id_data,
+    var_data: layer.var_data,
+    pal: layer.pal,
+    nbreaks: layer.nbreaks,
+    breaks: layer.breaks,
+    colors: layer.colors,
+    method: layer.method,
+    col_missing: layer.col_missing,
+    stroke: layer.stroke,
+    strokewidth: layer.strokewidth,
+    fillopacity: layer.fillopacity,
+    tooltip: layer.tooltip
+  });
+}
+
 
     // text note
 if (layer.type == "text") {

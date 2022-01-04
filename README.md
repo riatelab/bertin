@@ -133,6 +133,46 @@ bertin.plot({
 
 </details>
 
+#### Choro
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-choro.js). [Example](https://observablehq.com/d/26db505c71cc6606?collection=@neocartocnrs/bertin)
+
+~~~js
+bertin.plot({
+  layers: [{
+    {
+      type: "choro",
+      geojson: countries,
+      id_geojson: "ISO3_CODE",
+      data: maddison,
+      id_data: "countrycode",
+      var_data: "gdpppc",
+      method: "quantile",
+      pal: "Blues"
+    }]
+})
+~~~
+
+<details><summary>See parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>data</b>: a geojson (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>pal</b>: a palette of categorical colors (default: "Blues") [See](https://observablehq.com/@d3/color-schemes)
+- <b>nbreaks</b>: Number of classes (default:5)
+- <b>breaks</b>: Class breaks (default:null)
+- <b>colors</b>: An array of colors (default: null)
+- <b>method</b>: A method of classification. Jenks, q6, quantiles, equal (default: quantiles)
+- <b>col_missing</b>: Color for missing values (default "#f5f5f5")
+- <b>stroke</b>: stroke color (default: "white")
+- <b>strokewidth</b>: Stroke width (default: 0.5)
+- <b>fillopacity</b>: Fill opacity (dafault: 1)
+- <b>tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+</details>
+
+
 #### footer
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
@@ -378,6 +418,7 @@ Fonction pour creer une couche par symboles proportionnels [Source](https://gith
         var_data: "pop",
         k: 60,
         tooltip: ["country", "pop", "(inh.)"]
+      }
     ]
   })
 ~~~
@@ -519,17 +560,17 @@ Fuction to create a typology map [Source](https://github.com/neocarto/bertin/blo
 <details><summary>See parameters</summary>
 
 - <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b/>data</b>: a geoj (<ins>compulsory<ins>)
+- <b/>data</b>: a geojson (<ins>compulsory<ins>)
 - <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
 - <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
 - <b/>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
-- <b>colors</b>: An array containig n colos for n types (defaut: null)
+- <b>colors</b>: An array containig n colors for n types (defaut: null)
 - <b>pal</b>: a palette of categorical colors (default: "Tableau10") [See](https://observablehq.com/@d3/color-schemes)
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
 - <b>stroke</b>: sreoke color (default: "white")
 - <b>strokewidth</b>: Stroke width (default: 0.5)
 - <b>fillopacity</b>: Fill opacity (dafault: 1)
-- <b>tooltip</b>: - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b>: An array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
