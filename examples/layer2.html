@@ -1,12 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="http://localhost/npm_test/bertin/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@0.1.0/dist/index.min.js"></script>
 
 <script>
 
-let geojson =   "./world.geojson"
-
-
+let geojson =   "../data/world.geojson"
 
 d3.json(geojson).then(r =>
 
@@ -39,5 +37,3 @@ with the library bertin.js, 2021`
 }))});
 
 </script>
-
-
