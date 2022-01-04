@@ -19,12 +19,7 @@ export function legchoro(selection, options = {}) {
   let breaks = options.breaks;
   let colors = options.colors;
 
-  let getcolor = d3.scaleOrdinal().domain(breaks).range(colors);
   const span = 0;
-
-  // x = 100;
-  // y = 100;
-  // title = "Title of the legend";
 
   if (x != null && y != null) {
     let leg = selection.append("g");
@@ -48,13 +43,13 @@ export function legchoro(selection, options = {}) {
     }
     leg
       .selectAll("rect")
-      .data(colors)
+      .data(d3.reverse(colors))
       .join("rect")
       .attr("x", x)
       .attr("y", (d, i) => y + delta + (h + span) * i)
       .attr("height", h)
       .attr("width", w)
-      .attr("fill", (d) => getcolor(d))
+      .attr("fill", (d) => d)
       .attr("stroke", stroke)
       .attr("stroke-width", strokewidth)
       .attr("fill-opacity", fillopacity);
@@ -62,12 +57,10 @@ export function legchoro(selection, options = {}) {
     leg
       .append("g")
       .selectAll("text")
-      .data(breaks)
+      .data(d3.reverse(breaks))
       .join("text")
       .attr("x", x + w + fontsize2 / 2)
-      //.attr("y", y + delta + h / 2)
       .attr("y", y + delta)
-      //.attr("y", y + h / 2 - (fontsize2 * text.split("\n").length) / 2 + delta)
       .attr("font-size", `${fontsize2}px`)
       .attr("dy", (d, i) => (h + span) * i)
       .attr("text-anchor", "start")

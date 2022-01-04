@@ -3,7 +3,7 @@ import * as d3scale from "d3-scale";
 import * as d3array from "d3-array";
 const d3 = Object.assign({}, d3array, d3scale);
 
-export function getbreaks(data, method, nbclass) {
+export function getbreaks(data, method, nbclass, round) {
   let breaks = [];
 
   // Jenks
@@ -49,5 +49,9 @@ export function getbreaks(data, method, nbclass) {
   //   const sd = d3.deviation(data);
   // }
 
-  return d3.sort(breaks);
+  let bks = d3.sort(breaks);
+  if (round !== undefined) {
+    bks = bks.map((d) => +d.toFixed(round));
+  }
+  return bks;
 }

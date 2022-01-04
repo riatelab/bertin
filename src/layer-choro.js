@@ -35,6 +35,7 @@ export function layerchoro(selection, projection, clipid, options = {}){
   let leg_fillopacity = options.fillopacity ? options.fillopacity : 1;
   let leg_strokewidth = options.leg_strokewidth ? options.leg_strokewidth : 0.5;
   let leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
+  let leg_round = options.leg_round !== undefined ? options.leg_round : undefined;
 
   // Get only available data in the basemap
   let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
@@ -44,20 +45,24 @@ export function layerchoro(selection, projection, clipid, options = {}){
   let databyid = d3.index(data, (d) => d[id_data]);
 
   // breaks
+  if (method == "q6") {
+  nbreaks = 6;
+}
   if (breaks == null) {
     breaks = getbreaks(
       data.map((d) => d[var_data]),
       method,
-      nbreaks
+      nbreaks,
+      leg_round
     );
   }
   // colors
-  let cols;
   if (colors == null) {
-    cols = d3.scaleThreshold(breaks, d3[`scheme${pal}`][nbreaks]);
-  } else {
-    cols = d3.scaleThreshold(breaks, colors);
+    colors = d3[`scheme${pal}`][nbreaks];
   }
+  let b = [...breaks]; b.pop(); b.shift();
+  let cols = d3.scaleThreshold(b, colors);
+
   let path = d3.geoPath(projection);
 
   selection
