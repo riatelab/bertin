@@ -5,6 +5,7 @@ import * as d3array from "d3-array";
 import * as d3scalechromatic from "d3-scale-chromatic";
 const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3scale);
 import {addtooltip } from "./tooltip.js";
+import {getbreaks } from "./breaks.js";
 
 export function layerchoro(selection, projection, clipid, options = {}){
   let geojson = options.geojson;
