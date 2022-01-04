@@ -1,0 +1,43 @@
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+<script src="http://localhost/npm_test/bertin/index.min.js"></script>
+
+<script>
+
+let geojson =   "./world.geojson"
+
+
+
+d3.json(geojson).then(r =>
+
+{
+
+let JPN = {type: "FeatureCollection",features: r.features.filter((d) => d.properties.ISO3 == "JPN")};
+
+document.body.appendChild(bertin.plot({
+  params: {
+    extent: JPN,
+    background: "#bde1f0",
+    margin:20
+  },
+  layers: [
+     {
+      type: "header",
+      text: `This is Japan`,
+      fontsize: 36
+    },
+    {
+      type: "footer",
+      text: `Map designed by Nicolas Lambert
+with the library bertin.js, 2021`
+    },
+    { type: "layer", geojson: JPN },
+    { type: "shadow", geojson: JPN, dx: 5, dy: 5 },
+    { type: "layer", geojson: r, fill: "#CCC" },
+    { type: "scalebar", dist: 250 }
+    ]
+}))});
+
+</script>
+
+
