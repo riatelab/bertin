@@ -6,6 +6,7 @@ import * as d3scalechromatic from "d3-scale-chromatic";
 const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3scale);
 import {addtooltip } from "./tooltip.js";
 import {getbreaks } from "./breaks.js";
+import {legchoro } from "./leg-choro.js";
 
 export function layerchoro(selection, projection, clipid, options = {}){
   let geojson = options.geojson;
@@ -23,6 +24,17 @@ export function layerchoro(selection, projection, clipid, options = {}){
   let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
   let fillopacity = options.fillopacity ? options.fillopacity : 1;
   let tooltip = options.tooltip ? options.tooltip : "";
+  let leg_x = options.leg_x ? options.leg_x : null;
+  let leg_y = options.leg_y ? options.leg_y : null;
+  let leg_w = options.leg_w ? options.leg_w : 30;
+  let leg_h = options.leg_h ? options.leg_h : 20;
+  let leg_title = options.leg_title ? options.leg_title : null;
+  let leg_fontsize = options.leg_fontsize ? options.leg_fontsize : 14;
+  let leg_fontsize2 = options.leg_fontsize2 ? options.leg_fontsize2 : 10;
+  let leg_stroke = options.leg_stroke ? options.leg_stroke : "black";
+  let leg_fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let leg_strokewidth = options.leg_strokewidth ? options.leg_strokewidth : 0.5;
+  let leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
 
   // Get only available data in the basemap
   let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
@@ -99,4 +111,25 @@ export function layerchoro(selection, projection, clipid, options = {}){
         .attr("stroke-width", strokewidth)
         .attr("fill-opacity", fillopacity);
     });
+
+
+      // Legend
+
+      legchoro(selection, {
+        x: leg_x,
+        y: leg_y,
+        w: leg_w,
+        h: leg_h,
+        stroke: leg_stroke,
+        fillopacity: leg_fillopacity,
+        strokewidth: leg_strokewidth,
+        txtcol: leg_txtcol,
+        title: leg_title,
+        fontsize: leg_fontsize,
+        fontsize2: leg_fontsize2,
+        breaks: breaks,
+        colors: colors
+      });
+
+
 }
