@@ -5,6 +5,7 @@ const d3 = Object.assign({}, d3array, d3scale);
 
 export function getbreaks(data, method, nbclass, round) {
   let breaks = [];
+  data = data.map((d) => +d);
 
   // Jenks
   if (method == "jenks") {

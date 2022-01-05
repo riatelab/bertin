@@ -50,7 +50,7 @@ export function layerchoro(selection, projection, clipid, options = {}){
 }
   if (breaks == null) {
     breaks = getbreaks(
-      data.map((d) => d[var_data]),
+      merge.map((d) => d[var_data]),
       method,
       nbreaks,
       leg_round

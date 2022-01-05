@@ -1,6 +1,6 @@
 # bertin
 
-*Bertin.js is <ins>**under development**</ins> so not necessarily very stable yet.*
+*Bertin.js is <ins>**under development**</ins> so not necessarily very stable yet. The names of the functions and the parameters are still subject to change.*
 
 bertin.js is an easy to use wrapper around [d3js](https://github.com/d3/d3) to facilitate the process of making thematic maps. The principle is to work with layers stacked on each other. As in a GIS, the layers that are displayed above are placed at the top in the code, the layers that are displayed below are placed at the bottom in the code. The layers that can be displayed are of several types: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text... Each type has its own parameters. This list will be completed gradually.
 
@@ -8,7 +8,7 @@ bertin.js is an easy to use wrapper around [d3js](https://github.com/d3/d3) to f
 
 ### Why Bertin ?
 
-Jacques Bertin (1918-2010) was a French cartographer, whose major contribution was a theoretical and practical reflection on all graphic means (diagrams, maps and graphs), forming the subject of a fundamental treatise, Graphic Semiology, originally published in 1967. Bertin's influence remains strong in the university teaching of cartography today, but also in the circles of statisticians and data visualization specialists.
+Jacques Bertin (1918-2010) was a French cartographer, whose major contribution was a theoretical and practical reflection on all graphic representations (diagrams, maps and graphs), forming the subject of a fundamental treatise, Graphic Semiology, originally published in 1967. Bertin's influence remains strong in the university teaching of cartography today, but also in the circles of statisticians and data visualization specialists.
 
 ## 1. Installation
 
@@ -164,7 +164,7 @@ Parameters of the legend
 </details>
 
 
-#### footer
+#### Footer
 
 The *footer* type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
 
@@ -222,7 +222,7 @@ bertin.draw({
 
 </details>
 
-#### header
+#### Header
 
 The *header* type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
 
