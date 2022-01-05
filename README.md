@@ -48,14 +48,14 @@ bertin = require("bertin@0.1.0/dist/index.min.js")
 ~~~js
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@0.1.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin"></script>
 
 <script>
 
 let geojson = "https://raw.githubusercontent.com/neocarto/bertin/main/data/world.geojson"
 
 d3.json(geojson).then(r =>
-document.body.appendChild(bertin.plot({
+document.body.appendChild(bertin.draw({
   params: {
     projection: d3.geoVanDerGrinten4()
   },
@@ -109,6 +109,8 @@ bertin.draw({
 
 The *choro* type aims to draw Choropleth maps. This kind of representation is especially suitable for relative quantitative data (rates, indices, densities).[Source](https://github.com/neocarto/bertin/blob/main/src/layer-choro.js). [Example](https://observablehq.com/d/26db505c71cc6606?collection=@neocartocnrs/bertin)
 
+<details><summary>Code</summary>
+
 ~~~js
 bertin.draw({
   layers: [{
@@ -125,7 +127,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b>data</b>: a geojson (<ins>compulsory<ins>)
@@ -142,7 +146,6 @@ bertin.draw({
 - <b>strokewidth</b>: Stroke width (default: 0.5)
 - <b>fillopacity</b>: Fill opacity (dafault: 1)
 - <b>tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
-
 
 Parameters of the legend
 
@@ -165,6 +168,8 @@ Parameters of the legend
 
 The *footer* type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
 
+<details><summary>Code</summary>
+
 ~~~js
 bertin.draw({
   layers: [{
@@ -175,7 +180,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>text</b>: text to be displayed (default:"")
 - <b>anchor</b>: text anchor. start, middle, end (default:"end")
@@ -191,6 +198,8 @@ bertin.draw({
 
 The *graticule* type allows you to display the latitude and longitude lines.[Source](https://github.com/neocarto/bertin/blob/main/src/graticule.js).
 
+<details><summary>Code</summary>
+
 ~~~js
 bertin.draw({
   layers: [{
@@ -201,7 +210,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>stroke</b>: stroke color (default:"white")
 - <b>strokewidth</b>: stroke width (default:0.8)
@@ -215,6 +226,8 @@ bertin.draw({
 
 The *header* type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
 
+<details><summary>Code</summary>
+
 ~~~js
 bertin.draw({
   layers: [{
@@ -225,7 +238,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>text</b>: text to be displayed (default:"")
 - <b>anchor</b>: text anchor. start, middle, end (default:"middle")
@@ -240,6 +255,8 @@ bertin.draw({
 
 The *layer* type allows to display a simple geojson layer.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example](https://observablehq.com/d/d59855d7cc99f6e5?collection=@neocartocnrs/bertin)
 
+<details><summary>Code</summary>
+
 ~~~js
 bertin.draw({
   layers: [
@@ -253,7 +270,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b>fill</b>: fill color (default: a random color)
@@ -284,6 +303,8 @@ Parameters of the legend
 
 *match()* is a function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
 
+<details><summary>Code</summary>
+
 ~~~js
 let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
 ~~~
@@ -312,7 +333,9 @@ testjoin.unmatched_data
 testjoin.unmatched_geom
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
@@ -324,6 +347,8 @@ testjoin.unmatched_geom
 #### Missing
 
 Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what the type *missing* is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
+
+<details><summary>Code</summary>
 
 ~~~js
 bertin.draw({
@@ -339,7 +364,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b/>data</b>: a geoj (<ins>compulsory<ins>)
@@ -371,6 +398,8 @@ Parameters of the legend
 
 The *outline* type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
 
+<details><summary>Code</summary>
+
 ~~~js
 bertin.draw({
   layers: [{
@@ -380,7 +409,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>fill</b>: fill color of the outline (default: "#add8f7")
 - <b>stroke</b>: stroke color (default:"none")
@@ -391,6 +422,8 @@ bertin.draw({
 #### Prop
 
 The *prop* type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-prop.js) [Example](https://observablehq.com/d/6648e042f25e7241?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
 
 ~~~js
   bertin.draw({
@@ -409,7 +442,9 @@ The *prop* type is used to draw a map by proportional circles. [Source](https://
   })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b/>data</b>: a geoj (<ins>compulsory<ins>)
@@ -442,6 +477,8 @@ Parameters of the legend
 
 The *scalebar* type allows to display a scalebar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js)
 
+<details><summary>Code</summary>
+
   ~~~js
   bertin.draw({
     layers: [
@@ -453,7 +490,9 @@ The *scalebar* type allows to display a scalebar in miles or kilometers. [Source
   })
   ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b/>x</b>: position in x (if this value is not filled, the legend is displayed on the left)
 - <b/>y</b>: position in x (if this value is not filled, the legend is displayed at the bottom)
@@ -464,6 +503,8 @@ The *scalebar* type allows to display a scalebar in miles or kilometers. [Source
 #### Shadow
 
 The *shadow* type allows to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
+
+<details><summary>Code</summary>
 
 ~~~js
 bertin.draw({
@@ -478,7 +519,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>col</b>: color (default: "#35383d")
 - <b>dx</b>: shift in x (default: 3)
@@ -491,6 +534,8 @@ bertin.draw({
 #### Texts
 
 The *text* type simply allows you to display text anywhere on the map. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
+
+<details><summary>Code</summary>
 
 ~~~js
 bertin.draw({
@@ -508,7 +553,9 @@ bertin.draw({
 })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - <b>text</b>: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
@@ -529,6 +576,8 @@ bertin.draw({
 
 The *typo* type allows to realize a qualitative map. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-typo.js) [Examples](https://observablehq.com/d/bf52a76ebafaba98?collection=@neocartocnrs/bertin)
 
+<details><summary>Code</summary>
+
 ~~~js
   bertin.draw({
     layers: [
@@ -543,7 +592,9 @@ The *typo* type allows to realize a qualitative map. [Source](https://github.com
   })
 ~~~
 
-<details><summary>See parameters</summary>
+</details>
+
+<details><summary>Parameters</summary>
 
 - <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b/>data</b>: a geojson (<ins>compulsory<ins>)
