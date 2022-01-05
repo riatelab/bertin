@@ -80,7 +80,7 @@ The bertin.js library is really easy to use within Observable. You'll find many 
 
 In the section *params*, we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
 
-<details><summary>See code</summary>
+<details><summary>Code</summary>
 
 ~~~js
 bertin.draw({
@@ -94,7 +94,7 @@ bertin.draw({
 
 </details>
 
-<details><summary>See parameters</summary>
+<details><summary>Options</summary>
 
 - <b>projection</b>: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
 - <b>width</b>: width of the map (default:1000);
