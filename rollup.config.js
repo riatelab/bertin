@@ -8,17 +8,12 @@ import copy from 'rollup-plugin-copy';
 import del from 'rollup-plugin-delete';
 
 export default {
-
-entry: 'src/index.js',
-moduleName: 'bertin',
-  format: 'umd',
-   dest: 'build/bertin.js',
-    // input: 'src/index.js',
-    // output: {
-    //     format: 'umd',
-    //     file: 'dist/index.min.js',
-    //     name: 'bertin'
-    // },
+    input: 'src/index.js',
+    output: {
+        format: 'umd',
+        file: 'dist/index.min.js',
+        name: 'bertin'
+    },
     plugins: [
         commonjs(), // prise en charge de require
         noderesolve(), // prise en charge des modules depuis node_modules

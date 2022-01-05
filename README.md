@@ -1,33 +1,28 @@
-# WORK IN PROGRESS !!!!!!!!!!!!!!
+# WORK IN PROGRESS
+
+*Bertin.js is <ins>under development</ins> so not necessarily very stable yet.*
 
 # bertin
 
-***An easy to use wrapper around d3js to facilitate the process of making thematic maps***
+bertin.js is an easy to use wrapper around [d3js](https://github.com/d3/d3) to facilitate the process of making thematic maps. The principle is to work with layers stacked on each other. As in a GIS, the layers that are displayed above are placed at the top in the code, the layers that are displayed below are placed at the bottom in the code. The layers that can be displayed are of several types: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text... Each type has its own parameters. This list will be completed gradually.
 
 ![](./img/bertin_typo.png)
 
 ### Why Bertin ?
 
-Jacques Bertin (1918 - 2010) is a French cartographer, whose work on "graphic semiology" has been crucial....
-
-## Testing phase
-
-> npm publish --dry-run
-
-https://observablehq.com/d/4113b173ec452c29
+Jacques Bertin (1918-2010) was a French cartographer, whose major contribution was a theoretical and practical reflection on all graphic means (diagrams, maps and graphs), forming the subject of a fundamental treatise, Graphic Semiology, originally published in 1967. Bertin's influence remains strong in the university teaching of cartography today, but also in the circles of statisticians and data visualization specialists.
 
 ## 1. Installation
 
 ### ➡️ In browser
 
 ```html
-<script src="index.min.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin" charset="utf-8"></script>
 ```
-
 ### ➡️ In observable
 
 ~~~js
-bertin = require("https://bundle.run/bertin@0.0.34")
+bertin = require("bertin/dist/index.min.js")
 ~~~
 
 ## 2. How to use?
@@ -43,11 +38,11 @@ bertin = require("https://bundle.run/bertin@0.0.34")
 ~~~js
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="http://localhost/npm_test/bertin/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@0.1.0"></script>
 
 <script>
 
-let geojson =   "./world.geojson"
+let geojson =   "https://raw.githubusercontent.com/neocarto/bertin/main/data/world.geojson"
 
 d3.json(geojson).then(r =>
 document.body.appendChild(bertin.plot({
@@ -62,58 +57,18 @@ document.body.appendChild(bertin.plot({
 })));
 
 </script>
-~~~
 
 ### ➡️ In Observable
 
-~~~js
-d3 = require("d3@7", "d3-geo-projection@4")
-~~~
-
-~~~js
-bertin = require("https://bundle.run/bertin@0.0.34")
-~~~
-
-~~~js
-countries = d3.json(
-  "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson"
-)
-~~~
-
-~~~js
-bertin.plot({
-  params: {
-    projection: d3.geoBertin1953()
-  },
-  layers: [
-    {
-      type: "layer",
-      geojson: countries,
-      fill: "#e6acdf",
-      tooltip: ["CNTR_ID", "CNTR_NAME", ""]
-    },
-
-    { type: "outline" },
-    { type: "graticule", step: [0, 90], stroke: "blue", strokewidth: 2 }
-  ]
-})
-~~~
-
-
-
-
-### ➡️ Tutorials
-
-https://observablehq.com/d/8fc1cb198f9d1017?collection=@neocartocnrs/bertin
+the bertin.js library is really easy to use within Observable. You will find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin)
 
 ## 3. Documentation
 
 <b>plot</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
-Plot is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 
 #### Global parameters
 
-In section *params* we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
+In the section *params*, we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
 
 ~~~js
 bertin.plot({

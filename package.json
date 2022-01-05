@@ -44,7 +44,7 @@
     "topojson-server": "^3.0.1"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup --config",
     "prepare": "npm run build"
   }
 }
