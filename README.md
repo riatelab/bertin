@@ -76,7 +76,7 @@ The bertin.js library is really easy to use within Observable. You'll find many 
 
 <b>draw</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 
-#### Global parameters
+#### <ins>Global parameters</ins>
 
 In the section *params*, we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
 
@@ -94,7 +94,7 @@ bertin.draw({
 
 </details>
 
-<details><summary>Options</summary>
+<details><summary>Parameters</summary>
 
 - <b>projection</b>: a function defining the map projection. Cf d3-geo-projection@4 (default: d3.geoPatterson())
 - <b>width</b>: width of the map (default:1000);
