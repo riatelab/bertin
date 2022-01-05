@@ -14,11 +14,13 @@ Jacques Bertin (1918-2010) was a French cartographer, whose major contribution w
 
 ### ➡️ In browser
 
+Last version
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/bertin" charset="utf-8"></script>
 ```
 
-Or, if you want to pin the version:
+Pinned version
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/bertin@0.1.0" charset="utf-8"></script>
@@ -26,12 +28,13 @@ Or, if you want to pin the version:
 
 ### ➡️ In observable
 
+Last version
+
 ~~~js
 bertin = require("bertin/dist/index.min.js")
 ~~~
 
-Or, if you want to pin the version:
-
+Pinned version
 
 ~~~js
 bertin = require("bertin@0.1.0/dist/index.min.js")
