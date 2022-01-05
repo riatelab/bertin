@@ -321,7 +321,7 @@ testjoin.unmatched_geom
 Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what the type *missing* is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
 
 ~~~js
-plot({
+bertin.draw({
   layers: [
     {
       type: "missing",
@@ -364,10 +364,10 @@ Parameters of the legend
 
 #### Outline
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
+The *outline* type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
 
 ~~~js
-bertin.plot({
+bertin.draw({
   layers: [{
         type: "outline",
         fill: "#4269ad"
@@ -385,24 +385,24 @@ bertin.plot({
 
 #### Prop
 
-Fonction pour creer une couche par symboles proportionnels [Source](https://github.com/neocarto/bertin/blob/main/src/layer-prop.js)
+The *prop* type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-prop.js) [Example](https://observablehq.com/d/6648e042f25e7241?collection=@neocartocnrs/bertin)
 
-~~~js
-  plot({
-    layers: [
-      {
-        type: "prop",
-        geojson: countries,
-        id_geojson: "ISO3_CODE",
-        data: maddison,
-        id_data: "countrycode",
-        var_data: "pop",
-        k: 60,
-        tooltip: ["country", "pop", "(inh.)"]
-      }
-    ]
-  })
-~~~
+// ~~~js
+//   bertin.draw({
+//     layers: [
+//       {
+//         type: "prop",
+//         geojson: countries,
+//         id_geojson: "ISO3_CODE",
+//         data: maddison,
+//         id_data: "countrycode",
+//         var_data: "pop",
+//         k: 60,
+//         tooltip: ["country", "pop", "(inh.)"]
+//       }
+//     ]
+//   })
+// ~~~
 
 <details><summary>See parameters</summary>
 
