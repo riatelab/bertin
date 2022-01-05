@@ -1,2 +1,2 @@
-export {draw} from "./plot.js";
+export {draw} from "./draw.js";
 export {match} from "./match.js";
