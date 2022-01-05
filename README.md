@@ -12,7 +12,7 @@ Jacques Bertin (1918-2010) was a French cartographer, whose major contribution w
 
 ## 1. Installation
 
-### ➡️ In browser
+#### <ins>In browser</ins>
 
 Last version
 
@@ -26,7 +26,7 @@ Pinned version
 <script src="https://cdn.jsdelivr.net/npm/bertin@0.1.0" charset="utf-8"></script>
 ```
 
-### ➡️ In observable
+#### <ins>In Observable</ins>
 
 Last version
 
@@ -42,7 +42,8 @@ bertin = require("bertin@0.1.0/dist/index.min.js")
 
 ## 2. How to use?
 
-### ➡️ In browser
+
+#### <ins>In browser</ins>
 
 ~~~js
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -68,7 +69,7 @@ document.body.appendChild(bertin.plot({
 </script>
 ~~~
 
-### ➡️ In Observable
+#### <ins>In Observable</ins>
 
 The bertin.js library is really easy to use within Observable. You'll find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin).
 
