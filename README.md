@@ -1,5 +1,3 @@
-# WORK IN PROGRESS
-
 *Bertin.js is <ins>under development</ins> so not necessarily very stable yet.*
 
 # bertin
