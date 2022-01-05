@@ -102,7 +102,7 @@ bertin.draw({
 
 #### Choro
 
-The type *choro* aims to draw Choropleth maps. This kind of representation is especially suitable for relative quantitative data (rates, indices, densities).[Source](https://github.com/neocarto/bertin/blob/main/src/layer-choro.js). [Example](https://observablehq.com/d/26db505c71cc6606?collection=@neocartocnrs/bertin)
+The *choro* type aims to draw Choropleth maps. This kind of representation is especially suitable for relative quantitative data (rates, indices, densities).[Source](https://github.com/neocarto/bertin/blob/main/src/layer-choro.js). [Example](https://observablehq.com/d/26db505c71cc6606?collection=@neocartocnrs/bertin)
 
 ~~~js
 bertin.draw({
@@ -158,10 +158,10 @@ Parameters of the legend
 
 #### footer
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
+The *footer* type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
 
 ~~~js
-bertin.plot({
+bertin.draw({
   layers: [{
         type: "footer",
         text: "Source: Worldbank, 2021",
@@ -184,10 +184,10 @@ bertin.plot({
 
 #### Graticule
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/graticule.js).
+The *graticule* type allows you to display the latitude and longitude lines.[Source](https://github.com/neocarto/bertin/blob/main/src/graticule.js).
 
 ~~~js
-bertin.plot({
+bertin.draw({
   layers: [{
         type: "graticule",
         fill: "#644580",
@@ -206,13 +206,12 @@ bertin.plot({
 
 </details>
 
-
 #### header
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
+The *header* type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
 
 ~~~js
-bertin.plot({
+bertin.draw({
   layers: [{
         type: "header",
         text: "Title of the map",
@@ -234,10 +233,10 @@ bertin.plot({
 
 #### Layer
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example](https://observablehq.com/d/d59855d7cc99f6e5?collection=@neocartocnrs/bertin)
+The *layer* type allows to display a simple geojson layer.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example](https://observablehq.com/d/d59855d7cc99f6e5?collection=@neocartocnrs/bertin)
 
 ~~~js
-bertin.plot({
+bertin.draw({
   layers: [
     {
       type: "layer",
@@ -278,7 +277,7 @@ Parameters of the legend
 
 #### Match
 
-Function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca)
+*match()* is a function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
 
 ~~~js
 let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
@@ -317,10 +316,9 @@ testjoin.unmatched_geom
 
 </details>
 
-
 #### Missing
 
-Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what this function is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
+Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what the type *missing* is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
 
 ~~~js
 plot({
