@@ -22,7 +22,7 @@ import { addtext } from "./text.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
-export function plot({ params = {}, layers = {} } = {}) {
+export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
 
   let projection = params.projection ? params.projection : d3.geoPatterson();

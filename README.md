@@ -51,7 +51,7 @@ bertin = require("bertin@0.1.0/dist/index.min.js")
 
 <script>
 
-let geojson =   "https://raw.githubusercontent.com/neocarto/bertin/main/data/world.geojson"
+let geojson = "https://raw.githubusercontent.com/neocarto/bertin/main/data/world.geojson"
 
 d3.json(geojson).then(r =>
 document.body.appendChild(bertin.plot({
@@ -70,18 +70,18 @@ document.body.appendChild(bertin.plot({
 
 ### ➡️ In Observable
 
-the bertin.js library is really easy to use within Observable. You will find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin)
+The bertin.js library is really easy to use within Observable. You'll find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin).
 
 ## 3. Documentation
 
-<b>plot</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
+<b>draw</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 
 #### Global parameters
 
 In the section *params*, we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
 
 ~~~js
-bertin.plot({
+bertin.draw({
   params: {
     projection: d3.geoBertin1953(),
     width: 750,
@@ -96,16 +96,16 @@ bertin.plot({
 - <b>width</b>: width of the map (default:1000);
 - <b>extent</b>: a feature defing the extent e.g. a country (default: null)
 - <b>margin</b>: margin around features to be displayed. This option can be usefull if the stroke is very heavy (default: 1)
-- <b>background</b>: color of the background (default:"none")
+- <b>background</b>: color of the background (default: "none")
 
 </details>
 
 #### Choro
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-choro.js). [Example](https://observablehq.com/d/26db505c71cc6606?collection=@neocartocnrs/bertin)
+The type *choro* aims to draw Choropleth maps. This kind of representation is especially suitable for relative quantitative data (rates, indices, densities).[Source](https://github.com/neocarto/bertin/blob/main/src/layer-choro.js). [Example](https://observablehq.com/d/26db505c71cc6606?collection=@neocartocnrs/bertin)
 
 ~~~js
-bertin.plot({
+bertin.draw({
   layers: [{
     {
       type: "choro",

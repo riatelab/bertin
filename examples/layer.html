@@ -1,13 +1,13 @@
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@0.1.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin"></script>
 
 <script>
 
-let geojson =   "https://raw.githubusercontent.com/neocarto/bertin/main/data/world.geojson"
+let geojson =   "../data/world.geojson"
 
 d3.json(geojson).then(r =>
-document.body.appendChild(bertin.plot({
+document.body.appendChild(bertin.draw({
   params: {
     projection: d3.geoVanDerGrinten4()
   },
