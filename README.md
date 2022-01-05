@@ -387,22 +387,22 @@ bertin.draw({
 
 The *prop* type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-prop.js) [Example](https://observablehq.com/d/6648e042f25e7241?collection=@neocartocnrs/bertin)
 
-// ~~~js
-//   bertin.draw({
-//     layers: [
-//       {
-//         type: "prop",
-//         geojson: countries,
-//         id_geojson: "ISO3_CODE",
-//         data: maddison,
-//         id_data: "countrycode",
-//         var_data: "pop",
-//         k: 60,
-//         tooltip: ["country", "pop", "(inh.)"]
-//       }
-//     ]
-//   })
-// ~~~
+~~~js
+  bertin.draw({
+    layers: [
+      {
+        type: "prop",
+        geojson: countries,
+        id_geojson: "ISO3_CODE",
+        data: maddison,
+        id_data: "countrycode",
+        var_data: "pop",
+        k: 60,
+        tooltip: ["country", "pop", "(inh.)"]
+      }
+    ]
+  })
+~~~
 
 <details><summary>See parameters</summary>
 
@@ -435,10 +435,10 @@ Parameters of the legend
 
 #### Scalebar
 
-This function allows you to display a sclaebar on the map [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js)
+The *scalebar* type allows to display a scalebar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js)
 
   ~~~js
-  plot({
+  bertin.draw({
     layers: [
       {
         type: "scalebar",
@@ -458,10 +458,10 @@ This function allows you to display a sclaebar on the map [Source](https://githu
 
 #### Shadow
 
-This function allows you to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
+The *shadow* type allows to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
 
 ~~~js
-plot({
+bertin.draw({
   layers: [
     {
       type: "shadow",
@@ -485,14 +485,14 @@ plot({
 
 #### Texts
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
+The *text* type simply allows you to display text anywhere on the map. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
 
 ~~~js
-bertin.plot({
+bertin.draw({
   layers: [
     {
       type: "text",
-      text: "bottomright",
+      text: "This is my text",
       position: "bottomright",
       fontsize: 20,
       baseline: "middle",
@@ -522,10 +522,10 @@ bertin.plot({
 
 #### Typo
 
-Fuction to create a typology map [Source](https://github.com/neocarto/bertin/blob/main/src/layer-typo.js)
+The *typo* type allows to realize a qualitative map. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-typo.js) [Examples](https://observablehq.com/d/bf52a76ebafaba98?collection=@neocartocnrs/bertin)
 
 ~~~js
-  plot({
+  bertin.draw({
     layers: [
       {
         type: "typo",
