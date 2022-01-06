@@ -431,20 +431,20 @@ bertin.draw({
 
 <details><summary>Parameters</summary>
 
-- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b/>data</b>: a geoj (<ins>compulsory<ins>)
-- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b/>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
-- <b/>fill</b>: fill color (default: "white")
-- <b/>stroke</b>: stroke color (default: "white")
-- <b/>strokewidth</b>: stroke width (default: 0.5)
-- <b/>fillopacity</b>: fill opacity (default: 1)
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>data</b>: a geoj (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>fill</b>: fill color (default: "white")
+- <b>stroke</b>: stroke color (default: "white")
+- <b>strokewidth</b>: stroke width (default: 0.5)
+- <b>fillopacity</b>: fill opacity (default: 1)
 
 Parameters of the legend
 
-- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
-- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
 - <b>leg_text</b>: text of the box (default: "text of the box")
