@@ -12,6 +12,7 @@ import { layersimple } from "./layer-simple.js";
 import { layerprop } from "./layer-prop.js";
 import { layertypo } from "./layer-typo.js";
 import { layerchoro } from "./layer-choro.js";
+import {layermashroom} from "./layer-mashroom.js";
 import { layermissing } from "./layer-missing.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
@@ -19,7 +20,6 @@ import { getcenters } from "./centroids.js";
 import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
 import { addtext } from "./text.js";
-import {layermashroom} from "./layer-mashroom.js"
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
@@ -169,6 +169,40 @@ if (layer.type == "typo") {
     leg_txtcol: layer.leg_txtcol
 
   });
+}
+
+
+// typo layers
+if (layer.type == "mashroom") {
+layermashroom(svg, projection, clipid,  {
+    geojson:layer.geojson,
+    data:layer.data,
+    id_geojson:layer.id_geojson,
+    id_data:layer.id_data,
+    top_var:layer.top_var,
+    top_fill:layer.top_fill,
+    bottom_var:layer.bottom_var,
+    bottom_fill:layer.bottom_fill,
+    k:layer.k,
+    stroke:layer.stroke,
+    strokewidth:layer.strokewidth,
+    fillopacity:layer.fillopacity,
+    top_tooltip:layer.top_tooltip,
+    bottom_tooltip:layer.bottom_tooltip,
+    leg_x:layer.leg_x,
+    leg_y:layer.leg_y,
+    leg_fontsize:layer.leg_fontsize,
+    leg_fontsize2:layer.leg_fontsize2,
+    leg_round:layer.leg_round,
+    leg_txtcol:layer.leg_txtcol,
+    leg_title:layer.leg_title,
+    leg_top_txt:layer.leg_top_txt,
+    leg_bottom_txt:layer.leg_bottom_txt,
+    leg_top_fill:layer.leg_top_fill,
+    leg_bottom_fill:layer.leg_bottom_fill,
+    leg_stroke:layer.leg_stroke,
+    leg_strokewidth:layer.leg_strokewidth
+});
 }
 
 // choro layers
