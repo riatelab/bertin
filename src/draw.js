@@ -19,6 +19,7 @@ import { getcenters } from "./centroids.js";
 import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
 import { addtext } from "./text.js";
+import {layermashroom} from "./layer-mashroom.js"
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 

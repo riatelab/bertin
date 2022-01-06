@@ -344,6 +344,69 @@ testjoin.unmatched_geom
 
 </details>
 
+
+#### Mashroom
+
+The *mashroom* type is used to draw a map with 2 supperposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mashroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+
+~~~js
+  bertin.draw({
+    layers: [
+      {
+        type: "mashroom",
+        geojson: mygeojson,
+        id_geojson: "ids",
+        data: mydata,
+        id_data: "ids",
+        top_var: "gdp_pct",
+        bottom_var: "pop_pct",
+        bottom_tooltip: ["name", "pop", "(thousands inh.)"],
+        top_tooltip: ["name", "gdp", "(million $)"]
+      }
+    ]
+  })
+~~~
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b/>data</b>: a geoj (<ins>compulsory<ins>)
+- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b/>top_var: a string corresponding to the targeted top variable (<ins>compulsory<ins>)
+- <b/>top_fill = top fill color (default: "#d64f4f")
+- <b/>bottom_var: a string corresponding to the targeted bottom variable (<ins>compulsory<ins>)
+- <b/>bottom_fill = bottom fill color (default: "#4fabd6")
+- <b/>k</b>: size of the largest semi circle (defaul:50)
+- <b/>stroke</b>: stroke color (default: "white")
+- <b/>strokewidth</b>: stroke width (default: 0.5)
+- <b/>fillopacity</b>: fill opacity (default: 1)
+- <b/>top_tooltip: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b/>bottom_tooltip: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+
+Parameters of the legend
+
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_fontsize</b>: title legend font size (default: 14)
+- <b>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_round</b>: number of digits after the decimal point (default: undefined)
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_title</b>: title of the legend (default "Title, year")
+- <b>leg_stroke</b>: stroke of the circles (default: "black")
+- <b>leg_top_txt</b> title for the top variable (default top_var)
+- <b>leg_bottom_txt</b> title for the bottom variable (default bottom_var)
+- <b>leg_top_fill</b> color of top semi circles (default same as top_fill)
+- <b>leg_bottom_fill</b> color of bottom semi circles (default same as bottom_fill)
+- <b>leg_strokewidth</b> stroke width of elements in the legend (default 0.8)
+
+</details>
+
+
 #### Missing
 
 Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what the type *missing* is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
