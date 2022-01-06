@@ -149,18 +149,18 @@ bertin.draw({
 
 Parameters of the legend
 
-- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
-- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
 - <b>leg_text</b>: text of the box (default: "text of the box")
-- <b/>leg_fontsize</b>: text font size (default: 10)
-- <b/>leg_fill</b>: color of the box (same as the layer displayed)
-- <b/>leg_stroke</b>: stroke of the box (default: "black")
-- <b/>leg_strokewidth</b>: stroke-width (default: 0.5)
+- <b>leg_fontsize</b>: text font size (default: 10)
+- <b>leg_fill</b>: color of the box (same as the layer displayed)
+- <b>leg_stroke</b>: stroke of the box (default: "black")
+- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
-- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
-- <b/>leg_round</b>: Number of digits (default: undefined)
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_round</b>: Number of digits (default: undefined)
 </details>
 
 
@@ -283,19 +283,19 @@ bertin.draw({
 
 Parameters of the legend
 
-- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
-- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
-- <b/>leg_title</b>: title of the legend (default; null)
+- <b>leg_title</b>: title of the legend (default; null)
 - <b>leg_text</b>: text of the box (default: "text of the box")
-- <b/>leg_fontsize</b>: title legend font size (default: 14)
-- <b/>leg_fontsize2</b>: values font size (default: 10)
-- <b/>leg_fill</b>: color of the box (same as the layer displayed)
-- <b/>leg_stroke</b>: stroke of the box (default: "black")
-- <b/>leg_strokewidth</b>: stroke-width (default: 0.5)
+- <b>leg_fontsize</b>: title legend font size (default: 14)
+- <b>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_fill</b>: color of the box (same as the layer displayed)
+- <b>leg_stroke</b>: stroke of the box (default: "black")
+- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
-- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
 
 </details>
 
@@ -338,9 +338,9 @@ testjoin.unmatched_geom
 <details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b/>data</b>: a geoj (<ins>compulsory<ins>)
-- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>data</b>: a geoj (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
 
 </details>
 
@@ -373,20 +373,20 @@ The *mashroom* type is used to draw a map with 2 supperposed proportional semi-c
 
 <details><summary>Parameters</summary>
 
-- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b/>data</b>: a geoj (<ins>compulsory<ins>)
-- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b/>top_var: a string corresponding to the targeted top variable (<ins>compulsory<ins>)
-- <b/>top_fill = top fill color (default: "#d64f4f")
-- <b/>bottom_var: a string corresponding to the targeted bottom variable (<ins>compulsory<ins>)
-- <b/>bottom_fill = bottom fill color (default: "#4fabd6")
-- <b/>k</b>: size of the largest semi circle (defaul:50)
-- <b/>stroke</b>: stroke color (default: "white")
-- <b/>strokewidth</b>: stroke width (default: 0.5)
-- <b/>fillopacity</b>: fill opacity (default: 1)
-- <b/>top_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
-- <b/>bottom_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>data</b>: a geoj (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>top_var: a string corresponding to the targeted top variable (<ins>compulsory<ins>)
+- <b>top_fill = top fill color (default: "#d64f4f")
+- <b>bottom_var: a string corresponding to the targeted bottom variable (<ins>compulsory<ins>)
+- <b>bottom_fill = bottom fill color (default: "#4fabd6")
+- <b>k</b>: size of the largest semi circle (defaul:50)
+- <b>stroke</b>: stroke color (default: "white")
+- <b>strokewidth</b>: stroke width (default: 0.5)
+- <b>fillopacity</b>: fill opacity (default: 1)
+- <b>top_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>bottom_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -448,12 +448,12 @@ Parameters of the legend
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
 - <b>leg_text</b>: text of the box (default: "text of the box")
-- <b/>leg_fontsize</b>: text font size (default: 10)
-- <b/>leg_fill</b>: color of the box (same as the layer displayed)
-- <b/>leg_stroke</b>: stroke of the box (default: "black")
-- <b/>leg_strokewidth</b>: stroke-width (default: 0.5)
+- leg_fontsize</b>: text font size (default: 10)
+- <b>leg_fill</b>: color of the box (same as the layer displayed)
+- <b>leg_stroke</b>: stroke of the box (default: "black")
+- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
-- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
 
 </details>
 
@@ -509,30 +509,30 @@ The *prop* type is used to draw a map by proportional circles. [Source](https://
 
 <details><summary>Parameters</summary>
 
-- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b/>data</b>: a geoj (<ins>compulsory<ins>)
-- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b/>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
-- <b/>k</b>: size of the largest circle (defaul:50)
-- <b/>fill</b>: fill color (default: random color)
-- <b/>stroke</b>: stroke color (default: "white")
-- <b/>strokewidth</b>: stroke width (default: 0.5)
-- <b/>fillopacity</b>: fill opacity (default: 1)
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>data</b>: a geoj (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>k</b>: size of the largest circle (defaul:50)
+- <b>fill</b>: fill color (default: random color)
+- <b>stroke</b>: stroke color (default: "white")
+- <b>strokewidth</b>: stroke width (default: 0.5)
+- <b>fillopacity</b>: fill opacity (default: 1)
 - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
-- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
-- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
-- <b/>leg_fill</b>: color of the circles (default: "none")
-- <b/>leg_stroke</b>: stroke of the circles (default: "black")
-- <b/>leg_strokewidth</b>: stoke-width (default: 0.8)
-- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
-- <b/>leg_title</b>: title of the legend (default var_data)
-- <b/>leg_round</b>: number of digits after the decimal point (default: undefined)
-- <b/>leg_fontsize</b>: title legend font size (default: 14)
-- <b/>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_fill</b>: color of the circles (default: "none")
+- <b>leg_stroke</b>: stroke of the circles (default: "black")
+- <b>leg_strokewidth</b>: stoke-width (default: 0.8)
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_title</b>: title of the legend (default var_data)
+- <b>leg_round</b>: number of digits after the decimal point (default: undefined)
+- <b>leg_fontsize</b>: title legend font size (default: 14)
+- <b>leg_fontsize2</b>: values font size (default: 10)
 
 </details>
 
@@ -557,9 +557,9 @@ The *scalebar* type allows to display a scalebar in miles or kilometers. [Source
 
 <details><summary>Parameters</summary>
 
-- <b/>x</b>: position in x (if this value is not filled, the legend is displayed on the left)
-- <b/>y</b>: position in x (if this value is not filled, the legend is displayed at the bottom)
-- <b/>units</b>: distance unit, miles or kilometers (default: "kilimeters")
+- <b>x</b>: position in x (if this value is not filled, the legend is displayed on the left)
+- <b>y</b>: position in x (if this value is not filled, the legend is displayed at the bottom)
+- <b>units</b>: distance unit, miles or kilometers (default: "kilimeters")
 
 </details>
 
@@ -659,11 +659,11 @@ The *typo* type allows to realize a qualitative map. [Source](https://github.com
 
 <details><summary>Parameters</summary>
 
-- <b/>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b/>data</b>: a geojson (<ins>compulsory<ins>)
-- <b/>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b/>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b/>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>data</b>: a geojson (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
 - <b>colors</b>: An array containig n colors for n types (defaut: null)
 - <b>pal</b>: a palette of categorical colors (default: "Tableau10") [See](https://observablehq.com/@d3/color-schemes)
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
@@ -674,16 +674,16 @@ The *typo* type allows to realize a qualitative map. [Source](https://github.com
 
 Parameters of the legend
 
-- <b/>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
-- <b/>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
-- <b/>leg_title</b>: title of the legend (default; null)
-- <b/>leg_fontsize</b>: title legend font size (default: 14)
-- <b/>leg_fontsize2</b>: values font size (default: 10)
-- <b/>leg_stroke</b>: stroke of the box (default: "black")
-- <b/>leg_strokewidth</b>: stroke-width (default: 0.5)
+- <b>leg_title</b>: title of the legend (default; null)
+- <b>leg_fontsize</b>: title legend font size (default: 14)
+- <b>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_stroke</b>: stroke of the box (default: "black")
+- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
-- <b/>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
 
 </details>
