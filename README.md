@@ -385,8 +385,8 @@ The *mashroom* type is used to draw a map with 2 supperposed proportional semi-c
 - <b/>stroke</b>: stroke color (default: "white")
 - <b/>strokewidth</b>: stroke width (default: 0.5)
 - <b/>fillopacity</b>: fill opacity (default: 1)
-- <b/>top_tooltip: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
-- <b/>bottom_tooltip: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b/>top_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b/>bottom_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
