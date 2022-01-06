@@ -380,7 +380,7 @@ The *mashroom* type is used to draw a map with 2 supperposed proportional semi-c
 - <b>top_var</b>: a string corresponding to the targeted top variable (<ins>compulsory<ins>)
 - <b>top_fill</b>: top fill color (default: "#d64f4f")
 - <b>bottom_var</b>: a string corresponding to the targeted bottom variable (<ins>compulsory<ins>)
-- <b>bottom_fill<b/>: bottom fill color (default: "#4fabd6")
+- <b>bottom_fill</b>: bottom fill color (default: "#4fabd6")
 - <b>k</b>: size of the largest semi circle (defaul:50)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokewidth</b>: stroke width (default: 0.5)
