@@ -110,7 +110,7 @@ svg
   layers.reverse().forEach((layer) => {
     // Graticule
     if (layer.type == "graticule") {
-      addgraticule(svg, projection,  {
+      addgraticule(svg, projection, clipid, {
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
         strokeopacity: layer.strokeopacity,
