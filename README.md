@@ -1,4 +1,4 @@
-# bertin
+# bertin.js
 
 *Bertin.js is <ins>**under development**</ins> so not necessarily very stable yet. The names of the functions and the parameters are still subject to change. Bugs will be corrected as they occur. New features will be added in the next versions.*
 
