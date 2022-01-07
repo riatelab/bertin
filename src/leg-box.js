@@ -57,6 +57,7 @@ export function legbox(selection, options = {}){
       .attr("y", y + h / 2 - (fontsize2 * text.split("\n").length) / 2 + delta)
       .attr("font-size", `${fontsize2}px`)
       .attr("dy", (d, i) => i * fontsize2)
+      .attr("fill", txtcol)
       .attr("text-anchor", "start")
       .attr("alignment-baseline", "hanging")
       .text((d) => d);
