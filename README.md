@@ -23,7 +23,7 @@ Last version
 Pinned version
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/bertin@0.1.0" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@0.2.0" charset="utf-8"></script>
 ```
 
 #### <ins>In Observable</ins>
