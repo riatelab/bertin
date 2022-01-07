@@ -69,6 +69,8 @@ document.body.appendChild(bertin.draw({
 </script>
 ~~~
 
+See examples [here](https://neocarto.github.io/bertin/examples/layer.html) and [there](https://neocarto.github.io/bertin/examples/layer2.html).
+
 #### <ins>In Observable</ins>
 
 The bertin.js library is really easy to use within Observable. You'll find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin).
