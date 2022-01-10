@@ -409,6 +409,30 @@ Parameters of the legend
 </details>
 
 
+### Merge
+
+*merge* is a function to join a geojson and a data file. This is the first step in the mapping process. [Source](https://github.com/neocarto/bertin/blob/main/src/merge.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+
+~~~js
+const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
+~~~
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>data</b>: a geoj (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>all</b>: boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
+
+</details>
+
+
+
 #### Missing
 
 Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That's what the type *missing* is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
