@@ -692,7 +692,7 @@ testjoin.unmatched_geom
 
 </details>
 
-### Merge
+#### Merge
 
 *merge* is a function to join a geojson and a data file. This is the first step in the mapping process. [Source](https://github.com/neocarto/bertin/blob/main/src/merge.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
 
