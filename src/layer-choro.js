@@ -10,10 +10,7 @@ import {legchoro } from "./leg-choro.js";
 
 export function layerchoro(selection, projection, clipid, options = {}){
   let geojson = options.geojson;
-  let data = options.data;
-  let id_geojson = options.id_geojson;
-  let id_data = options.id_data;
-  let var_data = options.var_data;
+  let values = options.values;
   let pal = options.pal ? options.pal : "Blues";
   let nbreaks = options.nbreaks ? options.nbreaks : 5;
   let breaks = options.breaks ? options.breaks : null;
@@ -24,6 +21,7 @@ export function layerchoro(selection, projection, clipid, options = {}){
   let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
   let fillopacity = options.fillopacity ? options.fillopacity : 1;
   let tooltip = options.tooltip ? options.tooltip : "";
+
   let leg_x = options.leg_x ? options.leg_x : null;
   let leg_y = options.leg_y ? options.leg_y : null;
   let leg_w = options.leg_w ? options.leg_w : 30;
@@ -35,32 +33,42 @@ export function layerchoro(selection, projection, clipid, options = {}){
   let leg_fillopacity = options.fillopacity ? options.fillopacity : 1;
   let leg_strokewidth = options.leg_strokewidth ? options.leg_strokewidth : 0.5;
   let leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
-  let leg_round = options.leg_round !== undefined ? options.leg_round : undefined;
+  let leg_round =
+    options.leg_round !== undefined ? options.leg_round : undefined;
 
   // Get only available data in the basemap
-  let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
-  let ids_data = data.filter((d) => d[var_data] != null).map((d) => d[id_data]);
-  let match = ids_geojson.filter((x) => ids_data.includes(x));
-  let merge = data.filter((x) => match.includes(x[id_data]));
-  let databyid = d3.index(data, (d) => d[id_data]);
+  // let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
+  // let ids_data = data.filter((d) => d[var_data] != null).map((d) => d[id_data]);
+  // let match = ids_geojson.filter((x) => ids_data.includes(x));
+  // let merge = data.filter((x) => match.includes(x[id_data]));
+  // let databyid = d3.index(data, (d) => d[id_data]);
 
   // breaks
   if (method == "q6") {
-  nbreaks = 6;
-}
+    nbreaks = 6;
+  }
   if (breaks == null) {
     breaks = getbreaks(
-      merge.map((d) => d[var_data]),
+      geojson.features.map((d) => +d.properties[values]),
       method,
       nbreaks,
       leg_round
     );
+  } else {
+    breaks = d3.sort(breaks);
   }
+
+  console.log(breaks);
+
   // colors
   if (colors == null) {
     colors = d3[`scheme${pal}`][nbreaks];
   }
-  let b = [...breaks]; b.pop(); b.shift();
+
+  let b = [...breaks];
+  b.pop();
+  b.shift();
+
   let cols = d3.scaleThreshold(b, colors);
 
   let path = d3.geoPath(projection);
@@ -68,20 +76,15 @@ export function layerchoro(selection, projection, clipid, options = {}){
   selection
     .append("g")
     .attr(":inkscape:groupmode", "layer")
-    .attr("id", "typo layer")
-    .attr(":inkscape:label", "typo layer")
+    .attr("id", "choro layer")
+    .attr(":inkscape:label", "choro layer")
     .selectAll("path")
     .data(geojson.features)
     .join("path")
     .attr("d", path)
     .attr("fill", (d) =>
-      databyid.get(d.properties[id_geojson])[var_data]
-        ? cols(databyid.get(d.properties[id_geojson])[var_data])
-        : col_missing
+      d.properties[values] ? cols(d.properties[values]) : col_missing
     )
-    // .attr("fill", (d) =>
-    //   cols(d.properties[var_data]) ? cols(d.properties[var_data]) : col_missing
-    // )
     .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
     .attr("fill-opacity", fillopacity)
@@ -93,12 +96,14 @@ export function layerchoro(selection, projection, clipid, options = {}){
             .select("#info")
             .call(
               addtooltip,
-              `${databyid.get(d.properties[id_geojson])[tooltip[0]]}\n${
-                databyid.get(d.properties[id_geojson])[tooltip[1]]
-              }\n${tooltip[2]}`
+              `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
+                tooltip[2]
+              }`
             );
         } else {
-          selection.select("#info").call(addtooltip, `${d[tooltip]}`);
+          selection
+            .select("#info")
+            .call(addtooltip, `${d.properties[tooltip]}`);
         }
       }
       if (tooltip != "") {
@@ -117,24 +122,21 @@ export function layerchoro(selection, projection, clipid, options = {}){
         .attr("fill-opacity", fillopacity);
     });
 
+  // Legend
 
-      // Legend
-
-      legchoro(selection, {
-        x: leg_x,
-        y: leg_y,
-        w: leg_w,
-        h: leg_h,
-        stroke: leg_stroke,
-        fillopacity: leg_fillopacity,
-        strokewidth: leg_strokewidth,
-        txtcol: leg_txtcol,
-        title: leg_title,
-        fontsize: leg_fontsize,
-        fontsize2: leg_fontsize2,
-        breaks: breaks,
-        colors: colors
-      });
-
-
+  legchoro(selection, {
+    x: leg_x,
+    y: leg_y,
+    w: leg_w,
+    h: leg_h,
+    stroke: leg_stroke,
+    fillopacity: leg_fillopacity,
+    strokewidth: leg_strokewidth,
+    txtcol: leg_txtcol,
+    title: leg_title ? leg_title : values,
+    fontsize: leg_fontsize,
+    fontsize2: leg_fontsize2,
+    breaks: breaks,
+    colors: colors
+  });
 }

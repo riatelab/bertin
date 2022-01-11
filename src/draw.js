@@ -71,19 +71,17 @@ export function draw({ params = {}, layers = {} } = {}) {
       `max-width: 100%; height: auto; height: intrinsic; background-color: white;`
     );
 
-
   // defs
   let defs = svg.append("defs");
 
   // Clip
-const clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
-svg
-  .append("clipPath")
-  .attr("id", `clip_${clipid}`)
-  .append("path")
-  .datum({ type: "Sphere" })
-  .attr("d", d3.geoPath(projection));
-
+  const clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+  svg
+    .append("clipPath")
+    .attr("id", `clip_${clipid}`)
+    .append("path")
+    .datum({ type: "Sphere" })
+    .attr("d", d3.geoPath(projection));
 
   // Background color
   if (background) {
@@ -144,131 +142,115 @@ svg
     }
 
     // typo layers
-if (layer.type == "typo") {
-  layertypo(svg, projection, clipid,  {
-    geojson: layer.geojson,
-    data: layer.data,
-    id_geojson: layer.id_geojson,
-    id_data: layer.id_data,
-    var_data: layer.var_data,
-    colors: layer.colors,
-    pal: layer.pal,
-    col_missing: layer.col_missing,
-    stroke: layer.stroke,
-    strokewidth: layer.strokewidth,
-    fillopacity: layer.fillopacity,
-    tooltip: layer.tooltip,
-    leg_x: layer.leg_x,
-    leg_y: layer.leg_y,
-    leg_title: layer.leg_title,
-    leg_fontsize: layer.leg_fontsize,
-    leg_fontsize2: layer.leg_fontsize2,
-    leg_stroke: layer.leg_stroke,
-    leg_fillopacity: layer.leg_fillopacity,
-    leg_strokewidth: layer.leg_strokewidth,
-    leg_txtcol: layer.leg_txtcol
+    if (layer.type == "typo") {
+      layertypo(svg, projection, clipid, {
+        geojson: layer.geojson,
+        values: layer.values,
+        colors: layer.colors,
+        pal: layer.pal,
+        col_missing: layer.col_missing,
+        stroke: layer.stroke,
+        strokewidth: layer.strokewidth,
+        fillopacity: layer.fillopacity,
+        tooltip: layer.tooltip,
+        leg_x: layer.leg_x,
+        leg_y: layer.leg_y,
+        leg_title: layer.leg_title,
+        leg_fontsize: layer.leg_fontsize,
+        leg_fontsize2: layer.leg_fontsize2,
+        leg_stroke: layer.leg_stroke,
+        leg_fillopacity: layer.leg_fillopacity,
+        leg_strokewidth: layer.leg_strokewidth,
+        leg_txtcol: layer.leg_txtcol
+      });
+    }
 
-  });
-}
+    // choro layers
+    if (layer.type == "choro") {
+      layerchoro(svg, projection, clipid, {
+        geojson: layer.geojson,
+        values: layer.values,
+        pal: layer.pal,
+        nbreaks: layer.nbreaks,
+        breaks: layer.breaks,
+        colors: layer.colors,
+        method: layer.method,
+        col_missing: layer.col_missing,
+        stroke: layer.stroke,
+        strokewidth: layer.strokewidth,
+        fillopacity: layer.fillopacity,
+        tooltip: layer.tooltip,
+        leg_x: layer.leg_x,
+        leg_y: layer.leg_y,
+        leg_w: layer.leg_w,
+        leg_h: layer.leg_h,
+        leg_title: layer.leg_title,
+        leg_text: layer.leg_text,
+        leg_fontsize: layer.leg_fontsize,
+        leg_fontsize2: layer.leg_fontsize2,
+        leg_stroke: layer.leg_stroke,
+        leg_fillopacity: layer.leg_fillopacity,
+        leg_fill: layer.leg_fill,
+        leg_strokewidth: layer.leg_strokewidth,
+        leg_txtcol: layer.leg_txtcol,
+        leg_round: layer.leg_round
+      });
+    }
 
+    // mashroom layer
 
-// typo layers
-if (layer.type == "mashroom") {
-layermashroom(svg, projection, clipid,  {
-    geojson:layer.geojson,
-    data:layer.data,
-    id_geojson:layer.id_geojson,
-    id_data:layer.id_data,
-    top_var:layer.top_var,
-    top_fill:layer.top_fill,
-    bottom_var:layer.bottom_var,
-    bottom_fill:layer.bottom_fill,
-    k:layer.k,
-    stroke:layer.stroke,
-    strokewidth:layer.strokewidth,
-    fillopacity:layer.fillopacity,
-    top_tooltip:layer.top_tooltip,
-    bottom_tooltip:layer.bottom_tooltip,
-    leg_x:layer.leg_x,
-    leg_y:layer.leg_y,
-    leg_fontsize:layer.leg_fontsize,
-    leg_fontsize2:layer.leg_fontsize2,
-    leg_round:layer.leg_round,
-    leg_txtcol:layer.leg_txtcol,
-    leg_title:layer.leg_title,
-    leg_top_txt:layer.leg_top_txt,
-    leg_bottom_txt:layer.leg_bottom_txt,
-    leg_top_fill:layer.leg_top_fill,
-    leg_bottom_fill:layer.leg_bottom_fill,
-    leg_stroke:layer.leg_stroke,
-    leg_strokewidth:layer.leg_strokewidth
-});
-}
-
-// choro layers
-if (layer.type == "choro") {
-  layerchoro(svg, projection, clipid, {
-    geojson: layer.geojson,
-    data: layer.data,
-    id_geojson: layer.id_geojson,
-    id_data: layer.id_data,
-    var_data: layer.var_data,
-    pal: layer.pal,
-    nbreaks: layer.nbreaks,
-    breaks: layer.breaks,
-    colors: layer.colors,
-    method: layer.method,
-    col_missing: layer.col_missing,
-    stroke: layer.stroke,
-    strokewidth: layer.strokewidth,
-    fillopacity: layer.fillopacity,
-    tooltip: layer.tooltip,
-    leg_x: layer.leg_x,
-    leg_y: layer.leg_y,
-    leg_w: layer.leg_w,
-    leg_h: layer.leg_h,
-    leg_title: layer.leg_title,
-    leg_text: layer.leg_text,
-    leg_fontsize: layer.leg_fontsize,
-    leg_fontsize2: layer.leg_fontsize2,
-    leg_stroke: layer.leg_stroke,
-    leg_fillopacity: layer.leg_fillopacity,
-    leg_fill: layer.leg_fill,
-    leg_strokewidth: layer.leg_strokewidth,
-    leg_txtcol: layer.leg_txtcol,
-    leg_round: layer.leg_round
-
-  });
-}
-
+    if (layer.type == "mashroom") {
+      layermashroom(svg, projection, clipid, {
+        geojson: layer.geojson,
+        top_values: layer.top_values,
+        bottom_values: layer.bottom_values,
+        top_fill: layer.top_fill,
+        bottom_fill: layer.bottom_fill,
+        k: layer.k,
+        stroke: layer.stroke,
+        strokewidth: layer.strokewidth,
+        fillopacity: layer.fillopacity,
+        top_tooltip: layer.top_tooltip,
+        bottom_tooltip: layer.bottom_tooltip,
+        leg_x: layer.leg_x,
+        leg_y: layer.leg_y,
+        leg_fontsize: layer.leg_fontsize,
+        leg_fontsize2: layer.leg_fontsize2,
+        leg_round: layer.leg_round,
+        leg_txtcol: layer.leg_txtcol,
+        leg_title: layer.leg_title,
+        leg_top_txt: layer.leg_top_txt,
+        leg_bottom_txt: layer.leg_bottom_txt,
+        leg_top_fill: layer.leg_top_fill,
+        leg_bottom_fill: layer.leg_bottom_fill,
+        leg_stroke: layer.leg_stroke,
+        leg_strokewidth: layer.leg_strokewidth
+      });
+    }
 
     // text note
-if (layer.type == "text") {
-  addtext(svg, width, height, {
-    position: layer.position,
-    text: layer.text,
-    fill: layer.fill,
-    stroke: layer.stroke,
-    fontsize: layer.fontsize,
-    margin: layer.margin,
-    anchor: layer.anchor, // start, middle, end
-    baseline: layer.baseline, // baseline, middle, hanging
-    frame_fill: layer.frame_fill,
-    frame_stroke: layer.frame_stroke,
-    frame_opacity: layer.frame_opacity,
-    frame_strokewidth: layer.frame_strokewidth
-  });
-}
-
+    if (layer.type == "text") {
+      addtext(svg, width, height, {
+        position: layer.position,
+        text: layer.text,
+        fill: layer.fill,
+        stroke: layer.stroke,
+        fontsize: layer.fontsize,
+        margin: layer.margin,
+        anchor: layer.anchor, // start, middle, end
+        baseline: layer.baseline, // baseline, middle, hanging
+        frame_fill: layer.frame_fill,
+        frame_stroke: layer.frame_stroke,
+        frame_opacity: layer.frame_opacity,
+        frame_strokewidth: layer.frame_strokewidth
+      });
+    }
 
     // missing
     if (layer.type == "missing") {
       layermissing(svg, projection, clipid, {
         geojson: layer.geojson,
-        id_geojson: layer.id_geojson,
-        data: layer.data,
-        id_data: layer.id_data,
-        var_data: layer.var_data,
+        values: layer.values,
         fill: layer.fill,
         stroke: layer.stroke,
         strokewidth: layer.strokewidth,
@@ -302,10 +284,7 @@ if (layer.type == "text") {
     if (layer.type == "prop") {
       layerprop(svg, projection, clipid, {
         geojson: layer.geojson,
-        id_geojson: layer.id_geojson,
-        data: layer.data,
-        id_data: layer.id_data,
-        var_data: layer.var_data,
+        values: layer.values,
         k: layer.k,
         fill: layer.fill,
         stroke: layer.stroke,
@@ -372,7 +351,7 @@ if (layer.type == "text") {
   }
 
   // Tootltip
- svg.append("g").attr("id", "info").attr("class", "info");
+  svg.append("g").attr("id", "info").attr("class", "info");
 
   // build
   return Object.assign(svg.node(), {});

@@ -8,16 +8,14 @@ import {addtooltip } from "./tooltip.js";
 import {legcircles } from "./leg-circles.js";
 
 const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
-import {getcenters } from "./centroids.js";
+import {poly2points } from "./poly2points.js";
 
 export function layermashroom(selection, projection, clipid, options = {}) {
   let geojson = options.geojson;
-  let data = options.data;
-  let id_geojson = options.id_geojson;
-  let id_data = options.id_data;
-  let top_var = options.top_var;
+  let top_values = options.top_values;
+  let bottom_values = options.bottom_values;
+
   let top_fill = options.top_fill ? options.top_fill : "#d64f4f";
-  let bottom_var = options.bottom_var;
   let bottom_fill = options.bottom_fill ? options.bottom_fill : "#4fabd6";
   let k = options.k ? options.k : 50;
   let stroke = options.stroke ? options.stroke : "white";
@@ -33,10 +31,10 @@ export function layermashroom(selection, projection, clipid, options = {}) {
   let leg_round = options.leg_round ? options.leg_round : undefined;
   let leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
   let leg_title = options.leg_title ? options.leg_title : `Title, year`;
-  let leg_top_txt = options.leg_top_txt ? options.leg_top_txt : top_var;
+  let leg_top_txt = options.leg_top_txt ? options.leg_top_txt : top_values;
   let leg_bottom_txt = options.leg_bottom_txt
     ? options.leg_bottom_txt
-    : bottom_var;
+    : bottom_values;
 
   let leg_top_fill = options.leg_top_fill ? options.leg_top_fill : top_fill;
   let leg_bottom_fill = options.leg_bottom_fill
@@ -44,48 +42,49 @@ export function layermashroom(selection, projection, clipid, options = {}) {
     : bottom_fill;
   let leg_stroke = options.leg_stroke ? options.leg_stroke : leg_txtcol;
   let leg_strokewidth = options.leg_strokewidth ? options.leg_strokewidth : 0.8;
-  let coords = getcenters(geojson, id_geojson, projection, true);
 
-  const max_top = d3.max(data, (d) => +d[top_var]);
-  const max_bottom = d3.max(data, (d) => +d[bottom_var]);
+  const features = poly2points(geojson)
+    .sort((a, b) =>
+      d3.descending(+a.properties[top_values], +b.properties[top_values])
+    )
+    .filter((d) => d.geometry.coordinates != undefined);
+
+  const max_top = d3.max(features, (d) => +d.properties[top_values]);
+  const max_bottom = d3.max(features, (d) => +d.properties[bottom_values]);
   let radius = d3.scaleSqrt([0, Math.max(max_top, max_bottom)], [0, k]);
 
-  data = data
-    .sort((a, b) => d3.descending(+a[top_var], +b[top_var]))
-    .filter((d) => coords.get(d[id_data]) != undefined);
-
-  for (let i = 0; i < data.length; i++) {
-    const centers = coords.get(data[i][id_data]);
-    const r_top = radius(data[i][top_var]);
-    const r_bottom = radius(data[i][bottom_var]);
+  for (let i = 0; i < features.length; i++) {
+    const cx = projection(features[i].geometry.coordinates)[0];
+    const cy = projection(features[i].geometry.coordinates)[1];
+    const r_top = radius(features[i].properties[top_values]);
+    const r_bottom = radius(features[i].properties[bottom_values]);
     const r_max = Math.max(r_top, r_bottom);
-
     // TOP
-
     selection
       .append("circle")
-      .attr("cx", centers[0])
-      .attr("cy", centers[1])
+      .attr("cx", cx)
+      .attr("cy", cy)
       .attr("r", r_top)
       .style("fill", top_fill)
       .attr("stroke", stroke)
       .attr("stroke-width", strokewidth)
       .attr("clip-path", "url(#top-clip_" + clipid + i + ")")
-      .on("touchmove mousemove", function (event) {
+      .on("touchmove mousemove", function (event, d) {
         if (top_tooltip != "") {
           if (Array.isArray(top_tooltip)) {
             selection
               .select("#info")
               .call(
                 addtooltip,
-                `${data[i][top_tooltip[0]]}\n${data[i][top_tooltip[1]]}\n${
-                  top_tooltip[2]
-                }`
+                `${d.properties[top_tooltip[0]]}\n${
+                  d.properties[top_tooltip[1]]
+                }\n${top_tooltip[2]}`
               );
+          } else {
+            selection
+              .select("#info")
+              .call(addtooltip, `${d.properties[top_tooltip]}`);
           }
-          //else {
-          //   selection.select("#info").call(addtooltip, `${d[tooltip]}`);
-          // }
         }
         if (top_tooltip != "") {
           selection
@@ -102,42 +101,41 @@ export function layermashroom(selection, projection, clipid, options = {}) {
           .attr("stroke-width", strokewidth)
           .attr("fill-opacity", fillopacity);
       });
-
     selection
       .append("clipPath")
       .attr("id", "top-clip_" + clipid + i)
       .append("rect")
-      .attr("x", centers[0] - r_top - strokewidth)
-      .attr("y", centers[1] + -r_top - strokewidth)
+      .attr("x", cx - r_top - strokewidth)
+      .attr("y", cy + -r_top - strokewidth)
       .attr("height", r_top + strokewidth)
       .attr("width", r_top * 2 + strokewidth * 2);
 
     // BOTTOM
-
     selection
       .append("circle")
-      .attr("cx", centers[0])
-      .attr("cy", centers[1])
+      .attr("cx", cx)
+      .attr("cy", cy)
       .attr("r", r_bottom)
       .style("fill", bottom_fill)
       .attr("stroke", stroke)
       .attr("stroke-width", strokewidth)
       .attr("clip-path", "url(#bottom-clip_" + clipid + i + ")")
-      .on("touchmove mousemove", function (event) {
+      .on("touchmove mousemove", function (event, d) {
         if (bottom_tooltip != "") {
           if (Array.isArray(bottom_tooltip)) {
             selection
               .select("#info")
               .call(
                 addtooltip,
-                `${data[i][bottom_tooltip[0]]}\n${
-                  data[i][bottom_tooltip[1]]
+                `${d.properties[bottom_tooltip[0]]}\n${
+                  d.properties[bottom_tooltip[1]]
                 }\n${bottom_tooltip[2]}`
               );
+          } else {
+            selection
+              .select("#info")
+              .call(addtooltip, `${d.properties[bottom_tooltip]}`);
           }
-          //else {
-          //   selection.select("#info").call(addtooltip, `${d[tooltip]}`);
-          // }
         }
         if (bottom_tooltip != "") {
           selection
@@ -159,24 +157,23 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .append("clipPath")
       .attr("id", "bottom-clip_" + clipid + i)
       .append("rect")
-      .attr("x", centers[0] - r_bottom - strokewidth)
-      .attr("y", centers[1])
+      .attr("x", cx - r_bottom - strokewidth)
+      .attr("y", cy)
       .attr("height", r_bottom + strokewidth)
       .attr("width", r_bottom * 2 + strokewidth * 2)
       .attr("fill", "none")
       .attr("stroke", "red");
-
     selection
       .append("line")
-      .attr("x1", centers[0] - r_max)
-      .attr("x2", centers[0] + r_max)
-      .attr("y1", centers[1])
-      .attr("y2", centers[1])
+      .attr("x1", cx - r_max)
+      .attr("x2", cx + r_max)
+      .attr("y1", cy)
+      .attr("y2", cy)
       .attr("stroke", stroke)
       .attr("stroke-width", strokewidth);
   }
 
-  // Legend
+  // // Legend
 
   if (leg_x != null && leg_y != null) {
     const span = 30;
@@ -186,9 +183,9 @@ export function layermashroom(selection, projection, clipid, options = {}) {
     // Leg top
 
     let legtop = selection.append("g");
-    const top_rmax = radius(d3.max(data, (d) => +d[top_var]));
-    let top_array = data.map((d) => +d[top_var]);
-    let top_values = [
+    const top_rmax = radius(d3.max(features, (d) => +d.properties[top_values]));
+    let top_array = features.map((d) => +d.properties[top_values]);
+    let top_leg_values = [
       radius.invert(top_rmax / 3),
       radius.invert(top_rmax / 1.5),
       d3.max(top_array)
@@ -196,7 +193,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
 
     legtop
       .selectAll("circle")
-      .data(top_values.sort(d3.descending))
+      .data(top_leg_values.sort(d3.descending))
       .join("circle")
       .attr("cx", leg_x + radiusmax)
       .attr(
@@ -225,7 +222,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
 
     legtop
       .selectAll("line")
-      .data(top_values)
+      .data(top_leg_values)
       .join("line")
       .attr("x1", leg_x + radiusmax)
       .attr(
@@ -257,7 +254,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
 
     legtop
       .selectAll("text")
-      .data(top_values)
+      .data(top_leg_values)
       .join("text")
       .attr("x", leg_x + radiusmax * 2 + leg_fontsize + leg_fontsize2 / 2)
       .attr(
@@ -278,9 +275,13 @@ export function layermashroom(selection, projection, clipid, options = {}) {
     // leg bottom
     let legbottom = selection.append("g");
 
-    const bottom_rmax = radius(d3.max(data, (d) => +d[bottom_var]));
-    let bottom_array = data.map((d) => +d[bottom_var]);
-    let bottom_values = [
+    const bottom_rmax = radius(
+      d3.max(features, (d) => +d.properties[bottom_values])
+    );
+    let bottom_array = geojson.features.map(
+      (d) => +d.properties[bottom_values]
+    );
+    let bottom_leg_values = [
       radius.invert(bottom_rmax / 3),
       radius.invert(bottom_rmax / 1.5),
       d3.max(bottom_array)
@@ -288,7 +289,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
 
     legbottom
       .selectAll("circle")
-      .data(bottom_values.sort(d3.descending))
+      .data(bottom_leg_values.sort(d3.descending))
       .join("circle")
       .attr("cx", leg_x + radiusmax)
       .attr(
@@ -321,7 +322,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
 
     legbottom
       .selectAll("line")
-      .data(bottom_values)
+      .data(bottom_leg_values)
       .join("line")
       .attr("x1", leg_x + radiusmax)
       .attr(
@@ -351,7 +352,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
 
     legbottom
       .selectAll("text")
-      .data(bottom_values)
+      .data(bottom_leg_values)
       .join("text")
       .attr("x", leg_x + radiusmax * 2 + leg_fontsize + leg_fontsize2 / 2)
       .attr(

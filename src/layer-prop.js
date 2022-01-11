@@ -8,7 +8,7 @@ import {addtooltip } from "./tooltip.js";
 import {legcircles } from "./leg-circles.js";
 
 const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
-import {getcenters } from "./centroids.js";
+import {poly2points } from "./poly2points.js";
 
 export function layerprop(selection, projection, clipid, options = {}) {
   let cols = [
@@ -22,74 +22,79 @@ export function layerprop(selection, projection, clipid, options = {}) {
     "#b3b3b3"
   ];
   let geojson = options.geojson;
-  let data = options.data;
-  let id_geojson = options.id_geojson;
-  let id_data = options.id_data;
-  let var_data = options.var_data;
+  let values = options.values;
   let k = options.k ? options.k : 50;
   let fill = options.fill
-  ? options.fill
-  : cols[Math.floor(Math.random() * cols.length)];
+    ? options.fill
+    : cols[Math.floor(Math.random() * cols.length)];
   let stroke = options.stroke ? options.stroke : "white";
   let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
   let fillopacity = options.fillopacity ? options.fillopacity : 1;
   let tooltip = options.tooltip ? options.tooltip : "";
-  //let radius = options.radius ? options.radius : 40;
 
-  let coords = getcenters(geojson, id_geojson, projection, true);
-  //let stockbyid = new Map(data.map((d) => [d[id_data], +d[var_data]]));
-  let radius = d3.scaleSqrt([0, d3.max(data, (d) => +d[var_data])], [0, k]);
+  const features = poly2points(geojson);
+
+  let radius = d3.scaleSqrt(
+    [0, d3.max(features, (d) => +d.properties[values])],
+    [0, k]
+  );
 
   selection
-  .append("g")
-  .selectAll("circle")
-  .data(
-    data
-    .sort((a, b) => d3.descending(+a[var_data], +b[var_data]))
-    .filter((d) => coords.get(d[id_data]) != undefined)
-  )
-  .join("circle")
-  .attr("fill", fill)
-  .attr("stroke", stroke)
-  .attr("stroke-width", strokewidth)
-  .attr("fill-opacity", fillopacity)
-  //.attr("transform", (d) => `translate(${coords.get(d[id_data])})`)
-  .attr("cx", (d) => coords.get(d[id_data])[0])
-  .attr("cy", (d) => coords.get(d[id_data])[1])
-  .attr("r", (d) => radius(d[var_data]))
-  .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
-  .on("touchmove mousemove", function (event, d) {
-    if (tooltip != "") {
-      if (Array.isArray(tooltip)) {
-        selection
-        .select("#info")
-        .call(
-          addtooltip,
-          `${d[tooltip[0]]}\n${d[tooltip[1]]}\n${tooltip[2]}`
-        );
-      } else {
-        selection.select("#info").call(addtooltip, `${d[tooltip]}`);
-      }
-    }
-    if (tooltip != "") {
-      selection
-      .select("#info")
-      .attr("transform", `translate(${d3.pointer(event, this)})`);
-      d3.select(this)
-      .attr("stroke-width", strokewidth + 0.5)
-      .attr("fill-opacity", fillopacity - 0.3);
-    }
-  })
-  .on("touchend mouseleave", function () {
-    selection.select("#info").call(addtooltip, null);
-    d3.select(this)
+    .append("g")
+    .selectAll("circle")
+    .data(
+      features
+        .filter((d) => d.geometry.coordinates != undefined)
+        .filter((d) => d.properties[values] != undefined)
+        .sort((a, b) =>
+          d3.descending(+a.properties[values], +b.properties[values])
+        )
+    )
+    .join("circle")
+    .attr("fill", fill)
+    .attr("stroke", stroke)
     .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity);
-  });
+    .attr("fill-opacity", fillopacity)
+    .attr("cx", (d) => projection(d.geometry.coordinates)[0])
+    .attr("cy", (d) => projection(d.geometry.coordinates)[1])
+    .attr("r", (d) => radius(d.properties[values]))
+    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
+    .on("touchmove mousemove", function (event, d) {
+      if (tooltip != "") {
+        if (Array.isArray(tooltip)) {
+          selection
+            .select("#info")
+            .call(
+              addtooltip,
+              `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
+                tooltip[2]
+              }`
+            );
+        } else {
+          selection
+            .select("#info")
+            .call(addtooltip, `${d.properties[tooltip]}`);
+        }
+      }
+      if (tooltip != "") {
+        selection
+          .select("#info")
+          .attr("transform", `translate(${d3.pointer(event, this)})`);
+        d3.select(this)
+          .attr("stroke-width", strokewidth + 0.5)
+          .attr("fill-opacity", fillopacity - 0.3);
+      }
+    })
+    .on("touchend mouseleave", function () {
+      selection.select("#info").call(addtooltip, null);
+      d3.select(this)
+        .attr("stroke-width", strokewidth)
+        .attr("fill-opacity", fillopacity);
+    });
 
   // Legend
-  let array = data.map((d) => +d[var_data]);
-  let values = [
+  let array = features.map((d) => +d.properties[values]);
+  let legval = [
     d3.min(array),
     radius.invert(k / 3),
     radius.invert(k / 1.5),
@@ -109,7 +114,7 @@ export function layerprop(selection, projection, clipid, options = {}) {
     title: options.leg_title,
     fontsize: options.leg_fontsize,
     fontsize2: options.leg_fontsize2,
-    title: options.leg_title ? options.leg_title : var_data,
-    values: values
+    title: options.leg_title ? options.leg_title : values,
+    values: legval
   });
 }

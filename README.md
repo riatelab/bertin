@@ -119,10 +119,7 @@ bertin.draw({
     {
       type: "choro",
       geojson: countries,
-      id_geojson: "ISO3_CODE",
-      data: maddison,
-      id_data: "countrycode",
-      var_data: "gdpppc",
+      values: "gdpppc",
       method: "quantile",
       pal: "Blues"
     }]
@@ -134,10 +131,7 @@ bertin.draw({
 <details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>data</b>: a geojson (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
 - <b>pal</b>: a palette of categorical colors (default: "Blues") [See](https://observablehq.com/@d3/color-schemes)
 - <b>nbreaks</b>: Number of classes (default:5)
 - <b>breaks</b>: Class breaks (default:null)
@@ -147,7 +141,7 @@ bertin.draw({
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokewidth</b>: Stroke width (default: 0.5)
 - <b>fillopacity</b>: Fill opacity (dafault: 1)
-- <b>tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -281,7 +275,7 @@ bertin.draw({
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokewidth</b> stroke width (default:0.5)
 - <b>fillopacity</b>: fill opacity (default:1)
-- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -313,11 +307,8 @@ The *mashroom* type is used to draw a map with 2 supperposed proportional semi-c
       {
         type: "mashroom",
         geojson: mygeojson,
-        id_geojson: "ids",
-        data: mydata,
-        id_data: "ids",
-        top_var: "gdp_pct",
-        bottom_var: "pop_pct",
+        top_values: "gdp_pct",
+        bottom_values: "pop_pct",
         bottom_tooltip: ["name", "pop", "(thousands inh.)"],
         top_tooltip: ["name", "gdp", "(million $)"]
       }
@@ -330,19 +321,16 @@ The *mashroom* type is used to draw a map with 2 supperposed proportional semi-c
 <details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>data</b>: a geoj (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b>top_var</b>: a string corresponding to the targeted top variable (<ins>compulsory<ins>)
+- <b>top_values</b>: a string corresponding to the targeted top variable in the properties (<ins>compulsory<ins>)
+- <b>bottom_values</b>: a string corresponding to the targeted bottom variable in the properties(<ins>compulsory<ins>)
 - <b>top_fill</b>: top fill color (default: "#d64f4f")
-- <b>bottom_var</b>: a string corresponding to the targeted bottom variable (<ins>compulsory<ins>)
 - <b>bottom_fill</b>: bottom fill color (default: "#4fabd6")
 - <b>k</b>: size of the largest semi circle (defaul:50)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokewidth</b>: stroke width (default: 0.5)
 - <b>fillopacity</b>: fill opacity (default: 1)
-- <b>top_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
-- <b>bottom_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>top_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>bottom_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -375,10 +363,7 @@ bertin.draw({
     {
       type: "missing",
       geojson: countries,
-      id_geojson: "ISO3_CODE",
-      data: maddison,
-      id_data: "countrycode",
-      var_data: "pop"
+      values: "pop"
   ]
 })
 ~~~
@@ -388,10 +373,7 @@ bertin.draw({
 <details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>data</b>: a geoj (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>values</b>: a string corresponding to the targeted variable in the properties (<ins>compulsory<ins>)
 - <b>fill</b>: fill color (default: "white")
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokewidth</b>: stroke width (default: 0.5)
@@ -450,10 +432,7 @@ The *prop* type is used to draw a map by proportional circles. [Source](https://
       {
         type: "prop",
         geojson: countries,
-        id_geojson: "ISO3_CODE",
-        data: maddison,
-        id_data: "countrycode",
-        var_data: "pop",
+        values: "pop",
         k: 60,
         tooltip: ["country", "pop", "(inh.)"]
       }
@@ -466,16 +445,13 @@ The *prop* type is used to draw a map by proportional circles. [Source](https://
 <details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>data</b>: a geoj (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
 - <b>k</b>: size of the largest circle (defaul:50)
 - <b>fill</b>: fill color (default: random color)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokewidth</b>: stroke width (default: 0.5)
 - <b>fillopacity</b>: fill opacity (default: 1)
-- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -603,10 +579,7 @@ The *typo* type allows to realize a qualitative map. [Source](https://github.com
       {
         type: "typo",
         geojson: countries,
-        id_geojson: "ISO3_CODE",
-        data: maddison,
-        id_data: "countrycode",
-        var_data: "region"
+        values: "region"
     ]
   })
 ~~~
@@ -616,17 +589,14 @@ The *typo* type allows to realize a qualitative map. [Source](https://github.com
 <details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>data</b>: a geojson (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b>var_data</b>: a string corresponding to the targeted variable (<ins>compulsory<ins>)
+- <b>values</b>: a string corresponding to the targeted variable in the properties (<ins>compulsory<ins>)
 - <b>colors</b>: An array containig n colors for n types (defaut: null)
 - <b>pal</b>: a palette of categorical colors (default: "Tableau10") [See](https://observablehq.com/@d3/color-schemes)
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
 - <b>stroke</b>: sreoke color (default: "white")
 - <b>strokewidth</b>: Stroke width (default: 0.5)
 - <b>fillopacity</b>: Fill opacity (dafault: 1)
-- <b>tooltip</b>: An array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b>: An array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 

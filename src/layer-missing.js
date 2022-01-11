@@ -8,25 +8,16 @@ import {addtooltip } from "./tooltip.js";
 import {legbox } from "./leg-box.js";
 
 export function layermissing(selection, projection, clipid, options = {}){
-  //layermissing = (options = {}) => {
   let geojson = options.geojson;
-  let data = options.data;
-  let id_geojson = options.id_geojson;
-  let id_data = options.id_data;
-  let var_data = options.var_data;
+  let values = options.values;
   let fill = options.fill ? options.fill : "white";
   let stroke = options.stroke ? options.stroke : "white";
   let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
   let fillopacity = options.fillopacity ? options.fillopacity : 1;
 
-  let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
-  let ids_data = data.filter((d) => d[var_data] != null).map((d) => d[id_data]);
-  let unmatch = ids_geojson.filter((x) => !ids_data.includes(x));
-  let missing = geojson.features.filter((d) =>
-    unmatch.includes(d.properties[id_geojson])
+  let missing = geojson.features.filter(
+    (d) => d.properties[values] == undefined
   );
-
-  // return missing;
 
   // If lines
   if (figuration(geojson) == "l") {
@@ -35,8 +26,7 @@ export function layermissing(selection, projection, clipid, options = {}){
     strokewidth = options.strokewidth ? options.strokewidth : 1;
   }
 
-
-selection
+  selection
     .append("g")
     .attr(":inkscape:groupmode", "layer")
     .attr("id", "missing")
@@ -51,19 +41,21 @@ selection
     .attr("fill-opacity", fillopacity)
     .attr("clip-path", `url(#clip_${clipid}`);
 
+  // Legend
+
   legbox(selection, {
-   x: options.leg_x,
-   y: options.leg_y,
-   w: options.leg_w,
-   h: options.leg_h,
-   text: options.leg_text ?  options.leg_text : "Missing data",
-   fontsize: options.leg_fontsize2,
-   stroke: options.leg_stroke,
-   fillopacity: options.leg_fillopacity
-     ? options.leg_fillopacity
-     : fillopacity,
-   fill: fill,
-   strokewidth: options.leg_strokewidth,
-   txtcol: options.leg_txtcol
- });
+    x: options.leg_x,
+    y: options.leg_y,
+    w: options.leg_w,
+    h: options.leg_h,
+    text: options.leg_text ? options.leg_text : "Missing data",
+    fontsize: options.leg_fontsize2,
+    stroke: options.leg_stroke,
+    fillopacity: options.leg_fillopacity
+      ? options.leg_fillopacity
+      : fillopacity,
+    fill: fill,
+    strokewidth: options.leg_strokewidth,
+    txtcol: options.leg_txtcol
+  });
 }
