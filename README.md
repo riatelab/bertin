@@ -75,7 +75,7 @@ See examples [here](https://neocarto.github.io/bertin/examples/layer.html) and [
 
 The bertin.js library is really easy to use within Observable. You'll find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin).
 
-## 3. Documentation
+## 3. bertin.draw
 
 <b>draw</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first.
 
@@ -301,52 +301,6 @@ Parameters of the legend
 
 </details>
 
-#### Match
-
-*match()* is a function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
-
-<details><summary>Code</summary>
-
-~~~js
-let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
-~~~
-
-*.matched* returns an array containing matched ids
-
-~~~js
-testjoin.matched
-~~~
-
-*.matched_data* returns an array containing matched data ids
-
-~~~js
-testjoin.matched_data
-~~~
-
-*.unmatched_data* returns an array containing unmatched data ids
-
-~~~js
-testjoin.unmatched_data
-~~~
-
-*.unmatched_geom* returns an array containing unmatched geom ids
-
-~~~js
-testjoin.unmatched_geom
-~~~
-
-</details>
-
-<details><summary>Parameters</summary>
-
-- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>data</b>: a geoj (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-
-</details>
-
-
 #### Mashroom
 
 The *mashroom* type is used to draw a map with 2 supperposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mashroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
@@ -407,30 +361,6 @@ Parameters of the legend
 - <b>leg_strokewidth</b> stroke width of elements in the legend (default 0.8)
 
 </details>
-
-
-### Merge
-
-*merge* is a function to join a geojson and a data file. This is the first step in the mapping process. [Source](https://github.com/neocarto/bertin/blob/main/src/merge.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
-
-<details><summary>Code</summary>
-
-~~~js
-const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
-~~~
-
-</details>
-
-<details><summary>Parameters</summary>
-
-- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>data</b>: a geoj (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b>all</b>: boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
-
-</details>
-
 
 
 #### Missing
@@ -711,5 +641,75 @@ Parameters of the legend
 - <b>leg_strokewidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
 - <b>leg_txtcol</b>: color of the texte (default: "#363636")
+
+</details>
+
+## 4. Other functions
+
+
+#### Match
+
+*match()* is a function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+
+~~~js
+let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
+~~~
+
+*.matched* returns an array containing matched ids
+
+~~~js
+testjoin.matched
+~~~
+
+*.matched_data* returns an array containing matched data ids
+
+~~~js
+testjoin.matched_data
+~~~
+
+*.unmatched_data* returns an array containing unmatched data ids
+
+~~~js
+testjoin.unmatched_data
+~~~
+
+*.unmatched_geom* returns an array containing unmatched geom ids
+
+~~~js
+testjoin.unmatched_geom
+~~~
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>data</b>: a geoj (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+
+</details>
+
+### Merge
+
+*merge* is a function to join a geojson and a data file. This is the first step in the mapping process. [Source](https://github.com/neocarto/bertin/blob/main/src/merge.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+
+~~~js
+const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
+~~~
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- <b>data</b>: a geoj (<ins>compulsory<ins>)
+- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- <b>all</b>: boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
 
 </details>

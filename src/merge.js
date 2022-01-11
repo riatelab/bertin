@@ -1,35 +1,40 @@
 
 export function merge(geojson, id_geojson, data, id_data, all = true) {
-  let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
-  let ids_data = data.map((d) => d[id_data]);
-  let ids = ids_geojson.filter((x) => ids_data.includes(x));
+  let output = JSON.parse(JSON.stringify(geojson));
+   let data2 = JSON.parse(JSON.stringify(data));
 
-  const geomfields = Object.keys(geojson.features[0].properties);
+   let ids_geojson = output.features.map((d) => d.properties[id_geojson]);
+   let ids_data = data.map((d) => d[id_data]);
+   let ids = ids_geojson.filter((x) => ids_data.includes(x));
 
-  let databyid = d3.index(data, (d) => d[id_data]);
+   let geomfields = Object.keys(output.features[0].properties);
 
-  geojson.features.forEach((d) => {
-    const mydata = databyid.get(d.properties[id_geojson]);
+   console.log(geomfields);
+   if (Object.keys(data2[0]).includes(id_data)) {
+     let databyid = d3.index(data2, (d) => d[id_data]);
+     //console.log(databyid);
+     output.features.forEach((d) => {
+       const mydata = databyid.get(d.properties[id_geojson]);
 
-    // if same name of variables in geojon and in data
-    if (mydata != null) {
-      Object.keys(mydata).forEach((x) => {
-        if (geomfields.find((e) => e == x) !== undefined) {
-          mydata[`_${x}`] = mydata[x];
-          delete mydata[x];
-        }
-      });
-    }
+       //console.log(mydata);
+       // if same name of variables in geojson and in data
+       if (mydata != null) {
+         Object.keys(mydata).forEach((x) => {
+           if (geomfields.find((e) => e == x) !== undefined) {
+             mydata[`_${x}`] = mydata[x];
+             delete mydata[x];
+           }
+         });
+       }
+       d.properties = Object.assign(d.properties, mydata);
+     });
 
-    const prop = Object.assign(d.properties, mydata);
-    d.properties = prop;
-  });
+     if (all === false) {
+       output.features = output.features.filter((x) =>
+         ids_data.includes(x.properties[id_geojson])
+       );
+     }
+   }
 
-  if (all === false) {
-    geojson.features = geojson.features.filter((x) =>
-      ids_data.includes(x.properties[id_geojson])
-    );
-  }
-
-  return geojson;
-}
+   return output;
+ }
