@@ -657,7 +657,7 @@ testjoin.unmatched_geom
 
 - a geojson (<ins>compulsory<ins>)
 - a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- a geojson (<ins>compulsory<ins>)
+- a json (<ins>compulsory<ins>)
 - a string corresponding to the identifier of the features (<ins>compulsory<ins>)
 
 </details>
@@ -678,7 +678,7 @@ const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
 
 - a geojson (<ins>compulsory<ins>)
 - a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- a geojson (<ins>compulsory<ins>)
+- a json (<ins>compulsory<ins>)
 - a string corresponding to the identifier of the features (<ins>compulsory<ins>)
 - boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
 
