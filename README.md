@@ -685,10 +685,10 @@ testjoin.unmatched_geom
 
 <details><summary>Parameters</summary>
 
-- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>data</b>: a geoj (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- a geojson (<ins>compulsory<ins>)
+- a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- a geojson (<ins>compulsory<ins>)
+- a string corresponding to the identifier of the features (<ins>compulsory<ins>)
 
 </details>
 
@@ -706,10 +706,10 @@ const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
 
 <details><summary>Parameters</summary>
 
-- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
-- <b>id_geojson</b>: a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- <b>data</b>: a geoj (<ins>compulsory<ins>)
-- <b>id_data</b>: a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- <b>all</b>: boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
+- a geojson (<ins>compulsory<ins>)
+- a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- a geojson (<ins>compulsory<ins>)
+- a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
 
 </details>
