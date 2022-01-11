@@ -1,3 +1,5 @@
+import * as d3array from "d3-array";
+const d3 = Object.assign({}, d3array);
 
 export function merge(geojson, id_geojson, data, id_data, all = true) {
   let output = JSON.parse(JSON.stringify(geojson));
