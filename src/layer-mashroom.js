@@ -76,8 +76,8 @@ export function layermashroom(selection, projection, clipid, options = {}) {
               .select("#info")
               .call(
                 addtooltip,
-                `${d.properties[top_tooltip[0]]}\n${
-                  d.properties[top_tooltip[1]]
+                `${features[i].properties[top_tooltip[0]]}\n${
+                  features[i].properties[top_tooltip[1]]
                 }\n${top_tooltip[2]}`
               );
           } else {
@@ -120,21 +120,21 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr("stroke", stroke)
       .attr("stroke-width", strokewidth)
       .attr("clip-path", "url(#bottom-clip_" + clipid + i + ")")
-      .on("touchmove mousemove", function (event, d) {
+      .on("touchmove mousemove", function (event) {
         if (bottom_tooltip != "") {
           if (Array.isArray(bottom_tooltip)) {
             selection
               .select("#info")
               .call(
                 addtooltip,
-                `${d.properties[bottom_tooltip[0]]}\n${
-                  d.properties[bottom_tooltip[1]]
+                `${features[i].properties[bottom_tooltip[0]]}\n${
+                  features[i].properties[bottom_tooltip[1]]
                 }\n${bottom_tooltip[2]}`
               );
           } else {
             selection
               .select("#info")
-              .call(addtooltip, `${d.properties[bottom_tooltip]}`);
+              .call(addtooltip, `${features[i].properties[bottom_tooltip]}`);
           }
         }
         if (bottom_tooltip != "") {

@@ -1,3 +1,7 @@
+// Imports
+import * as d3geo from "d3-geo";
+const d3 = Object.assign({}, d3geo);
+
 export function poly2points(geojson, largest){
   geojson = JSON.parse(JSON.stringify(geojson));
   const largestPolygon = function (d) {
