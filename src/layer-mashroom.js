@@ -19,15 +19,15 @@ export function layermashroom(selection, projection, clipid, options = {}) {
   let bottom_fill = options.bottom_fill ? options.bottom_fill : "#4fabd6";
   let k = options.k ? options.k : 50;
   let stroke = options.stroke ? options.stroke : "white";
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
-  let fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let top_tooltip = options.top_tooltip ? options.top_tooltip : "";
   let bottom_tooltip = options.bottom_tooltip ? options.bottom_tooltip : "";
 
   let leg_x = options.leg_x ? options.leg_x : null;
   let leg_y = options.leg_y ? options.leg_y : null;
-  let leg_fontsize = options.leg_fontsize ? options.leg_fontsize : 14;
-  let leg_fontsize2 = options.leg_fontsize2 ? options.leg_fontsize2 : 10;
+  let leg_fontSize = options.leg_fontSize ? options.leg_fontSize : 14;
+  let leg_fontSize2 = options.leg_fontSize2 ? options.leg_fontSize2 : 10;
   let leg_round = options.leg_round ? options.leg_round : undefined;
   let leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
   let leg_title = options.leg_title ? options.leg_title : `Title, year`;
@@ -41,7 +41,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
     ? options.leg_bottom_fill
     : bottom_fill;
   let leg_stroke = options.leg_stroke ? options.leg_stroke : leg_txtcol;
-  let leg_strokewidth = options.leg_strokewidth ? options.leg_strokewidth : 0.8;
+  let leg_strokeWidth = options.leg_strokeWidth ? options.leg_strokeWidth : 0.8;
 
   const features = poly2points(geojson)
     .sort((a, b) =>
@@ -67,7 +67,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr("r", r_top)
       .style("fill", top_fill)
       .attr("stroke", stroke)
-      .attr("stroke-width", strokewidth)
+      .attr("stroke-width", strokeWidth)
       .attr("clip-path", "url(#top-clip_" + clipid + i + ")")
       .on("touchmove mousemove", function (event, d) {
         if (top_tooltip != "") {
@@ -91,24 +91,24 @@ export function layermashroom(selection, projection, clipid, options = {}) {
             .select("#info")
             .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
-            .attr("stroke-width", strokewidth + 0.5)
-            .attr("fill-opacity", fillopacity - 0.3);
+            .attr("stroke-width", strokeWidth + 0.5)
+            .attr("fill-opacity", fillOpacity - 0.3);
         }
       })
       .on("touchend mouseleave", function () {
         selection.select("#info").call(addtooltip, null);
         d3.select(this)
-          .attr("stroke-width", strokewidth)
-          .attr("fill-opacity", fillopacity);
+          .attr("stroke-width", strokeWidth)
+          .attr("fill-opacity", fillOpacity);
       });
     selection
       .append("clipPath")
       .attr("id", "top-clip_" + clipid + i)
       .append("rect")
-      .attr("x", cx - r_top - strokewidth)
-      .attr("y", cy + -r_top - strokewidth)
-      .attr("height", r_top + strokewidth)
-      .attr("width", r_top * 2 + strokewidth * 2);
+      .attr("x", cx - r_top - strokeWidth)
+      .attr("y", cy + -r_top - strokeWidth)
+      .attr("height", r_top + strokeWidth)
+      .attr("width", r_top * 2 + strokeWidth * 2);
 
     // BOTTOM
     selection
@@ -118,7 +118,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr("r", r_bottom)
       .style("fill", bottom_fill)
       .attr("stroke", stroke)
-      .attr("stroke-width", strokewidth)
+      .attr("stroke-width", strokeWidth)
       .attr("clip-path", "url(#bottom-clip_" + clipid + i + ")")
       .on("touchmove mousemove", function (event) {
         if (bottom_tooltip != "") {
@@ -142,25 +142,25 @@ export function layermashroom(selection, projection, clipid, options = {}) {
             .select("#info")
             .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
-            .attr("stroke-width", strokewidth + 0.5)
-            .attr("fill-opacity", fillopacity - 0.3);
+            .attr("stroke-width", strokeWidth + 0.5)
+            .attr("fill-opacity", fillOpacity - 0.3);
         }
       })
       .on("touchend mouseleave", function () {
         selection.select("#info").call(addtooltip, null);
         d3.select(this)
-          .attr("stroke-width", strokewidth)
-          .attr("fill-opacity", fillopacity);
+          .attr("stroke-width", strokeWidth)
+          .attr("fill-opacity", fillOpacity);
       });
 
     selection
       .append("clipPath")
       .attr("id", "bottom-clip_" + clipid + i)
       .append("rect")
-      .attr("x", cx - r_bottom - strokewidth)
+      .attr("x", cx - r_bottom - strokeWidth)
       .attr("y", cy)
-      .attr("height", r_bottom + strokewidth)
-      .attr("width", r_bottom * 2 + strokewidth * 2)
+      .attr("height", r_bottom + strokeWidth)
+      .attr("width", r_bottom * 2 + strokeWidth * 2)
       .attr("fill", "none")
       .attr("stroke", "red");
     selection
@@ -170,7 +170,7 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr("y1", cy)
       .attr("y2", cy)
       .attr("stroke", stroke)
-      .attr("stroke-width", strokewidth);
+      .attr("stroke-width", strokeWidth);
   }
 
   // // Legend
@@ -198,27 +198,27 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr("cx", leg_x + radiusmax)
       .attr(
         "cy",
-        leg_y + top_rmax + (leg_title.split("\n").length + 1) * leg_fontsize
+        leg_y + top_rmax + (leg_title.split("\n").length + 1) * leg_fontSize
       )
       .attr("r", (d) => radius(d))
       .attr("fill", leg_top_fill)
       .attr("stroke", leg_stroke)
-      .attr("stroke-width", leg_strokewidth)
+      .attr("stroke-width", leg_strokeWidth)
       .attr("clip-path", "url(#legtop-clip_" + clipid + ")");
 
     legtop
       .append("clipPath")
       .attr("id", "legtop-clip_" + clipid)
       .append("rect")
-      .attr("x", leg_x - leg_strokewidth + radiusmax - top_rmax)
+      .attr("x", leg_x - leg_strokeWidth + radiusmax - top_rmax)
       .attr(
         "y",
         leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize -
-          leg_strokewidth
+          (leg_title.split("\n").length + 1) * leg_fontSize -
+          leg_strokeWidth
       )
-      .attr("height", top_rmax + leg_strokewidth)
-      .attr("width", top_rmax * 2 + leg_strokewidth * 2);
+      .attr("height", top_rmax + leg_strokeWidth)
+      .attr("width", top_rmax * 2 + leg_strokeWidth * 2);
 
     legtop
       .selectAll("line")
@@ -231,23 +231,23 @@ export function layermashroom(selection, projection, clipid, options = {}) {
           // leg_y +
           // radiusmax * 2 -
           // radius(d) * 2 +
-          // (leg_title.split("\n").length + 1) * leg_fontsize
+          // (leg_title.split("\n").length + 1) * leg_fontSize
           leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax -
           radius(d)
       )
-      .attr("x2", leg_x + radiusmax * 2 + leg_fontsize)
+      .attr("x2", leg_x + radiusmax * 2 + leg_fontSize)
       .attr(
         "y2",
         (d) =>
           leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax -
           radius(d)
       )
       .attr("stroke", leg_stroke)
-      .attr("stroke-width", leg_strokewidth)
+      .attr("stroke-width", leg_strokeWidth)
       .attr("stroke-dasharray", 2);
 
     // top values
@@ -256,16 +256,16 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .selectAll("text")
       .data(top_leg_values)
       .join("text")
-      .attr("x", leg_x + radiusmax * 2 + leg_fontsize + leg_fontsize2 / 2)
+      .attr("x", leg_x + radiusmax * 2 + leg_fontSize + leg_fontSize2 / 2)
       .attr(
         "y",
         (d) =>
           leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax -
           radius(d)
       )
-      .attr("font-size", leg_fontsize2)
+      .attr("font-size", leg_fontSize2)
       .attr("alignment-baseline", "central")
       .attr("fill", leg_txtcol)
       .text((d) =>
@@ -296,29 +296,29 @@ export function layermashroom(selection, projection, clipid, options = {}) {
         "cy",
         leg_y +
           top_rmax +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           span
       )
       .attr("r", (d) => radius(d))
       .attr("fill", leg_bottom_fill)
       .attr("stroke", leg_stroke)
-      .attr("stroke-width", leg_strokewidth)
+      .attr("stroke-width", leg_strokeWidth)
       .attr("clip-path", "url(#legbottom-clip_" + clipid + ")");
 
     legbottom
       .append("clipPath")
       .attr("id", "legbottom-clip_" + clipid)
       .append("rect")
-      .attr("x", leg_x - leg_strokewidth + radiusmax - bottom_rmax)
+      .attr("x", leg_x - leg_strokeWidth + radiusmax - bottom_rmax)
       .attr(
         "y",
         leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           span +
           top_rmax
       )
-      .attr("height", bottom_rmax + leg_strokewidth)
-      .attr("width", bottom_rmax * 2 + leg_strokewidth * 2);
+      .attr("height", bottom_rmax + leg_strokeWidth)
+      .attr("width", bottom_rmax * 2 + leg_strokeWidth * 2);
 
     legbottom
       .selectAll("line")
@@ -329,23 +329,23 @@ export function layermashroom(selection, projection, clipid, options = {}) {
         "y1",
         (d) =>
           leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax +
           span +
           radius(d)
       )
-      .attr("x2", leg_x + radiusmax * 2 + leg_fontsize)
+      .attr("x2", leg_x + radiusmax * 2 + leg_fontSize)
       .attr(
         "y2",
         (d) =>
           leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax +
           span +
           radius(d)
       )
       .attr("stroke", leg_stroke)
-      .attr("stroke-width", leg_strokewidth)
+      .attr("stroke-width", leg_strokeWidth)
       .attr("stroke-dasharray", 2);
 
     // bottom values
@@ -354,17 +354,17 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .selectAll("text")
       .data(bottom_leg_values)
       .join("text")
-      .attr("x", leg_x + radiusmax * 2 + leg_fontsize + leg_fontsize2 / 2)
+      .attr("x", leg_x + radiusmax * 2 + leg_fontSize + leg_fontSize2 / 2)
       .attr(
         "y",
         (d) =>
           leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax +
           span +
           radius(d)
       )
-      .attr("font-size", leg_fontsize2)
+      .attr("font-size", leg_fontSize2)
       .attr("alignment-baseline", "central")
       .attr("fill", leg_txtcol)
       .text((d) =>
@@ -380,14 +380,14 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr("x2", leg_x + radiusmax + top_rmax)
       .attr(
         "y1",
-        leg_y + (leg_title.split("\n").length + 1) * leg_fontsize + top_rmax
+        leg_y + (leg_title.split("\n").length + 1) * leg_fontSize + top_rmax
       )
       .attr(
         "y2",
-        leg_y + (leg_title.split("\n").length + 1) * leg_fontsize + top_rmax
+        leg_y + (leg_title.split("\n").length + 1) * leg_fontSize + top_rmax
       )
       .attr("stroke", leg_txtcol)
-      .attr("stroke-width", leg_strokewidth);
+      .attr("stroke-width", leg_strokeWidth);
 
     leg
       .append("line")
@@ -396,19 +396,19 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr(
         "y1",
         leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax +
           span
       )
       .attr(
         "y2",
         leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax +
           span
       )
       .attr("stroke", leg_txtcol)
-      .attr("stroke-width", leg_strokewidth);
+      .attr("stroke-width", leg_strokeWidth);
 
     leg
       .append("g")
@@ -417,8 +417,8 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .join("text")
       .attr("x", leg_x)
       .attr("y", leg_y)
-      .attr("font-size", `${leg_fontsize}px`)
-      .attr("dy", (d, i) => i * leg_fontsize)
+      .attr("font-size", `${leg_fontSize}px`)
+      .attr("dy", (d, i) => i * leg_fontSize)
       .attr("text-anchor", "start")
       .attr("alignment-baseline", "hanging")
       .attr("fill", leg_txtcol)
@@ -430,13 +430,13 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr(
         "y",
         leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax +
           span2
       )
       .text(leg_top_txt)
       .attr("fill", leg_txtcol)
-      .attr("font-size", `${leg_fontsize2}px`)
+      .attr("font-size", `${leg_fontSize2}px`)
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "hanging");
 
@@ -446,14 +446,14 @@ export function layermashroom(selection, projection, clipid, options = {}) {
       .attr(
         "y",
         leg_y +
-          (leg_title.split("\n").length + 1) * leg_fontsize +
+          (leg_title.split("\n").length + 1) * leg_fontSize +
           top_rmax +
           span -
           span2
       )
       .text(leg_bottom_txt)
       .attr("fill", leg_txtcol)
-      .attr("font-size", `${leg_fontsize2}px`)
+      .attr("font-size", `${leg_fontSize2}px`)
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "baseline");
   }

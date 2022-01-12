@@ -15,8 +15,8 @@ export function layertypo(selection, projection, clipid, options = {}){
   let pal = options.pal ? options.pal : "Tableau10";
   let col_missing = options.col_missing ? options.col_missing : "#f5f5f5";
   let stroke = options.stroke ? options.stroke : "white";
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
-  let fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let tooltip = options.tooltip ? options.tooltip : "";
 
   let leg_x = options.leg_x ? options.leg_x : null;
@@ -24,11 +24,11 @@ export function layertypo(selection, projection, clipid, options = {}){
   let leg_w = options.leg_w ? options.leg_w : 30;
   let leg_h = options.leg_h ? options.leg_h : 20;
   let leg_title = options.leg_title ? options.leg_title : null;
-  let leg_fontsize = options.leg_fontsize ? options.leg_fontsize : 14;
-  let leg_fontsize2 = options.leg_fontsize2 ? options.leg_fontsize2 : 10;
+  let leg_fontSize = options.leg_fontSize ? options.leg_fontSize : 14;
+  let leg_fontSize2 = options.leg_fontSize2 ? options.leg_fontSize2 : 10;
   let leg_stroke = options.leg_stroke ? options.leg_stroke : "black";
-  let leg_fillopacity = options.fillopacity ? options.fillopacity : 1;
-  let leg_strokewidth = options.leg_strokewidth ? options.leg_strokewidth : 0.5;
+  let leg_fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
+  let leg_strokeWidth = options.leg_strokeWidth ? options.leg_strokeWidth : 0.5;
   let leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
 
   // Get types only available in the basemap
@@ -65,8 +65,8 @@ export function layertypo(selection, projection, clipid, options = {}){
       d.properties[values] ? getcolor(d.properties[values]) : col_missing
     )
     .attr("stroke", stroke)
-    .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity)
+    .attr("stroke-width", strokeWidth)
+    .attr("fill-opacity", fillOpacity)
     .attr("clip-path", `url(#clip_${clipid}`)
     .on("touchmove mousemove", function (event, d) {
       if (tooltip != "") {
@@ -90,15 +90,15 @@ export function layertypo(selection, projection, clipid, options = {}){
           .select("#info")
           .attr("transform", `translate(${d3.pointer(event, this)})`);
         d3.select(this)
-          .attr("stroke-width", strokewidth + 0.5)
-          .attr("fill-opacity", fillopacity - 0.3);
+          .attr("stroke-width", strokeWidth + 0.5)
+          .attr("fill-opacity", fillOpacity - 0.3);
       }
     })
     .on("touchend mouseleave", function () {
       selection.select("#info").call(addtooltip, null);
       d3.select(this)
-        .attr("stroke-width", strokewidth)
-        .attr("fill-opacity", fillopacity);
+        .attr("stroke-width", strokeWidth)
+        .attr("fill-opacity", fillOpacity);
     });
 
   // Legend
@@ -109,12 +109,12 @@ export function layertypo(selection, projection, clipid, options = {}){
     w: leg_w,
     h: leg_h,
     stroke: leg_stroke,
-    fillopacity: leg_fillopacity,
-    strokewidth: leg_strokewidth,
+    fillOpacity: leg_fillOpacity,
+    strokeWidth: leg_strokeWidth,
     txtcol: leg_txtcol,
     title: leg_title ? leg_title : values,
-    fontsize: leg_fontsize,
-    fontsize2: leg_fontsize2,
+    fontSize: leg_fontSize,
+    fontSize2: leg_fontSize2,
     types: types,
     colors: colors
   });

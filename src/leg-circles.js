@@ -9,7 +9,7 @@ export function legcircles(selection, options = {}) {
   let k = options.k ? options.k : 50;
   let stroke = options.stroke ? options.stroke : "black";
   let fill = options.fill ? options.fill : "none";
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.8;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.8;
   let txtcol = options.txtcol ? options.txtcol : "#363636";
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
@@ -17,8 +17,8 @@ export function legcircles(selection, options = {}) {
     ? options.title
     : `Title, year
 (units)`;
-  let fontsize = options.fontsize ? options.fontsize : 14;
-  let fontsize2 = options.fontsize2 ? options.fontsize2 : 10;
+  let fontSize = options.fontSize ? options.fontSize : 14;
+  let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
   let round = options.round ? options.round : undefined;
 
   let radius = d3.scaleSqrt([0, d3.max(values)], [0, k]);
@@ -34,12 +34,12 @@ export function legcircles(selection, options = {}) {
       .attr("r", (d) => radius(d))
       .attr("fill", fill)
       .attr("stroke", stroke)
-      .attr("stroke-width", strokewidth)
+      .attr("stroke-width", strokeWidth)
       .attr(
         "transform",
         (d) =>
           `translate(${x + rmax},${
-            y - radius(d) + rmax * 2 + (title.split("\n").length + 1) * fontsize
+            y - radius(d) + rmax * 2 + (title.split("\n").length + 1) * fontSize
           })`
       );
 
@@ -54,19 +54,19 @@ export function legcircles(selection, options = {}) {
           y +
           rmax * 2 -
           radius(d) * 2 +
-          (title.split("\n").length + 1) * fontsize
+          (title.split("\n").length + 1) * fontSize
       )
-      .attr("x2", x + rmax * 2 + fontsize)
+      .attr("x2", x + rmax * 2 + fontSize)
       .attr(
         "y2",
         (d) =>
           y +
           rmax * 2 -
           radius(d) * 2 +
-          (title.split("\n").length + 1) * fontsize
+          (title.split("\n").length + 1) * fontSize
       )
       .attr("stroke", stroke)
-      .attr("stroke-width", strokewidth)
+      .attr("stroke-width", strokeWidth)
       .attr("stroke-dasharray", 2);
 
     // Legend title
@@ -85,8 +85,8 @@ export function legcircles(selection, options = {}) {
       .join("text")
       .attr("x", x)
       .attr("y", y)
-      .attr("font-size", `${fontsize}px`)
-      .attr("dy", (d, i) => i * fontsize)
+      .attr("font-size", `${fontSize}px`)
+      .attr("dy", (d, i) => i * fontSize)
       .attr("text-anchor", "start")
       .attr("alignment-baseline", "hanging")
       .attr("fill", txtcol)
@@ -99,16 +99,16 @@ export function legcircles(selection, options = {}) {
       .selectAll("text")
       .data(values)
       .join("text")
-      .attr("x", x + rmax * 2 + fontsize + fontsize2 / 2)
+      .attr("x", x + rmax * 2 + fontSize + fontSize2 / 2)
       .attr(
         "y",
         (d) =>
           y +
           rmax * 2 -
           radius(d) * 2 +
-          (title.split("\n").length + 1) * fontsize
+          (title.split("\n").length + 1) * fontSize
       )
-      .attr("font-size", fontsize2)
+      .attr("font-size", fontSize2)
       .attr("alignment-baseline", "central")
       .attr("fill", txtcol)
       .text((d) => (round !== undefined || round !== 0 ? d.toFixed(round) : d));

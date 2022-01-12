@@ -8,7 +8,7 @@ const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 export function addoutline(selection, projection,  options = {}) {
   let fill = options.fill ? options.fill : "#add8f7";
   let stroke = options.stroke ? options.stroke : "none";
-  let strokewidth = options.strokewidth ? options.strokewidth : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
   selection
     .append("g")
     .attr(":inkscape:groupmode", "layer")
@@ -18,6 +18,6 @@ export function addoutline(selection, projection,  options = {}) {
     .attr("d", d3.geoPath(projection)({ type: "Sphere" }))
     .attr("fill", fill)
     .attr("stroke", stroke)
-    .attr("stroke-width", strokewidth)
+    .attr("stroke-width", strokeWidth)
     .attr("clip-path", "url(#clip)");
 }

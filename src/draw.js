@@ -40,8 +40,8 @@ export function draw({ params = {}, layers = {} } = {}) {
     if (header.text) {
       headerdelta = 25 * header.text.split("\n").length + 10;
     }
-    if (header.fontsize) {
-      headerdelta = header.fontsize * header.text.split("\n").length + 10;
+    if (header.fontSize) {
+      headerdelta = header.fontSize * header.text.split("\n").length + 10;
     }
   }
   let footerdelta = 0;
@@ -50,8 +50,8 @@ export function draw({ params = {}, layers = {} } = {}) {
     if (footer.text) {
       footerdelta = 10 * footer.text.split("\n").length + 10;
     }
-    if (footer.fontsize) {
-      footerdelta = footer.fontsize * footer.text.split("\n").length + 10;
+    if (footer.fontSize) {
+      footerdelta = footer.fontSize * footer.text.split("\n").length + 10;
     }
   }
 
@@ -100,7 +100,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     addoutline(svg, projection, {
       fill: outline.fill,
       stroke: "none",
-      strokewidth: "none"
+      strokeWidth: "none"
     });
   }
 
@@ -110,7 +110,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     if (layer.type == "graticule") {
       addgraticule(svg, projection, clipid, {
         stroke: layer.stroke,
-        strokewidth: layer.strokewidth,
+        strokeWidth: layer.strokeWidth,
         strokeopacity: layer.strokeopacity,
         strokedasharray: layer.strokedasharray,
         step: layer.step
@@ -122,8 +122,8 @@ export function draw({ params = {}, layers = {} } = {}) {
       layersimple(svg, projection, clipid, layer.geojson, {
         fill: layer.fill,
         stroke: layer.stroke,
-        strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
@@ -131,12 +131,12 @@ export function draw({ params = {}, layers = {} } = {}) {
         leg_h: layer.leg_h,
         leg_title: layer.leg_title,
         leg_text: layer.leg_text,
-        leg_fontsize: layer.leg_fontsize,
-        leg_fontsize2: layer.leg_fontsize2,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
         leg_stroke: layer.leg_stroke,
-        leg_fillopacity: layer.leg_fillopacity,
+        leg_fillOpacity: layer.leg_fillOpacity,
         leg_fill: layer.leg_fill,
-        leg_strokewidth: layer.leg_strokewidth,
+        leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol
       });
     }
@@ -150,17 +150,17 @@ export function draw({ params = {}, layers = {} } = {}) {
         pal: layer.pal,
         col_missing: layer.col_missing,
         stroke: layer.stroke,
-        strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
         leg_title: layer.leg_title,
-        leg_fontsize: layer.leg_fontsize,
-        leg_fontsize2: layer.leg_fontsize2,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
         leg_stroke: layer.leg_stroke,
-        leg_fillopacity: layer.leg_fillopacity,
-        leg_strokewidth: layer.leg_strokewidth,
+        leg_fillOpacity: layer.leg_fillOpacity,
+        leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol
       });
     }
@@ -177,8 +177,8 @@ export function draw({ params = {}, layers = {} } = {}) {
         method: layer.method,
         col_missing: layer.col_missing,
         stroke: layer.stroke,
-        strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
@@ -186,12 +186,12 @@ export function draw({ params = {}, layers = {} } = {}) {
         leg_h: layer.leg_h,
         leg_title: layer.leg_title,
         leg_text: layer.leg_text,
-        leg_fontsize: layer.leg_fontsize,
-        leg_fontsize2: layer.leg_fontsize2,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
         leg_stroke: layer.leg_stroke,
-        leg_fillopacity: layer.leg_fillopacity,
+        leg_fillOpacity: layer.leg_fillOpacity,
         leg_fill: layer.leg_fill,
-        leg_strokewidth: layer.leg_strokewidth,
+        leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol,
         leg_round: layer.leg_round
       });
@@ -208,14 +208,14 @@ export function draw({ params = {}, layers = {} } = {}) {
         bottom_fill: layer.bottom_fill,
         k: layer.k,
         stroke: layer.stroke,
-        strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
         top_tooltip: layer.top_tooltip,
         bottom_tooltip: layer.bottom_tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
-        leg_fontsize: layer.leg_fontsize,
-        leg_fontsize2: layer.leg_fontsize2,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
         leg_round: layer.leg_round,
         leg_txtcol: layer.leg_txtcol,
         leg_title: layer.leg_title,
@@ -224,7 +224,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         leg_top_fill: layer.leg_top_fill,
         leg_bottom_fill: layer.leg_bottom_fill,
         leg_stroke: layer.leg_stroke,
-        leg_strokewidth: layer.leg_strokewidth
+        leg_strokeWidth: layer.leg_strokeWidth
       });
     }
 
@@ -235,14 +235,14 @@ export function draw({ params = {}, layers = {} } = {}) {
         text: layer.text,
         fill: layer.fill,
         stroke: layer.stroke,
-        fontsize: layer.fontsize,
+        fontSize: layer.fontSize,
         margin: layer.margin,
         anchor: layer.anchor, // start, middle, end
         baseline: layer.baseline, // baseline, middle, hanging
         frame_fill: layer.frame_fill,
         frame_stroke: layer.frame_stroke,
         frame_opacity: layer.frame_opacity,
-        frame_strokewidth: layer.frame_strokewidth
+        frame_strokeWidth: layer.frame_strokeWidth
       });
     }
 
@@ -253,18 +253,18 @@ export function draw({ params = {}, layers = {} } = {}) {
         values: layer.values,
         fill: layer.fill,
         stroke: layer.stroke,
-        strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
         leg_w: layer.leg_w,
         leg_h: layer.leg_h,
         leg_text: layer.leg_text,
-        leg_fontsize: layer.leg_fontsize,
+        leg_fontSize: layer.leg_fontSize,
         leg_stroke: layer.leg_stroke,
-        leg_fillopacity: layer.fillopacity,
+        leg_fillOpacity: layer.fillOpacity,
         leg_fill: layer.fill,
-        leg_strokewidth: layer.leg_strokewidth,
+        leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol
       });
     }
@@ -288,18 +288,18 @@ export function draw({ params = {}, layers = {} } = {}) {
         k: layer.k,
         fill: layer.fill,
         stroke: layer.stroke,
-        strokewidth: layer.strokewidth,
-        fillopacity: layer.fillopacity,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
         leg_stroke: layer.leg_stroke,
         leg_fill: layer.leg_fill,
-        leg_strokewidth: layer.leg_strokewidth,
+        leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol,
         leg_title: layer.leg_title,
-        leg_fontsize: layer.leg_fontsize,
-        leg_fontsize2: layer.leg_fontsize2,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
         leg_round: layer.leg_round
       });
     }
@@ -307,11 +307,11 @@ export function draw({ params = {}, layers = {} } = {}) {
     // Header
     if (layer.type == "header") {
       addheader(svg, width, {
-        fontsize: layer.fontsize,
+        fontSize: layer.fontSize,
         text: layer.text,
         fill: layer.fill,
         background: layer.background,
-        backgroundopacity: layer.backgroundopacity,
+        backgroundOpacity: layer.backgroundOpacity,
         anchor: layer.anchor
       });
     }
@@ -319,11 +319,11 @@ export function draw({ params = {}, layers = {} } = {}) {
     // Footer
     if (layer.type == "footer") {
       addfooter(svg, width, height, {
-        fontsize: layer.fontsize,
+        fontSize: layer.fontSize,
         text: layer.text,
         fill: layer.fill,
         background: layer.background,
-        backgroundopacity: layer.backgroundopacity,
+        backgroundOpacity: layer.backgroundOpacity,
         anchor: layer.anchor
       });
     }
@@ -346,7 +346,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     addoutline(svg, projection, {
       fill: "none",
       stroke: outline.stroke,
-      strokewidth: outline.strokewidth
+      strokeWidth: outline.strokeWidth
     });
   }
 
