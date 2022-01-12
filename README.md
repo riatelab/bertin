@@ -23,7 +23,7 @@ Last version
 Pinned version
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/bertin@0.2.2" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@0.3.2" charset="utf-8"></script>
 ```
 
 #### <ins>In Observable</ins>
@@ -31,13 +31,13 @@ Pinned version
 Last version
 
 ~~~js
-bertin = require("bertin/dist/index.min.js")
+bertin = require("bertin")
 ~~~
 
 Pinned version
 
 ~~~js
-bertin = require("bertin@0.2.0/dist/index.min.js")
+bertin = require("bertin@0.3.2")
 ~~~
 
 ## 2. How to use?
