@@ -616,6 +616,29 @@ Parameters of the legend
 
 ## 4. Other functions
 
+#### Quickdraw
+
+*quickdraw* is a function to display one or more layers directly and easily. [Source](https://github.com/neocarto/bertin/blob/main/src/quickdraw.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+
+~~~js
+bertin.quickdraw(geojson)
+~~~
+
+~~~js
+bertin.quickdraw(geojson, 1000, 7)
+~~~
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- param 1 : a geojson (<ins>compulsory<ins>)
+- param 2 : width
+- param 3 : margin
+
+</details>
 
 #### Match
 
@@ -655,10 +678,10 @@ testjoin.unmatched_geom
 
 <details><summary>Parameters</summary>
 
-- a geojson (<ins>compulsory<ins>)
-- a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- a json (<ins>compulsory<ins>)
-- a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- param 1 : a geojson (<ins>compulsory<ins>)
+- param 2 : a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- param 3 : a json (<ins>compulsory<ins>)
+- param 4 : a string corresponding to the identifier of the features (<ins>compulsory<ins>)
 
 </details>
 
@@ -676,10 +699,31 @@ const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
 
 <details><summary>Parameters</summary>
 
-- a geojson (<ins>compulsory<ins>)
-- a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
-- a json (<ins>compulsory<ins>)
-- a string corresponding to the identifier of the features (<ins>compulsory<ins>)
-- boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
+- param 1 : a geojson (<ins>compulsory<ins>)
+- param 2 : a string corresponding to the identifier of the features in the properties (<ins>compulsory<ins>)
+- param 3 : a json (<ins>compulsory<ins>)
+- param 4 : a string corresponding to the identifier of the features (<ins>compulsory<ins>)
+- param 5 : a boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
+
+</details>
+
+#### Talble2geo
+
+*talble2geo* is a function to convert a data table with lat/lon fileds to a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/talble2geo.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+
+~~~js
+bertin.table2geo(cities, "lat", "lng")
+~~~
+
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- param 1 : a geojson (<ins>compulsory<ins>)
+- param 2 : latitude
+- param 3 : longitude
 
 </details>
