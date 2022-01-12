@@ -4,6 +4,8 @@
   "description": "Thematic mapping",
   "main": "dist/index.js",
   "module": "src/index.js",
+  "jsdelivr": "dist/index.min.js",
+  "unpkg": "dist/index.min.js",
   "files": [
     "src",
     "dist"
