@@ -111,8 +111,8 @@ export function draw({ params = {}, layers = {} } = {}) {
       addgraticule(svg, projection, clipid, {
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
-        strokeopacity: layer.strokeopacity,
-        strokedasharray: layer.strokedasharray,
+        strokeOpacity: layer.strokeOpacity,
+        strokeDasharray: layer.strokeDasharray,
         step: layer.step
       });
     }
