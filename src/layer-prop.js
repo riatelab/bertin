@@ -4,10 +4,9 @@ import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
 import * as d3array from "d3-array";
 import * as d3scale from "d3-scale";
+const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
 import {addtooltip } from "./tooltip.js";
 import {legcircles } from "./leg-circles.js";
-
-const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
 import {poly2points } from "./poly2points.js";
 
 export function layerprop(selection, projection, clipid, options = {}) {

@@ -247,6 +247,38 @@ bertin.draw({
 
 </details>
 
+
+#### Labels
+
+The *label* type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-labels.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts)
+
+<details><summary>Code</summary>
+
+~~~js
+bertin.draw({
+  layers: [{
+        type: "label",
+        geojson: countries,
+        label: "name"
+  }]
+})
+~~~
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>values</b>: a string corresponding to the targeted variable in the properties (<ins>compulsory<ins>)
+- <b>fill</b>: fill color (default: "#474342")
+- <b>fontSize</b>: font size (default: 10)
+- <b>fontFamily</b>: font family. "Pacifico","Roboto","Rubik","Ubuntu" (default: "Robotto")
+- <b>textDecoration</b>: text decoration. "none", "underline", "line-through", "overline" (default:"none")
+- <b>fontWeight</b>: font weight. "normal", "bold", "bolder", "lighter" (default: "normal")
+- <b>fontStyle</b>: font style. "normal", "italic", "oblique" (default: "normal")
+- <b>opacity</b>: opacity (default: 1)
+</details>
+
 #### Layer
 
 The *layer* type allows to display a simple geojson layer.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example](https://observablehq.com/d/d59855d7cc99f6e5?collection=@neocartocnrs/bertin)

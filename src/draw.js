@@ -20,6 +20,7 @@ import { getcenters } from "./centroids.js";
 import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
 import { addtext } from "./text.js";
+import { layerlabel } from "./layer-label.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
@@ -73,6 +74,15 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   // defs
   let defs = svg.append("defs");
+
+
+  // font
+  defs
+    .append("style")
+    .attr("type", "text/css")
+    .text(
+      "@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&family=Rubik&family=Ubuntu&display=swap');"
+    );
 
   // Clip
   const clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -227,6 +237,22 @@ export function draw({ params = {}, layers = {} } = {}) {
         leg_strokeWidth: layer.leg_strokeWidth
       });
     }
+
+    // labels layer
+
+if (layer.type == "label") {
+  layerlabel(svg, projection, clipid, {
+    geojson: layer.geojson,
+    values: layer.values,
+    fill: layer.fill,
+    fontSize: layer.fontSize,
+    fontFamily: layer.fontFamily,
+    textDecoration: layer.textDecoration,
+    fontWeight: layer.fontWeight,
+    fontStyle: layer.fontStyle,
+    opacity: layer.opacity
+  });
+}
 
     // text note
     if (layer.type == "text") {
