@@ -4,22 +4,22 @@ const d3 = Object.assign({}, d3selection);
 
 // header
 export function addheader(selection, width, options = {}) {
-  let fontsize;
+  let fontSize;
   if (options.text) {
-    fontsize = 25;
+    fontSize = 25;
   }
-  if (options.fontsize) {
-    fontsize = options.fontsize;
+  if (options.fontSize) {
+    fontSize = options.fontSize;
   }
   let text = options.text ? options.text : "";
   let fill = options.fill ? options.fill : "#9e9696";
   let background = options.background ? options.background : "white";
-  let backgroundopacity = options.backgroundopacity
-    ? options.backgroundopacity
+  let backgroundOpacity = options.backgroundOpacity
+    ? options.backgroundOpacity
     : 1;
   let anchor = options.anchor ? options.anchor : "middle";
 
-  const delta = fontsize * text.split("\n").length;
+  const delta = fontSize * text.split("\n").length;
 
   let x;
   if (anchor == "start") {
@@ -45,7 +45,7 @@ export function addheader(selection, width, options = {}) {
     .attr("width", width)
     .attr("height", delta + 10)
     .attr("fill", background)
-    .attr("fill-opacity", backgroundopacity);
+    .attr("fill-opacity", backgroundOpacity);
 
   header
     .selectAll("text")
@@ -53,8 +53,8 @@ export function addheader(selection, width, options = {}) {
     .join("text")
     .attr("x", x)
     .attr("y", -delta - 5)
-    .attr("font-size", `${fontsize}px`)
-    .attr("dy", (d, i) => i * fontsize)
+    .attr("font-size", `${fontSize}px`)
+    .attr("dy", (d, i) => i * fontSize)
     .attr("text-anchor", anchor)
     .attr("alignment-baseline", "hanging")
     .attr("fill", fill)

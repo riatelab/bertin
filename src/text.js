@@ -4,7 +4,7 @@ const d3 = Object.assign({}, d3selection);
 export function addtext(selection, width, height, options = {}){
   let position = options.position ? options.position : "topright";
     let text = options.text ? options.text : "Your text here!";
-    let fontsize = options.fontsize ? options.fontsize : 15;
+    let fontSize = options.fontSize ? options.fontSize : 15;
     let margin = options.margin ? options.margin : 0;
     let anchor = options.anchor ? options.anchor : "start"; // start, middle, end
     let baseline = options.baseline ? options.baseline : "baseline"; // baseline, middle, hanging
@@ -12,7 +12,7 @@ export function addtext(selection, width, height, options = {}){
     let stroke = options.stroke ? options.stroke : "none";
     let frame_fill = options.frame_fill ? options.frame_fill : "none";
     let frame_stroke = options.frame_stroke ? options.frame_stroke : "none";
-    let frame_strokewidth = options.strokewidth ? options.strokewidth : 1;
+    let frame_strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
     let frame_opacity = options.frame_opacity ? options.frame_opacity : 1;
     let x;
     let y;
@@ -89,7 +89,7 @@ export function addtext(selection, width, height, options = {}){
 
     let tmp = selection
       .append("text")
-      .attr("font-size", `${fontsize}px`)
+      .attr("font-size", `${fontSize}px`)
       .text(txt[i]);
     selection.node().appendChild(tmp.node());
     document.body.appendChild(selection.node());
@@ -97,18 +97,18 @@ export function addtext(selection, width, height, options = {}){
     document.body.removeChild(selection.node());
     tmp.remove();
 
-    let h = fontsize * count.length;
+    let h = fontSize * count.length;
 
     if (baseline == "hanging") {
       delta = 0;
       margin_y = margin;
     }
     if (baseline == "middle") {
-      delta = (fontsize * txt.length) / 2;
+      delta = (fontSize * txt.length) / 2;
       margin_y = 0;
     }
     if (baseline == "baseline") {
-      delta = fontsize * txt.length;
+      delta = fontSize * txt.length;
       margin_y = -margin;
     }
 
@@ -144,7 +144,7 @@ export function addtext(selection, width, height, options = {}){
       .attr("height", h + margin * 2)
       .attr("width", w + margin * 2)
       .attr("fill", frame_fill)
-      .attr("stroke-width", frame_strokewidth)
+      .attr("stroke-width", frame_strokeWidth)
       .attr("fill-opacity", frame_opacity)
       .attr("stroke", frame_stroke);
 
@@ -153,8 +153,8 @@ export function addtext(selection, width, height, options = {}){
       .join("text")
       .attr("x", x + margin_x)
       .attr("y", y - +delta + margin_y)
-      .attr("font-size", `${fontsize}px`)
-      .attr("dy", (d, i) => i * fontsize)
+      .attr("font-size", `${fontSize}px`)
+      .attr("dy", (d, i) => i * fontSize)
       .attr("text-anchor", anchor)
       .attr("alignment-baseline", "hanging")
       .attr("fill", fill)

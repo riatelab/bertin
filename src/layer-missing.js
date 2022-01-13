@@ -12,8 +12,8 @@ export function layermissing(selection, projection, clipid, options = {}){
   let values = options.values;
   let fill = options.fill ? options.fill : "white";
   let stroke = options.stroke ? options.stroke : "white";
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
-  let fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
 
   let missing = geojson.features.filter(
     (d) => d.properties[values] == undefined
@@ -23,7 +23,7 @@ export function layermissing(selection, projection, clipid, options = {}){
   if (figuration(geojson) == "l") {
     stroke = options.stroke ? options.stroke : "white";
     fill = options.fill ? options.fill : "none";
-    strokewidth = options.strokewidth ? options.strokewidth : 1;
+    strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
   }
 
   selection
@@ -37,8 +37,8 @@ export function layermissing(selection, projection, clipid, options = {}){
     .attr("d", d3.geoPath(projection))
     .attr("fill", fill)
     .attr("stroke", stroke)
-    .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity)
+    .attr("stroke-width", strokeWidth)
+    .attr("fill-opacity", fillOpacity)
     .attr("clip-path", `url(#clip_${clipid}`);
 
   // Legend
@@ -49,13 +49,13 @@ export function layermissing(selection, projection, clipid, options = {}){
     w: options.leg_w,
     h: options.leg_h,
     text: options.leg_text ? options.leg_text : "Missing data",
-    fontsize: options.leg_fontsize2,
+    fontSize: options.leg_fontSize2,
     stroke: options.leg_stroke,
-    fillopacity: options.leg_fillopacity
-      ? options.leg_fillopacity
-      : fillopacity,
+    fillOpacity: options.leg_fillOpacity
+      ? options.leg_fillOpacity
+      : fillOpacity,
     fill: fill,
-    strokewidth: options.leg_strokewidth,
+    strokeWidth: options.leg_strokeWidth,
     txtcol: options.leg_txtcol
   });
 }

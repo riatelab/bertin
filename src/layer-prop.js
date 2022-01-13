@@ -28,8 +28,8 @@ export function layerprop(selection, projection, clipid, options = {}) {
     ? options.fill
     : cols[Math.floor(Math.random() * cols.length)];
   let stroke = options.stroke ? options.stroke : "white";
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
-  let fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let tooltip = options.tooltip ? options.tooltip : "";
 
   const features = poly2points(geojson);
@@ -53,8 +53,8 @@ export function layerprop(selection, projection, clipid, options = {}) {
     .join("circle")
     .attr("fill", fill)
     .attr("stroke", stroke)
-    .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity)
+    .attr("stroke-width", strokeWidth)
+    .attr("fill-opacity", fillOpacity)
     .attr("cx", (d) => projection(d.geometry.coordinates)[0])
     .attr("cy", (d) => projection(d.geometry.coordinates)[1])
     .attr("r", (d) => radius(d.properties[values]))
@@ -81,15 +81,15 @@ export function layerprop(selection, projection, clipid, options = {}) {
           .select("#info")
           .attr("transform", `translate(${d3.pointer(event, this)})`);
         d3.select(this)
-          .attr("stroke-width", strokewidth + 0.5)
-          .attr("fill-opacity", fillopacity - 0.3);
+          .attr("stroke-width", strokeWidth + 0.5)
+          .attr("fill-opacity", fillOpacity - 0.3);
       }
     })
     .on("touchend mouseleave", function () {
       selection.select("#info").call(addtooltip, null);
       d3.select(this)
-        .attr("stroke-width", strokewidth)
-        .attr("fill-opacity", fillopacity);
+        .attr("stroke-width", strokeWidth)
+        .attr("fill-opacity", fillOpacity);
     });
 
   // Legend
@@ -109,11 +109,11 @@ export function layerprop(selection, projection, clipid, options = {}) {
     k: k,
     stroke: options.leg_stroke,
     fill: options.leg_fill,
-    strokewidth: options.leg_strokewidth,
+    strokeWidth: options.leg_strokeWidth,
     txtcol: options.leg_txtcol,
     title: options.leg_title,
-    fontsize: options.leg_fontsize,
-    fontsize2: options.leg_fontsize2,
+    fontSize: options.leg_fontSize,
+    fontSize2: options.leg_fontSize2,
     title: options.leg_title ? options.leg_title : values,
     values: legval
   });

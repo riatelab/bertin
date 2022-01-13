@@ -22,8 +22,8 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
   ? options.fill
   : cols[Math.floor(Math.random() * cols.length)];
   let stroke = options.stroke ? options.stroke : "white";
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
-  let fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let tooltip = options.tooltip ? options.tooltip : "";
 
   // If lines
@@ -32,7 +32,7 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
     ? options.stroke
     : cols[Math.floor(Math.random() * cols.length)];
     fill = options.fill ? options.fill : "none";
-    strokewidth = options.strokewidth ? options.strokewidth : 1;
+    strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
   }
 
   selection
@@ -46,8 +46,8 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
   .attr("d", d3.geoPath(projection))
   .attr("fill", fill)
   .attr("stroke", stroke)
-  .attr("stroke-width", strokewidth)
-  .attr("fill-opacity", fillopacity)
+  .attr("stroke-width", strokeWidth)
+  .attr("fill-opacity", fillOpacity)
   .attr("clip-path", `url(#clip_${clipid}`)
   .on("touchmove mousemove", function (event, d) {
     if (tooltip != "") {
@@ -71,16 +71,16 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
       .select("#info")
       .attr("transform", `translate(${d3.pointer(event, this)})`);
       d3.select(this)
-      .attr("stroke-width", strokewidth + 0.5)
-      .attr("fill-opacity", fillopacity - 0.3)
+      .attr("stroke-width", strokeWidth + 0.5)
+      .attr("fill-opacity", fillOpacity - 0.3)
       .raise();
     }
   })
   .on("touchend mouseleave", function () {
     selection.select("#info").call(addtooltip, null);
     d3.select(this)
-    .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity)
+    .attr("stroke-width", strokeWidth)
+    .attr("fill-opacity", fillOpacity)
     .lower();
   });
 
@@ -93,14 +93,14 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
     h: options.leg_h,
     title: options.leg_title,
     text: options.leg_text,
-    fontsize: options.leg_fontsize,
-    fontsize2: options.leg_fontsize2,
+    fontSize: options.leg_fontSize,
+    fontSize2: options.leg_fontSize2,
     stroke: options.leg_stroke,
-    fillopacity: options.leg_fillopacity
-    ? options.leg_fillopacity
-    : fillopacity,
+    fillOpacity: options.leg_fillOpacity
+    ? options.leg_fillOpacity
+    : fillOpacity,
     fill: options.leg_fill ? options.leg_fill : fill,
-    strokewidth: options.leg_strokewidth,
+    strokeWidth: options.leg_strokeWidth,
     txtcol: options.leg_txtcol
   });
 }

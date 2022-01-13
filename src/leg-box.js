@@ -9,12 +9,12 @@ export function legbox(selection, options = {}){
   let h = options.h ? options.h : 20;
   let title = options.title ? options.title : null;
   let text = options.text ? options.text : `text of the box`;
-  let fontsize = options.fontsize ? options.fontsize : 14;
-  let fontsize2 = options.fontsize2 ? options.fontsize2 : 10;
+  let fontSize = options.fontSize ? options.fontSize : 14;
+  let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
   let stroke = options.stroke ? options.stroke : "black";
   let fill = options.fill ? options.fill : "#CCCCCC";
-  let fillopacity = options.fillopacity ? options.fillopacity : 1;
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
   let txtcol = options.txtcol ? options.txtcol : "#363636";
 
   if (x != null && y != null) {
@@ -22,7 +22,7 @@ export function legbox(selection, options = {}){
 
     let delta = 0;
     if (title != null) {
-      delta = (title.split("\n").length + 1) * fontsize;
+      delta = (title.split("\n").length + 1) * fontSize;
       leg
         .append("g")
         .selectAll("text")
@@ -30,8 +30,8 @@ export function legbox(selection, options = {}){
         .join("text")
         .attr("x", x)
         .attr("y", y)
-        .attr("font-size", `${fontsize}px`)
-        .attr("dy", (d, i) => i * fontsize)
+        .attr("font-size", `${fontSize}px`)
+        .attr("dy", (d, i) => i * fontSize)
         .attr("text-anchor", "start")
         .attr("alignment-baseline", "hanging")
         .attr("fill", txtcol)
@@ -45,18 +45,18 @@ export function legbox(selection, options = {}){
       .attr("width", w)
       .attr("fill", fill)
       .attr("stroke", stroke)
-      .attr("stroke-width", strokewidth)
-      .attr("fill-opacity", fillopacity);
+      .attr("stroke-width", strokeWidth)
+      .attr("fill-opacity", fillOpacity);
 
     leg
       .append("g")
       .selectAll("text")
       .data(text.split("\n"))
       .join("text")
-      .attr("x", x + w + fontsize2 / 2)
-      .attr("y", y + h / 2 - (fontsize2 * text.split("\n").length) / 2 + delta)
-      .attr("font-size", `${fontsize2}px`)
-      .attr("dy", (d, i) => i * fontsize2)
+      .attr("x", x + w + fontSize2 / 2)
+      .attr("y", y + h / 2 - (fontSize2 * text.split("\n").length) / 2 + delta)
+      .attr("font-size", `${fontSize2}px`)
+      .attr("dy", (d, i) => i * fontSize2)
       .attr("fill", txtcol)
       .attr("text-anchor", "start")
       .attr("alignment-baseline", "hanging")

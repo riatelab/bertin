@@ -139,8 +139,8 @@ bertin.draw({
 - <b>method</b>: A method of classification. Jenks, q6, quantiles, equal (default: quantiles)
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
 - <b>stroke</b>: stroke color (default: "white")
-- <b>strokewidth</b>: Stroke width (default: 0.5)
-- <b>fillopacity</b>: Fill opacity (dafault: 1)
+- <b>strokeWidth</b>: Stroke width (default: 0.5)
+- <b>fillOpacity</b>: Fill opacity (dafault: 1)
 - <b>tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
@@ -150,11 +150,11 @@ Parameters of the legend
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
 - <b>leg_text</b>: text of the box (default: "text of the box")
-- <b>leg_fontsize</b>: text font size (default: 10)
+- <b>leg_fontSize</b>: text font size (default: 10)
 - <b>leg_fill</b>: color of the box (same as the layer displayed)
 - <b>leg_stroke</b>: stroke of the box (default: "black")
-- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
-- <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
+- <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
+- <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
 - <b>leg_txtcol</b>: color of the texte (default: "#363636")
 - <b>leg_round</b>: Number of digits (default: undefined)
 </details>
@@ -171,7 +171,7 @@ bertin.draw({
   layers: [{
         type: "footer",
         text: "Source: Worldbank, 2021",
-        fontsize: 10
+        fontSize: 10
   }]
 })
 ~~~
@@ -182,10 +182,10 @@ bertin.draw({
 
 - <b>text</b>: text to be displayed (default:"")
 - <b>anchor</b>: text anchor. start, middle, end (default:"end")
-- <b>fontsize</b>: size of the text (default:15)
+- <b>fontSize</b>: size of the text (default:15)
 - <b>fill</b>: color of the text (default:"#9e9696")
 - <b>background</b>: background color (default: "white")
-- <b>backgroundopacity</b>: background opacity (default: 1)
+- <b>backgroundOpacity</b>: background opacity (default: 1)
 
 </details>
 
@@ -211,7 +211,7 @@ bertin.draw({
 <details><summary>Parameters</summary>
 
 - <b>stroke</b>: stroke color (default:"white")
-- <b>strokewidth</b>: stroke width (default:0.8)
+- <b>strokeWidth</b>: stroke width (default:0.8)
 - <b>strokeopacity</b>: stroke opacity (default:0.5)
 - <b>strokedasharray</b>stroke-dasharray (default:2)
 - <b>step</b>: gap between graticules. The value can be a number or an array of two values (default:[10, 10])
@@ -229,7 +229,7 @@ bertin.draw({
   layers: [{
         type: "header",
         text: "Title of the map",
-        fontsize: 40
+        fontSize: 40
   }]
 })
 ~~~
@@ -240,10 +240,10 @@ bertin.draw({
 
 - <b>text</b>: text to be displayed (default:"")
 - <b>anchor</b>: text anchor. start, middle, end (default:"middle")
-- <b>fontsize</b>: size of the text (default:20)
+- <b>fontSize</b>: size of the text (default:20)
 - <b>fill</b>: color of the text (default:"#9e9696")
 - <b>background</b>: background color (default: "white")
-- <b>backgroundopacity</b>: background opacity (default: 1)
+- <b>backgroundOpacity</b>: background opacity (default: 1)
 
 </details>
 
@@ -273,8 +273,8 @@ bertin.draw({
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b>fill</b>: fill color (default: a random color)
 - <b>stroke</b>: stroke color (default: "white")
-- <b>strokewidth</b> stroke width (default:0.5)
-- <b>fillopacity</b>: fill opacity (default:1)
+- <b>strokeWidth</b> stroke width (default:0.5)
+- <b>fillOpacity</b>: fill opacity (default:1)
 - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
@@ -285,12 +285,12 @@ Parameters of the legend
 - <b>leg_h</b>: height of the bof (default:20)
 - <b>leg_title</b>: title of the legend (default; null)
 - <b>leg_text</b>: text of the box (default: "text of the box")
-- <b>leg_fontsize</b>: title legend font size (default: 14)
-- <b>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_fontSize</b>: title legend font size (default: 14)
+- <b>leg_fontSize2</b>: values font size (default: 10)
 - <b>leg_fill</b>: color of the box (same as the layer displayed)
 - <b>leg_stroke</b>: stroke of the box (default: "black")
-- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
-- <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
+- <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
+- <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
 - <b>leg_txtcol</b>: color of the texte (default: "#363636")
 
 </details>
@@ -327,8 +327,8 @@ The *mashroom* type is used to draw a map with 2 supperposed proportional semi-c
 - <b>bottom_fill</b>: bottom fill color (default: "#4fabd6")
 - <b>k</b>: size of the largest semi circle (defaul:50)
 - <b>stroke</b>: stroke color (default: "white")
-- <b>strokewidth</b>: stroke width (default: 0.5)
-- <b>fillopacity</b>: fill opacity (default: 1)
+- <b>strokeWidth</b>: stroke width (default: 0.5)
+- <b>fillOpacity</b>: fill opacity (default: 1)
 - <b>top_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 - <b>bottom_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
@@ -336,8 +336,8 @@ Parameters of the legend
 
 - <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
 - <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
-- <b>leg_fontsize</b>: title legend font size (default: 14)
-- <b>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_fontSize</b>: title legend font size (default: 14)
+- <b>leg_fontSize2</b>: values font size (default: 10)
 - <b>leg_round</b>: number of digits after the decimal point (default: undefined)
 - <b>leg_txtcol</b>: color of the texte (default: "#363636")
 - <b>leg_title</b>: title of the legend (default "Title, year")
@@ -346,7 +346,7 @@ Parameters of the legend
 - <b>leg_bottom_txt</b> title for the bottom variable (default bottom_var)
 - <b>leg_top_fill</b> color of top semi circles (default same as top_fill)
 - <b>leg_bottom_fill</b> color of bottom semi circles (default same as bottom_fill)
-- <b>leg_strokewidth</b> stroke width of elements in the legend (default 0.8)
+- <b>leg_strokeWidth</b> stroke width of elements in the legend (default 0.8)
 
 </details>
 
@@ -376,8 +376,8 @@ bertin.draw({
 - <b>values</b>: a string corresponding to the targeted variable in the properties (<ins>compulsory<ins>)
 - <b>fill</b>: fill color (default: "white")
 - <b>stroke</b>: stroke color (default: "white")
-- <b>strokewidth</b>: stroke width (default: 0.5)
-- <b>fillopacity</b>: fill opacity (default: 1)
+- <b>strokeWidth</b>: stroke width (default: 0.5)
+- <b>fillOpacity</b>: fill opacity (default: 1)
 
 Parameters of the legend
 
@@ -386,11 +386,11 @@ Parameters of the legend
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
 - <b>leg_text</b>: text of the box (default: "text of the box")
-- leg_fontsize</b>: text font size (default: 10)
+- leg_fontSize</b>: text font size (default: 10)
 - <b>leg_fill</b>: color of the box (same as the layer displayed)
 - <b>leg_stroke</b>: stroke of the box (default: "black")
-- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
-- <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
+- <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
+- <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
 - <b>leg_txtcol</b>: color of the texte (default: "#363636")
 
 </details>
@@ -416,7 +416,7 @@ bertin.draw({
 
 - <b>fill</b>: fill color of the outline (default: "#add8f7")
 - <b>stroke</b>: stroke color (default:"none")
-- <b>strokewidth</b>: stroke width (default: 1)
+- <b>strokeWidth</b>: stroke width (default: 1)
 
 </details>
 
@@ -449,8 +449,8 @@ The *prop* type is used to draw a map by proportional circles. [Source](https://
 - <b>k</b>: size of the largest circle (defaul:50)
 - <b>fill</b>: fill color (default: random color)
 - <b>stroke</b>: stroke color (default: "white")
-- <b>strokewidth</b>: stroke width (default: 0.5)
-- <b>fillopacity</b>: fill opacity (default: 1)
+- <b>strokeWidth</b>: stroke width (default: 0.5)
+- <b>fillOpacity</b>: fill opacity (default: 1)
 - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
@@ -459,12 +459,12 @@ Parameters of the legend
 - <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
 - <b>leg_fill</b>: color of the circles (default: "none")
 - <b>leg_stroke</b>: stroke of the circles (default: "black")
-- <b>leg_strokewidth</b>: stoke-width (default: 0.8)
+- <b>leg_strokeWidth</b>: stoke-width (default: 0.8)
 - <b>leg_txtcol</b>: color of the texte (default: "#363636")
 - <b>leg_title</b>: title of the legend (default var_data)
 - <b>leg_round</b>: number of digits after the decimal point (default: undefined)
-- <b>leg_fontsize</b>: title legend font size (default: 14)
-- <b>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_fontSize</b>: title legend font size (default: 14)
+- <b>leg_fontSize2</b>: values font size (default: 10)
 
 </details>
 
@@ -539,7 +539,7 @@ bertin.draw({
       type: "text",
       text: "This is my text",
       position: "bottomright",
-      fontsize: 20,
+      fontSize: 20,
       baseline: "middle",
       frame_stroke: "red",
       margin: 4
@@ -554,7 +554,7 @@ bertin.draw({
 
 - <b>position</b>: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - <b>text</b>: text to display. With the backticks, it is possible to display a text on several lines (default: "Your text here!")
-- <b>fontsize</b>: text size (default: 15)
+- <b>fontSize</b>: text size (default: 15)
 - <b>margin</b>: margin around the text (default: 0)
 - <b>anchor</b>: text anchor. start, middle, end (default: "start")
 - <b>baseline</b>: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
@@ -562,7 +562,7 @@ bertin.draw({
 - <b>stroke</b>: stroke color (default: "none")
 - <b>frame_fill</b>: frame background color (default:"none")
 - <b>frame_stroke</b>: frame stroke color (default: "none")
-- <b>frame_strokewidth</b>: thickness of the frame contour (default: 1)
+- <b>frame_strokeWidth</b>: thickness of the frame contour (default: 1)
 - <b>frame_opacity</b>: frame opacity (default: 1)
 
 </details>
@@ -594,8 +594,8 @@ The *typo* type allows to realize a qualitative map. [Source](https://github.com
 - <b>pal</b>: a palette of categorical colors (default: "Tableau10") [See](https://observablehq.com/@d3/color-schemes)
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
 - <b>stroke</b>: sreoke color (default: "white")
-- <b>strokewidth</b>: Stroke width (default: 0.5)
-- <b>fillopacity</b>: Fill opacity (dafault: 1)
+- <b>strokeWidth</b>: Stroke width (default: 0.5)
+- <b>fillOpacity</b>: Fill opacity (dafault: 1)
 - <b>tooltip</b>: An array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
@@ -605,11 +605,11 @@ Parameters of the legend
 - <b>leg_w</b>: width of the bof (default: 30)
 - <b>leg_h</b>: height of the bof (default:20)
 - <b>leg_title</b>: title of the legend (default; null)
-- <b>leg_fontsize</b>: title legend font size (default: 14)
-- <b>leg_fontsize2</b>: values font size (default: 10)
+- <b>leg_fontSize</b>: title legend font size (default: 14)
+- <b>leg_fontSize2</b>: values font size (default: 10)
 - <b>leg_stroke</b>: stroke of the box (default: "black")
-- <b>leg_strokewidth</b>: stroke-width (default: 0.5)
-- <b>leg_fillopacity</b>: stroke opacity (same as the layer displayed)
+- <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
+- <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
 - <b>leg_txtcol</b>: color of the texte (default: "#363636")
 
 </details>
