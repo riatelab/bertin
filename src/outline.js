@@ -7,6 +7,7 @@ const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 // outline
 export function addoutline(selection, projection,  options = {}) {
   let fill = options.fill ? options.fill : "#add8f7";
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let stroke = options.stroke ? options.stroke : "none";
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
   selection
@@ -17,6 +18,7 @@ export function addoutline(selection, projection,  options = {}) {
     .append("path")
     .attr("d", d3.geoPath(projection)({ type: "Sphere" }))
     .attr("fill", fill)
+    .attr("fill-opacity",fillOpacity)
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
     .attr("clip-path", "url(#clip)");

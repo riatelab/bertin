@@ -21,6 +21,7 @@ import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
 import { addtext } from "./text.js";
 import { layerlabel } from "./layer-label.js";
+import { layerdorling } from "./layer-dorling.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
@@ -109,6 +110,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   if (outline) {
     addoutline(svg, projection, {
       fill: outline.fill,
+      fillOpacity:outline.fillOpacity,
       stroke: "none",
       strokeWidth: "none"
     });
@@ -309,6 +311,30 @@ if (layer.type == "label") {
     // prop layers
     if (layer.type == "prop") {
       layerprop(svg, projection, clipid, {
+        geojson: layer.geojson,
+        values: layer.values,
+        k: layer.k,
+        fill: layer.fill,
+        stroke: layer.stroke,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
+        tooltip: layer.tooltip,
+        leg_x: layer.leg_x,
+        leg_y: layer.leg_y,
+        leg_stroke: layer.leg_stroke,
+        leg_fill: layer.leg_fill,
+        leg_strokeWidth: layer.leg_strokeWidth,
+        leg_txtcol: layer.leg_txtcol,
+        leg_title: layer.leg_title,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
+        leg_round: layer.leg_round
+      });
+    }
+
+    // dorling layers
+    if (layer.type == "dorling") {
+      layerdorling(svg, projection, clipid, {
         geojson: layer.geojson,
         values: layer.values,
         k: layer.k,

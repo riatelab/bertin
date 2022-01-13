@@ -159,6 +159,55 @@ Parameters of the legend
 - <b>leg_round</b>: Number of digits (default: undefined)
 </details>
 
+#### Dorling
+
+The *dorling* type is used to draw a Dorling cartogram. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-dorling.js) [Example](https://observablehq.com/d/84d7e9e9a5fb445f?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+
+~~~js
+  bertin.draw({
+    layers: [
+      {
+        type: "prop",
+        geojson: countries,
+        values: "pop",
+        k: 60,
+        tooltip: ["country", "pop", "(inh.)"]
+      }
+    ]
+  })
+~~~
+
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
+- <b>k</b>: size of the largest circle (defaul:50)
+- <b>interation</b>: number of interations (default: 200)
+- <b>fill</b>: fill color (default: random color)
+- <b>stroke</b>: stroke color (default: "white")
+- <b>strokeWidth</b>: stroke width (default: 0.5)
+- <b>fillOpacity</b>: fill opacity (default: 1)
+- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+
+Parameters of the legend
+
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_fill</b>: color of the circles (default: "none")
+- <b>leg_stroke</b>: stroke of the circles (default: "black")
+- <b>leg_strokeWidth</b>: stoke-width (default: 0.8)
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_title</b>: title of the legend (default var_data)
+- <b>leg_round</b>: number of digits after the decimal point (default: undefined)
+- <b>leg_fontSize</b>: title legend font size (default: 14)
+- <b>leg_fontSize2</b>: values font size (default: 10)
+
+</details>
+
 
 #### Footer
 
@@ -447,6 +496,7 @@ bertin.draw({
 <details><summary>Parameters</summary>
 
 - <b>fill</b>: fill color of the outline (default: "#add8f7")
+- <b>opacity</b>: opacity (default:1)
 - <b>stroke</b>: stroke color (default:"none")
 - <b>strokeWidth</b>: stroke width (default: 1)
 
