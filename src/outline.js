@@ -21,5 +21,4 @@ export function addoutline(selection, projection,  options = {}) {
     .attr("fill-opacity",fillOpacity)
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
-    .attr("clip-path", "url(#clip)");
 }
