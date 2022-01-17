@@ -22,13 +22,20 @@ import { addscalebar } from "./scalebar.js";
 import { addtext } from "./text.js";
 import { layerlabel } from "./layer-label.js";
 import { layerdorling } from "./layer-dorling.js";
+import { proj4d3 } from "./proj4d3.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
 
 export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
 
-  let projection = params.projection ? params.projection : d3.geoPatterson();
+  let projection = params.projection ? params.projection : d3.geoEquirectangular();
+
+  if (typeof projection === "string") {
+    projection = proj4d3(projection);
+  }
+
+
   let width = params.width ? params.width : 1000;
   let extent = params.extent ? params.extent : null;
   let margin = params.margin ? params.margin : 1;
