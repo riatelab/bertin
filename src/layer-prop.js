@@ -8,6 +8,7 @@ const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojecti
 import {addtooltip } from "./tooltip.js";
 import {legcircles } from "./leg-circles.js";
 import {poly2points } from "./poly2points.js";
+import {figuration } from "./figuration.js";
 
 export function layerprop(selection, projection, clipid, options = {}) {
   let cols = [
@@ -31,7 +32,13 @@ export function layerprop(selection, projection, clipid, options = {}) {
   let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let tooltip = options.tooltip ? options.tooltip : "";
 
-  const features = poly2points(geojson);
+  let features;
+
+  if (figuration(geojson) == "p") {
+    features = geojson.features;
+  } else {
+    features = poly2points(geojson);
+  }
 
   let radius = d3.scaleSqrt(
     [0, d3.max(features, (d) => +d.properties[values])],
