@@ -9,6 +9,10 @@ Promise.all([
   d3.json("../data/AUS_roads.json")
 ]).then(([AUS, AUS_ports, AUS_roads]) =>
 document.body.appendChild(
+
+// Bertin code here
 bertin.quickdraw([AUS_ports, AUS_roads, AUS])
+// --------------
+
 ));
 </script>
