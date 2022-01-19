@@ -1,0 +1,14 @@
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@0.4.2"></script>
+
+<script>
+Promise.all([
+  d3.json("../data/AUS.json"),
+  d3.json("../data/AUS_ports.json"),
+  d3.json("../data/AUS_roads.json")
+]).then(([AUS, AUS_ports, AUS_roads]) =>
+document.body.appendChild(
+bertin.quickdraw([AUS_ports, AUS_roads, AUS])
+));
+</script>
