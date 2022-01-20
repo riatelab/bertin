@@ -356,7 +356,11 @@ bertin.draw({
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b> stroke width (default:0.5)
 - <b>fillOpacity</b>: fill opacity (default:1)
-- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>fillOpacity</b>: fill opacity (default:1)
+- <b>marker_size</b>: if it is a dot layer, a number indicating the size of the symbol (default: 5)
+- <b>marker_type</b>: if it is a dot layer, the type of symbol. "circle" ou "square" (default: "circle")
+- <b>marker_shift</b>: if it is a dot layer, use a value > 0 to swith symbols and avaoid overlay (default: 0)
+- <b>marker_interation</b>: Number of iteration tu shift symbols (default: 200)
 
 Parameters of the legend
 
