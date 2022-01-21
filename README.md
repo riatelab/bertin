@@ -330,7 +330,7 @@ bertin.draw({
 
 #### Layer
 
-The *layer* type allows to display a simple geojson layer.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example](https://observablehq.com/d/d59855d7cc99f6e5?collection=@neocartocnrs/bertin)
+The *layer* type allows to display a simple geojson layer.[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example](https://observablehq.com/d/d59855d7cc99f6e5?collection=@neocartocnrs/bertin) & [Example2](https://observablehq.com/d/0adcec718b71f5e8?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -357,10 +357,10 @@ bertin.draw({
 - <b>strokeWidth</b> stroke width (default:0.5)
 - <b>fillOpacity</b>: fill opacity (default:1)
 - <b>fillOpacity</b>: fill opacity (default:1)
-- <b>marker_size</b>: if it is a dot layer, a number indicating the size of the symbol (default: 5)
-- <b>marker_type</b>: if it is a dot layer, the type of symbol. "circle" ou "square" (default: "circle")
-- <b>marker_shift</b>: if it is a dot layer, use a value > 0 to swith symbols and avaoid overlay (default: 0)
-- <b>marker_interation</b>: Number of iteration tu shift symbols (default: 200)
+- <b>symbol</b>: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
+- <b>symbol_size</b>: if it is a dot layer, a number indicating the size of the symbol (default: 5)
+- <b>symbol_shift</b>: if it is a dot layer, use a value > 0 to swith symbols and avaoid overlay (default: 0)
+- <b>symbol_interation</b>: Number of iteration tu shift symbols (default: 200)
 
 Parameters of the legend
 
