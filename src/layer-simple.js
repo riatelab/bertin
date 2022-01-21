@@ -149,7 +149,7 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        .attr("stroke", stroke)
        .attr("stroke-width", strokeWidth)
        .attr("fill-opacity", fillOpacity)
-       .attr("clip-path", `url(#clip_${clipid}`)
+       //.attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
          if (tooltip != "") {
            if (Array.isArray(tooltip)) {
