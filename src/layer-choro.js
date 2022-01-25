@@ -5,7 +5,8 @@ import * as d3array from "d3-array";
 import * as d3scalechromatic from "d3-scale-chromatic";
 const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3scale);
 import {addtooltip } from "./tooltip.js";
-import {getbreaks } from "./breaks.js";
+//import {getbreaks } from "./breaks.js";
+import * as stats from "statsbreaks";
 import {legchoro } from "./leg-choro.js";
 
 export function layerchoro(selection, projection, clipid, options = {}){
@@ -48,12 +49,7 @@ export function layerchoro(selection, projection, clipid, options = {}){
     nbreaks = 6;
   }
   if (breaks == null) {
-    breaks = getbreaks(
-      geojson.features.map((d) => +d.properties[values]),
-      method,
-      nbreaks,
-      leg_round
-    );
+    breaks = stats.breaks({ values: geojson.features.map((d) => +d.properties[values]), method: method, nb: nbreaks, precision: leg_round })
   } else {
     breaks = d3.sort(breaks);
   }

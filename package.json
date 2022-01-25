@@ -41,9 +41,8 @@
     "d3": "^7.1.1",
     "d3-geo-projection": "^4.0.0",
     "d3-geo-scale-bar": "^1.1.1",
-    "jenks": "^1.0.3",
     "proj4": "^2.7.5",
-    "proj4js": "^10.0.0",
+    "statsbreaks": "^0.1.2",
     "topojson-client": "^3.1.0",
     "topojson-server": "^3.0.1"
   },
