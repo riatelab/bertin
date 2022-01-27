@@ -150,11 +150,11 @@ export function layerspikes(selection, projection, clipid, options = {}) {
       .attr("stroke-width", strokeWidth)
       .attr("fill-opacity", fillOpacity)
       .attr(
-        "transform",
-        (d, i) =>
-          `translate(${w / 2 + (w + 5) * i},${
-            k + (leg_title.split("\n").length + 1) * leg_fontSize
-          })`
+            "transform",
+            (d, i) =>
+              `translate(${leg_x + w / 2 + (w + 5) * i},${
+                leg_y + k + (leg_title.split("\n").length + 1) * leg_fontSize
+              })`
       );
 
     leg
@@ -165,14 +165,15 @@ export function layerspikes(selection, projection, clipid, options = {}) {
       .attr("text-anchor", "start")
       .attr("alignment-baseline", "middle")
       .attr(
-        "transform",
-        (d, i) =>
-          `translate(${w / 2 + (w + 5) * i},${
-            k +
-            (leg_title.split("\n").length + 1) * leg_fontSize +
-            leg_fontSize2 / 2
-          }) rotate(90)`
-      )
+          "transform",
+          (d, i) =>
+            `translate(${leg_x + w / 2 + (w + 5) * i},${
+              leg_y +
+              k +
+              (leg_title.split("\n").length + 1) * leg_fontSize +
+              leg_fontSize2 / 2
+            }) rotate(90)`
+        )
       .attr("font-size", `${leg_fontSize2}px`)
       .attr("fill", leg_txtcol)
       .text((d) => rounding(d, leg_round));

@@ -21,6 +21,7 @@ import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
 import { addtext } from "./text.js";
 import { layerlabel } from "./layer-label.js";
+import { layerspikes } from "./layer-spikes.js";
 import { layerdorling } from "./layer-dorling.js";
 import { proj4d3 } from "./proj4d3.js";
 
@@ -189,6 +190,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     leg_strokeWidth: layer.leg_strokeWidth,
     leg_txtcol: layer.leg_txtcol,
     leg_round:layer.leg_round
+  });
 }
 
     // typo layers
