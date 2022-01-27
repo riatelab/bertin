@@ -166,8 +166,8 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     // spikes layers
 
-    if (layer.type == "layer") {
-    layerspikese(svg, projection, clipid, {
+    if (layer.type == "spikes") {
+    layerspikes(svg, projection, clipid, {
     geojson: layer.geojson,
     values: layer.values,
     k: layer.k,
