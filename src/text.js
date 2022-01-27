@@ -5,7 +5,11 @@ export function addtext(selection, width, height, options = {}){
   let position = options.position ? options.position : "topright";
     let text = options.text ? options.text : "Your text here!";
     let fontSize = options.fontSize ? options.fontSize : 15;
+    let fontFamily = options.fontFamily ? options.fontFamily : "Robotto";
     let margin = options.margin ? options.margin : 0;
+    let textDecoration = options.textDecoration ? options.textDecoration : "none";
+    let fontWeight = options.fontWeight ? options.fontWeight : "normal";
+    let fontStyle = options.fontStyle ? options.fontStyle : "normal"
     let anchor = options.anchor ? options.anchor : "start"; // start, middle, end
     let baseline = options.baseline ? options.baseline : "baseline"; // baseline, middle, hanging
     let fill = options.fill ? options.fill : "#474342";
@@ -90,6 +94,10 @@ export function addtext(selection, width, height, options = {}){
     let tmp = selection
       .append("text")
       .attr("font-size", `${fontSize}px`)
+      .attr("font-family", fontFamily)
+      .attr("font-style", fontStyle)
+      .attr("text-decoration", textDecoration)
+      .attr("font-weight", fontWeight)
       .text(txt[i]);
     selection.node().appendChild(tmp.node());
     document.body.appendChild(selection.node());
@@ -154,6 +162,10 @@ export function addtext(selection, width, height, options = {}){
       .attr("x", x + margin_x)
       .attr("y", y - +delta + margin_y)
       .attr("font-size", `${fontSize}px`)
+      .attr("font-style", fontStyle)
+      .attr("text-decoration", textDecoration)
+      .attr("font-weight", fontWeight)
+      .attr("font-family", fontFamily)
       .attr("dy", (d, i) => i * fontSize)
       .attr("text-anchor", anchor)
       .attr("alignment-baseline", "hanging")

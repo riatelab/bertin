@@ -304,6 +304,10 @@ if (layer.type == "label") {
         fill: layer.fill,
         stroke: layer.stroke,
         fontSize: layer.fontSize,
+        fontFamily: layer.fontFamily,
+        textDecoration: layer.textDecoration,
+        fontWeight: layer.fontWeight,
+        fontStyle: layer.fontStyle,
         margin: layer.margin,
         anchor: layer.anchor, // start, middle, end
         baseline: layer.baseline, // baseline, middle, hanging
