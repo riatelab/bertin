@@ -12,7 +12,7 @@ import { layersimple } from "./layer-simple.js";
 import { layerprop } from "./layer-prop.js";
 import { layertypo } from "./layer-typo.js";
 import { layerchoro } from "./layer-choro.js";
-import {layermashroom} from "./layer-mashroom.js";
+import {layermushroom} from "./layer-mushroom.js";
 import { layermissing } from "./layer-missing.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
@@ -220,10 +220,10 @@ export function draw({ params = {}, layers = {} } = {}) {
       });
     }
 
-    // mashroom layer
+    // mushroom layer
 
-    if (layer.type == "mashroom") {
-      layermashroom(svg, projection, clipid, {
+    if (layer.type == "mushroom") {
+      layermushroom(svg, projection, clipid, {
         geojson: layer.geojson,
         top_values: layer.top_values,
         bottom_values: layer.bottom_values,

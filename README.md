@@ -380,9 +380,9 @@ Parameters of the legend
 
 </details>
 
-#### Mashroom
+#### Mushroom
 
-The *mashroom* type is used to draw a map with 2 supperposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mashroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
+The *mushroom* type is used to draw a map with 2 supperposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mushroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -390,7 +390,7 @@ The *mashroom* type is used to draw a map with 2 supperposed proportional semi-c
   bertin.draw({
     layers: [
       {
-        type: "mashroom",
+        type: "mushroom",
         geojson: mygeojson,
         top_values: "gdp_pct",
         bottom_values: "pop_pct",
