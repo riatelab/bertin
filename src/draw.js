@@ -164,6 +164,33 @@ export function draw({ params = {}, layers = {} } = {}) {
       });
     }
 
+    // spikes layers
+
+    if (layer.type == "layer") {
+    layerspikese(svg, projection, clipid, {
+    geojson: layer.geojson,
+    values: layer.values,
+    k: layer.k,
+    w: layer.w,
+    fill: layer.fill,
+    stroke: layer.stroke,
+    strokeWidth: layer.strokeWidth,
+    fillOpacity: layer.fillOpacity,
+    tooltip: layer.tooltip,
+    leg_x: layer.leg_x,
+    leg_y: layer.leg_y,
+    leg_w: layer.leg_w,
+    leg_h: layer.leg_h,
+    leg_title: layer.leg_title,
+    leg_fontSize: layer.leg_fontSize,
+    leg_fontSize2: layer.leg_fontSize2,
+    leg_stroke: layer.leg_stroke,
+    leg_fillOpacity: layer.leg_fillOpacity,
+    leg_strokeWidth: layer.leg_strokeWidth,
+    leg_txtcol: layer.leg_txtcol,
+    leg_round:layer.leg_round
+}
+
     // typo layers
     if (layer.type == "typo") {
       layertypo(svg, projection, clipid, {
