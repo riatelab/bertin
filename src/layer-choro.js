@@ -54,8 +54,6 @@ export function layerchoro(selection, projection, clipid, options = {}){
     breaks = d3.sort(breaks);
   }
 
-  console.log(breaks);
-
   // colors
   if (colors == null) {
     colors = d3[`scheme${pal}`][nbreaks];
