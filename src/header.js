@@ -52,7 +52,7 @@ export function addheader(selection, width, options = {}) {
     .data(options.text.split("\n"))
     .join("text")
     .attr("x", x)
-    .attr("y", -delta + fontsize / 2) // because alignment-baseline not implemented on Firefox
+    .attr("y", -delta + fontSize / 2) // because alignment-baseline not implemented on Firefox
     //.attr("y", -delta - 5) // better but don't work with Forefox
     .attr("font-size", `${fontSize}px`)
     .attr("dy", (d, i) => i * fontSize)
