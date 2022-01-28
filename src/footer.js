@@ -52,12 +52,13 @@ export function addfooter(selection, width, height, options = {}) {
     .data(options.text.split("\n"))
     .join("text")
     .attr("x", x)
-    .attr("y", height + 5)
-    //.attr("y", height + delta + 5)
+    .attr("y", height + fontSize / 2 + 8) // because alignment-baseline not implemented on Firefox
+    //.attr("y", height + 5) better but don't work with Forefox
+    //.attr("y", height + delta + 5) // better but don't work with Forefox
     .attr("font-size", `${fontSize}px`)
     .attr("dy", (d, i) => i * fontSize)
     .attr("text-anchor", anchor)
-    .attr("alignment-baseline", "hanging")
+    //.attr("alignment-baseline", "hanging")// better but don't work with Forefox
     .attr("fill", fill)
     .attr("font-family", "sans-serif")
     .attr("fill-opacity", 1)

@@ -160,7 +160,8 @@ export function addtext(selection, width, height, options = {}){
       .data(txt)
       .join("text")
       .attr("x", x + margin_x)
-      .attr("y", y - +delta + margin_y)
+      //.attr("y", y - +delta + margin_y) // better but don't work with Forefox
+      .attr("y", y - +delta + margin_y + (fontsize * 3) / 4) // because alignment-baseline not implemented on Firefox
       .attr("font-size", `${fontSize}px`)
       .attr("font-style", fontStyle)
       .attr("text-decoration", textDecoration)
@@ -168,7 +169,7 @@ export function addtext(selection, width, height, options = {}){
       .attr("font-family", fontFamily)
       .attr("dy", (d, i) => i * fontSize)
       .attr("text-anchor", anchor)
-      .attr("alignment-baseline", "hanging")
+      //.attr("alignment-baseline", "hanging") // better but don't work with Forefox
       .attr("fill", fill)
       .attr("stroke", stroke)
       .text((d) => d);
