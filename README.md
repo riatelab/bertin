@@ -677,7 +677,6 @@ bertin.draw({
       text: "This is my text",
       position: "bottomright",
       fontSize: 20,
-      baseline: "middle",
       frame_stroke: "red",
       margin: 4
     }
@@ -698,7 +697,6 @@ bertin.draw({
 - <b>fontStyle</b>: font style. "normal", "italic", "oblique" (default: "normal")
 - <b>margin</b>: margin around the text (default: 0)
 - <b>anchor</b>: text anchor. start, middle, end (default: "start")
-- <b>baseline</b>: alignment baseline. "baseline", "middle", "hanging" (default:"hanging")
 - <b>fill</b>: text color (default: "#474342")
 - <b>stroke</b>: stroke color (default: "none")
 - <b>frame_fill</b>: frame background color (default:"none")
