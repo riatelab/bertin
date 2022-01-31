@@ -10,6 +10,7 @@ import { addfooter } from "./footer.js";
 import { addheader } from "./header.js";
 import { layersimple } from "./layer-simple.js";
 import { layerprop } from "./layer-prop.js";
+import { bubble } from "./layer-bubble.js";
 import { layertypo } from "./layer-typo.js";
 import { layerchoro } from "./layer-choro.js";
 import {layermushroom} from "./layer-mushroom.js";
@@ -362,6 +363,33 @@ if (layer.type == "label") {
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
         fillOpacity: layer.fillOpacity,
+        tooltip: layer.tooltip,
+        leg_x: layer.leg_x,
+        leg_y: layer.leg_y,
+        leg_stroke: layer.leg_stroke,
+        leg_fill: layer.leg_fill,
+        leg_strokeWidth: layer.leg_strokeWidth,
+        leg_txtcol: layer.leg_txtcol,
+        leg_title: layer.leg_title,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
+        leg_round: layer.leg_round
+      });
+    }
+
+    // Bubbles
+
+    if (layer.type == "bubble") {
+      layerprop(svg, projection, clipid, {
+        geojson: layer.geojson,
+        values: layer.values,
+        k: layer.k,
+        fill: layer.fill,
+        stroke: layer.stroke,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
+        dorling:layer.dorling,
+        interation:layer.interation,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
