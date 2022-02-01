@@ -54,8 +54,12 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        .data(geojson.features)
        .join("path")
        .attr("d", d3.geoPath(projection))
-       .attr("fill", fill)
-       .attr("stroke", stroke)
+       .attr("fill", (d) =>
+             chorotypo(geojson, fill).getcol(d.properties[fill.values])
+           )
+           .attr("stroke", (d) =>
+             chorotypo(geojson, stroke).getcol(d.properties[stroke.values])
+           )
        .attr("stroke-width", strokeWidth)
        .attr("fill-opacity", fillOpacity)
        .attr("clip-path", `url(#clip_${clipid}`)
@@ -145,8 +149,12 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        ${symbol_shift ? d.x : projection(d.geometry.coordinates)[0]},
        ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`
        )
-       .attr("fill", fill)
-       .attr("stroke", stroke)
+       .attr("fill", (d) =>
+             chorotypo(geojson, fill).getcol(d.properties[fill.values])
+           )
+           .attr("stroke", (d) =>
+             chorotypo(geojson, stroke).getcol(d.properties[stroke.values])
+           )
        .attr("stroke-width", strokeWidth)
        .attr("fill-opacity", fillOpacity)
        //.attr("clip-path", `url(#clip_${clipid}`)
