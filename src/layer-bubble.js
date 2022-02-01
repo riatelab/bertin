@@ -31,8 +31,8 @@ export function bubble(selection, projection, clipid, options = {}){
     ? options.fill
     : cols[Math.floor(Math.random() * cols.length)];
   let stroke = options.stroke ? options.stroke : "white";
-  let strokewidth = options.strokewidth ? options.strokewidth : 0.5;
-  let fillopacity = options.fillopacity ? options.fillopacity : 1;
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let dorling = options.dorling ? options.dorling : false;
   let interation = options.interation ? options.interation : 200;
   let tooltip = options.tooltip ? options.tooltip : "";
@@ -66,7 +66,7 @@ export function bubble(selection, projection, clipid, options = {}){
       )
       .force(
         "collide",
-        d3.forceCollide((d) => radius(d.properties[values]) + strokewidth / 2)
+        d3.forceCollide((d) => radius(d.properties[values]) + strokeWidth / 2)
       );
 
     for (let i = 0; i < interation; i++) {
@@ -94,12 +94,43 @@ export function bubble(selection, projection, clipid, options = {}){
     .attr("stroke", (d) =>
       chorotypo(geojson, stroke).getcol(d.properties[stroke.values])
     )
-    .attr("stroke-width", strokewidth)
-    .attr("fill-opacity", fillopacity)
+    .attr("stroke-width", strokeWidth)
+    .attr("fill-opacity", fillOpacity)
     .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
     .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
     .attr("r", (d) => radius(d.properties[values]))
-    .attr("clip-path", `url(#clip_${clipid}_rectangle)`);
+    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)    .on("touchmove mousemove", function (event, d) {
+          if (tooltip != "") {
+            if (Array.isArray(tooltip)) {
+              selection
+                .select("#info")
+                .call(
+                  addtooltip,
+                  `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
+                    tooltip[2]
+                  }`
+                );
+            } else {
+              selection
+                .select("#info")
+                .call(addtooltip, `${d.properties[tooltip]}`);
+            }
+          }
+          if (tooltip != "") {
+            selection
+              .select("#info")
+              .attr("transform", `translate(${d3.pointer(event, this)})`);
+            d3.select(this)
+              .attr("stroke-width", strokeWidth + 0.5)
+              .attr("fill-opacity", fillOpacity - 0.3);
+          }
+        })
+        .on("touchend mouseleave", function () {
+          selection.select("#info").call(addtooltip, null);
+          d3.select(this)
+            .attr("stroke-width", strokeWidth)
+            .attr("fill-opacity", fillOpacity);
+        });
 
   // legend (classes)
 
@@ -139,6 +170,42 @@ export function bubble(selection, projection, clipid, options = {}){
     });
   }
 
+  if (typeof fill == "object" && fill.type == "typo") {
+    legtypo(selection, {
+      x: fill.leg_x,
+      y: fill.leg_y,
+      w: fill.leg_w,
+      h: fill.leg_h,
+      stroke: fill.leg_stroke,
+      fillOpacity: fill.leg_fillOpacity,
+      strokeWidth: fill.leg_strokeWidth,
+      txtcol: fill.leg_txtcol,
+      title: fill.leg_title ? fill.leg_title : fill.values,
+      fontSize: fill.leg_fontSize,
+      fontSize2: fill.leg_fontSize2,
+      types: chorotypo(geojson, fill).types,
+      colors: chorotypo(geojson, fill).colors
+    });
+  }
+
+  if (typeof stroke == "object" && fill.type == "stroke") {
+    legtypo(selection, {
+      x: stroke.leg_x,
+      y: stroke.leg_y,
+      w: stroke.leg_w,
+      h: stroke.leg_h,
+      stroke: stroke.leg_stroke,
+      fillOpacity: stroke.leg_fillOpacity,
+      strokeWidth: stroke.leg_strokeWidth,
+      txtcol: stroke.leg_txtcol,
+      title: stroke.leg_title ? fill.leg_title : fill.values,
+      fontSize: stroke.leg_fontSize,
+      fontSize2: stroke.leg_fontSize2,
+      types: chorotypo(geojson, stroke).types,
+      colors: chorotypo(geojson, stroke).colors
+    });
+  }
+
   // Legend (circles)
   let array = features.map((d) => +d.properties[values]);
   let legval = [
@@ -152,7 +219,7 @@ export function bubble(selection, projection, clipid, options = {}){
   legcircles(selection, {
     x: options.leg_x,
     y: options.leg_y,
-    round: options.leg_round,
+    round: options.leg_round !== undefined ? options.leg_round : undefined,
     k: k,
     stroke: options.leg_stroke,
     fill: options.leg_fill,

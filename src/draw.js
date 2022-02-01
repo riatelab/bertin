@@ -380,7 +380,7 @@ if (layer.type == "label") {
     // Bubbles
 
     if (layer.type == "bubble") {
-      layerprop(svg, projection, clipid, {
+      bubble(svg, projection, clipid, {
         geojson: layer.geojson,
         values: layer.values,
         k: layer.k,
@@ -388,8 +388,8 @@ if (layer.type == "label") {
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
         fillOpacity: layer.fillOpacity,
-        dorling:layer.dorling,
-        interation:layer.interation,
+        dorling: layer.dorling,
+        interation: layer.interation,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,

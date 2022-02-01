@@ -1,7 +1,8 @@
 import * as d3scalechromatic from "d3-scale-chromatic";
 import * as d3array from "d3-array";
-const d3 = Object.assign({}, d3scalechromatic, d3array);
-import * as stats from "statsbreaks";
+import * as d3scale from "d3-scale";
+const d3 = Object.assign({}, d3scalechromatic, d3scale, d3array);
+import * as stat from "statsbreaks";
 
 export function chorotypo(geojson, input){
   if (typeof input == "string")

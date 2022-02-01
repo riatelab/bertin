@@ -1,6 +1,8 @@
 import * as d3selection from "d3-selection";
 import * as d3scale from "d3-scale";
 import * as d3array from "d3-array";
+import {rounding } from "./rounding.js";
+
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
@@ -111,6 +113,6 @@ export function legcircles(selection, options = {}) {
       .attr("font-size", fontSize2)
       .attr("alignment-baseline", "central")
       .attr("fill", txtcol)
-      .text((d) => (round !== undefined || round !== 0 ? d.toFixed(round) : d));
+      .text((d) => rounding(d, round));
   }
 }
