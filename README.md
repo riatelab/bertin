@@ -888,9 +888,9 @@ const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
 
 </details>
 
-#### Talble2geo
+#### Table2geo
 
-*talble2geo* is a function to convert a data table with lat/lon fileds to a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/talble2geo.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
+*table2geo* is a function to convert a data table with lat/lon fileds to a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/table2geo.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
