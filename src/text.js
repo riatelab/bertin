@@ -160,7 +160,7 @@ export function addtext(selection, width, height, options = {}){
       .data(txt)
       .join("text")
       .attr("x", x + margin_x)
-      .attr("y", y - margin - delta + margin_y + fontsize)
+      .attr("y", y - margin - delta + margin_y + fontSize)
       .attr("font-size", `${fontSize}px`)
       .attr("font-style", fontStyle)
       .attr("text-decoration", textDecoration)
