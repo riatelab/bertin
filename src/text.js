@@ -140,12 +140,6 @@ export function addtext(selection, width, height, options = {}){
       .attr("id", "note")
       .attr(":inkscape:label", "note");
 
-    // l.append("circle")
-    //   .attr("cx", x)
-    //   .attr("cy", y)
-    //   .attr("r", 2)
-    //   .attr("fill", "#5277bf");
-
     l.append("rect")
       .attr("x", x - margin - delta2 + margin_x)
       .attr("y", y - margin - delta + margin_y)
@@ -160,7 +154,7 @@ export function addtext(selection, width, height, options = {}){
       .data(txt)
       .join("text")
       .attr("x", x + margin_x)
-      .attr("y", y - margin - delta + margin_y + fontSize)
+      .attr("y", y - +delta + margin_y)
       .attr("font-size", `${fontSize}px`)
       .attr("font-style", fontStyle)
       .attr("text-decoration", textDecoration)
@@ -168,6 +162,7 @@ export function addtext(selection, width, height, options = {}){
       .attr("font-family", fontFamily)
       .attr("dy", (d, i) => i * fontSize)
       .attr("text-anchor", anchor)
+      .attr("dominant-baseline", "hanging")
       .attr("fill", fill)
       .attr("stroke", stroke)
       .text((d) => d);

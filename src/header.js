@@ -52,12 +52,11 @@ export function addheader(selection, width, options = {}) {
     .data(options.text.split("\n"))
     .join("text")
     .attr("x", x)
-    .attr("y", -delta + fontSize / 2) // because alignment-baseline not implemented on Firefox
-    //.attr("y", -delta - 5) // better but don't work with Forefox
+    .attr("y", -delta - 5)
     .attr("font-size", `${fontSize}px`)
     .attr("dy", (d, i) => i * fontSize)
     .attr("text-anchor", anchor)
-    //.attr("alignment-baseline", "hanging") // better but don't work with Forefox
+    .attr("dominant-baseline", "hanging")
     .attr("fill", fill)
     .attr("font-family", "sans-serif")
     .attr("font-weight", "bold")

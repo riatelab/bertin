@@ -34,6 +34,6 @@ export function layerlabel(selection, projection, clipid, options = {}){
     .attr("text-decoration", textDecoration)
     .attr("font-weight", fontWeight)
     .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle")
+    .attr("dominant-baseline", "middle")
     .text((d) => d.properties[values]);
 }
