@@ -24,6 +24,7 @@ import { addtext } from "./text.js";
 import { layerlabel } from "./layer-label.js";
 import { layerspikes } from "./layer-spikes.js";
 import { layerdorling } from "./layer-dorling.js";
+import { dotscartogram } from "./layer-dotscartogram.js";
 import { proj4d3 } from "./proj4d3.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
@@ -139,7 +140,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     }
 
     // simple layers
-    if (layer.type == "layer") {
+    if (layer.type == "layer" || layer.type == "simple" || layer.type == undefined) {
       layersimple(svg, projection, clipid, layer.geojson, {
         fill: layer.fill,
         stroke: layer.stroke,
@@ -374,6 +375,24 @@ if (layer.type == "label") {
         leg_fontSize: layer.leg_fontSize,
         leg_fontSize2: layer.leg_fontSize2,
         leg_round: layer.leg_round
+      });
+    }
+
+    // Dots cartogram
+
+    if (layer.type == "dotscartogram") {
+      dotscartogram(svg, projection, clipid, {
+        geojson: layer.geojson,
+        values: layer.values,
+        radius: layer.radius,
+        onedot: layer.onedot,
+        span: layer.span,
+        fill: layer.fill,
+        stroke: layer.stroke,
+        strokeWidth: layer.strokeWidth,
+        fillOpacity: layer.fillOpacity,
+        iteration: layer.iteration,
+        tooltip: layer.tooltip,
       });
     }
 

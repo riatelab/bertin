@@ -102,7 +102,7 @@ export function bubble(selection, projection, clipid, options = {}){
     .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
     .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
     .attr("r", (d) => radius(d.properties[values]))
-    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
+  //  .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
     .on("touchmove mousemove", function (event, d) {
           if (tooltip != "") {
             if (Array.isArray(tooltip)) {
