@@ -134,7 +134,7 @@ export function layerspikes(selection, projection, clipid, options = {}) {
         .attr("font-size", `${leg_fontSize}px`)
         .attr("dy", (d, i) => i * leg_fontSize)
         .attr("text-anchor", "start")
-        .attr("alignment-baseline", "hanging")
+        .attr("dominant-baseline", "hanging")
         .attr("fill", leg_txtcol)
         .text((d) => d);
     }
@@ -163,7 +163,7 @@ export function layerspikes(selection, projection, clipid, options = {}) {
       .data(legval.sort(d3.descending))
       .join("text")
       .attr("text-anchor", "start")
-      .attr("alignment-baseline", "middle")
+      .attr("dominant-baseline", "middle")
       .attr(
           "transform",
           (d, i) =>

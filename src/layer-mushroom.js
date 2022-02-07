@@ -266,7 +266,7 @@ export function layermushroom(selection, projection, clipid, options = {}) {
           radius(d)
       )
       .attr("font-size", leg_fontSize2)
-      .attr("alignment-baseline", "central")
+      .attr("dominant-baseline", "central")
       .attr("fill", leg_txtcol)
       .text((d) =>
         leg_round !== undefined || leg_round !== 0 ? d.toFixed(leg_round) : d
@@ -365,7 +365,7 @@ export function layermushroom(selection, projection, clipid, options = {}) {
           radius(d)
       )
       .attr("font-size", leg_fontSize2)
-      .attr("alignment-baseline", "central")
+      .attr("dominant-baseline", "central")
       .attr("fill", leg_txtcol)
       .text((d) =>
         leg_round !== undefined || leg_round !== 0 ? d.toFixed(leg_round) : d
@@ -420,7 +420,7 @@ export function layermushroom(selection, projection, clipid, options = {}) {
       .attr("font-size", `${leg_fontSize}px`)
       .attr("dy", (d, i) => i * leg_fontSize)
       .attr("text-anchor", "start")
-      .attr("alignment-baseline", "hanging")
+      .attr("dominant-baseline", "hanging")
       .attr("fill", leg_txtcol)
       .text((d) => d);
 
@@ -438,7 +438,7 @@ export function layermushroom(selection, projection, clipid, options = {}) {
       .attr("fill", leg_txtcol)
       .attr("font-size", `${leg_fontSize2}px`)
       .attr("text-anchor", "middle")
-      .attr("alignment-baseline", "hanging");
+      .attr("dominant-baseline", "hanging");
 
     leg
       .append("text")
@@ -455,6 +455,6 @@ export function layermushroom(selection, projection, clipid, options = {}) {
       .attr("fill", leg_txtcol)
       .attr("font-size", `${leg_fontSize2}px`)
       .attr("text-anchor", "middle")
-      .attr("alignment-baseline", "baseline");
+      .attr("dominant-baseline", "baseline");
   }
 }

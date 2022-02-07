@@ -90,7 +90,7 @@ export function legcircles(selection, options = {}) {
       .attr("font-size", `${fontSize}px`)
       .attr("dy", (d, i) => i * fontSize)
       .attr("text-anchor", "start")
-      .attr("alignment-baseline", "hanging")
+      .attr("dominant-baseline", "hanging")
       .attr("fill", txtcol)
       .text((d) => d);
 
@@ -111,7 +111,7 @@ export function legcircles(selection, options = {}) {
           (title.split("\n").length + 1) * fontSize
       )
       .attr("font-size", fontSize2)
-      .attr("alignment-baseline", "central")
+      .attr("dominant-baseline", "central")
       .attr("fill", txtcol)
       .text((d) => rounding(d, round));
   }

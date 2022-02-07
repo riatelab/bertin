@@ -42,7 +42,7 @@ export function legtypo(selection, options = {}) {
         .attr("font-size", `${fontSize}px`)
         .attr("dy", (d, i) => i * fontSize)
         .attr("text-anchor", "start")
-        .attr("alignment-baseline", "hanging")
+        .attr("dominant-baseline", "hanging")
         .attr("fill", txtcol)
         .text((d) => d);
     }
@@ -70,7 +70,7 @@ export function legtypo(selection, options = {}) {
       .attr("font-size", `${fontSize2}px`)
       .attr("dy", (d, i) => (h + span) * i)
       .attr("text-anchor", "start")
-      .attr("alignment-baseline", "central")
+      .attr("dominant-baseline", "central")
       .text((d) => d);
   }
 }

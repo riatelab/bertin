@@ -299,6 +299,7 @@ The *bubble* type is used to draw a map by proportional circles. [Source](https:
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
 - <b>k</b>: size of the largest circle (defaul:50)
+- <b>fixmax</b>: Max value to fix the size of the biggest circle, in order to make maps comparable (defaul:undefined)
 - <b>fill</b>: fill color (default: random color)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: stroke width (default: 0.5)

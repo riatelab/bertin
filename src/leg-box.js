@@ -33,7 +33,7 @@ export function legbox(selection, options = {}){
         .attr("font-size", `${fontSize}px`)
         .attr("dy", (d, i) => i * fontSize)
         .attr("text-anchor", "start")
-        .attr("alignment-baseline", "hanging")
+        .attr("dominant-baseline", "hanging")
         .attr("fill", txtcol)
         .text((d) => d);
     }
@@ -59,7 +59,7 @@ export function legbox(selection, options = {}){
       .attr("dy", (d, i) => i * fontSize2)
       .attr("fill", txtcol)
       .attr("text-anchor", "start")
-      .attr("alignment-baseline", "hanging")
+      .attr("dominant-baseline", "hanging")
       .text((d) => d);
 
     // leg

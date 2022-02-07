@@ -110,7 +110,7 @@ export function match(geojson, id_geojson, data, id_data) {
     .attr("x", w - scale(ids_data.length) + scale(intersection.length) / 2)
     .attr("y", h / 2 + 3)
     .attr("text-anchor", "middle")
-    .attr("alignment-baseline", "middle")
+    .attr("dominant-baseline", "middle")
     .text(`${Math.round((intersection.length / all.length) * 100)}%`)
     .attr("font-size", 40)
     .attr("fill", "black");
@@ -120,7 +120,7 @@ export function match(geojson, id_geojson, data, id_data) {
     .attr("x", w - scale(ids_data.length) + 5)
     .attr("y", delta + 7)
     .attr("text-anchor", "start")
-    .attr("alignment-baseline", "hanging")
+    .attr("dominant-baseline", "hanging")
     .text(`Matched geom`)
     .attr("font-size", 12)
     .attr("fill", "black");
@@ -131,7 +131,7 @@ export function match(geojson, id_geojson, data, id_data) {
     .attr("x", w - scale(ids_data.length) + 5)
     .attr("y", h - delta - 8)
     .attr("text-anchor", "start")
-    .attr("alignment-baseline", "baseline")
+    .attr("dominant-baseline", "baseline")
     .text(`${intersection.length}/${ids_geojson.length}`)
     .attr("font-size", 14)
     .attr("fill", "black");
@@ -141,7 +141,7 @@ export function match(geojson, id_geojson, data, id_data) {
     .attr("x", w - scale(difference2.length) - 5)
     .attr("y", delta + 7)
     .attr("text-anchor", "end")
-    .attr("alignment-baseline", "hanging")
+    .attr("dominant-baseline", "hanging")
     .text(`Matched data`)
     .attr("font-size", 12)
     //.attr("font-weight", "bold")
@@ -152,7 +152,7 @@ export function match(geojson, id_geojson, data, id_data) {
     .attr("x", w - scale(difference2.length) - 5)
     .attr("y", h - delta - 8)
     .attr("text-anchor", "end")
-    .attr("alignment-baseline", "baseline")
+    .attr("dominant-baseline", "baseline")
     .text(`${intersection.length}/${ids_data.length}`)
     .attr("font-size", 14)
     .attr("fill", "black");

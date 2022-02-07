@@ -384,6 +384,7 @@ if (layer.type == "label") {
         geojson: layer.geojson,
         values: layer.values,
         k: layer.k,
+        fixmax: layer.fixmax,
         fill: layer.fill,
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,

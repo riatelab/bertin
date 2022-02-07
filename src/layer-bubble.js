@@ -26,6 +26,7 @@ export function bubble(selection, projection, clipid, options = {}){
   ];
   let geojson = options.geojson;
   let values = options.values;
+  let fixmax = options.fixmax ?? undefined
   let k = options.k ? options.k : 50;
   let fill = options.fill
     ? options.fill
@@ -46,8 +47,10 @@ export function bubble(selection, projection, clipid, options = {}){
     features = poly2points(geojson);
   }
 
+  const valvax = fixmax != undefined ? fixmax : d3.max(features, (d) => Math.abs(+d.properties[values]))
   let radius = d3.scaleSqrt(
-    [0, d3.max(features, (d) => +d.properties[values])],
+    [0, valvax],
+    //[0, d3.max(features, (d) => +d.properties[values])],
     [0, k]
   );
 
@@ -66,7 +69,7 @@ export function bubble(selection, projection, clipid, options = {}){
       )
       .force(
         "collide",
-        d3.forceCollide((d) => radius(d.properties[values]) + strokeWidth / 2)
+        d3.forceCollide((d) => radius(Math.abs(d.properties[values])) + strokeWidth / 2)
       );
 
     for (let i = 0; i < interation; i++) {
@@ -84,7 +87,7 @@ export function bubble(selection, projection, clipid, options = {}){
         .filter((d) => d.geometry.coordinates != undefined)
         .filter((d) => d.properties[values] != undefined)
         .sort((a, b) =>
-          d3.descending(+a.properties[values], +b.properties[values])
+          d3.descending(Math.abs(+a.properties[values]), Math.abs(+b.properties[values]))
         )
     )
     .join("circle")
@@ -99,7 +102,8 @@ export function bubble(selection, projection, clipid, options = {}){
     .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
     .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
     .attr("r", (d) => radius(d.properties[values]))
-    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)    .on("touchmove mousemove", function (event, d) {
+    .attr("clip-path", `url(#clip_${clipid}_rectangle)`)
+    .on("touchmove mousemove", function (event, d) {
           if (tooltip != "") {
             if (Array.isArray(tooltip)) {
               selection
@@ -207,7 +211,7 @@ export function bubble(selection, projection, clipid, options = {}){
   }
 
   // Legend (circles)
-  let array = features.map((d) => +d.properties[values]);
+  let array = features.map((d) => Math.abs(+d.properties[values]));
   let legval = [
     d3.min(array),
     radius.invert(k / 3),
