@@ -153,10 +153,10 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`
        )
        .attr("fill", (d) =>
-             chorotypo(geojson, fill).getcol(d.properties[fill.values] || undefined)
+             chorotypo(geojson.features, fill).getcol(d.properties[fill.values] || undefined)
            )
            .attr("stroke", (d) =>
-             chorotypo(geojson, stroke).getcol(d.properties[stroke.values] || undefined)
+             chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
            )
        .attr("stroke-width", strokeWidth)
        .attr("fill-opacity", fillOpacity)

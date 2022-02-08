@@ -4,7 +4,7 @@ import * as d3scale from "d3-scale";
 const d3 = Object.assign({}, d3scalechromatic, d3scale, d3array);
 import * as stat from "statsbreaks";
 
-export function chorotypo(geojson, input){
+export function chorotypo(features, input){
   if (typeof input == "string")
     return {
       getcol: (d) => input
@@ -26,7 +26,7 @@ export function chorotypo(geojson, input){
     }
     if (breaks == null) {
       breaks = stat.breaks({
-        values: geojson.features.map((d) => +d.properties[values]),
+        values: features.map((d) => +d.properties[values]),
         method: method,
         nb: nbreaks,
         precision: leg_round
@@ -61,7 +61,7 @@ export function chorotypo(geojson, input){
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
 
     let types = Array.from(
-      new Set(geojson.features.map((d) => d.properties[values]))
+      new Set(features.map((d) => d.properties[values]))
     );
 
     if (colors == null) {

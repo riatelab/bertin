@@ -385,6 +385,7 @@ if (layer.type == "label") {
         geojson: layer.geojson,
         values: layer.values,
         radius: layer.radius,
+        nbmax: layer.nbmax,
         onedot: layer.onedot,
         span: layer.span,
         fill: layer.fill,
@@ -393,6 +394,17 @@ if (layer.type == "label") {
         fillOpacity: layer.fillOpacity,
         iteration: layer.iteration,
         tooltip: layer.tooltip,
+        leg_x: layer.leg_x,
+        leg_y: layer.leg_y,
+        leg_title: layer.leg_title,
+        leg_fontSize: layer.leg_fontSize,
+        leg_fontSize2: layer.leg_fontSize2,
+        leg_txtcol: layer.leg_txtcol,
+        leg_stroke: layer.leg_stroke,
+        leg_strokeWidth: layer.leg_strokeWidth,
+        leg_fill: layer.leg_fill,
+        leg_txt: layer.leg_txt
+    
       });
     }
 

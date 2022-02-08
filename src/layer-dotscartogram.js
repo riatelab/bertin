@@ -15,21 +15,18 @@ export function dotscartogram(selection, projection, clipid, options = {}){
     "#66c2a5",
     "#fc8d62",
     "#8da0cb",
-    "#e78ac3",
-    "#a6d854",
-    "#ffd92f",
-    "#e5c494",
-    "#b3b3b3"
+    "#e78ac3"
   ];
 
   let geojson = options.geojson;
   let values = options.values;
   let radius = options.radius ?? 4;
-  let onedot = options.onedot ?? Math.round(d3.sum(geojson.features.map((d) => +d.properties[values])) / 500)
-  let span = options.span ?? 0
+  let nbmax = options.nbmax ?? 200
+  let onedot = options.onedot ?? Math.round(d3.sum(geojson.features.map((d) => +d.properties[values])) / nbmax)
+  let span = options.span ?? 0.5
   let fill = options.fill ?? cols[Math.floor(Math.random() * cols.length)];
-  let stroke = options.stroke ?? "white";
-  let strokeWidth = options.strokeWidth ?? 0.5;
+  let stroke = options.stroke ?? "none";
+  let strokeWidth = options.strokeWidth ?? 0;
   let fillOpacity = options.fillOpacity ?? 1;
   let tooltip = options.tooltip ?? "";
   let iteration = options.iteration ?? 200;
@@ -87,9 +84,7 @@ export function dotscartogram(selection, projection, clipid, options = {}){
       chorotypo(dots, fill).getcol(d.properties[fill.values] || undefined)
     )
     .attr("stroke", (d) =>
-      chorotypo(dots, stroke).getcol(
-        d.properties[stroke.values] || undefined
-      )
+      chorotypo(dots, stroke).getcol(d.properties[stroke.values] || undefined)
     )
     .attr("stroke-width", strokeWidth)
     .attr("fill-opacity", fillOpacity)
@@ -128,4 +123,134 @@ export function dotscartogram(selection, projection, clipid, options = {}){
               .attr("stroke-width", strokeWidth)
               .attr("fill-opacity", fillOpacity);
           });
+
+
+// legend
+
+const leg_x = options.leg_x ?? null
+const leg_y = options.leg_y ?? null
+const leg_title = options.leg_title ?? "leg_title"
+const leg_fontSize = options.leg_fontSize ?? 14
+const leg_fontSize2 = options.leg_fontSize2 ?? 10
+const leg_txtcol = options.leg_txtcol ?? "#363636"
+const leg_stroke = options.leg_stroke ?? stroke
+const leg_strokeWidth = options.leg_strokeWidth ?? strokeWidth
+const leg_fill = typeof fill == "string" ? fill : options.leg_fill
+const leg_txt = options.leg_txt ?? onedot
+
+  if (leg_x != null && leg_y != null) {
+let delta = 0
+let leg = selection.append("g");
+if (leg_title != null) {
+  delta = (leg_title.split("\n").length + 1) * leg_fontSize;
+  leg
+    .append("g")
+    .selectAll("text")
+    .data(leg_title.split("\n"))
+    .join("text")
+    .attr("x", leg_x)
+    .attr("y", leg_y)
+    .attr("font-size", `${leg_fontSize}px`)
+    .attr("dy", (d, i) => i * leg_fontSize)
+    .attr("text-anchor", "start")
+    .attr("dominant-baseline", "hanging")
+    .attr("fill", leg_txtcol)
+    .text((d) => d);
+}
+    leg
+      .append("circle")
+      .attr("r", radius)
+      .attr("fill", leg_fill)
+      .attr("stroke", leg_stroke)
+      .attr("stroke-width", leg_strokeWidth)
+      .attr("cx",leg_x + radius)
+      .attr("cy", leg_y + radius * 2 + (leg_title.split("\n").length ) * leg_fontSize)
+
+
+      leg
+        .append("text")
+        .attr("fill", leg_txtcol)
+        .attr("font-size", `${leg_fontSize2}px`)
+        .attr("dominant-baseline", "middle")
+        .attr("x",leg_x + radius * 2 + leg_fontSize2)
+        .attr("y", leg_y + radius * 2 + (leg_title.split("\n").length) * leg_fontSize)
+        .text(leg_txt)
+
+}
+
+          // legend (classes)
+
+          if (typeof fill == "object" && fill.type == "choro") {
+            legchoro(selection, {
+              x: fill.leg_x,
+              y: fill.leg_y,
+              w: fill.leg_w,
+              h: fill.leg_h,
+              stroke: fill.leg_stroke,
+              fillOpacity: fill.leg_fillOpacity,
+              strokeWidth: fill.leg_strokeWidth,
+              txtcol: fill.leg_txtcol,
+              title: fill.leg_title ? fill.leg_title : fill.values,
+              fontSize: fill.leg_fontSize,
+              fontSize2: fill.leg_fontSize2,
+              breaks: chorotypo(dots, fill).breaks,
+              colors: chorotypo(dots, fill).colors
+            });
+          }
+
+          if (typeof stroke == "object" && stroke.type == "choro") {
+            legchoro(selection, {
+              x: stroke.leg_x,
+              y: stroke.leg_y,
+              w: stroke.leg_w,
+              h: stroke.leg_h,
+              stroke: stroke.leg_stroke,
+              fillOpacity: stroke.leg_fillOpacity,
+              strokeWidth: stroke.leg_strokeWidth,
+              txtcol: stroke.leg_txtcol,
+              title: stroke.leg_title ? stroke.leg_title : stroke.values,
+              fontSize: stroke.leg_fontSize,
+              fontSize2: stroke.leg_fontSize2,
+              breaks: chorotypo(dots, stroke).breaks,
+              colors: chorotypo(dots, stroke).colors
+            });
+          }
+
+          if (typeof fill == "object" && fill.type == "typo") {
+            legtypo(selection, {
+              x: fill.leg_x,
+              y: fill.leg_y,
+              w: fill.leg_w,
+              h: fill.leg_h,
+              stroke: fill.leg_stroke,
+              fillOpacity: fill.leg_fillOpacity,
+              strokeWidth: fill.leg_strokeWidth,
+              txtcol: fill.leg_txtcol,
+              title: fill.leg_title ? fill.leg_title : fill.values,
+              fontSize: fill.leg_fontSize,
+              fontSize2: fill.leg_fontSize2,
+              types: chorotypo(dots, fill).types,
+              colors: chorotypo(dots, fill).colors
+            });
+          }
+
+          if (typeof stroke == "object" && fill.type == "stroke") {
+            legtypo(selection, {
+              x: stroke.leg_x,
+              y: stroke.leg_y,
+              w: stroke.leg_w,
+              h: stroke.leg_h,
+              stroke: stroke.leg_stroke,
+              fillOpacity: stroke.leg_fillOpacity,
+              strokeWidth: stroke.leg_strokeWidth,
+              txtcol: stroke.leg_txtcol,
+              title: stroke.leg_title ? fill.leg_title : fill.values,
+              fontSize: stroke.leg_fontSize,
+              fontSize2: stroke.leg_fontSize2,
+              types: chorotypo(dots, stroke).types,
+              colors: chorotypo(dots, stroke).colors
+            });
+          }
+
+
 }

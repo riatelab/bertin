@@ -305,7 +305,7 @@ The *bubble* type is used to draw a map by proportional circles. [Source](https:
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
 - <b>dorling</b>: a boolean (default:false)
-- <b>interation</b> an integer ti define the number of iteration for the Dorling method (default 200)
+- <b>interation</b> an integer to define the number of iteration for the Dorling method (default 200)
 - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
@@ -397,6 +397,71 @@ bertin.draw({
   ]
 })
 ~~~
+
+</details>
+
+
+#### Dots cartogram
+
+The *dotscartogram* type is a method of map representation that follows Dorling s cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map.  [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
+
+<details><summary>Code</summary>
+~~~js
+
+bertin.draw({
+  params: { projection: d3.geoBertin1953() },
+  layers: [
+    {
+      type: "dotscartogram",
+      geojson: data,
+      onedot: 200000000000,
+      iteration: 200,
+      values: "gdp",
+      radius: radius,
+      span: span,
+      leg_fill: "none",
+      leg_stroke: "black",
+      leg_strokeWidth: 1.5,
+      leg_x: 800,
+      leg_y: 450,
+      leg_title: `GDP by world region`,
+      leg_txt: "200 billion $",
+      fill: "red",
+      tooltip: ["name", "region", ""]
+    }
+  ]
+})
+~~~
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson (<ins>compulsory<ins>)
+- <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
+- <b>radius</b>: radius of dots (defaul:4)
+- <b>nbmax</b>: number max of circles on the map (defaul:200)
+- <b>onedot</b>: dot value (if onedot is filled, nbmax is useless)
+- <b>span></b>: spacing between dots (default 0.5)
+<b>fill </b>:
+- <b>fill</b>: fill color (default: random color)
+- <b>stroke</b>: stroke color (default: "white")
+- <b>strokeWidth</b>: stroke width (default: 0.5)
+- <b>fillOpacity</b>: fill opacity (default: 1)
+- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>interation</b> an integer to define the number of iteration for the Dorling method (default 200)
+
+Parameters of the legend
+
+- <b>leg_x</b>: position in x (if this value is not filled, the legend is not displayed)
+- <b>leg_y</b>: position in y (if this value is not filled, the legend is not displayed)
+- <b>leg_fill</b>: color of the circles (default: "none")
+- <b>leg_stroke</b>: stroke of the circles (default: "black")
+- <b>leg_strokeWidth</b>: stoke-width (default: 0.8)
+- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_title</b>: title of the legend (default var_data)
+- <b>leg_txt</b>: text in the legend (default onedot value)
+- <b>leg_fontSize</b>: title legend font size (default: 14)
+- <b>leg_fontSize2</b>: text font size (default: 10)
 
 </details>
 

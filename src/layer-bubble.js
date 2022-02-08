@@ -92,10 +92,10 @@ export function bubble(selection, projection, clipid, options = {}){
     )
     .join("circle")
     .attr("fill", (d) =>
-      chorotypo(geojson, fill).getcol(d.properties[fill.values] || undefined)
+      chorotypo(features, fill).getcol(d.properties[fill.values] || undefined)
     )
     .attr("stroke", (d) =>
-      chorotypo(geojson, stroke).getcol(d.properties[stroke.values] || undefined)
+      chorotypo(features, stroke).getcol(d.properties[stroke.values] || undefined)
     )
     .attr("stroke-width", strokeWidth)
     .attr("fill-opacity", fillOpacity)
