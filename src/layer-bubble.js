@@ -214,17 +214,22 @@ export function bubble(selection, projection, clipid, options = {}){
   let array = features.map((d) => Math.abs(+d.properties[values]));
   let legval = [
     d3.min(array),
-    radius.invert(k / 3),
-    radius.invert(k / 1.5),
-    //radius.invert(k / 3),
+    radius.invert(radius(d3.max(array)) / 3),
+    radius.invert(radius(d3.max(array)) / 1.5),
     d3.max(array)
   ];
+
+
+
+
+
 
   legcircles(selection, {
     x: options.leg_x,
     y: options.leg_y,
     round: options.leg_round !== undefined ? options.leg_round : undefined,
     k: k,
+    fixmax:fixmax,
     stroke: options.leg_stroke,
     fill: options.leg_fill,
     strokeWidth: options.leg_strokeWidth,

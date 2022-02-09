@@ -21,9 +21,18 @@ export function legcircles(selection, options = {}) {
 (units)`;
   let fontSize = options.fontSize ? options.fontSize : 14;
   let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
-  let round = options.round ? options.round : undefined;
+  let round = options.round ?? undefined;
+  let fixmax = options.fixmax
 
-  let radius = d3.scaleSqrt([0, d3.max(values)], [0, k]);
+  const valvax = fixmax != undefined ? fixmax : d3.max(values)
+  let radius = d3.scaleSqrt(
+    [0, valvax],
+    //[0, d3.max(features, (d) => +d.properties[values])],
+    [0, k]
+  );
+
+
+  //let radius = d3.scaleSqrt([0, d3.max(values)], [0, k]);
   let rmax = radius(d3.max(values));
 
   if (x != null && y != null) {
