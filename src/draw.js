@@ -148,7 +148,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         fillOpacity: layer.fillOpacity,
         symbol: layer.symbol,
         symbol_size: layer.symbol_size,
-        symbol_interation: layer.symbol_interation,
+        symbol_iteration: layer.symbol_iteration,
         symbol_shift: layer.symbol_shift,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
@@ -404,7 +404,7 @@ if (layer.type == "label") {
         leg_strokeWidth: layer.leg_strokeWidth,
         leg_fill: layer.leg_fill,
         leg_txt: layer.leg_txt
-    
+
       });
     }
 
@@ -421,7 +421,7 @@ if (layer.type == "label") {
         strokeWidth: layer.strokeWidth,
         fillOpacity: layer.fillOpacity,
         dorling: layer.dorling,
-        interation: layer.interation,
+        iteration: layer.iteration,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,

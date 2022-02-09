@@ -32,8 +32,8 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
    let tooltip = options.tooltip ? options.tooltip : "";
    let symbol = options.symbol ? options.symbol : "circle";
    let symbol_size = options.symbol_size ? options.symbol_size : 40;
-   let symbol_interation = options.symbol_interation
-     ? options.symbol_interation
+   let symbol_iteration = options.symbol_iteration
+     ? options.symbol_iteration
      : 200;
    let symbol_shift = options.symbol_shift ? options.symbol_shift : 0;
 
@@ -119,7 +119,7 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
          d3.forceCollide(Math.sqrt(symbol_size) / 2 + symbol_shift / 2)
        );
 
-     for (let i = 0; i < symbol_interation; i++) {
+     for (let i = 0; i < symbol_iteration; i++) {
        simulation.tick();
      }
 

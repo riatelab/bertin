@@ -35,7 +35,7 @@ export function bubble(selection, projection, clipid, options = {}){
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
   let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let dorling = options.dorling ? options.dorling : false;
-  let interation = options.interation ? options.interation : 200;
+  let iteration = options.iteration ? options.iteration : 200;
   let tooltip = options.tooltip ? options.tooltip : "";
   //let choro = options.choro ? options.choro : undefined;
 
@@ -72,7 +72,7 @@ export function bubble(selection, projection, clipid, options = {}){
         d3.forceCollide((d) => radius(Math.abs(d.properties[values])) + strokeWidth / 2)
       );
 
-    for (let i = 0; i < interation; i++) {
+    for (let i = 0; i < iteration; i++) {
       simulation.tick();
     }
   }

@@ -140,7 +140,7 @@ bertin.draw({
 - <b>symbol</b>: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
 - <b>symbol_size</b>: if it is a dot layer, a number indicating the size of the symbol (default: 5)
 - <b>symbol_shift</b>: if it is a dot layer, use a value > 0 to swith symbols and avaoid overlay (default: 0)
-- <b>symbol_interation</b>: Number of iteration tu shift symbols (default: 200)
+- <b>symbol_iteration</b>: Number of iteration tu shift symbols (default: 200)
 
 Parameters of the legend
 
@@ -305,7 +305,7 @@ The *bubble* type is used to draw a map by proportional circles. [Source](https:
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
 - <b>dorling</b>: a boolean (default:false)
-- <b>interation</b> an integer to define the number of iteration for the Dorling method (default 200)
+- <b>iteration</b> an integer to define the number of iteration for the Dorling method (default 200)
 - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
@@ -448,7 +448,7 @@ bertin.draw({
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
 - <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
-- <b>interation</b> an integer to define the number of iteration for the Dorling method (default 200)
+- <b>iteration</b> an integer to define the number of iteration for the Dorling method (default 200)
 
 Parameters of the legend
 
