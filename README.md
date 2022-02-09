@@ -403,7 +403,7 @@ bertin.draw({
 
 #### Dots cartogram
 
-The *dotscartogram* type is a method of map representation that follows Dorling s cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map.  [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
+The *dotcartogram* type is a method of map representation that follows Dorling s cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map.  [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 ~~~js
@@ -412,7 +412,7 @@ bertin.draw({
   params: { projection: d3.geoBertin1953() },
   layers: [
     {
-      type: "dotscartogram",
+      type: "dotcartogram",
       geojson: data,
       onedot: 200000000000,
       iteration: 200,

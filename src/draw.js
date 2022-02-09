@@ -24,7 +24,7 @@ import { addtext } from "./text.js";
 import { layerlabel } from "./layer-label.js";
 import { layerspikes } from "./layer-spikes.js";
 import { layerdorling } from "./layer-dorling.js";
-import { dotscartogram } from "./layer-dotscartogram.js";
+import { dotcartogram } from "./layer-dotcartogram.js";
 import { proj4d3 } from "./proj4d3.js";
 
 //import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
@@ -380,8 +380,8 @@ if (layer.type == "label") {
 
     // Dots cartogram
 
-    if (layer.type == "dotscartogram") {
-      dotscartogram(svg, projection, clipid, {
+    if (layer.type == "dotcartogram") {
+      dotcartogram(svg, projection, clipid, {
         geojson: layer.geojson,
         values: layer.values,
         radius: layer.radius,
