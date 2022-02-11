@@ -2,15 +2,27 @@
 import * as d3selection from "d3-selection";
 import * as d3geo from "d3-geo";
 import * as d3shape from "d3-shape";
-import * as d3geoprojection from "d3-geo-projection";
+//import * as d3geoprojection from "d3-geo-projection";
+import * as d3scalechromatic from "d3-scale-chromatic";
+import * as d3scale from "d3-scale";
 import * as d3force from "d3-force";
-const d3 = Object.assign({}, d3selection, d3geo, d3shape, d3geoprojection, d3force);
-import {figuration } from "./figuration.js";
-import {addtooltip } from "./tooltip.js";
+const d3 = Object.assign({}, d3selection, d3geo, d3shape, d3scale, d3scalechromatic,  d3force);
+// import {figuration } from "./figuration.js";
+// // import {addtooltip } from "./tooltip.js";
 import {legbox } from "./leg-box.js";
-import {chorotypo} from "./chorotypo.js";
+// // import {chorotypo} from "./chorotypo.js";
+// // import {legchoro } from "./leg-choro.js"
+// // import {legtypo } from "./leg-typo.js";
+
+
+import {addtooltip } from "./tooltip.js";
 import {legchoro } from "./leg-choro.js"
 import {legtypo } from "./leg-typo.js";
+import {poly2points } from "./poly2points.js";
+import {figuration } from "./figuration.js";
+import {chorotypo } from "./chorotypo.js";
+
+//import {thickness } from "./thickness.js";
 
 export function layersimple(selection, projection, clipid, geojson, options = {}) {
   let cols = [
@@ -58,12 +70,15 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        .join("path")
        .attr("d", d3.geoPath(projection))
        .attr("fill", (d) =>
-             chorotypo(geojson, fill).getcol(d.properties[fill.values] || undefined)
-           )
-           .attr("stroke", (d) =>
-             chorotypo(geojson, stroke).getcol(d.properties[stroke.values] || undefined)
-           )
+         chorotypo(geojson.features, fill).getcol(d.properties[fill.values] || undefined)
+       )
+       .attr("stroke", (d) =>
+         chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
+       )
        .attr("stroke-width", strokeWidth)
+    //    .attr("stroke-width", (d) =>
+    //   thickness(data, strokeWidth)(d[strokeWidth.values])
+    // );
        .attr("fill-opacity", fillOpacity)
        .attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
@@ -216,8 +231,8 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        title: fill.leg_title ? fill.leg_title : fill.values,
        fontSize: fill.leg_fontSize,
        fontSize2: fill.leg_fontSize2,
-       breaks: chorotypo(geojson, fill).breaks,
-       colors: chorotypo(geojson, fill).colors
+       breaks: chorotypo(geojson.features, fill).breaks,
+       colors: chorotypo(geojson.features, fill).colors
      });
    }
 
@@ -234,8 +249,8 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        title: stroke.leg_title ? stroke.leg_title : stroke.values,
        fontSize: stroke.leg_fontSize,
        fontSize2: stroke.leg_fontSize2,
-       breaks: chorotypo(geojson, stroke).breaks,
-       colors: chorotypo(geojson, stroke).colors
+       breaks: chorotypo(geojson.features, stroke).breaks,
+       colors: chorotypo(geojson.features, stroke).colors
      });
    }
 
@@ -252,8 +267,8 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        title: fill.leg_title ? fill.leg_title : fill.values,
        fontSize: fill.leg_fontSize,
        fontSize2: fill.leg_fontSize2,
-       types: chorotypo(geojson, fill).types,
-       colors: chorotypo(geojson, fill).colors
+       types: chorotypo(geojson.features, fill).types,
+       colors: chorotypo(geojson.features, fill).colors
      });
    }
 
@@ -270,8 +285,8 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        title: stroke.leg_title ? fill.leg_title : fill.values,
        fontSize: stroke.leg_fontSize,
        fontSize2: stroke.leg_fontSize2,
-       types: chorotypo(geojson, stroke).types,
-       colors: chorotypo(geojson, stroke).colors
+       types: chorotypo(geojson.features, stroke).types,
+       colors: chorotypo(geojson.features, stroke).colors
      });
    }
 

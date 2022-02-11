@@ -151,8 +151,8 @@ export function bubble(selection, projection, clipid, options = {}){
       title: fill.leg_title ? fill.leg_title : fill.values,
       fontSize: fill.leg_fontSize,
       fontSize2: fill.leg_fontSize2,
-      breaks: chorotypo(geojson, fill).breaks,
-      colors: chorotypo(geojson, fill).colors
+      breaks: chorotypo(geojson.features, fill).breaks,
+      colors: chorotypo(geojson.features, fill).colors
     });
   }
 
@@ -169,8 +169,8 @@ export function bubble(selection, projection, clipid, options = {}){
       title: stroke.leg_title ? stroke.leg_title : stroke.values,
       fontSize: stroke.leg_fontSize,
       fontSize2: stroke.leg_fontSize2,
-      breaks: chorotypo(geojson, stroke).breaks,
-      colors: chorotypo(geojson, stroke).colors
+      breaks: chorotypo(geojson.features, stroke).breaks,
+      colors: chorotypo(geojson.features, stroke).colors
     });
   }
 
@@ -187,8 +187,8 @@ export function bubble(selection, projection, clipid, options = {}){
       title: fill.leg_title ? fill.leg_title : fill.values,
       fontSize: fill.leg_fontSize,
       fontSize2: fill.leg_fontSize2,
-      types: chorotypo(geojson, fill).types,
-      colors: chorotypo(geojson, fill).colors
+      types: chorotypo(geojson.features, fill).types,
+      colors: chorotypo(geojson.features, fill).colors
     });
   }
 
@@ -205,8 +205,8 @@ export function bubble(selection, projection, clipid, options = {}){
       title: stroke.leg_title ? fill.leg_title : fill.values,
       fontSize: stroke.leg_fontSize,
       fontSize2: stroke.leg_fontSize2,
-      types: chorotypo(geojson, stroke).types,
-      colors: chorotypo(geojson, stroke).colors
+      types: chorotypo(geojson.features, stroke).types,
+      colors: chorotypo(geojson.features, stroke).colors
     });
   }
 
@@ -218,10 +218,6 @@ export function bubble(selection, projection, clipid, options = {}){
     radius.invert(radius(d3.max(array)) / 1.5),
     d3.max(array)
   ];
-
-
-
-
 
 
   legcircles(selection, {
