@@ -195,31 +195,6 @@ export function draw({ params = {}, layers = {} } = {}) {
   });
 }
 
-    // typo layers
-    if (layer.type == "typo") {
-      layertypo(svg, projection, clipid, {
-        geojson: layer.geojson,
-        values: layer.values,
-        colors: layer.colors,
-        pal: layer.pal,
-        col_missing: layer.col_missing,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_title: layer.leg_title,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_stroke: layer.leg_stroke,
-        leg_fillOpacity: layer.leg_fillOpacity,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol
-      });
-    }
-
-
     // links layers
     if (layer.type == "links") {
       links(svg, projection, clipid, {
@@ -231,40 +206,6 @@ export function draw({ params = {}, layers = {} } = {}) {
         data_fij : layer.data_fij,
         stroke : layer.stroke,
         strokeWidth : layer.strokeWidth,
-      });
-    }
-
-
-
-    // choro layers
-    if (layer.type == "choro") {
-      layerchoro(svg, projection, clipid, {
-        geojson: layer.geojson,
-        values: layer.values,
-        pal: layer.pal,
-        nbreaks: layer.nbreaks,
-        breaks: layer.breaks,
-        colors: layer.colors,
-        method: layer.method,
-        col_missing: layer.col_missing,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_w: layer.leg_w,
-        leg_h: layer.leg_h,
-        leg_title: layer.leg_title,
-        leg_text: layer.leg_text,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_stroke: layer.leg_stroke,
-        leg_fillOpacity: layer.leg_fillOpacity,
-        leg_fill: layer.leg_fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol,
-        leg_round: layer.leg_round
       });
     }
 
@@ -371,31 +312,7 @@ if (layer.type == "label") {
       });
     }
 
-    // prop layers
-    if (layer.type == "prop") {
-      layerprop(svg, projection, clipid, {
-        geojson: layer.geojson,
-        values: layer.values,
-        k: layer.k,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_stroke: layer.leg_stroke,
-        leg_fill: layer.leg_fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol,
-        leg_title: layer.leg_title,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_round: layer.leg_round
-      });
-    }
-
-    // Dots cartogram
+  // Dots cartogram
 
     if (layer.type == "dotcartogram") {
       dotcartogram(svg, projection, clipid, {
@@ -439,30 +356,6 @@ if (layer.type == "label") {
         fillOpacity: layer.fillOpacity,
         dorling: layer.dorling,
         iteration: layer.iteration,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_stroke: layer.leg_stroke,
-        leg_fill: layer.leg_fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol,
-        leg_title: layer.leg_title,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_round: layer.leg_round
-      });
-    }
-
-    // dorling layers
-    if (layer.type == "dorling") {
-      layerdorling(svg, projection, clipid, {
-        geojson: layer.geojson,
-        values: layer.values,
-        k: layer.k,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,
         leg_y: layer.leg_y,
