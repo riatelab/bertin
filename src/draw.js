@@ -219,6 +219,23 @@ export function draw({ params = {}, layers = {} } = {}) {
       });
     }
 
+
+    // links layers
+    if (layer.type == "links") {
+      links(svg, projection, clipid, {
+        geojson : layer.geojson,
+        geojson_id : layer.geojson_id,
+        data : layer.data,
+        data_i : layer.data_i,
+        data_j : layer.data_j,
+        data_fij : layer.data_fij,
+        stroke : layer.stroke,
+        strokeWidth : layer.strokeWidth,
+      });
+    }
+
+
+
     // choro layers
     if (layer.type == "choro") {
       layerchoro(svg, projection, clipid, {
