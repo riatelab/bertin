@@ -9,10 +9,7 @@ import { addoutline } from "./outline.js";
 import { addfooter } from "./footer.js";
 import { addheader } from "./header.js";
 import { layersimple } from "./layer-simple.js";
-import { layerprop } from "./layer-prop.js";
 import { bubble } from "./layer-bubble.js";
-import { layertypo } from "./layer-typo.js";
-import { layerchoro } from "./layer-choro.js";
 import {layermushroom} from "./layer-mushroom.js";
 import { layermissing } from "./layer-missing.js";
 import { getheight } from "./height.js";
@@ -23,7 +20,6 @@ import { addscalebar } from "./scalebar.js";
 import { addtext } from "./text.js";
 import { layerlabel } from "./layer-label.js";
 import { layerspikes } from "./layer-spikes.js";
-import { layerdorling } from "./layer-dorling.js";
 import { dotcartogram } from "./layer-dotcartogram.js";
 import { proj4d3 } from "./proj4d3.js";
 
