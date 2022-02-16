@@ -21,10 +21,11 @@ import {legtypo } from "./leg-typo.js";
 import {poly2points } from "./poly2points.js";
 import {figuration } from "./figuration.js";
 import {chorotypo } from "./chorotypo.js";
+import {thickness } from "./thickness.js";
 
 //import {thickness } from "./thickness.js";
 
-export function layersimple(selection, projection, clipid, geojson, options = {}) {
+export function layersimple(selection, projection, clipid, options = {}) {
   let cols = [
      "#66c2a5",
      "#fc8d62",
@@ -35,6 +36,7 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
      "#e5c494",
      "#b3b3b3"
    ];
+  let geojson = options.geojson;
    let fill = options.fill
      ? options.fill
      : cols[Math.floor(Math.random() * cols.length)];
@@ -75,10 +77,9 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
        .attr("stroke", (d) =>
          chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
        )
-       .attr("stroke-width", strokeWidth)
-    //    .attr("stroke-width", (d) =>
-    //   thickness(data, strokeWidth)(d[strokeWidth.values])
-    // );
+       .attr("stroke-width", (d) =>
+      thickness(geojson.features, strokeWidth)(d.properties[strokeWidth.values] || undefined)
+    )
        .attr("fill-opacity", fillOpacity)
        .attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
@@ -173,7 +174,9 @@ export function layersimple(selection, projection, clipid, geojson, options = {}
            .attr("stroke", (d) =>
              chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
            )
-       .attr("stroke-width", strokeWidth)
+           .attr("stroke-width", (d) =>
+      thickness(geojson.features, strokeWidth)(d.properties[strokeWidth.values] || undefined)
+           )
        .attr("fill-opacity", fillOpacity)
        //.attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {

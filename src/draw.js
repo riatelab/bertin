@@ -10,7 +10,7 @@ import { addfooter } from "./footer.js";
 import { addheader } from "./header.js";
 import { layersimple } from "./layer-simple.js";
 import { bubble } from "./layer-bubble.js";
-import {layermushroom} from "./layer-mushroom.js";
+import { layermushroom } from "./layer-mushroom.js";
 import { layermissing } from "./layer-missing.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
@@ -137,7 +137,8 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     // simple layers
     if (layer.type == "layer" || layer.type == "simple" || layer.type == undefined) {
-      layersimple(svg, projection, clipid, layer.geojson, {
+      layersimple(svg, projection, clipid, {
+        geojson: layer.geojson,
         fill: layer.fill,
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
@@ -201,6 +202,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         data_j : layer.data_j,
         data_fij : layer.data_fij,
         stroke : layer.stroke,
+        strokeOpacity : layer.strokeOpacity,
         strokeWidth : layer.strokeWidth,
       });
     }

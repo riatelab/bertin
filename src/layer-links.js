@@ -25,6 +25,7 @@ export function links(selection, projection, clipid, options = {}) {
   ];
   let stroke = options.stroke ?? cols[Math.floor(Math.random() * cols.length)];
   let strokeWidth = options.strokeWidth ?? 1.5;
+  let strokeOpacity = options.strokeOpacity ?? 0.9;
   let geojson = options.geojson;
   let geojson_id = options.geojson_id;
   let data = options.data;
@@ -64,6 +65,7 @@ export function links(selection, projection, clipid, options = {}) {
     .attr("y2", (d) => coordsbyid.get(d[data_i]) ? coordsbyid.get(d[data_j])[1] : undefined)
     .attr("fill", "none")
     .attr("stroke", stroke)
+    .attr("stroke-opacity", strokeOpacity)
     .attr("stroke-width", (d) =>
       thickness(data, strokeWidth)(d[strokeWidth.values])
     );

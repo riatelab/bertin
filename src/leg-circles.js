@@ -27,7 +27,6 @@ export function legcircles(selection, options = {}) {
   const valvax = fixmax != undefined ? fixmax : d3.max(values)
   let radius = d3.scaleSqrt(
     [0, valvax],
-    //[0, d3.max(features, (d) => +d.properties[values])],
     [0, k]
   );
 
