@@ -68,6 +68,7 @@ export function legtypo(selection, options = {}) {
       .attr("y", y + delta + h / 2)
       //.attr("y", y + h / 2 - (fontSize2 * text.split("\n").length) / 2 + delta)
       .attr("font-size", `${fontSize2}px`)
+      .attr("fill", txtcol)
       .attr("dy", (d, i) => (h + span) * i)
       .attr("text-anchor", "start")
       .attr("dominant-baseline", "central")

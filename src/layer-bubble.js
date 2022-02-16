@@ -210,6 +210,9 @@ export function bubble(selection, projection, options = {}, clipid){
     });
   }
 
+
+
+
   // Legend (circles)
   let array = features.map((d) => Math.abs(+d.properties[values]));
   let legval = [

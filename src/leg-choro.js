@@ -62,6 +62,7 @@ export function legchoro(selection, options = {}) {
       .attr("x", x + w + fontSize2 / 2)
       .attr("y", y + delta)
       .attr("font-size", `${fontSize2}px`)
+      .attr("fill", txtcol)
       .attr("dy", (d, i) => (h + span) * i)
       .attr("text-anchor", "start")
       .attr("dominant-baseline", "central")

@@ -19,6 +19,7 @@ import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
 import { text } from "./text.js";
 import { label } from "./layer-label.js";
+import { links } from "./layer-links.js";
 import { spikes } from "./layer-spikes.js";
 import { dotcartogram } from "./layer-dotcartogram.js";
 import { proj4d3 } from "./proj4d3.js";
@@ -201,11 +202,11 @@ export function draw({ params = {}, layers = {} } = {}) {
         data : layer.data,
         data_i : layer.data_i,
         data_j : layer.data_j,
-        data_fij : layer.data_fij,
         stroke : layer.stroke,
         strokeOpacity : layer.strokeOpacity,
         strokeWidth : layer.strokeWidth,
-      }, clipid);
+        strokeLinecap : layer.strokeLinecap,
+    }, clipid);
     }
 
     // mushroom layer

@@ -11,6 +11,8 @@ import {poly2points } from "./poly2points.js";
 import {figuration } from "./figuration.js";
 import {chorotypo } from "./chorotypo.js";
 import {thickness } from "./thickness.js";
+import {leglinks } from "./leg-links.js";
+
 
 export function links(selection, projection, options = {}, clipid) {
   let cols = [
@@ -23,6 +25,7 @@ export function links(selection, projection, options = {}, clipid) {
     "#e5c494",
     "#b3b3b3"
   ];
+  let strokeLinecap = options.strokeLinecap ?? "butt"
   let stroke = options.stroke ?? cols[Math.floor(Math.random() * cols.length)];
   let strokeWidth = options.strokeWidth ?? 1.5;
   let strokeOpacity = options.strokeOpacity ?? 0.9;
@@ -31,8 +34,9 @@ export function links(selection, projection, options = {}, clipid) {
   let data = options.data;
   let data_i = options.data_i ?? "i";
   let data_j = options.data_j ?? "j";
-  let data_fij = options.data_fij ?? "fij";
   //let tooltip = options.tooltip ?? "";
+
+if (data.length > 0){
 
   let dots;
   if (figuration(geojson) == "p") {
@@ -48,25 +52,48 @@ export function links(selection, projection, options = {}, clipid) {
     ])
   );
 
-  //return coordsbyid;
-
   selection
     .append("g")
     .selectAll("line")
-    .data(
+    .data
+    (
       data.sort((a, b) =>
-        d3.descending(Math.abs(+a[data_fij]), Math.abs(+b[data_fij]))
+        d3.descending(Math.abs(+a[strokeWidth.values]), Math.abs(+b[strokeWidth.values]))
       )
     )
     .join("line")
-    .attr("x1", (d) => coordsbyid.get(d[data_i]) ? coordsbyid.get(d[data_i])[0] : undefined)
-    .attr("y1", (d) => coordsbyid.get(d[data_i]) ? coordsbyid.get(d[data_i])[1] : undefined)
-    .attr("x2", (d) => coordsbyid.get(d[data_i]) ? coordsbyid.get(d[data_j])[0] : undefined)
-    .attr("y2", (d) => coordsbyid.get(d[data_i]) ? coordsbyid.get(d[data_j])[1] : undefined)
+    .attr("x1", (d) => coordsbyid.get(d[data_i]) && coordsbyid.get(d[data_j]) ? coordsbyid.get(d[data_i])[0] : undefined)
+    .attr("y1", (d) => coordsbyid.get(d[data_i]) && coordsbyid.get(d[data_j]) ? coordsbyid.get(d[data_i])[1] : undefined)
+    .attr("x2", (d) => coordsbyid.get(d[data_i]) && coordsbyid.get(d[data_j]) ? coordsbyid.get(d[data_j])[0] : undefined)
+    .attr("y2", (d) => coordsbyid.get(d[data_i]) && coordsbyid.get(d[data_j]) ? coordsbyid.get(d[data_j])[1] : undefined)
     .attr("fill", "none")
     .attr("stroke", stroke)
+    .attr("stroke-linecap",strokeLinecap)
     .attr("stroke-opacity", strokeOpacity)
     .attr("stroke-width", (d) =>
       thickness(data, strokeWidth)(d[strokeWidth.values])
     );
+
+
+// legend
+const vmax = d3.max(data.map((d) => +d[strokeWidth.values]))
+const smax = thickness(data, { k: strokeWidth.k, values: strokeWidth.values, fixmax: strokeWidth.fixmax})(vmax)
+
+leglinks(selection, {
+x: strokeWidth.leg_x,
+y: strokeWidth.leg_y,
+valmax: vmax,
+sizemax: smax,
+title: strokeWidth.leg_title ?? strokeWidth.values,
+fontSize: strokeWidth.leg_fontSize,
+fontSize2: strokeWidth.leg_fontSize2,
+fill: stroke,
+fillOpacity: strokeOpacity,
+txtcol: strokeWidth.leg_txtcol,
+w: strokeWidth.leg_w,
+round: strokeWidth.leg_round
+})
+
+}
+
 }
