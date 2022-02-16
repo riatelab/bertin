@@ -4,22 +4,22 @@ import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
-import { addgraticule } from "./graticule.js";
-import { addoutline } from "./outline.js";
+import { graticule } from "./graticule.js";
+import { outline } from "./outline.js";
 import { addfooter } from "./footer.js";
 import { addheader } from "./header.js";
-import { layersimple } from "./layer-simple.js";
+import { simple } from "./layer-simple.js";
 import { bubble } from "./layer-bubble.js";
-import { layermushroom } from "./layer-mushroom.js";
-import { layermissing } from "./layer-missing.js";
+import { mushroom } from "./layer-mushroom.js";
+import { missing } from "./layer-missing.js";
 import { getheight } from "./height.js";
 import { figuration } from "./figuration.js";
 import { getcenters } from "./centroids.js";
 import { shadow } from "./shadow.js";
 import { addscalebar } from "./scalebar.js";
-import { addtext } from "./text.js";
-import { layerlabel } from "./layer-label.js";
-import { layerspikes } from "./layer-spikes.js";
+import { text } from "./text.js";
+import { label } from "./layer-label.js";
+import { spikes } from "./layer-spikes.js";
 import { dotcartogram } from "./layer-dotcartogram.js";
 import { proj4d3 } from "./proj4d3.js";
 
@@ -112,11 +112,11 @@ export function draw({ params = {}, layers = {} } = {}) {
   }
 
   // Outline (fill)
-  let outline = layers.find((d) => d.type == "outline");
+  let o = layers.find((d) => d.type == "outline");
   if (outline) {
-    addoutline(svg, projection, {
-      fill: outline.fill,
-      fillOpacity:outline.fillOpacity,
+    outline(svg, projection, {
+      fill: o.fill,
+      fillOpacity:o.fillOpacity,
       stroke: "none",
       strokeWidth: "none"
     });
@@ -126,7 +126,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   layers.reverse().forEach((layer) => {
     // Graticule
     if (layer.type == "graticule") {
-      addgraticule(svg, projection, clipid, {
+      graticule(svg, projection, clipid, {
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
         strokeOpacity: layer.strokeOpacity,
@@ -137,12 +137,13 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     // simple layers
     if (layer.type == "layer" || layer.type == "simple" || layer.type == undefined) {
-      layersimple(svg, projection, clipid, {
+      simple(svg, projection, {
         geojson: layer.geojson,
         fill: layer.fill,
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
         fillOpacity: layer.fillOpacity,
+        strokeOpacity: layer.strokeOpacity,
         symbol: layer.symbol,
         symbol_size: layer.symbol_size,
         symbol_iteration: layer.symbol_iteration,
@@ -161,13 +162,13 @@ export function draw({ params = {}, layers = {} } = {}) {
         leg_fill: layer.leg_fill,
         leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol
-      });
+      }, clipid);
     }
 
     // spikes layers
 
     if (layer.type == "spikes") {
-    layerspikes(svg, projection, clipid, {
+    spikes(svg, projection, {
     geojson: layer.geojson,
     values: layer.values,
     k: layer.k,
@@ -189,12 +190,12 @@ export function draw({ params = {}, layers = {} } = {}) {
     leg_strokeWidth: layer.leg_strokeWidth,
     leg_txtcol: layer.leg_txtcol,
     leg_round:layer.leg_round
-  });
+  }, clipid);
 }
 
     // links layers
     if (layer.type == "links") {
-      links(svg, projection, clipid, {
+      links(svg, projection, {
         geojson : layer.geojson,
         geojson_id : layer.geojson_id,
         data : layer.data,
@@ -204,13 +205,13 @@ export function draw({ params = {}, layers = {} } = {}) {
         stroke : layer.stroke,
         strokeOpacity : layer.strokeOpacity,
         strokeWidth : layer.strokeWidth,
-      });
+      }, clipid);
     }
 
     // mushroom layer
 
     if (layer.type == "mushroom") {
-      layermushroom(svg, projection, clipid, {
+      mushroom(svg, projection, {
         geojson: layer.geojson,
         top_values: layer.top_values,
         bottom_values: layer.bottom_values,
@@ -235,13 +236,13 @@ export function draw({ params = {}, layers = {} } = {}) {
         leg_bottom_fill: layer.leg_bottom_fill,
         leg_stroke: layer.leg_stroke,
         leg_strokeWidth: layer.leg_strokeWidth
-      });
+      }, clipid);
     }
 
     // labels layer
 
 if (layer.type == "label") {
-  layerlabel(svg, projection, clipid, {
+  label(svg, projection, {
     geojson: layer.geojson,
     values: layer.values,
     fill: layer.fill,
@@ -251,12 +252,12 @@ if (layer.type == "label") {
     fontWeight: layer.fontWeight,
     fontStyle: layer.fontStyle,
     opacity: layer.opacity
-  });
+  }, clipid);
 }
 
     // text note
     if (layer.type == "text") {
-      addtext(svg, width, height, {
+      text(svg, width, height, {
         position: layer.position,
         text: layer.text,
         fill: layer.fill,
@@ -278,7 +279,7 @@ if (layer.type == "label") {
 
     // missing
     if (layer.type == "missing") {
-      layermissing(svg, projection, clipid, {
+      missing(svg, projection, {
         geojson: layer.geojson,
         values: layer.values,
         fill: layer.fill,
@@ -296,12 +297,13 @@ if (layer.type == "label") {
         leg_fill: layer.fill,
         leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol
-      });
+      }, clipid);
     }
 
     // shadow
     if (layer.type == "shadow") {
-      shadow(svg, projection, layer.geojson, clipid, defs, {
+      shadow(svg, projection, clipid, defs, {
+        geojson: layer.geojson,
         col: layer.col,
         dx: layer.dx,
         dy: layer.dy,
@@ -313,7 +315,7 @@ if (layer.type == "label") {
   // Dots cartogram
 
     if (layer.type == "dotcartogram") {
-      dotcartogram(svg, projection, clipid, {
+      dotcartogram(svg, projection, {
         geojson: layer.geojson,
         values: layer.values,
         radius: layer.radius,
@@ -337,13 +339,13 @@ if (layer.type == "label") {
         leg_fill: layer.leg_fill,
         leg_txt: layer.leg_txt
 
-      });
+      }, clipid);
     }
 
     // Bubbles
 
     if (layer.type == "bubble") {
-      bubble(svg, projection, clipid, {
+      bubble(svg, projection,  {
         geojson: layer.geojson,
         values: layer.values,
         k: layer.k,
@@ -365,7 +367,7 @@ if (layer.type == "label") {
         leg_fontSize: layer.leg_fontSize,
         leg_fontSize2: layer.leg_fontSize2,
         leg_round: layer.leg_round
-      });
+      }, clipid);
     }
 
     // Header
@@ -396,21 +398,21 @@ if (layer.type == "label") {
   // -----------------------------------------
 
   // Scalebar
-  let scalebar = layers.find((d) => d.type == "scalebar");
-  if (scalebar) {
-    addscalebar(svg, projection, width, height, {
-      x: scalebar.x,
-      y: scalebar.y,
-      units: scalebar.units
+  let s = layers.find((d) => d.type == "scalebar");
+  if (s) {
+    scalebar(svg, projection, width, height, {
+      x: s.x,
+      y: s.y,
+      units: s.units
     });
   }
 
   // Outline (stroke)
   if (outline) {
-    addoutline(svg, projection, {
+    outline(svg, projection, {
       fill: "none",
-      stroke: outline.stroke,
-      strokeWidth: outline.strokeWidth
+      stroke: o.stroke,
+      strokeWidth: o.strokeWidth
     });
   }
 

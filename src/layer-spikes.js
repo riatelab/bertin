@@ -9,7 +9,7 @@ import {rounding } from "./rounding.js";
 import {poly2points } from "./poly2points.js";
 import {figuration } from "./figuration.js";
 
-export function layerspikes(selection, projection, clipid, options = {}) {
+export function spikes(selection, projection, options = {}, clipid) {
   let geojson = options.geojson;
   let values = options.values;
   let k = options.k !== undefined ? options.k : 50;

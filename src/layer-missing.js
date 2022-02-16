@@ -7,7 +7,7 @@ import {figuration } from "./figuration.js";
 import {addtooltip } from "./tooltip.js";
 import {legbox } from "./leg-box.js";
 
-export function layermissing(selection, projection, clipid, options = {}){
+export function missing(selection, projection, options = {}, clipid){
   let geojson = options.geojson;
   let values = options.values;
   let fill = options.fill ? options.fill : "white";

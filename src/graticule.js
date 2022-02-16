@@ -5,7 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
 // Graticule
-export function addgraticule(selection, projection, clipid, options = {}) {
+export function graticule(selection, projection, options = {}, clipid) {
   let stroke = options.stroke ? options.stroke : "white";
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.8;
   let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 0.5;

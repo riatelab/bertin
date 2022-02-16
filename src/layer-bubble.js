@@ -13,7 +13,7 @@ import {poly2points } from "./poly2points.js";
 import {figuration } from "./figuration.js";
 import {chorotypo } from "./chorotypo.js";
 
-export function bubble(selection, projection, clipid, options = {}){
+export function bubble(selection, projection, options = {}, clipid){
   let cols = [
     "#66c2a5",
     "#fc8d62",

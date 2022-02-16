@@ -1,7 +1,7 @@
 import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 
-export function addtext(selection, width, height, options = {}){
+export function text(selection, width, height, options = {}){
   let position = options.position ? options.position : "topright";
     let text = options.text ? options.text : "Your text here!";
     let fontSize = options.fontSize ? options.fontSize : 15;

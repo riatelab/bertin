@@ -2,7 +2,7 @@ import {poly2points } from "./poly2points.js";
 import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 
-export function layerlabel(selection, projection, clipid, options = {}){
+export function label(selection, projection, options = {}, clipid){
   let geojson = options.geojson;
   let values = options.values;
   let fill = options.fill ? options.fill : "#474342";

@@ -25,7 +25,7 @@ import {thickness } from "./thickness.js";
 
 //import {thickness } from "./thickness.js";
 
-export function layersimple(selection, projection, clipid, options = {}) {
+export function simple(selection, projection, options = {}, clipid) {
   let cols = [
      "#66c2a5",
      "#fc8d62",
@@ -36,20 +36,17 @@ export function layersimple(selection, projection, clipid, options = {}) {
      "#e5c494",
      "#b3b3b3"
    ];
-  let geojson = options.geojson;
-   let fill = options.fill
-     ? options.fill
-     : cols[Math.floor(Math.random() * cols.length)];
-   let stroke = options.stroke ? options.stroke : "white";
-   let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
-   let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
+   let geojson = options.geojson;
+   let fill = options.fill ?? cols[Math.floor(Math.random() * cols.length)];
+   let stroke = options.stroke ?? "white";
+   let strokeWidth = options.strokeWidth ?? 0.5;
+   let fillOpacity = options.fillOpacity ?? 1;
+   let strokeOpacity = options.strokeOpacity ?? 1;
    let tooltip = options.tooltip ? options.tooltip : "";
-   let symbol = options.symbol ? options.symbol : "circle";
-   let symbol_size = options.symbol_size ? options.symbol_size : 40;
-   let symbol_iteration = options.symbol_iteration
-     ? options.symbol_iteration
-     : 200;
-   let symbol_shift = options.symbol_shift ? options.symbol_shift : 0;
+   let symbol = options.symbol ?? "circle";
+   let symbol_size = options.symbol_size ?? 40;
+   let symbol_iteration = options.symbol_iteration ?? 200
+   let symbol_shift = options.symbol_shift ?? 0;
 
    // If lines
    if (figuration(geojson) == "l") {
@@ -81,6 +78,7 @@ export function layersimple(selection, projection, clipid, options = {}) {
       thickness(geojson.features, strokeWidth)(d.properties[strokeWidth.values] || undefined)
     )
        .attr("fill-opacity", fillOpacity)
+       .attr("stroke-opacity", strokeOpacity)
        .attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
          if (tooltip != "") {
@@ -104,7 +102,8 @@ export function layersimple(selection, projection, clipid, options = {}) {
              .select("#info")
              .attr("transform", `translate(${d3.pointer(event, this)})`);
            d3.select(this)
-             .attr("stroke-width", strokeWidth + 0.5)
+             //.attr("stroke-width", strokeWidth + 0.5)
+             .attr("stroke-opacity", strokeOpacity - 0.3)
              .attr("fill-opacity", fillOpacity - 0.3)
              .raise();
          }
@@ -112,7 +111,7 @@ export function layersimple(selection, projection, clipid, options = {}) {
        .on("touchend mouseleave", function () {
          selection.select("#info").call(addtooltip, null);
          d3.select(this)
-           .attr("stroke-width", strokeWidth)
+            .attr("stroke-opacity", strokeOpacity)
            .attr("fill-opacity", fillOpacity)
            .lower();
        });
@@ -178,6 +177,7 @@ export function layersimple(selection, projection, clipid, options = {}) {
       thickness(geojson.features, strokeWidth)(d.properties[strokeWidth.values] || undefined)
            )
        .attr("fill-opacity", fillOpacity)
+       .attr("stroke-opacity", strokeOpacity)
        //.attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
          if (tooltip != "") {
@@ -203,7 +203,8 @@ export function layersimple(selection, projection, clipid, options = {}) {
       ${symbol_shift ? d.x : projection(d.geometry.coordinates)[0]},
       ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`);
            d3.select(this)
-             .attr("stroke-width", strokeWidth + 0.5)
+             //.attr("stroke-width", strokeWidth + 0.5)
+              .attr("stroke-opacity", strokeOpacity - 0.3)
              .attr("fill-opacity", fillOpacity - 0.3)
              .raise();
          }
@@ -211,7 +212,7 @@ export function layersimple(selection, projection, clipid, options = {}) {
        .on("touchend mouseleave", function () {
          selection.select("#info").call(addtooltip, null);
          d3.select(this)
-           .attr("stroke-width", strokeWidth)
+           .attr("stroke-opacity", strokeOpacity)
            .attr("fill-opacity", fillOpacity)
            .lower();
        });

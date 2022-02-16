@@ -10,7 +10,7 @@ import {legcircles } from "./leg-circles.js";
 const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
 import {poly2points } from "./poly2points.js";
 
-export function layermushroom(selection, projection, clipid, options = {}) {
+export function mushroom(selection, projection, options = {}, clipid) {
   let geojson = options.geojson;
   let top_values = options.top_values;
   let bottom_values = options.bottom_values;

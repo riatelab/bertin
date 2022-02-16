@@ -5,7 +5,7 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
 // outline
-export function addoutline(selection, projection,  options = {}) {
+export function outline(selection, projection,  options = {}) {
   let fill = options.fill ? options.fill : "#add8f7";
   let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let stroke = options.stroke ? options.stroke : "none";

@@ -12,7 +12,7 @@ import {figuration } from "./figuration.js";
 import {chorotypo } from "./chorotypo.js";
 import {thickness } from "./thickness.js";
 
-export function links(selection, projection, clipid, options = {}) {
+export function links(selection, projection, options = {}, clipid) {
   let cols = [
     "#66c2a5",
     "#fc8d62",
