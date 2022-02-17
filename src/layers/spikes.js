@@ -164,10 +164,9 @@ export function spikes(selection, projection, options = {}, clipid) {
       .data(legval.sort(d3.descending))
       .join("path")
       .attr("d", (d) => `M ${-w / 2},0 0,${-yScale(d)} ${w / 2},0`)
-      .attr("fill", fill)
-      .attr("stroke", stroke)
-      .attr("stroke-width", strokeWidth)
-      .attr("fill-opacity", fillOpacity)
+      .attr("fill", typeof fill == "object" ? "white" : fill)
+      .attr("stroke", typeof stroke == "object" ? "black" : stroke)
+      .attr("stroke-width", 1)
       .attr(
             "transform",
             (d, i) =>
