@@ -5,11 +5,11 @@ import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3array, d3geo, d3force);
 
 import {addtooltip } from "../helpers/tooltip.js";
-import {legchoro } from "../helpers/leg-choro.js"
-import {legtypo } from "../helpers/leg-typo.js";
 import {poly2points } from "../helpers/poly2points.js";
 import {figuration } from "../helpers/figuration.js";
 import {chorotypo } from "../helpers/chorotypo.js";
+import {thickness } from "../helpers/thickness.js";
+import {legends } from "../helpers/legends.js";
 
 export function dotcartogram(selection, projection, options = {}, clipid){
   let cols = [
@@ -29,6 +29,8 @@ export function dotcartogram(selection, projection, options = {}, clipid){
   let stroke = options.stroke ?? "none";
   let strokeWidth = options.strokeWidth ?? 0;
   let fillOpacity = options.fillOpacity ?? 1;
+  let strokeDasharray = options.strokeDasharray ?? "none";
+  let strokeOpacity = options.strokeOpacity ?? 1;
   let tooltip = options.tooltip ?? "";
   let iteration = options.iteration ?? 200;
 
@@ -87,8 +89,12 @@ export function dotcartogram(selection, projection, options = {}, clipid){
     .attr("stroke", (d) =>
       chorotypo(dots, stroke).getcol(d.properties[stroke.values] || undefined)
     )
-    .attr("stroke-width", strokeWidth)
+    .attr("stroke-width", (d) =>
+   thickness(dots, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)
+ )
     .attr("fill-opacity", fillOpacity)
+    .attr("stroke-dasharray", strokeDasharray)
+    .attr("stroke-opacity", strokeOpacity)
     .attr("cx", (d) => d.x)
     .attr("cy", (d) => d.y)
     .attr("r", radius)
@@ -180,78 +186,7 @@ if (leg_title != null) {
 }
 
           // legend (classes)
-
-          if (typeof fill == "object" && fill.type == "choro") {
-            legchoro(selection, {
-              x: fill.leg_x,
-              y: fill.leg_y,
-              w: fill.leg_w,
-              h: fill.leg_h,
-              stroke: fill.leg_stroke,
-              fillOpacity: fill.leg_fillOpacity,
-              strokeWidth: fill.leg_strokeWidth,
-              txtcol: fill.leg_txtcol,
-              title: fill.leg_title ? fill.leg_title : fill.values,
-              fontSize: fill.leg_fontSize,
-              fontSize2: fill.leg_fontSize2,
-              breaks: chorotypo(dots, fill).breaks,
-              colors: chorotypo(dots, fill).colors
-            });
-          }
-
-          if (typeof stroke == "object" && stroke.type == "choro") {
-            legchoro(selection, {
-              x: stroke.leg_x,
-              y: stroke.leg_y,
-              w: stroke.leg_w,
-              h: stroke.leg_h,
-              stroke: stroke.leg_stroke,
-              fillOpacity: stroke.leg_fillOpacity,
-              strokeWidth: stroke.leg_strokeWidth,
-              txtcol: stroke.leg_txtcol,
-              title: stroke.leg_title ? stroke.leg_title : stroke.values,
-              fontSize: stroke.leg_fontSize,
-              fontSize2: stroke.leg_fontSize2,
-              breaks: chorotypo(dots, stroke).breaks,
-              colors: chorotypo(dots, stroke).colors
-            });
-          }
-
-          if (typeof fill == "object" && fill.type == "typo") {
-            legtypo(selection, {
-              x: fill.leg_x,
-              y: fill.leg_y,
-              w: fill.leg_w,
-              h: fill.leg_h,
-              stroke: fill.leg_stroke,
-              fillOpacity: fill.leg_fillOpacity,
-              strokeWidth: fill.leg_strokeWidth,
-              txtcol: fill.leg_txtcol,
-              title: fill.leg_title ? fill.leg_title : fill.values,
-              fontSize: fill.leg_fontSize,
-              fontSize2: fill.leg_fontSize2,
-              types: chorotypo(dots, fill).types,
-              colors: chorotypo(dots, fill).colors
-            });
-          }
-
-          if (typeof stroke == "object" && fill.type == "stroke") {
-            legtypo(selection, {
-              x: stroke.leg_x,
-              y: stroke.leg_y,
-              w: stroke.leg_w,
-              h: stroke.leg_h,
-              stroke: stroke.leg_stroke,
-              fillOpacity: stroke.leg_fillOpacity,
-              strokeWidth: stroke.leg_strokeWidth,
-              txtcol: stroke.leg_txtcol,
-              title: stroke.leg_title ? fill.leg_title : fill.values,
-              fontSize: stroke.leg_fontSize,
-              fontSize2: stroke.leg_fontSize2,
-              types: chorotypo(dots, stroke).types,
-              colors: chorotypo(dots, stroke).colors
-            });
-          }
+          legends(geojson, selection, fill, stroke, strokeWidth)
 
 
 }

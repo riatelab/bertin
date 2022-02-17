@@ -34,9 +34,6 @@ export function addheader(selection, width, options = {}) {
 
   let header = selection
     .append("g")
-    .attr(":inkscape:groupmode", "layer")
-    .attr("id", "header")
-    .attr(":inkscape:label", "header");
 
   header
     .append("rect")

@@ -27,7 +27,7 @@ import { links } from "./layers/links.js";
 import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 
-// Main 
+// Main
 export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
 
@@ -185,6 +185,10 @@ export function draw({ params = {}, layers = {} } = {}) {
     stroke: layer.stroke,
     strokeWidth: layer.strokeWidth,
     fillOpacity: layer.fillOpacity,
+    strokeLinecap: layer.strokeLinecap,
+    strokeLinejoin: layer.strokeLinejoin,
+    strokeDasharray: layer.strokeDasharray,
+    strokeOpacity: layer.strokeOpacity,
     tooltip: layer.tooltip,
     leg_x: layer.leg_x,
     leg_y: layer.leg_y,
@@ -334,6 +338,8 @@ if (layer.type == "label") {
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
         fillOpacity: layer.fillOpacity,
+        strokeDasharray: layer.strokeDasharray,
+        strokeOpacity: layer.strokeOpacity,
         iteration: layer.iteration,
         tooltip: layer.tooltip,
         leg_x: layer.leg_x,

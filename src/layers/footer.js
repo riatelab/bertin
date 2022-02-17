@@ -34,9 +34,6 @@ export function addfooter(selection, width, height, options = {}) {
 
   let footer = selection
     .append("g")
-    .attr(":inkscape:groupmode", "layer")
-    .attr("id", "footer")
-    .attr(":inkscape:label", "footer");
 
   footer
     .append("rect")

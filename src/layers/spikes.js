@@ -9,18 +9,26 @@ import {addtooltip } from "../helpers/tooltip.js";
 import {rounding } from "../helpers/rounding.js";
 import {poly2points } from "../helpers/poly2points.js";
 import {figuration } from "../helpers/figuration.js";
+import { chorotypo } from "../helpers/chorotypo.js";
+import { thickness } from "../helpers/thickness.js";
+import { legends } from "../helpers/legends.js";
 
 export function spikes(selection, projection, options = {}, clipid) {
   let geojson = options.geojson;
   let values = options.values;
   let k = options.k !== undefined ? options.k : 50;
   let w = options.w !== undefined ? options.w : 10;
-  let fill = options.fill ? options.fill : "#a31d88";
+  let fill = options.fill ? options.fill : "#ffa3e3";
   let stroke = options.stroke ? options.stroke : "#a31d88";
-  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.7;
-  let fillOpacity = options.fillOpacity ? options.fillOpacity : 0.3;
-  let tooltip = options.tooltip ? options.tooltip : "";
+  let strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
+  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
 
+  let strokeLinecap = options.strokeLinecap ?? "round";
+  let strokeLinejoin = options.strokeLinejoin ?? "round";
+  let strokeDasharray = options.strokeDasharray ?? "none";
+  let strokeOpacity = options.strokeOpacity ?? 1;
+
+  let tooltip = options.tooltip ? options.tooltip : "";
   let leg_x = options.leg_x ? options.leg_x : null;
   let leg_y = options.leg_y ? options.leg_y : null;
   let leg_w = options.leg_w ? options.leg_w : 30;
@@ -59,10 +67,20 @@ export function spikes(selection, projection, options = {}, clipid) {
         )
     )
     .join("path")
-    .attr("fill", fill)
-    .attr("stroke", stroke)
-    .attr("stroke-width", strokeWidth)
+    .attr("fill", (d) =>
+      chorotypo(features, fill).getcol(d.properties[fill.values] || undefined)
+    )
+    .attr("stroke", (d) =>
+      chorotypo(features, stroke).getcol(d.properties[stroke.values] || undefined)
+    )
+    .attr("stroke-width", (d) =>
+   thickness(features, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)
+ )
     .attr("fill-opacity", fillOpacity)
+    .attr("stroke-opacity", strokeOpacity)
+    .attr("stroke-linecap", strokeLinecap)
+    .attr("stroke-linejoin", strokeLinejoin)
+    .attr("stroke-dasharray", strokeDasharray)
     .attr(
       "d",
       (d) =>
@@ -181,4 +199,7 @@ export function spikes(selection, projection, options = {}, clipid) {
 
     //);
   }
+
+  // Legend
+  legends(geojson, selection, fill, stroke, strokeWidth)
 }
