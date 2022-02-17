@@ -7,16 +7,15 @@ export {table2geo} from "./table2geo.js";
 
 // layer functions
 
-export {links} from "./layer-links.js"
-export {simple} from "./layer-simple.js"
-export {mushroom} from "./layer-mushroom.js"
-export {bubble} from "./layer-bubble.js"
-export {dotcartogram} from "./layer-dotcartogram.js"
-export {label} from "./layer-label.js"
-export {missing} from "./layer-missing.js"
-export {spikes} from "./layer-spikes.js"
-export {outline} from "./outline.js"
-export {graticule} from "./graticule.js"
+export {links} from "./layers/links.js"
+export {simple} from "./layers/simple.js"
+export {mushroom} from "./layers/mushroom.js"
+export {bubble} from "./layers/bubble.js"
+export {dotcartogram} from "./layers/dotcartogram.js"
+export {label} from "./layers/label.js"
+export {missing} from "./layers/missing.js"
+export {spikes} from "./layers/spikes.js"
+export {outline} from "./layers/outline.js"
+export {graticule} from "./layers/graticule.js"
 
-export {legends} from "./helpers/legends.js"
-export {thickness} from "./helpers/thickness.js"
+//export {legends} from "./helpers/legends.js"

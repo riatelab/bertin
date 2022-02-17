@@ -4,10 +4,11 @@ import * as d3geoprojection from "d3-geo-projection";
 import * as d3array from "d3-array";
 import * as d3scale from "d3-scale";
 const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
-import {addtooltip } from "./helpers/tooltip.js";
-import {rounding } from "./helpers/rounding.js";
-import {poly2points } from "./helpers/poly2points.js";
-import {figuration } from "./helpers/figuration.js";
+
+import {addtooltip } from "../helpers/tooltip.js";
+import {rounding } from "../helpers/rounding.js";
+import {poly2points } from "../helpers/poly2points.js";
+import {figuration } from "../helpers/figuration.js";
 
 export function spikes(selection, projection, options = {}, clipid) {
   let geojson = options.geojson;

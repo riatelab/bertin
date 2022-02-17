@@ -3,12 +3,13 @@ import * as d3geo from "d3-geo";
 import * as d3array from "d3-array";
 import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3array, d3geo, d3force);
-import {addtooltip } from "./helpers/tooltip.js";
-import {legchoro } from "./helpers/leg-choro.js"
-import {legtypo } from "./helpers/leg-typo.js";
-import {poly2points } from "./helpers/poly2points.js";
-import {figuration } from "./helpers/figuration.js";
-import {chorotypo } from "./helpers/chorotypo.js";
+
+import {addtooltip } from "../helpers/tooltip.js";
+import {legchoro } from "../helpers/leg-choro.js"
+import {legtypo } from "../helpers/leg-typo.js";
+import {poly2points } from "../helpers/poly2points.js";
+import {figuration } from "../helpers/figuration.js";
+import {chorotypo } from "../helpers/chorotypo.js";
 
 export function dotcartogram(selection, projection, options = {}, clipid){
   let cols = [

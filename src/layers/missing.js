@@ -3,9 +3,10 @@ import * as d3selection from "d3-selection";
 import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
-import {figuration } from "./helpers/figuration.js";
-import {addtooltip } from "./helpers/tooltip.js";
-import {legbox } from "./helpers/leg-box.js";
+
+import {figuration } from "../helpers/figuration.js";
+import {addtooltip } from "../helpers/tooltip.js";
+import {legbox } from "../helpers/leg-box.js";
 
 export function missing(selection, projection, options = {}, clipid){
   let geojson = options.geojson;

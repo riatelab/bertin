@@ -5,13 +5,14 @@ import * as d3array from "d3-array";
 import * as d3scalechromatic from "d3-scale-chromatic";
 import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3scale, d3force);
-import {addtooltip } from "./helpers/tooltip.js";
-import {legcircles } from "./helpers/leg-circles.js";
-import {poly2points } from "./helpers/poly2points.js";
-import {figuration } from "./helpers/figuration.js";
-import {chorotypo } from "./helpers/chorotypo.js";
-import {thickness } from "./helpers/thickness.js";
-import {legends } from "./helpers/legends.js";
+
+import {addtooltip } from "../helpers/tooltip.js";
+import {legcircles } from "../helpers/leg-circles.js";
+import {poly2points } from "../helpers/poly2points.js";
+import {figuration } from "../helpers/figuration.js";
+import {chorotypo } from "../helpers/chorotypo.js";
+import {thickness } from "../helpers/thickness.js";
+import {legends } from "../helpers/legends.js";
 
 export function bubble(selection, projection, options = {}, clipid){
   let cols = [

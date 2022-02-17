@@ -27,7 +27,7 @@ import { links } from "./layers/links.js";
 import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 
-
+// Main 
 export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
 

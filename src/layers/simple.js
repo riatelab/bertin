@@ -8,15 +8,13 @@ import * as d3scale from "d3-scale";
 import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3geo, d3shape, d3scale, d3scalechromatic,  d3force);
 
-import {legbox } from "./helpers/leg-box.js";
-import {legends } from "./helpers/legends.js";
-import {addtooltip } from "./helpers/tooltip.js";
-//import {legchoro } from "./helpers/leg-choro.js"
-//import {legtypo } from "./helpers/leg-typo.js";
-import {poly2points } from "./helpers/poly2points.js";
-import {figuration } from "./helpers/figuration.js";
-import {chorotypo } from "./helpers/chorotypo.js";
-import {thickness } from "./helpers/thickness.js";
+import { legbox } from "../helpers/leg-box.js";
+import { legends } from "../helpers/legends.js";
+import { addtooltip } from "../helpers/tooltip.js";
+import { poly2points } from "../helpers/poly2points.js";
+import { figuration } from "../helpers/figuration.js";
+import { chorotypo } from "../helpers/chorotypo.js";
+import { thickness } from "../helpers/thickness.js";
 
 //import {thickness } from "./thickness.js";
 
