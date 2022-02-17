@@ -1,4 +1,4 @@
-import {poly2points } from "./poly2points.js";
+import {poly2points } from "./helpers/poly2points.js";
 import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 

@@ -7,7 +7,7 @@ import * as topojsonclient from "topojson-client";
 
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 const topojson = Object.assign({}, topojsonserver, topojsonclient);
-import {figuration } from "./figuration.js";
+import {figuration } from "./helpers/figuration.js";
 
 export function shadow(selection, projection, geojson, clipid, defs, options = {}) {
   let col = options.col ? options.col : "#35383d";

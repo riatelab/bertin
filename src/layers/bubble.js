@@ -5,13 +5,13 @@ import * as d3array from "d3-array";
 import * as d3scalechromatic from "d3-scale-chromatic";
 import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3scale, d3force);
-import {addtooltip } from "./tooltip.js";
-import {legchoro } from "./leg-choro.js"
-import {legtypo } from "./leg-typo.js";
-import {legcircles } from "./leg-circles.js";
-import {poly2points } from "./poly2points.js";
-import {figuration } from "./figuration.js";
-import {chorotypo } from "./chorotypo.js";
+import {addtooltip } from "./helpers/tooltip.js";
+import {legcircles } from "./helpers/leg-circles.js";
+import {poly2points } from "./helpers/poly2points.js";
+import {figuration } from "./helpers/figuration.js";
+import {chorotypo } from "./helpers/chorotypo.js";
+import {thickness } from "./helpers/thickness.js";
+import {legends } from "./helpers/legends.js";
 
 export function bubble(selection, projection, options = {}, clipid){
   let cols = [
@@ -33,6 +33,8 @@ export function bubble(selection, projection, options = {}, clipid){
     : cols[Math.floor(Math.random() * cols.length)];
   let stroke = options.stroke ? options.stroke : "white";
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let strokeDasharray = options.strokeDasharray ?? "none";
+  let strokeOpacity = options.strokeOpacity ?? 1;
   let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
   let dorling = options.dorling ? options.dorling : false;
   let iteration = options.iteration ? options.iteration : 200;
@@ -97,8 +99,12 @@ export function bubble(selection, projection, options = {}, clipid){
     .attr("stroke", (d) =>
       chorotypo(features, stroke).getcol(d.properties[stroke.values] || undefined)
     )
-    .attr("stroke-width", strokeWidth)
+    .attr("stroke-width", (d) =>
+   thickness(features, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)
+ )
     .attr("fill-opacity", fillOpacity)
+    .attr("stroke-dasharray", strokeDasharray)
+    .attr("stroke-opacity", strokeOpacity)
     .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
     .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
     .attr("r", (d) => radius(d.properties[values]))
@@ -137,81 +143,7 @@ export function bubble(selection, projection, options = {}, clipid){
         });
 
   // legend (classes)
-
-  if (typeof fill == "object" && fill.type == "choro") {
-    legchoro(selection, {
-      x: fill.leg_x,
-      y: fill.leg_y,
-      w: fill.leg_w,
-      h: fill.leg_h,
-      stroke: fill.leg_stroke,
-      fillOpacity: fill.leg_fillOpacity,
-      strokeWidth: fill.leg_strokeWidth,
-      txtcol: fill.leg_txtcol,
-      title: fill.leg_title ? fill.leg_title : fill.values,
-      fontSize: fill.leg_fontSize,
-      fontSize2: fill.leg_fontSize2,
-      breaks: chorotypo(geojson.features, fill).breaks,
-      colors: chorotypo(geojson.features, fill).colors
-    });
-  }
-
-  if (typeof stroke == "object" && stroke.type == "choro") {
-    legchoro(selection, {
-      x: stroke.leg_x,
-      y: stroke.leg_y,
-      w: stroke.leg_w,
-      h: stroke.leg_h,
-      stroke: stroke.leg_stroke,
-      fillOpacity: stroke.leg_fillOpacity,
-      strokeWidth: stroke.leg_strokeWidth,
-      txtcol: stroke.leg_txtcol,
-      title: stroke.leg_title ? stroke.leg_title : stroke.values,
-      fontSize: stroke.leg_fontSize,
-      fontSize2: stroke.leg_fontSize2,
-      breaks: chorotypo(geojson.features, stroke).breaks,
-      colors: chorotypo(geojson.features, stroke).colors
-    });
-  }
-
-  if (typeof fill == "object" && fill.type == "typo") {
-    legtypo(selection, {
-      x: fill.leg_x,
-      y: fill.leg_y,
-      w: fill.leg_w,
-      h: fill.leg_h,
-      stroke: fill.leg_stroke,
-      fillOpacity: fill.leg_fillOpacity,
-      strokeWidth: fill.leg_strokeWidth,
-      txtcol: fill.leg_txtcol,
-      title: fill.leg_title ? fill.leg_title : fill.values,
-      fontSize: fill.leg_fontSize,
-      fontSize2: fill.leg_fontSize2,
-      types: chorotypo(geojson.features, fill).types,
-      colors: chorotypo(geojson.features, fill).colors
-    });
-  }
-
-  if (typeof stroke == "object" && fill.type == "stroke") {
-    legtypo(selection, {
-      x: stroke.leg_x,
-      y: stroke.leg_y,
-      w: stroke.leg_w,
-      h: stroke.leg_h,
-      stroke: stroke.leg_stroke,
-      fillOpacity: stroke.leg_fillOpacity,
-      strokeWidth: stroke.leg_strokeWidth,
-      txtcol: stroke.leg_txtcol,
-      title: stroke.leg_title ? fill.leg_title : fill.values,
-      fontSize: stroke.leg_fontSize,
-      fontSize2: stroke.leg_fontSize2,
-      types: chorotypo(geojson.features, stroke).types,
-      colors: chorotypo(geojson.features, stroke).colors
-    });
-  }
-
-
-
+  legends(geojson, selection, fill, stroke, strokeWidth)
 
   // Legend (circles)
   let array = features.map((d) => Math.abs(+d.properties[values]));

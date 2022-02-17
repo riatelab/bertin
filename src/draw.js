@@ -4,27 +4,29 @@ import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
-import { graticule } from "./graticule.js";
-import { outline } from "./outline.js";
-import { addfooter } from "./footer.js";
-import { addheader } from "./header.js";
-import { simple } from "./layer-simple.js";
-import { bubble } from "./layer-bubble.js";
-import { mushroom } from "./layer-mushroom.js";
-import { missing } from "./layer-missing.js";
-import { getheight } from "./height.js";
-import { figuration } from "./figuration.js";
-import { getcenters } from "./centroids.js";
-import { shadow } from "./shadow.js";
-import { addscalebar } from "./scalebar.js";
-import { text } from "./text.js";
-import { label } from "./layer-label.js";
-import { links } from "./layer-links.js";
-import { spikes } from "./layer-spikes.js";
-import { dotcartogram } from "./layer-dotcartogram.js";
-import { proj4d3 } from "./proj4d3.js";
+// Helpers
+import { getheight } from "./helpers/height.js";
+import { figuration } from "./helpers/figuration.js";
+import { getcenters } from "./helpers/centroids.js";
+import { proj4d3 } from "./helpers/proj4d3.js";
 
-//import { plotHeader, plotFooter, plotGraticule, plotOutline, getHeight} from "./helpers/layout.js";
+// Layers
+import { graticule } from "./layers/graticule.js";
+import { outline } from "./layers/outline.js";
+import { addfooter } from "./layers/footer.js";
+import { addheader } from "./layers/header.js";
+import { simple } from "./layers/simple.js";
+import { bubble } from "./layers/bubble.js";
+import { mushroom } from "./layers/mushroom.js";
+import { missing } from "./layers/missing.js";
+import { shadow } from "./layers/shadow.js";
+import { addscalebar } from "./layers/scalebar.js";
+import { text } from "./layers/text.js";
+import { label } from "./layers/label.js";
+import { links } from "./layers/links.js";
+import { spikes } from "./layers/spikes.js";
+import { dotcartogram } from "./layers/dotcartogram.js";
+
 
 export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
@@ -114,10 +116,10 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   // Outline (fill)
   let o = layers.find((d) => d.type == "outline");
-  if (outline) {
+  if (o) {
     outline(svg, projection, {
       fill: o.fill,
-      fillOpacity:o.fillOpacity,
+      fillOpacity: o.fillOpacity,
       stroke: "none",
       strokeWidth: "none"
     });
@@ -127,13 +129,15 @@ export function draw({ params = {}, layers = {} } = {}) {
   layers.reverse().forEach((layer) => {
     // Graticule
     if (layer.type == "graticule") {
-      graticule(svg, projection, clipid, {
+      graticule(svg, projection, {
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
         strokeOpacity: layer.strokeOpacity,
         strokeDasharray: layer.strokeDasharray,
+        strokeLinecap: layer.strokeLinecap,
+        strokeLinejoin: layer.strokeLinejoin,
         step: layer.step
-      });
+      }, clipid);
     }
 
     // simple layers
@@ -143,8 +147,11 @@ export function draw({ params = {}, layers = {} } = {}) {
         fill: layer.fill,
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
+        strokeLinecap: layer.strokeLinecap,
+        strokeLinejoin: layer.strokeLinejoin,
         fillOpacity: layer.fillOpacity,
         strokeOpacity: layer.strokeOpacity,
+        strokeDasharray: layer.strokeDasharray,
         symbol: layer.symbol,
         symbol_size: layer.symbol_size,
         symbol_iteration: layer.symbol_iteration,
@@ -355,6 +362,8 @@ if (layer.type == "label") {
         stroke: layer.stroke,
         strokeWidth: layer.strokeWidth,
         fillOpacity: layer.fillOpacity,
+        strokeDasharray: layer.strokeDasharray,
+        strokeOpacity: layer.strokeOpacity,
         dorling: layer.dorling,
         iteration: layer.iteration,
         tooltip: layer.tooltip,
@@ -409,7 +418,7 @@ if (layer.type == "label") {
   }
 
   // Outline (stroke)
-  if (outline) {
+  if (o) {
     outline(svg, projection, {
       fill: "none",
       stroke: o.stroke,

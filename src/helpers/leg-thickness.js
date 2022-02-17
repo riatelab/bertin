@@ -6,7 +6,7 @@ import {rounding } from "./rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
-export function leglinks(selection, options = {}) {
+export function legthickness(selection, options = {}) {
   let x = options.x ?? null;
   let y = options.y ?? null;
   let valmax = options.valmax;
@@ -14,7 +14,9 @@ export function leglinks(selection, options = {}) {
   let title = options.title ?? null;
   let fontSize = options.fontSize ?? 14;
   let fontSize2 = options.fontSize2 ?? 10;
-  let fill = options.fill ?? "black";
+  let fill = options.fill ?? "none";
+  let stroke = options.stroke ?? "black";
+  let strokeWidth = options.strokeWidth ?? 0.4;
   let fillOpacity = options.fillOpacity ?? 1;
   let txtcol = options.txtcol ?? "#363636";
   let w = options.w ?? 75;
@@ -51,8 +53,9 @@ export function leglinks(selection, options = {}) {
           y + delta + sizemax
         } Z `
       )
-      .attr("stroke", "none")
+      .attr("stroke", stroke)
       .attr("fill", fill)
+      .attr("stroke-width", strokeWidth)
       .attr("fill-opacity", fillOpacity);
 
     leg

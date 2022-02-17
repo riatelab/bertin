@@ -7,21 +7,16 @@ import * as d3scalechromatic from "d3-scale-chromatic";
 import * as d3scale from "d3-scale";
 import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3geo, d3shape, d3scale, d3scalechromatic,  d3force);
-// import {figuration } from "./figuration.js";
-// // import {addtooltip } from "./tooltip.js";
-import {legbox } from "./leg-box.js";
-// // import {chorotypo} from "./chorotypo.js";
-// // import {legchoro } from "./leg-choro.js"
-// // import {legtypo } from "./leg-typo.js";
 
-
-import {addtooltip } from "./tooltip.js";
-import {legchoro } from "./leg-choro.js"
-import {legtypo } from "./leg-typo.js";
-import {poly2points } from "./poly2points.js";
-import {figuration } from "./figuration.js";
-import {chorotypo } from "./chorotypo.js";
-import {thickness } from "./thickness.js";
+import {legbox } from "./helpers/leg-box.js";
+import {legends } from "./helpers/legends.js";
+import {addtooltip } from "./helpers/tooltip.js";
+//import {legchoro } from "./helpers/leg-choro.js"
+//import {legtypo } from "./helpers/leg-typo.js";
+import {poly2points } from "./helpers/poly2points.js";
+import {figuration } from "./helpers/figuration.js";
+import {chorotypo } from "./helpers/chorotypo.js";
+import {thickness } from "./helpers/thickness.js";
 
 //import {thickness } from "./thickness.js";
 
@@ -38,6 +33,9 @@ export function simple(selection, projection, options = {}, clipid) {
    ];
    let geojson = options.geojson;
    let fill = options.fill ?? cols[Math.floor(Math.random() * cols.length)];
+   let strokeLinecap = options.strokeLinecap ?? "round";
+   let strokeLinejoin = options.strokeLinejoin ?? "round";
+   let strokeDasharray = options.strokeDasharray ?? "none";
    let stroke = options.stroke ?? "white";
    let strokeWidth = options.strokeWidth ?? 0.5;
    let fillOpacity = options.fillOpacity ?? 1;
@@ -61,9 +59,6 @@ export function simple(selection, projection, options = {}, clipid) {
    if (figuration(geojson) == "l" || figuration(geojson) == "z") {
      selection
        .append("g")
-       .attr(":inkscape:groupmode", "layer")
-       .attr("id", "simple layer")
-       .attr(":inkscape:label", "simple layer")
        .selectAll("path")
        .data(geojson.features)
        .join("path")
@@ -75,10 +70,13 @@ export function simple(selection, projection, options = {}, clipid) {
          chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
        )
        .attr("stroke-width", (d) =>
-      thickness(geojson.features, strokeWidth)(d.properties[strokeWidth.values] || undefined)
+      thickness(geojson.features, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)
     )
        .attr("fill-opacity", fillOpacity)
        .attr("stroke-opacity", strokeOpacity)
+       .attr("stroke-linecap", strokeLinecap)
+       .attr("stroke-linejoin", strokeLinejoin)
+       .attr("stroke-dasharray", strokeDasharray)
        .attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
          if (tooltip != "") {
@@ -150,9 +148,9 @@ export function simple(selection, projection, options = {}, clipid) {
 
      selection
        .append("g")
-       .attr(":inkscape:groupmode", "layer")
-       .attr("id", "simple layer")
-       .attr(":inkscape:label", "simple layer")
+       // .attr(":inkscape:groupmode", "layer")
+       // .attr("id", "simple layer")
+       // .attr(":inkscape:label", "simple layer")
        .selectAll("path")
        .data(geojson.features)
        .join("path")
@@ -174,10 +172,13 @@ export function simple(selection, projection, options = {}, clipid) {
              chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
            )
            .attr("stroke-width", (d) =>
-      thickness(geojson.features, strokeWidth)(d.properties[strokeWidth.values] || undefined)
+      thickness(geojson.features, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)
            )
        .attr("fill-opacity", fillOpacity)
        .attr("stroke-opacity", strokeOpacity)
+      .attr("stroke-linecap", strokeLinecap)
+      .attr("stroke-linejoin", strokeLinejoin)
+     .attr("stroke-dasharray", strokeDasharray)
        //.attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
          if (tooltip != "") {
@@ -219,82 +220,9 @@ export function simple(selection, projection, options = {}, clipid) {
    }
 
    // Legend
+   legends(geojson, selection, fill, stroke, strokeWidth)
 
-   // legend (classes)
-
-   if (typeof fill == "object" && fill.type == "choro") {
-     legchoro(selection, {
-       x: fill.leg_x,
-       y: fill.leg_y,
-       w: fill.leg_w,
-       h: fill.leg_h,
-       stroke: fill.leg_stroke,
-       fillOpacity: fill.leg_fillOpacity,
-       strokeWidth: fill.leg_strokeWidth,
-       txtcol: fill.leg_txtcol,
-       title: fill.leg_title ? fill.leg_title : fill.values,
-       fontSize: fill.leg_fontSize,
-       fontSize2: fill.leg_fontSize2,
-       breaks: chorotypo(geojson.features, fill).breaks,
-       colors: chorotypo(geojson.features, fill).colors
-     });
-   }
-
-   if (typeof stroke == "object" && stroke.type == "choro") {
-     legchoro(selection, {
-       x: stroke.leg_x,
-       y: stroke.leg_y,
-       w: stroke.leg_w,
-       h: stroke.leg_h,
-       stroke: stroke.leg_stroke,
-       fillOpacity: stroke.leg_fillOpacity,
-       strokeWidth: stroke.leg_strokeWidth,
-       txtcol: stroke.leg_txtcol,
-       title: stroke.leg_title ? stroke.leg_title : stroke.values,
-       fontSize: stroke.leg_fontSize,
-       fontSize2: stroke.leg_fontSize2,
-       breaks: chorotypo(geojson.features, stroke).breaks,
-       colors: chorotypo(geojson.features, stroke).colors
-     });
-   }
-
-   if (typeof fill == "object" && fill.type == "typo") {
-     legtypo(selection, {
-       x: fill.leg_x,
-       y: fill.leg_y,
-       w: fill.leg_w,
-       h: fill.leg_h,
-       stroke: fill.leg_stroke,
-       fillOpacity: fill.leg_fillOpacity,
-       strokeWidth: fill.leg_strokeWidth,
-       txtcol: fill.leg_txtcol,
-       title: fill.leg_title ? fill.leg_title : fill.values,
-       fontSize: fill.leg_fontSize,
-       fontSize2: fill.leg_fontSize2,
-       types: chorotypo(geojson.features, fill).types,
-       colors: chorotypo(geojson.features, fill).colors
-     });
-   }
-
-   if (typeof stroke == "object" && fill.type == "stroke") {
-     legtypo(selection, {
-       x: stroke.leg_x,
-       y: stroke.leg_y,
-       w: stroke.leg_w,
-       h: stroke.leg_h,
-       stroke: stroke.leg_stroke,
-       fillOpacity: stroke.leg_fillOpacity,
-       strokeWidth: stroke.leg_strokeWidth,
-       txtcol: stroke.leg_txtcol,
-       title: stroke.leg_title ? fill.leg_title : fill.values,
-       fontSize: stroke.leg_fontSize,
-       fontSize2: stroke.leg_fontSize2,
-       types: chorotypo(geojson.features, stroke).types,
-       colors: chorotypo(geojson.features, stroke).colors
-     });
-   }
-
-
+   // legend (box)
    legbox(selection, {
      x: options.leg_x,
      y: options.leg_y,

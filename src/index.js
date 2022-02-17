@@ -17,3 +17,6 @@ export {missing} from "./layer-missing.js"
 export {spikes} from "./layer-spikes.js"
 export {outline} from "./outline.js"
 export {graticule} from "./graticule.js"
+
+export {legends} from "./helpers/legends.js"
+export {thickness} from "./helpers/thickness.js"

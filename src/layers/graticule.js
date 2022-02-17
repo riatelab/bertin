@@ -10,13 +10,16 @@ export function graticule(selection, projection, options = {}, clipid) {
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.8;
   let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 0.5;
   let strokeDasharray = options.strokeDasharray ? options.strokeDasharray : 2;
+  let strokeLinecap = options.strokeLinecap ?? "round"
+  let strokeLinejoin = options.strokeLinejoin ?? "round"
+
   let step = options.step ? options.step : [10, 10];
   step = Array.isArray(step) ? step : [step, step];
   selection
     .append("g")
-    .attr(":inkscape:groupmode", "layer")
-    .attr("id", "graticule")
-    .attr(":inkscape:label", "graticule")
+    // .attr(":inkscape:groupmode", "layer")
+    // .attr("id", "graticule")
+    // .attr(":inkscape:label", "graticule")
     .append("path")
     .datum(d3.geoGraticule().step(step))
     .attr("d", d3.geoPath(projection))
@@ -24,6 +27,8 @@ export function graticule(selection, projection, options = {}, clipid) {
     .style("stroke", stroke)
     .style("stroke-width", strokeWidth)
     .style("stroke-opacity", strokeOpacity)
+    .style("stroke-linecap", strokeLinecap)
+    .style("stroke-linejoin", strokeLinejoin)
     .style("stroke-dasharray", strokeDasharray)
     .attr("clip-path", `url(#clip_${clipid}`)
 }

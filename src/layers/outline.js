@@ -12,9 +12,9 @@ export function outline(selection, projection,  options = {}) {
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
   selection
     .append("g")
-    .attr(":inkscape:groupmode", "layer")
-    .attr("id", "outline")
-    .attr(":inkscape:label", "outline")
+    // .attr(":inkscape:groupmode", "layer")
+    // .attr("id", "outline")
+    // .attr(":inkscape:label", "outline")
     .append("path")
     .attr("d", d3.geoPath(projection)({ type: "Sphere" }))
     .attr("fill", fill)
