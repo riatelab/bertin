@@ -205,21 +205,6 @@ export function draw({ params = {}, layers = {} } = {}) {
   }, clipid);
 }
 
-    // links layers
-    if (layer.type == "links") {
-      links(svg, projection, {
-        geojson : layer.geojson,
-        geojson_id : layer.geojson_id,
-        data : layer.data,
-        data_i : layer.data_i,
-        data_j : layer.data_j,
-        stroke : layer.stroke,
-        strokeOpacity : layer.strokeOpacity,
-        strokeWidth : layer.strokeWidth,
-        strokeLinecap : layer.strokeLinecap,
-    }, clipid);
-    }
-
     // mushroom layer
 
     if (layer.type == "mushroom") {
