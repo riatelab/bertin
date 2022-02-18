@@ -71,7 +71,7 @@ legtypo(selection, {
     fillOpacity: stroke.leg_fillOpacity,
     strokeWidth: stroke.leg_strokeWidth,
     txtcol: stroke.leg_txtcol,
-    title: stroke.leg_title ? fill.leg_title : fill.values,
+    title: stroke.leg_title ? stroke.leg_title : stroke.values,
     fontSize: stroke.leg_fontSize,
     fontSize2: stroke.leg_fontSize2,
     types: chorotypo(geojson.features, stroke).types,

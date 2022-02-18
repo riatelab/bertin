@@ -3,11 +3,10 @@ export {match} from "./match.js";
 export {merge} from "./merge.js";
 export {quickdraw} from "./quickdraw.js";
 export {table2geo} from "./table2geo.js";
-
+export {links} from "./links.js";
 
 // layer functions
 
-export {links} from "./layers/links.js"
 export {simple} from "./layers/simple.js"
 export {mushroom} from "./layers/mushroom.js"
 export {bubble} from "./layers/bubble.js"
@@ -19,3 +18,5 @@ export {outline} from "./layers/outline.js"
 export {graticule} from "./layers/graticule.js"
 
 //export {legends} from "./helpers/legends.js"
+
+export {thickness} from "./helpers/thickness.js"

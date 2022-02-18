@@ -20,10 +20,9 @@ import { bubble } from "./layers/bubble.js";
 import { mushroom } from "./layers/mushroom.js";
 import { missing } from "./layers/missing.js";
 import { shadow } from "./layers/shadow.js";
-import { addscalebar } from "./layers/scalebar.js";
+import { scalebar } from "./layers/scalebar.js";
 import { text } from "./layers/text.js";
 import { label } from "./layers/label.js";
-import { links } from "./layers/links.js";
 import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 
@@ -299,8 +298,7 @@ if (layer.type == "label") {
 
     // shadow
     if (layer.type == "shadow") {
-      shadow(svg, projection, clipid, defs, {
-        geojson: layer.geojson,
+      shadow(svg, projection, layer.geojson, clipid, defs, {
         col: layer.col,
         dx: layer.dx,
         dy: layer.dy,

@@ -7,7 +7,18 @@ export function thickness(data, _) {
     return {getthickness: () => +_};
   }
 
-  if (typeof _ == "object" && typeof _ != "number" && typeof _ != "string") {
+
+
+  if (data.length == 0) {
+    return {
+      getthickness: () => 0,
+      valmax: 0,
+      sizemax: 0
+    };
+
+  }
+
+  if (typeof _ != "number" && typeof _ != "string") {
     let k = _.k ?? 10;
     let values = _.values;
     let fixmax = _.fixmax ?? undefined;
@@ -18,21 +29,21 @@ export function thickness(data, _) {
 
     if (typeof _ == "string" || typeof _ == "number")
       return {
-        getcol: (d) => input
+        getcol: (d) => _
       };
 
+        const v =
+          fixmax == undefined
+            ? d3.max(data.map((d) => Math.abs(+d[values])))
+            : fixmax;
 
-    const valmax =
-      fixmax == undefined
-        ? d3.max(data.map((d) => Math.abs(+d[values])))
-        : fixmax;
 
-    const sizemax = d3.scaleLinear().domain([0, valmax]).range([0, k])(valmax)
+            const valmax = d3.max(data.map((d) => Math.abs(+d[values])))
 
     return {
-      getthickness: d3.scaleLinear().domain([0, valmax]).range([0, k]),
-      valmax : valmax,
-      sizemax: sizemax
+      getthickness: d3.scaleLinear().domain([0, v]).range([0, k]),
+      valmax: valmax,
+      sizemax: d3.scaleLinear().domain([0, v]).range([0, k])(valmax)
     };
 
 

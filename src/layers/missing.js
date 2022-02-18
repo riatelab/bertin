@@ -29,9 +29,6 @@ export function missing(selection, projection, options = {}, clipid){
 
   selection
     .append("g")
-    .attr(":inkscape:groupmode", "layer")
-    .attr("id", "missing")
-    .attr(":inkscape:label", "missing")
     .selectAll("path")
     .data(missing)
     .join("path")

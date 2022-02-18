@@ -8,7 +8,7 @@ import * as topojsonclient from "topojson-client";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 const topojson = Object.assign({}, topojsonserver, topojsonclient);
 
-import {figuration } from "../helpers/figuration.js";
+import { figuration } from "../helpers/figuration.js";
 
 export function shadow(selection, projection, geojson, clipid, defs, options = {}) {
   let col = options.col ? options.col : "#35383d";
@@ -40,9 +40,6 @@ export function shadow(selection, projection, geojson, clipid, defs, options = {
 
   selection
     .append("g")
-    .attr(":inkscape:groupmode", "shadow")
-    .attr("id", "simple layer")
-    .attr(":inkscape:label", "shadow")
     .append("path")
     .datum(merged)
     .attr("d", path)

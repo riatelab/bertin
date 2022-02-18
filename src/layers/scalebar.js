@@ -2,7 +2,6 @@ import * as d3selection from "d3-selection";
 import * as geoScaleBar from "d3-geo-scale-bar"
 const d3 = Object.assign({}, d3selection, geoScaleBar);
 
-
 export function scalebar(selection, projection, width, height, options = {}) {
   let x = options.x ? options.x : 20;
   let y = options.y ? options.y : height - 30;
