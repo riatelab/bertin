@@ -16,6 +16,8 @@ export function chorotypo(features, input){
     let pal = input.pal ? input.pal : "Blues";
     let nbreaks = input.nbreaks ? input.nbreaks : 5;
     let breaks = input.breaks ? input.breaks : null;
+    let k = input.k ? input.k : 1;
+    let middle = input.middle ? input.middle : false;
     let colors = input.colors ? input.colors : null;
     let method = input.method ? input.method : "quantile";
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
@@ -29,6 +31,8 @@ export function chorotypo(features, input){
         values: features.map((d) => +d.properties[values]),
         method: method,
         nb: nbreaks,
+        k:k,
+        middle:middle,
         precision: leg_round
       });
     } else {
