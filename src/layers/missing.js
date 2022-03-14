@@ -29,6 +29,7 @@ export function missing(selection, projection, options = {}, clipid){
 
   selection
     .append("g")
+    .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
     .selectAll("path")
     .data(missing)
     .join("path")
@@ -37,7 +38,7 @@ export function missing(selection, projection, options = {}, clipid){
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
     .attr("fill-opacity", fillOpacity)
-    .attr("clip-path", `url(#clip_${clipid}`);
+
 
   // Legend
 

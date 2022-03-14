@@ -53,10 +53,13 @@ export function simple(selection, projection, options = {}, clipid) {
      strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
    }
 
+
+//console.log(clipid)
    // If lines or polygons
    if (figuration(geojson) == "l" || figuration(geojson) == "z") {
      selection
        .append("g")
+       .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
        .selectAll("path")
        .data(geojson.features)
        .join("path")
@@ -75,7 +78,7 @@ export function simple(selection, projection, options = {}, clipid) {
        .attr("stroke-linecap", strokeLinecap)
        .attr("stroke-linejoin", strokeLinejoin)
        .attr("stroke-dasharray", strokeDasharray)
-       .attr("clip-path", `url(#clip_${clipid}`)
+       //.attr("clip-path", `url(#clip_${clipid}`)
        .on("touchmove mousemove", function (event, d) {
          if (tooltip != "") {
            if (Array.isArray(tooltip)) {

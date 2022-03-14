@@ -40,13 +40,13 @@ export function shadow(selection, projection, geojson, clipid, defs, options = {
 
   selection
     .append("g")
+    .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
     .append("path")
     .datum(merged)
     .attr("d", path)
     .attr("fill", fill)
     .attr("opacity", opacity)
     .attr("stroke", stroke)
-    .attr("clip-path", `url(#clip_${clipid}`)
     .attr("filter", "url(#blur)")
     .attr("transform", `translate(${dx} ${dy})`);
 }

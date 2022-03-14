@@ -41,6 +41,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   let extent = params.extent ? params.extent : null;
   let margin = params.margin ? params.margin : 1;
   let background = params.background;
+  let clip = params.clip ?? false // test
 
   // optimal heights
   let height = getheight(layers, extent, margin, projection, width);
@@ -94,13 +95,16 @@ export function draw({ params = {}, layers = {} } = {}) {
     );
 
   // Clip
-  const clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+let clipid = null
+if (clip){ // test
+  clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
   svg
     .append("clipPath")
     .attr("id", `clip_${clipid}`)
     .append("path")
     .datum({ type: "Sphere" })
     .attr("d", d3.geoPath(projection));
+} // test
 
   // Background color
   if (background) {

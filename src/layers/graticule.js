@@ -17,9 +17,7 @@ export function graticule(selection, projection, options = {}, clipid) {
   step = Array.isArray(step) ? step : [step, step];
   selection
     .append("g")
-    // .attr(":inkscape:groupmode", "layer")
-    // .attr("id", "graticule")
-    // .attr(":inkscape:label", "graticule")
+    .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
     .append("path")
     .datum(d3.geoGraticule().step(step))
     .attr("d", d3.geoPath(projection))
@@ -30,5 +28,5 @@ export function graticule(selection, projection, options = {}, clipid) {
     .style("stroke-linecap", strokeLinecap)
     .style("stroke-linejoin", strokeLinejoin)
     .style("stroke-dasharray", strokeDasharray)
-    .attr("clip-path", `url(#clip_${clipid}`)
+
 }
