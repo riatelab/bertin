@@ -26,6 +26,9 @@ export function chorotypo(features, input){
     if (method == "q6") {
       nbreaks = 6;
     }
+
+
+
     if (breaks == null) {
       breaks = stat.breaks({
         values: features.map((d) => +d.properties[values]),
@@ -40,7 +43,7 @@ export function chorotypo(features, input){
     }
 
     if (colors == null) {
-      colors = d3[`scheme${pal}`][nbreaks];
+      colors = d3[`scheme${pal}`][breaks.length - 1];
     }
 
     let b = [...breaks];
