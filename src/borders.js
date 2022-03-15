@@ -2,6 +2,9 @@ import * as topojsonclient from "topojson-client";
 import * as topojsonserver from "topojson-server";
 const topojson = Object.assign({}, topojsonclient, topojsonserver);
 
+import * as d3array from "d3-array";
+const d3 = Object.assign({}, d3array);
+
 export function borders({ geojson, id, values, type = "rel", share = null }) {
   const topo = topojson.topology({ d: geojson });
   const ids = geojson.features.map((d) => d.properties[id]);
