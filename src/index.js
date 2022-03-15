@@ -4,6 +4,7 @@ export {merge} from "./merge.js";
 export {quickdraw} from "./quickdraw.js";
 export {table2geo} from "./table2geo.js";
 export {links} from "./links.js";
+export {borders} from "./borders.js";
 
 // layer functions
 
