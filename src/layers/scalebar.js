@@ -16,6 +16,7 @@ export function scalebar(selection, projection, width, height, options = {}) {
     .size([width, height])
     .left(x)
     .top(y)
+    .label(units == "miles" ? "Miles" : "Km") 
     .units(units == "miles" ? d3.geoScaleMiles : d3.geoScaleKilometers)
     .orient(d3.geoScaleBottom)
     .tickPadding(5)
