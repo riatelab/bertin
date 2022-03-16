@@ -9,6 +9,7 @@ export {borders} from "./borders.js";
 // layer functions
 
 export {simple} from "./layers/simple.js"
+export {simple2} from "./layers/simple2.js"
 export {mushroom} from "./layers/mushroom.js"
 export {bubble} from "./layers/bubble.js"
 export {dotcartogram} from "./layers/dotcartogram.js"

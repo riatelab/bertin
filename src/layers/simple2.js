@@ -10,7 +10,7 @@ const d3 = Object.assign({}, d3selection, d3geo, d3shape, d3scale, d3scalechroma
 
 import { legbox } from "../helpers/leg-box.js";
 import { legends } from "../helpers/legends.js";
-import { addtooltip } from "../helpers/tooltip.js";
+import { addtooltip, tooltiptype } from "../helpers/tooltip2.js";
 import { poly2points } from "../helpers/poly2points.js";
 import { figuration } from "../helpers/figuration.js";
 import { chorotypo } from "../helpers/chorotypo.js";
@@ -18,7 +18,7 @@ import { thickness } from "../helpers/thickness.js";
 
 //import {thickness } from "./thickness.js";
 
-export function simple(selection, projection, options = {}, clipid) {
+export function simple2(selection, projection, options = {}, clipid, width, height) {
   let cols = [
      "#66c2a5",
      "#fc8d62",
@@ -53,8 +53,6 @@ export function simple(selection, projection, options = {}, clipid) {
      strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
    }
 
-
-//console.log(clipid)
    // If lines or polygons
    if (figuration(geojson) == "l" || figuration(geojson) == "z") {
      selection
@@ -79,42 +77,51 @@ export function simple(selection, projection, options = {}, clipid) {
        .attr("stroke-linejoin", strokeLinejoin)
        .attr("stroke-dasharray", strokeDasharray)
        .on("touchmove mousemove", function (event, d) {
-         if (tooltip != "") {
-           if (Array.isArray(tooltip)) {
-             selection
-               .select("#info")
-               .call(
-                 addtooltip,
-                 `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
-                   tooltip[2]
-                 }`
-               );
-           } else {
-             selection
-               .select("#info")
-               .call(addtooltip, `${d.properties[tooltip]}`);
+
+     if (tooltip != "") {
+         selection.select("#info").call(
+           addtooltip,
+
+           {
+             fields: (function () {
+               const fields = Array.isArray(tooltip.fields)
+                 ? tooltip.fields
+                 : [tooltip.fields];
+               let result = [];
+               fields.forEach((e) => {
+                 result.push(
+                   e[0] == "$" ? `${d.properties[e.substr(1, e.length)]}` : e
+                 );
+               });
+               return result;
+             })(),
+             fontWeight: tooltip.fontWeight,
+             fontSize: tooltip.fontSize,
+             fontStyle: tooltip.fontStyle,
+             fill: tooltip.fill,
+             stroke: tooltip.stroke,
+             type: tooltiptype(d3.pointer(event, this), width, height)
            }
-         }
-         if (tooltip != "") {
-           selection
-             .select("#info")
-             .attr("transform", `translate(${d3.pointer(event, this)})`);
+         );
+       }
+       if (tooltip != "") {
+         selection
+           .select("#info")
+           .attr("transform", `translate(${d3.pointer(event, this)})`);
            d3.select(this)
-             //.attr("stroke-width", strokeWidth + 0.5)
              .attr("stroke-opacity", strokeOpacity - 0.3)
              .attr("fill-opacity", fillOpacity - 0.3)
              .raise();
-         }
-       })
-       .on("touchend mouseleave", function () {
-         selection.select("#info").call(addtooltip, null);
-         d3.select(this)
-            .attr("stroke-opacity", strokeOpacity)
-           .attr("fill-opacity", fillOpacity)
-           .lower();
-       });
-   }
-
+       }
+     })
+     .on("touchend mouseleave", function () {
+       selection.select("#info").call(addtooltip, null);
+       d3.select(this)
+       .attr("stroke-opacity", strokeOpacity)
+      .attr("fill-opacity", fillOpacity)
+      .lower();
+     });
+ }
    // If points
    if (figuration(geojson) == "p") {
      const simulation = d3
