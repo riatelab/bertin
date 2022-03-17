@@ -3,8 +3,8 @@ const d3 = Object.assign({}, d3selection);
 
 
 export function tooltiptype(pointer, width, height){
-  const x_margin = 0.25 * width
-  const y_margin = 0.20 * height
+  const x_margin = 0.33 * width
+  const y_margin = 0.25 * height
 
   if (pointer[0] < x_margin && pointer[1] <y_margin) { return "bottomright";}
   if (pointer[0] > width - x_margin && pointer[1] <y_margin) { return "bottomleft";}
@@ -31,9 +31,9 @@ export function addtooltip(g, params) {
   const strokeOpacity = params.strokeOpacity ?? 1;
   const stroke = params.stroke ?? "#4a4d4b";
   const type = params.type ?? "bottom";
-  const col =  params.col ?? "#4d4545";
-
   const l = fields.length;
+  let col =  params.col ?? "#4d4545";
+  if(!Array.isArray(col)){col = Array(l).fill(col) }
 
   let fontWeight = params.fontWeight;
   if (fontWeight == undefined && l == 1) { fontWeight = ["bold"]; }
@@ -110,14 +110,11 @@ export function addtooltip(g, params) {
       break;
     case "left":
       text.attr("transform", `translate(${-w - 15},${-y - h / 2})`);
-      path.attr(
-        "d",
-        `M0,0l-5,5v${h / 2}h${-w - 20}v${-h - 10}h${w + 20}v${h / 2}z`
-      );
+      path.attr("d", `M0,0l-5,5v${h / 2 + 5}h${-w - 20}v${-h - 20}h${w + 20}v${h / 2 + 5}z`);
       break;
     case "right":
       text.attr("transform", `translate(${15},${-y - h / 2})`);
-      path.attr( "d",`M0,0l5,5v${h / 2}h${w + 20}v${-h - 10}h${-w - 20}v${h / 2}z`);
+      path.attr( "d", `M0,0l5,5v${h / 2 + 5}h${w + 20}v${-h - 20}h${-w - 20}v${h / 2 + 5}z`);
       break;
     case "topleft":
       text.attr("transform", `translate(${-w - 10},${-15 - y - h})`);
