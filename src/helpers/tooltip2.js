@@ -3,11 +3,11 @@ const d3 = Object.assign({}, d3selection);
 
 
 export function tooltiptype(pointer, width, height){
-  const x_margin = 0.2 * width
-  const y_margin = 0.15 * height
+  const x_margin = 0.25 * width
+  const y_margin = 0.20 * height
 
-  if (pointer[0] < x_margin && pointer[1] <y_margin) { return "bottomleft";}
-  if (pointer[0] > width - x_margin && pointer[1] <y_margin) { return "bottomright";}
+  if (pointer[0] < x_margin && pointer[1] <y_margin) { return "bottomright";}
+  if (pointer[0] > width - x_margin && pointer[1] <y_margin) { return "bottomleft";}
   if (pointer[0] < x_margin && pointer[1] > height - y_margin) { return "topright";}
   if (pointer[0] > width - x_margin && pointer[1] > height - y_margin) { return "topleft";}
   if (pointer[1] > height - y_margin) { return "top";}
@@ -120,11 +120,11 @@ export function addtooltip(g, params) {
       text.attr("transform", `translate(${10},${-15 - y - h})`);
       path.attr("d", `M0,0v${-h - 5 - 20}h${w + 20}v${h + 20}h${-w - 15}z`);
       break;
-    case "bottomright":
+    case "bottomleft":
       text.attr("transform", `translate(${-w - 10},${15 - y})`);
       path.attr("d", `M0,0v${+h + 5 + 20}h${-w - 20}v${-h - 20}h${+w + 15}z`);
       break;
-    case "bottomleft":
+    case "bottomright":
       text.attr("transform", `translate(${10},${15 - y})`);
       path.attr("d", `M0,0v${+h + 5 + 20}h${w + 20}v${-h - 20}h${-w - 15}z`);
       break;

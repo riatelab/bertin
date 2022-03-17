@@ -44,6 +44,7 @@ export function simple(selection, projection, options = {}, clipid) {
    let symbol_iteration = options.symbol_iteration ?? 200
    let symbol_shift = options.symbol_shift ?? 0;
 
+
    // If lines
    if (figuration(geojson) == "l") {
      stroke = options.stroke

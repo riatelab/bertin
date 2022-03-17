@@ -39,6 +39,8 @@ export function simple2(selection, projection, options = {}, clipid, width, heig
    let fillOpacity = options.fillOpacity ?? 1;
    let strokeOpacity = options.strokeOpacity ?? 1;
    let tooltip = options.tooltip ? options.tooltip : "";
+   if (Array.isArray(tooltip)) { tooltip = { fields: tooltip }; }
+   if (typeof tooltip == "string") { tooltip = { fields: [tooltip] };}
    let symbol = options.symbol ?? "circle";
    let symbol_size = options.symbol_size ?? 40;
    let symbol_iteration = options.symbol_iteration ?? 200
@@ -155,9 +157,6 @@ export function simple2(selection, projection, options = {}, clipid, width, heig
 
      selection
        .append("g")
-       // .attr(":inkscape:groupmode", "layer")
-       // .attr("id", "simple layer")
-       // .attr(":inkscape:label", "simple layer")
        .selectAll("path")
        .data(geojson.features)
        .join("path")
@@ -186,44 +185,95 @@ export function simple2(selection, projection, options = {}, clipid, width, heig
       .attr("stroke-linecap", strokeLinecap)
       .attr("stroke-linejoin", strokeLinejoin)
      .attr("stroke-dasharray", strokeDasharray)
-       //.attr("clip-path", `url(#clip_${clipid}`)
-       .on("touchmove mousemove", function (event, d) {
-         if (tooltip != "") {
-           if (Array.isArray(tooltip)) {
-             selection
-               .select("#info")
-               .call(
-                 addtooltip,
-                 `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
-                   tooltip[2]
-                 }`
+     .on("touchmove mousemove", function (event, d) {
+
+   if (tooltip != "") {
+       selection.select("#info").call(
+         addtooltip,
+
+         {
+           fields: (function () {
+             const fields = Array.isArray(tooltip.fields)
+               ? tooltip.fields
+               : [tooltip.fields];
+             let result = [];
+             fields.forEach((e) => {
+               result.push(
+                 e[0] == "$" ? `${d.properties[e.substr(1, e.length)]}` : e
                );
-           } else {
-             selection
-               .select("#info")
-               .call(addtooltip, `${d.properties[tooltip]}`);
-           }
+             });
+             return result;
+           })(),
+           fontWeight: tooltip.fontWeight,
+           fontSize: tooltip.fontSize,
+           fontStyle: tooltip.fontStyle,
+           fill: tooltip.fill,
+           stroke: tooltip.stroke,
+           type: tooltiptype(symbol_shift ? [d.x, d.y] : projection(d.geometry.coordinates), width, height)
          }
-         if (tooltip != "") {
-           selection
-             .select("#info")
-             .attr("transform",   `translate(
-      ${symbol_shift ? d.x : projection(d.geometry.coordinates)[0]},
-      ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`);
-           d3.select(this)
-             //.attr("stroke-width", strokeWidth + 0.5)
-              .attr("stroke-opacity", strokeOpacity - 0.3)
-             .attr("fill-opacity", fillOpacity - 0.3)
-             .raise();
-         }
-       })
-       .on("touchend mouseleave", function () {
-         selection.select("#info").call(addtooltip, null);
+       );
+     }
+     if (tooltip != "") {
+       selection
+         .select("#info")
+        .attr("transform",   `translate(
+         ${symbol_shift ? d.x : projection(d.geometry.coordinates)[0]},
+         ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`);
          d3.select(this)
-           .attr("stroke-opacity", strokeOpacity)
-           .attr("fill-opacity", fillOpacity)
-           .lower();
-       });
+           .attr("stroke-opacity", strokeOpacity - 0.3)
+           .attr("fill-opacity", fillOpacity - 0.3)
+           //.raise();
+     }
+   })
+   .on("touchend mouseleave", function () {
+     selection.select("#info").call(addtooltip, null);
+     d3.select(this)
+     .attr("stroke-opacity", strokeOpacity)
+    .attr("fill-opacity", fillOpacity)
+    //.lower();
+   });
+
+
+      //  .on("touchmove mousemove", function (event, d) {
+      //    if (tooltip != "") {
+      //      if (Array.isArray(tooltip)) {
+      //        selection
+      //          .select("#info")
+      //          .call(
+      //            addtooltip,
+      //            `${d.properties[tooltip[0]]}\n${d.properties[tooltip[1]]}\n${
+      //              tooltip[2]
+      //            }`
+      //          );
+      //      } else {
+      //        selection
+      //          .select("#info")
+      //          .call(addtooltip, `${d.properties[tooltip]}`);
+      //      }
+      //    }
+      //    if (tooltip != "") {
+      //      selection
+      //        .select("#info")
+      //        .attr("transform",   `translate(
+      // ${symbol_shift ? d.x : projection(d.geometry.coordinates)[0]},
+      // ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`);
+      //      d3.select(this)
+      //        //.attr("stroke-width", strokeWidth + 0.5)
+      //         .attr("stroke-opacity", strokeOpacity - 0.3)
+      //        .attr("fill-opacity", fillOpacity - 0.3)
+      //        .raise();
+      //    }
+      //  })
+      //  .on("touchend mouseleave", function () {
+      //    selection.select("#info").call(addtooltip, null);
+      //    d3.select(this)
+      //      .attr("stroke-opacity", strokeOpacity)
+      //      .attr("fill-opacity", fillOpacity)
+      //      .lower();
+      //  });
+
+
+
    }
 
    // Legend
