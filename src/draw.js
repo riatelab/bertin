@@ -26,8 +26,6 @@ import { label } from "./layers/label.js";
 import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 
-import { simple2 } from "./layers/simple2.js";
-
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
@@ -149,41 +147,6 @@ if (clip){ // test
     // Simple 2 (test)
 
     // simple layers
-    if (layer.type == "layer" || layer.type == "simple2" || layer.type == undefined) {
-      simple2(svg, projection, {
-        geojson: layer.geojson,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        strokeLinecap: layer.strokeLinecap,
-        strokeLinejoin: layer.strokeLinejoin,
-        fillOpacity: layer.fillOpacity,
-        strokeOpacity: layer.strokeOpacity,
-        strokeDasharray: layer.strokeDasharray,
-        symbol: layer.symbol,
-        symbol_size: layer.symbol_size,
-        symbol_iteration: layer.symbol_iteration,
-        symbol_shift: layer.symbol_shift,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_w: layer.leg_w,
-        leg_h: layer.leg_h,
-        leg_title: layer.leg_title,
-        leg_text: layer.leg_text,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_stroke: layer.leg_stroke,
-        leg_fillOpacity: layer.leg_fillOpacity,
-        leg_fill: layer.leg_fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol
-      }, clipid, width, height);
-    }
-
-
-
-    // simple layers
     if (layer.type == "layer" || layer.type == "simple" || layer.type == undefined) {
       simple(svg, projection, {
         geojson: layer.geojson,
@@ -213,7 +176,7 @@ if (clip){ // test
         leg_fill: layer.leg_fill,
         leg_strokeWidth: layer.leg_strokeWidth,
         leg_txtcol: layer.leg_txtcol
-      }, clipid);
+      }, clipid, width, height);
     }
 
     // spikes layers
@@ -245,7 +208,7 @@ if (clip){ // test
     leg_strokeWidth: layer.leg_strokeWidth,
     leg_txtcol: layer.leg_txtcol,
     leg_round:layer.leg_round
-  }, clipid);
+  }, clipid, width, height);
 }
 
     // mushroom layer
@@ -276,7 +239,7 @@ if (clip){ // test
         leg_bottom_fill: layer.leg_bottom_fill,
         leg_stroke: layer.leg_stroke,
         leg_strokeWidth: layer.leg_strokeWidth
-      }, clipid);
+      }, clipid, width, height);
     }
 
     // labels layer
@@ -380,7 +343,7 @@ if (layer.type == "label") {
         leg_fill: layer.leg_fill,
         leg_txt: layer.leg_txt
 
-      }, clipid);
+      }, clipid, width, height);
     }
 
     // Bubbles
@@ -410,7 +373,7 @@ if (layer.type == "label") {
         leg_fontSize: layer.leg_fontSize,
         leg_fontSize2: layer.leg_fontSize2,
         leg_round: layer.leg_round
-      }, clipid);
+      }, clipid, width, height);
     }
 
     // Header

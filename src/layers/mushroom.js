@@ -6,11 +6,11 @@ import * as d3array from "d3-array";
 import * as d3scale from "d3-scale";
 const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
 
-import {addtooltip } from "../helpers/tooltip.js";
+import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import {legcircles } from "../helpers/leg-circles.js";
 import {poly2points } from "../helpers/poly2points.js";
 
-export function mushroom(selection, projection, options = {}, clipid) {
+export function mushroom(selection, projection, options = {}, clipid, width, height) {
   let geojson = options.geojson;
   let top_values = options.top_values;
   let bottom_values = options.bottom_values;
@@ -21,8 +21,12 @@ export function mushroom(selection, projection, options = {}, clipid) {
   let stroke = options.stroke ? options.stroke : "white";
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
   let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
-  let top_tooltip = options.top_tooltip ? options.top_tooltip : "";
-  let bottom_tooltip = options.bottom_tooltip ? options.bottom_tooltip : "";
+  let top_tooltip = options.top_tooltip ? options.top_tooltip : false;
+  if (Array.isArray(top_tooltip)) { top_tooltip = { fields: top_tooltip }; }
+  if (typeof top_tooltip == "string") { top_tooltip = { fields: [top_tooltip] };}
+  let bottom_tooltip = options.bottom_tooltip ? options.bottom_tooltip : false;
+  if (Array.isArray(bottom_tooltip)) { bottom_tooltip = { fields: bottom_tooltip }; }
+  if (typeof bottom_tooltip == "string") { bottom_tooltip = { fields: [bottom_tooltip] };}
 
   let leg_x = options.leg_x ? options.leg_x : null;
   let leg_y = options.leg_y ? options.leg_y : null;
@@ -70,37 +74,55 @@ export function mushroom(selection, projection, options = {}, clipid) {
       .attr("stroke-width", strokeWidth)
       .attr("clip-path", "url(#top-clip_" + clipid + i + ")")
       .on("touchmove mousemove", function (event, d) {
-        if (top_tooltip != "") {
-          if (Array.isArray(top_tooltip)) {
-            selection
-              .select("#info")
-              .call(
-                addtooltip,
-                `${features[i].properties[top_tooltip[0]]}\n${
-                  features[i].properties[top_tooltip[1]]
-                }\n${top_tooltip[2]}`
-              );
-          } else {
-            selection
-              .select("#info")
-              .call(addtooltip, `${d.properties[top_tooltip]}`);
+
+    if (top_tooltip) {
+        selection.select("#info").call(
+          addtooltip,
+
+          {
+            fields: (function () {
+              const fields = Array.isArray(top_tooltip.fields)
+                ? top_tooltip.fields
+                : [top_tooltip.fields];
+              let result = [];
+              fields.forEach((e) => {
+                result.push(
+                  e[0] == "$" ? `${features[i].properties[e.substr(1, e.length)]}` : e
+                );
+              });
+              return result;
+            })(),
+            fontWeight: top_tooltip.fontWeight,
+            fontSize: top_tooltip.fontSize,
+            fontStyle: top_tooltip.fontStyle,
+            fill: top_tooltip.fill,
+            stroke: top_tooltip.stroke,
+            strokeWidth: top_tooltip.strokeWidth,
+            fillOpacity: top_tooltip.fillOpacity,
+            strokeOpacity: top_tooltip.strokeOpacity,
+            col:top_tooltip.col,
+            type: tooltiptype(d3.pointer(event, this), width, height)
           }
-        }
-        if (top_tooltip != "") {
-          selection
-            .select("#info")
-            .attr("transform", `translate(${d3.pointer(event, this)})`);
+        );
+      }
+      if (top_tooltip) {
+        selection
+          .select("#info")
+          .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
-            .attr("stroke-width", strokeWidth + 0.5)
-            .attr("fill-opacity", fillOpacity - 0.3);
-        }
-      })
-      .on("touchend mouseleave", function () {
-        selection.select("#info").call(addtooltip, null);
-        d3.select(this)
-          .attr("stroke-width", strokeWidth)
-          .attr("fill-opacity", fillOpacity);
-      });
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3)
+            //.raise();
+      }
+    })
+    .on("touchend mouseleave", function () {
+      selection.select("#info").call(addtooltip, null);
+      d3.select(this)
+      .attr("stroke-opacity", strokeOpacity)
+     .attr("fill-opacity", fillOpacity)
+     //.lower();
+    });
+
     selection
       .append("clipPath")
       .attr("id", "top-clip_" + clipid + i)
@@ -120,38 +142,56 @@ export function mushroom(selection, projection, options = {}, clipid) {
       .attr("stroke", stroke)
       .attr("stroke-width", strokeWidth)
       .attr("clip-path", "url(#bottom-clip_" + clipid + i + ")")
-      .on("touchmove mousemove", function (event) {
-        if (bottom_tooltip != "") {
-          if (Array.isArray(bottom_tooltip)) {
-            selection
-              .select("#info")
-              .call(
-                addtooltip,
-                `${features[i].properties[bottom_tooltip[0]]}\n${
-                  features[i].properties[bottom_tooltip[1]]
-                }\n${bottom_tooltip[2]}`
-              );
-          } else {
-            selection
-              .select("#info")
-              .call(addtooltip, `${features[i].properties[bottom_tooltip]}`);
+      .on("touchmove mousemove", function (event, d) {
+
+    if (bottom_tooltip) {
+        selection.select("#info").call(
+          addtooltip,
+
+          {
+            fields: (function () {
+              const fields = Array.isArray(bottom_tooltip.fields)
+                ? bottom_tooltip.fields
+                : [bottom_tooltip.fields];
+              let result = [];
+              fields.forEach((e) => {
+                result.push(
+                  e[0] == "$" ? `${features[i].properties[e.substr(1, e.length)]}` : e
+                );
+              });
+              return result;
+            })(),
+            fontWeight: bottom_tooltip.fontWeight,
+            fontSize: bottom_tooltip.fontSize,
+            fontStyle: bottom_tooltip.fontStyle,
+            fill: bottom_tooltip.fill,
+            stroke: bottom_tooltip.stroke,
+            strokeWidth: bottom_tooltip.strokeWidth,
+            fillOpacity: bottom_tooltip.fillOpacity,
+            strokeOpacity: bottom_tooltip.strokeOpacity,
+            col:bottom_tooltip.col,
+            type: tooltiptype(d3.pointer(event, this), width, height)
           }
-        }
-        if (bottom_tooltip != "") {
-          selection
-            .select("#info")
-            .attr("transform", `translate(${d3.pointer(event, this)})`);
+        );
+      }
+      if (bottom_tooltip) {
+        selection
+          .select("#info")
+          .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
-            .attr("stroke-width", strokeWidth + 0.5)
-            .attr("fill-opacity", fillOpacity - 0.3);
-        }
-      })
-      .on("touchend mouseleave", function () {
-        selection.select("#info").call(addtooltip, null);
-        d3.select(this)
-          .attr("stroke-width", strokeWidth)
-          .attr("fill-opacity", fillOpacity);
-      });
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3)
+            //.raise();
+      }
+    })
+    .on("touchend mouseleave", function () {
+      selection.select("#info").call(addtooltip, null);
+      d3.select(this)
+      .attr("stroke-opacity", strokeOpacity)
+     .attr("fill-opacity", fillOpacity)
+     //.lower();
+    });
+
 
     selection
       .append("clipPath")
