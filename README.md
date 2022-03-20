@@ -14,7 +14,7 @@ Jacques Bertin (1918-2010) was a French cartographer, whose major contribution w
 
 #### <ins>In browser</ins>
 
-Last version
+Latest version
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/bertin" charset="utf-8"></script>
@@ -28,7 +28,7 @@ Pinned version
 
 #### <ins>In Observable</ins>
 
-Last version
+Latest version
 
 ~~~js
 bertin = require("bertin")
