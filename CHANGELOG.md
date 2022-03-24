@@ -5,6 +5,7 @@
 *  dependencies. d3 -> d3 modules ([7bf38eed](https://github.com/neocarto/bertin/commit/7bf38eed0ce65ece529afd7b715347500a60f906))
 
 ##### New Features
+* subgeo ([5bd10d1](https://github.com/neocarto/bertin/commit/5bd10d11d87326eb85f52caeb54498e329c44197)
 * topojson ([57b059d](https://github.com/neocarto/bertin/commit/57b059d2d8c8669da6ec223600efeef1e6a732cc))
 * tooltip ([23929633](https://github.com/neocarto/bertin/commit/239296339afa2115343b51342b6bfee16df687d6))
 * add parameters in tooltips ([d9b0394a](https://github.com/neocarto/bertin/commit/d9b0394a416921e4f24972aab035b10e54d44b35))
