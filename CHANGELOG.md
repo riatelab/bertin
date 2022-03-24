@@ -25,7 +25,8 @@
 *  rounding ([079641ab](https://github.com/neocarto/bertin/commit/079641ab420ee027a270cad072f984fb2e990dd9))
 
 ##### Bug Fixes
-
+* legend text size ([498754d](https://github.com/neocarto/bertin/commit/498754d143a1dd563e962f9014aa8ae120e64ed0))
+* fix Vertical centering for text in headers ([e63908](https://github.com/neocarto/bertin/commit/ae639084b065a8777ae56066197e34917d47fe4d))
 *  tooltip position ([ca9302ad](https://github.com/neocarto/bertin/commit/ca9302adcc3a0588a81fbb382990021136521b97))
 *  scalebar kilimeter -> km. Issue [#23](https://github.com/neocarto/bertin/pull/23) ([32be739d](https://github.com/neocarto/bertin/commit/32be739d0a98344bc1c677acb3d9e0941322cfd8))
 *  optional clip path to improve performance issue [#19](https://github.com/neocarto/bertin/pull/19) ([65bd9d91](https://github.com/neocarto/bertin/commit/65bd9d918a86b17ff1411cb0e490a88f4a8cdad5))
