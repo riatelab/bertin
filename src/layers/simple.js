@@ -255,8 +255,8 @@ export function simple(selection, projection, options = {}, clipid, width, heigh
      h: options.leg_h,
      title: options.leg_title,
      text: options.leg_text,
-     fontsize: options.leg_fontsize,
-     fontsize2: options.leg_fontsize2,
+     fontSize: options.leg_fontSize,
+     fontSize2: options.leg_fontSize2,
      stroke: options.leg_stroke,
      fillOpacity: options.leg_fillOpacity
        ? options.leg_fillOpacity
