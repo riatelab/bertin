@@ -18,8 +18,6 @@ export function text(selection, width, height, options = {}){
     let frame_stroke = options.frame_stroke ? options.frame_stroke : "none";
     let frame_strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
     let frame_opacity = options.frame_opacity ? options.frame_opacity : 1;
-    let x;
-    let y;
 
     switch (position) {
       case "topleft":
