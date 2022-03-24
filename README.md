@@ -1,6 +1,6 @@
 # bertin.js
 
-*Bertin.js is <ins>**under development**</ins> so not necessarily very stable yet. The names of the functions and the parameters are still subject to change. Bugs will be corrected as they occur. New features will be added in the next versions.*
+_Bertin.js is <ins>**under development**</ins> so not necessarily very stable yet. The names of the functions and the parameters are still subject to change. Bugs will be corrected as they occur. New features will be added in the next versions._
 
 ![](./img/banner.png)
 
@@ -23,7 +23,10 @@ Latest version
 Pinned version
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/bertin@0.3.2" charset="utf-8"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bertin@0.3.2"
+  charset="utf-8"
+></script>
 ```
 
 #### <ins>In Observable</ins>
@@ -31,13 +34,13 @@ Pinned version
 Latest version
 
 ```js
-bertin = require("bertin")
+bertin = require("bertin");
 ```
 
 Pinned version
 
 ```js
-bertin = require("bertin@0.3.2")
+bertin = require("bertin@0.3.2");
 ```
 
 ## 2. How to use?
@@ -80,7 +83,7 @@ The bertin.js library is really easy to use within Observable. You'll find many 
 
 #### <ins>Global parameters</ins>
 
-In the section *params*, we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
+In the section _params_, we define the global parameters of the map: its size, projection, background color, etc. To have access to a large number of projections, you will need to load the [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) library. This section is optional.
 
 <details><summary>Code</summary>
 
@@ -100,8 +103,8 @@ bertin.draw({
 
 - <b>projection</b>: a d3 function or proj4string defining the map projection. Cf [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) & [https://spatialreference.org](https://spatialreference.org/) (default: d3.geoEquirectangular())
 - <b>width</b>: width of the map (default:1000);
-- <b>extent</b>: a feature defing the extent e.g. a country (default: null)
-- <b>margin</b>: margin around features to be displayed. This option can be usefull if the stroke is very heavy (default: 1)
+- <b>extent</b>: a feature defining the extent e.g. a country (default: null)
+- <b>margin</b>: margin around features to be displayed. This option can be useful if the stroke is very heavy (default: 1)
 - <b>background</b>: color of the background (default: "none")
 
 </details>
@@ -110,7 +113,7 @@ bertin.draw({
 
 #### Simple layer
 
-The *layer* type allows to display a simple geojson layer (points, lines or polygons).[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js)) & [example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin)
+The _layer_ type allows to display a simple geojson layer (points, lines or polygons).[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js)) & [example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -139,7 +142,7 @@ bertin.draw({
 - <b>fillOpacity</b>: fill opacity (default:1)
 - <b>symbol</b>: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
 - <b>symbol_size</b>: if it is a dot layer, a number indicating the size of the symbol (default: 5)
-- <b>symbol_shift</b>: if it is a dot layer, use a value > 0 to swith symbols and avaoid overlay (default: 0)
+- <b>symbol_shift</b>: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
 - <b>symbol_iteration</b>: Number of iteration tu shift symbols (default: 200)
 
 Parameters of the legend
@@ -156,14 +159,13 @@ Parameters of the legend
 - <b>leg_stroke</b>: stroke of the box (default: "black")
 - <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 
 </details>
 
-
 #### Choropleth
 
-The *choro* type aims to draw Choropleth maps. This kind of representation is especially suitable for relative quantitative data (rates, indices, densities). The choro type can be applied to the fill or stroke property of a simple layer. [Example](https://observablehq.com/@neocartocnrs/bertin-js-chropoleth?collection=@neocartocnrs/bertin)
+The _choro_ type aims to draw Choropleth maps. This kind of representation is especially suitable for relative quantitative data (rates, indices, densities). The choro type can be applied to the fill or stroke property of a simple layer. [Example](https://observablehq.com/@neocartocnrs/bertin-js-chropoleth?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -201,7 +203,7 @@ bertin.draw({
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: Stroke width (default: 0.5)
-- <b>fillOpacity</b>: Fill opacity (dafault: 1)
+- <b>fillOpacity</b>: Fill opacity (default: 1)
 
 Parameters of the legend
 
@@ -215,13 +217,13 @@ Parameters of the legend
 - <b>leg_stroke</b>: stroke of the box (default: "black")
 - <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 - <b>leg_round</b>: Number of digits (default: undefined)
 </details>
 
 #### Typology
 
-The *typo* type allows to realize a qualitative map. The choro type can be applied to the fill or stroke property of a simple layer. [Example](https://observablehq.com/@neocartocnrs/bertin-js-typo?collection=@neocartocnrs/bertin)
+The _typo_ type allows to realize a qualitative map. The choro type can be applied to the fill or stroke property of a simple layer. [Example](https://observablehq.com/@neocartocnrs/bertin-js-typo?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -249,12 +251,12 @@ layers: [
 <details><summary>Parameters</summary>
 
 - <b>values</b>: a string corresponding to the targeted variable in the properties (<ins>compulsory<ins>)
-- <b>colors</b>: An array containig n colors for n types (defaut: null)
+- <b>colors</b>: An array containing n colors for n types (default: null)
 - <b>pal</b>: a palette of categorical colors (default: "Tableau10") [See](https://observablehq.com/@d3/color-schemes)
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
-- <b>stroke</b>: sreoke color (default: "white")
+- <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: Stroke width (default: 0.5)
-- <b>fillOpacity</b>: Fill opacity (dafault: 1)
+- <b>fillOpacity</b>: Fill opacity (default: 1)
 
 Parameters of the legend
 
@@ -268,28 +270,28 @@ Parameters of the legend
 - <b>leg_stroke</b>: stroke of the box (default: "black")
 - <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 
 </details>
 
 #### Bubble
 
-The *bubble* type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-bubble.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-symbols?collection=@neocartocnrs/bertin)
+The _bubble_ type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-bubble.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-symbols?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
 ```js
-  bertin.draw({
-    layers: [
-      {
-        type: "bubble",
-        geojson: countries,
-        values: "pop",
-        k: 60,
-        tooltip: ["country", "pop", "(inh.)"]
-      }
-    ]
-  })
+bertin.draw({
+  layers: [
+    {
+      type: "bubble",
+      geojson: countries,
+      values: "pop",
+      k: 60,
+      tooltip: ["country", "pop", "(inh.)"],
+    },
+  ],
+});
 ```
 
 </details>
@@ -298,15 +300,15 @@ The *bubble* type is used to draw a map by proportional circles. [Source](https:
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
-- <b>k</b>: size of the largest circle (defaul:50)
-- <b>fixmax</b>: Max value to fix the size of the biggest circle, in order to make maps comparable (defaul:undefined)
+- <b>k</b>: size of the largest circle (default:50)
+- <b>fixmax</b>: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
 - <b>fill</b>: fill color (default: random color)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
 - <b>dorling</b>: a boolean (default:false)
 - <b>iteration</b> an integer to define the number of iteration for the Dorling method (default 200)
-- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -315,7 +317,7 @@ Parameters of the legend
 - <b>leg_fill</b>: color of the circles (default: "none")
 - <b>leg_stroke</b>: stroke of the circles (default: "black")
 - <b>leg_strokeWidth</b>: stoke-width (default: 0.8)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 - <b>leg_title</b>: title of the legend (default var_data)
 - <b>leg_round</b>: number of digits after the decimal point (default: undefined)
 - <b>leg_fontSize</b>: title legend font size (default: 14)
@@ -344,17 +346,17 @@ bertin.draw({
         nbreaks: 5,
         values: "gdppc",
         pal: "RdYlGn",
-      }
-    }
-  ]
-})
+      },
+    },
+  ],
+});
 ```
 
 </details>
 
 #### Stock + typo
 
-In thematic mapping, we often have to represent an absolute quantitatve data with a size variation and relative quantitative data with color variations. For this we can use the bubble type + the typo type. [Example](https://observablehq.com/d/8c9b22ccdffc718d?collection=@neocartocnrs/bertin)
+In thematic mapping, we often have to represent an absolute quantitative data with a size variation and relative quantitative data with color variations. For this we can use the bubble type + the typo type. [Example](https://observablehq.com/d/8c9b22ccdffc718d?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -367,18 +369,18 @@ bertin.draw({
       values: "pop",
       fill: {
         type: "typo",
-        values: "region"
-      }
-    }
-  ]
-})
+        values: "region",
+      },
+    },
+  ],
+});
 ```
 
 </details>
 
 #### Dorling cartogram
 
-The *dorling* paramter cam be used with the *bubble* type to design a Dorling cartogram. [Example](https://observablehq.com/@neocartocnrs/bertin-js-dorling-cartogram?collection=@neocartocnrs/bertin)
+The _dorling_ parameter can be used with the _bubble_ type to design a Dorling cartogram. [Example](https://observablehq.com/@neocartocnrs/bertin-js-dorling-cartogram?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -393,53 +395,53 @@ bertin.draw({
       dorling: true,
       iteration: 100,
       fill: "#E95B40",
-    }
-  ]
-})
+    },
+  ],
+});
 ```
 
 </details>
 
-
 #### Dots cartogram
 
-The *dotcartogram* type is a method of map representation that follows Dorling s cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map.  [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
+The _dotcartogram_ type is a method of map representation that follows Dorling's cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map. [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 ```js
 
 bertin.draw({
-  params: { projection: d3.geoBertin1953() },
-  layers: [
-    {
-      type: "dotcartogram",
-      geojson: data,
-      onedot: 200000000000,
-      iteration: 200,
-      values: "gdp",
-      radius: radius,
-      span: span,
-      leg_fill: "none",
-      leg_stroke: "black",
-      leg_strokeWidth: 1.5,
-      leg_x: 800,
-      leg_y: 450,
-      leg_title: `GDP by world region`,
-      leg_txt: "200 billion $",
-      fill: "red",
-      tooltip: ["name", "region", ""]
-    }
-  ]
+params: { projection: d3.geoBertin1953() },
+layers: [
+{
+type: "dotcartogram",
+geojson: data,
+onedot: 200000000000,
+iteration: 200,
+values: "gdp",
+radius: radius,
+span: span,
+leg_fill: "none",
+leg_stroke: "black",
+leg_strokeWidth: 1.5,
+leg_x: 800,
+leg_y: 450,
+leg_title: `GDP by world region`,
+leg_txt: "200 billion $",
+fill: "red",
+tooltip: ["name", "region", ""]
+}
+]
 })
-```
+
+````
 </details>
 
 <details><summary>Parameters</summary>
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
-- <b>radius</b>: radius of dots (defaul:4)
-- <b>nbmax</b>: number max of circles on the map (defaul:200)
+- <b>radius</b>: radius of dots (default:4)
+- <b>nbmax</b>: number max of circles on the map (default:200)
 - <b>onedot</b>: dot value (if onedot is filled, nbmax is useless)
 - <b>span></b>: spacing between dots (default 0.5)
 <b>fill </b>:
@@ -447,7 +449,7 @@ bertin.draw({
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
-- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 - <b>iteration</b> an integer to define the number of iteration for the Dorling method (default 200)
 
 Parameters of the legend
@@ -457,7 +459,7 @@ Parameters of the legend
 - <b>leg_fill</b>: color of the circles (default: "none")
 - <b>leg_stroke</b>: stroke of the circles (default: "black")
 - <b>leg_strokeWidth</b>: stoke-width (default: 0.8)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 - <b>leg_title</b>: title of the legend (default var_data)
 - <b>leg_txt</b>: text in the legend (default onedot value)
 - <b>leg_fontSize</b>: title legend font size (default: 14)
@@ -467,7 +469,7 @@ Parameters of the legend
 
 #### Mushroom
 
-The *mushroom* type is used to draw a map with 2 supperposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mushroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
+The *mushroom* type is used to draw a map with 2 superposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mushroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -484,7 +486,7 @@ The *mushroom* type is used to draw a map with 2 supperposed proportional semi-c
       }
     ]
   })
-```
+````
 
 </details>
 
@@ -495,12 +497,12 @@ The *mushroom* type is used to draw a map with 2 supperposed proportional semi-c
 - <b>bottom_values</b>: a string corresponding to the targeted bottom variable in the properties(<ins>compulsory<ins>)
 - <b>top_fill</b>: top fill color (default: "#d64f4f")
 - <b>bottom_fill</b>: bottom fill color (default: "#4fabd6")
-- <b>k</b>: size of the largest semi circle (defaul:50)
+- <b>k</b>: size of the largest semi circle (default:50)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
-- <b>top_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
-- <b>bottom_tooltip</b>: an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>top_tooltip</b>: an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>bottom_tooltip</b>: an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -509,7 +511,7 @@ Parameters of the legend
 - <b>leg_fontSize</b>: title legend font size (default: 14)
 - <b>leg_fontSize2</b>: values font size (default: 10)
 - <b>leg_round</b>: number of digits after the decimal point (default: undefined)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 - <b>leg_title</b>: title of the legend (default "Title, year")
 - <b>leg_stroke</b>: stroke of the circles (default: "black")
 - <b>leg_top_txt</b> title for the top variable (default top_var)
@@ -520,26 +522,25 @@ Parameters of the legend
 
 </details>
 
-
 #### Spikes
 
-The *spikes* type is used to draw a map with spikes. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-spikes.js) [Example](https://observablehq.com/d/12446a15a2642907?collection=@neocartocnrs/bertin)
+The _spikes_ type is used to draw a map with spikes. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-spikes.js) [Example](https://observablehq.com/d/12446a15a2642907?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
 ```js
-  bertin.draw({
-    layers: [
-      {
-        type: "spikes",
-        geojson: countries,
-        values: "pop",
-        k: 60,
-        w: 8,
-        tooltip: ["country", "pop", "(inh.)"]
-      }
-    ]
-  })
+bertin.draw({
+  layers: [
+    {
+      type: "spikes",
+      geojson: countries,
+      values: "pop",
+      k: 60,
+      w: 8,
+      tooltip: ["country", "pop", "(inh.)"],
+    },
+  ],
+});
 ```
 
 </details>
@@ -548,13 +549,13 @@ The *spikes* type is used to draw a map with spikes. [Source](https://github.com
 
 - <b>geojson</b>: a geojson (<ins>compulsory<ins>)
 - <b>values</b>: a string corresponding to the targeted variable in the properties(<ins>compulsory<ins>)
-- <b>k</b>: height of the highest peake (defaul:50)
-- <b>w</b>: width of the spikes (defaul:10)
+- <b>k</b>: height of the highest peak (default:50)
+- <b>w</b>: width of the spikes (default:10)
 - <b>fill</b>: fill color (default: #a31d88)
 - <b>stroke</b>: stroke color (default: #a31d88)
 - <b>strokeWidth</b>: stroke width (default: 0.7)
 - <b>fillOpacity</b>: fill opacity (default: 0.3)
-- <b>tooltip</b> an array of 3 values defing what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
 
 Parameters of the legend
 
@@ -563,7 +564,7 @@ Parameters of the legend
 - <b>leg_fill</b>: color of the circles (default: "none")
 - <b>leg_stroke</b>: stroke of the circles (default: "black")
 - <b>leg_strokeWidth</b>: stoke-width (default: 0.8)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 - <b>leg_title</b>: title of the legend (default var_data)
 - <b>leg_round</b>: rounding (default: undefined)
 - <b>leg_fontSize</b>: title legend font size (default: 14)
@@ -575,18 +576,20 @@ Parameters of the legend
 
 #### Footer
 
-The *footer* type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
+The _footer_ type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
 
 <details><summary>Code</summary>
 
 ```js
 bertin.draw({
-  layers: [{
-        type: "footer",
-        text: "Source: Worldbank, 2021",
-        fontSize: 10
-  }]
-})
+  layers: [
+    {
+      type: "footer",
+      text: "Source: Worldbank, 2021",
+      fontSize: 10,
+    },
+  ],
+});
 ```
 
 </details>
@@ -604,18 +607,20 @@ bertin.draw({
 
 #### Graticule
 
-The *graticule* type allows you to display the latitude and longitude lines.[Source](https://github.com/neocarto/bertin/blob/main/src/graticule.js).
+The _graticule_ type allows you to display the latitude and longitude lines.[Source](https://github.com/neocarto/bertin/blob/main/src/graticule.js).
 
 <details><summary>Code</summary>
 
 ```js
 bertin.draw({
-  layers: [{
-        type: "graticule",
-        fill: "#644580",
-        step:[20,10]
-  }]
-})
+  layers: [
+    {
+      type: "graticule",
+      fill: "#644580",
+      step: [20, 10],
+    },
+  ],
+});
 ```
 
 </details>
@@ -632,18 +637,20 @@ bertin.draw({
 
 #### Header
 
-The *header* type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
+The _header_ type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
 
 <details><summary>Code</summary>
 
 ```js
 bertin.draw({
-  layers: [{
-        type: "header",
-        text: "Title of the map",
-        fontSize: 40
-  }]
-})
+  layers: [
+    {
+      type: "header",
+      text: "Title of the map",
+      fontSize: 40,
+    },
+  ],
+});
 ```
 
 </details>
@@ -661,18 +668,20 @@ bertin.draw({
 
 #### Labels
 
-The *label* type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-labels.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts)
+The _label_ type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-labels.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts)
 
 <details><summary>Code</summary>
 
 ```js
 bertin.draw({
-  layers: [{
-        type: "label",
-        geojson: countries,
-        label: "name"
-  }]
-})
+  layers: [
+    {
+      type: "label",
+      geojson: countries,
+      label: "name",
+    },
+  ],
+});
 ```
 
 </details>
@@ -692,7 +701,7 @@ bertin.draw({
 
 #### Missing
 
-Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That is what the type *missing* is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
+Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That is what the type _missing_ is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
 
 <details><summary>Code</summary>
 
@@ -730,23 +739,25 @@ Parameters of the legend
 - <b>leg_stroke</b>: stroke of the box (default: "black")
 - <b>leg_strokeWidth</b>: stroke-width (default: 0.5)
 - <b>leg_fillOpacity</b>: stroke opacity (same as the layer displayed)
-- <b>leg_txtcol</b>: color of the texte (default: "#363636")
+- <b>leg_txtcol</b>: color of the text (default: "#363636")
 
 </details>
 
 #### Outline
 
-The *outline* type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
+The _outline_ type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
 
 <details><summary>Code</summary>
 
 ```js
 bertin.draw({
-  layers: [{
-        type: "outline",
-        fill: "#4269ad"
-  }]
-})
+  layers: [
+    {
+      type: "outline",
+      fill: "#4269ad",
+    },
+  ],
+});
 ```
 
 </details>
@@ -762,20 +773,20 @@ bertin.draw({
 
 #### Scalebar
 
-The *scalebar* type allows to display a scalebar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js)
+The _scalebar_ type allows to display a scalebar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js)
 
 <details><summary>Code</summary>
 
-  ```js
-  bertin.draw({
-    layers: [
-      {
-        type: "scalebar",
-        units: "miles"
-      },
-    ]
-  })
-  ```
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "scalebar",
+      units: "miles",
+    },
+  ],
+});
+```
 
 </details>
 
@@ -783,13 +794,13 @@ The *scalebar* type allows to display a scalebar in miles or kilometers. [Source
 
 - <b>x</b>: position in x (if this value is not filled, the legend is displayed on the left)
 - <b>y</b>: position in x (if this value is not filled, the legend is displayed at the bottom)
-- <b>units</b>: distance unit, miles or kilometers (default: "kilimeters")
+- <b>units</b>: distance unit, miles or kilometers (default: "kilometers")
 
 </details>
 
 #### Shadow
 
-The *shadow* type allows to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
+The _shadow_ type allows to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
 
 <details><summary>Code</summary>
 
@@ -800,10 +811,10 @@ bertin.draw({
       type: "shadow",
       geojson: JPN,
       dx: 5,
-      dy: 5
+      dy: 5,
     },
-  ]
-})
+  ],
+});
 ```
 
 </details>
@@ -820,7 +831,7 @@ bertin.draw({
 
 #### Texts
 
-The *text* type simply allows you to display text anywhere on the map. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
+The _text_ type simply allows you to display text anywhere on the map. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
 
 <details><summary>Code</summary>
 
@@ -833,10 +844,10 @@ bertin.draw({
       position: "bottomright",
       fontSize: 20,
       frame_stroke: "red",
-      margin: 4
-    }
-  ]
-})
+      margin: 4,
+    },
+  ],
+});
 ```
 
 </details>
@@ -865,16 +876,16 @@ bertin.draw({
 
 #### Quickdraw
 
-*quickdraw* is a function to display one or more layers directly and easily. [Source](https://github.com/neocarto/bertin/blob/main/src/quickdraw.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
+_quickdraw_ is a function to display one or more layers directly and easily. [Source](https://github.com/neocarto/bertin/blob/main/src/quickdraw.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
 ```js
-bertin.quickdraw(geojson)
+bertin.quickdraw(geojson);
 ```
 
 ```js
-bertin.quickdraw(geojson, 1000, 7)
+bertin.quickdraw(geojson, 1000, 7);
 ```
 
 </details>
@@ -889,36 +900,36 @@ bertin.quickdraw(geojson, 1000, 7)
 
 #### Match
 
-*match()* is a function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
+_match()_ is a function to evaluate the quality of a join between the data and the background map. It returns a chart. [Source](https://github.com/neocarto/bertin/blob/main/src/match.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
 ```js
-let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
+let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode");
 ```
 
-*.matched* returns an array containing matched ids
+_.matched_ returns an array containing matched ids
 
 ```js
-testjoin.matched
+testjoin.matched;
 ```
 
-*.matched_data* returns an array containing matched data ids
+_.matched_data_ returns an array containing matched data ids
 
 ```js
-testjoin.matched_data
+testjoin.matched_data;
 ```
 
-*.unmatched_data* returns an array containing unmatched data ids
+_.unmatched_data_ returns an array containing unmatched data ids
 
 ```js
-testjoin.unmatched_data
+testjoin.unmatched_data;
 ```
 
-*.unmatched_geom* returns an array containing unmatched geom ids
+_.unmatched_geom_ returns an array containing unmatched geom ids
 
 ```js
-testjoin.unmatched_geom
+testjoin.unmatched_geom;
 ```
 
 </details>
@@ -934,12 +945,18 @@ testjoin.unmatched_geom
 
 #### Merge
 
-*merge* is a function to join a geojson and a data file. This is the first step in the mapping process. [Source](https://github.com/neocarto/bertin/blob/main/src/merge.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
+_merge_ is a function to join a geojson and a data file. This is the first step in the mapping process. [Source](https://github.com/neocarto/bertin/blob/main/src/merge.js) [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
 ```js
-const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
+const data = bertin.merge(
+  countries,
+  "ISO3_CODE",
+  maddison,
+  "countrycode",
+  true
+);
 ```
 
 </details>
@@ -956,12 +973,12 @@ const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
 
 #### Table2geo
 
-*table2geo* is a function to convert a data table with lat/lon fileds to a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/table2geo.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
+_table2geo_ is a function to convert a data table with lat/lon fields to a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/table2geo.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
 ```js
-bertin.table2geo(cities, "lat", "lng")
+bertin.table2geo(cities, "lat", "lng");
 ```
 
 </details>
