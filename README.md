@@ -30,21 +30,21 @@ Pinned version
 
 Latest version
 
-~~~js
+```js
 bertin = require("bertin")
-~~~
+```
 
 Pinned version
 
-~~~js
+```js
 bertin = require("bertin@0.3.2")
-~~~
+```
 
 ## 2. How to use?
 
 #### <ins>In browser</ins>
 
-~~~js
+```js
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
 <script src="https://cdn.jsdelivr.net/npm/bertin"></script>
@@ -66,7 +66,7 @@ document.body.appendChild(bertin.draw({
 })));
 
 </script>
-~~~
+```
 
 See examples [here](https://neocarto.github.io/bertin/examples/layer.html) and [there](https://neocarto.github.io/bertin/examples/layer2.html).
 
@@ -84,7 +84,7 @@ In the section *params*, we define the global parameters of the map: its size, p
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   params: {
     projection: d3.geoBertin1953(),
@@ -92,7 +92,7 @@ bertin.draw({
   },
   layers: [...]
 })
-~~~
+```
 
 </details>
 
@@ -114,7 +114,7 @@ The *layer* type allows to display a simple geojson layer (points, lines or poly
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [
     {
@@ -125,7 +125,7 @@ bertin.draw({
     }
   ]
 })
-~~~
+```
 
 </details>
 
@@ -167,7 +167,7 @@ The *choro* type aims to draw Choropleth maps. This kind of representation is es
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [
     {
@@ -186,7 +186,7 @@ bertin.draw({
       }
   ]
 })
-~~~
+```
 
 </details>
 
@@ -225,7 +225,7 @@ The *typo* type allows to realize a qualitative map. The choro type can be appli
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
 layers: [
   {
@@ -242,7 +242,7 @@ layers: [
     }
   ]
 })
-~~~
+```
 
 </details>
 
@@ -278,7 +278,7 @@ The *bubble* type is used to draw a map by proportional circles. [Source](https:
 
 <details><summary>Code</summary>
 
-~~~js
+```js
   bertin.draw({
     layers: [
       {
@@ -290,7 +290,7 @@ The *bubble* type is used to draw a map by proportional circles. [Source](https:
       }
     ]
   })
-~~~
+```
 
 </details>
 
@@ -329,7 +329,7 @@ In thematic mapping, we often have to represent an absolute quantitative data wi
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   params: { projection: d3.geoPolyhedralWaterman() },
   layers: [
@@ -348,7 +348,7 @@ bertin.draw({
     }
   ]
 })
-~~~
+```
 
 </details>
 
@@ -358,7 +358,7 @@ In thematic mapping, we often have to represent an absolute quantitatve data wit
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [
     {
@@ -372,7 +372,7 @@ bertin.draw({
     }
   ]
 })
-~~~
+```
 
 </details>
 
@@ -382,7 +382,7 @@ The *dorling* paramter cam be used with the *bubble* type to design a Dorling ca
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [
     {
@@ -396,7 +396,7 @@ bertin.draw({
     }
   ]
 })
-~~~
+```
 
 </details>
 
@@ -406,7 +406,7 @@ bertin.draw({
 The *dotcartogram* type is a method of map representation that follows Dorling s cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map.  [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
-~~~js
+```js
 
 bertin.draw({
   params: { projection: d3.geoBertin1953() },
@@ -431,7 +431,7 @@ bertin.draw({
     }
   ]
 })
-~~~
+```
 </details>
 
 <details><summary>Parameters</summary>
@@ -471,7 +471,7 @@ The *mushroom* type is used to draw a map with 2 supperposed proportional semi-c
 
 <details><summary>Code</summary>
 
-~~~js
+```js
   bertin.draw({
     layers: [
       {
@@ -484,7 +484,7 @@ The *mushroom* type is used to draw a map with 2 supperposed proportional semi-c
       }
     ]
   })
-~~~
+```
 
 </details>
 
@@ -527,7 +527,7 @@ The *spikes* type is used to draw a map with spikes. [Source](https://github.com
 
 <details><summary>Code</summary>
 
-~~~js
+```js
   bertin.draw({
     layers: [
       {
@@ -540,7 +540,7 @@ The *spikes* type is used to draw a map with spikes. [Source](https://github.com
       }
     ]
   })
-~~~
+```
 
 </details>
 
@@ -579,7 +579,7 @@ The *footer* type allows to display text under the map. This is useful to displa
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [{
         type: "footer",
@@ -587,7 +587,7 @@ bertin.draw({
         fontSize: 10
   }]
 })
-~~~
+```
 
 </details>
 
@@ -608,7 +608,7 @@ The *graticule* type allows you to display the latitude and longitude lines.[Sou
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [{
         type: "graticule",
@@ -616,7 +616,7 @@ bertin.draw({
         step:[20,10]
   }]
 })
-~~~
+```
 
 </details>
 
@@ -636,7 +636,7 @@ The *header* type allows to display a title above the map. [Source](https://gith
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [{
         type: "header",
@@ -644,7 +644,7 @@ bertin.draw({
         fontSize: 40
   }]
 })
-~~~
+```
 
 </details>
 
@@ -665,7 +665,7 @@ The *label* type allows to display labels from a geojson. [Source](https://githu
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [{
         type: "label",
@@ -673,7 +673,7 @@ bertin.draw({
         label: "name"
   }]
 })
-~~~
+```
 
 </details>
 
@@ -696,7 +696,7 @@ Sometimes, when making a map by proportional symbols for example, it can be inte
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [
     {
@@ -705,7 +705,7 @@ bertin.draw({
       values: "pop"
   ]
 })
-~~~
+```
 
 </details>
 
@@ -740,14 +740,14 @@ The *outline* type is used to display the limits of the earth area in the given 
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [{
         type: "outline",
         fill: "#4269ad"
   }]
 })
-~~~
+```
 
 </details>
 
@@ -766,7 +766,7 @@ The *scalebar* type allows to display a scalebar in miles or kilometers. [Source
 
 <details><summary>Code</summary>
 
-  ~~~js
+  ```js
   bertin.draw({
     layers: [
       {
@@ -775,7 +775,7 @@ The *scalebar* type allows to display a scalebar in miles or kilometers. [Source
       },
     ]
   })
-  ~~~
+  ```
 
 </details>
 
@@ -793,7 +793,7 @@ The *shadow* type allows to display a shadow under a layer to give it a relief e
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [
     {
@@ -804,7 +804,7 @@ bertin.draw({
     },
   ]
 })
-~~~
+```
 
 </details>
 
@@ -824,7 +824,7 @@ The *text* type simply allows you to display text anywhere on the map. [Source](
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.draw({
   layers: [
     {
@@ -837,7 +837,7 @@ bertin.draw({
     }
   ]
 })
-~~~
+```
 
 </details>
 
@@ -869,13 +869,13 @@ bertin.draw({
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.quickdraw(geojson)
-~~~
+```
 
-~~~js
+```js
 bertin.quickdraw(geojson, 1000, 7)
-~~~
+```
 
 </details>
 
@@ -893,33 +893,33 @@ bertin.quickdraw(geojson, 1000, 7)
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 let testjoin = bertin.match(countries, "ISO3_CODE", maddison, "countrycode")
-~~~
+```
 
 *.matched* returns an array containing matched ids
 
-~~~js
+```js
 testjoin.matched
-~~~
+```
 
 *.matched_data* returns an array containing matched data ids
 
-~~~js
+```js
 testjoin.matched_data
-~~~
+```
 
 *.unmatched_data* returns an array containing unmatched data ids
 
-~~~js
+```js
 testjoin.unmatched_data
-~~~
+```
 
 *.unmatched_geom* returns an array containing unmatched geom ids
 
-~~~js
+```js
 testjoin.unmatched_geom
-~~~
+```
 
 </details>
 
@@ -938,9 +938,9 @@ testjoin.unmatched_geom
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
-~~~
+```
 
 </details>
 
@@ -960,9 +960,9 @@ const data = bertin.merge(countries, "ISO3_CODE", maddison, "countrycode", true)
 
 <details><summary>Code</summary>
 
-~~~js
+```js
 bertin.table2geo(cities, "lat", "lng")
-~~~
+```
 
 </details>
 
