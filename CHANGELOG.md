@@ -5,9 +5,9 @@
 *  dependencies. d3 -> d3 modules ([7bf38eed](https://github.com/neocarto/bertin/commit/7bf38eed0ce65ece529afd7b715347500a60f906))
 
 ##### New Features
-
-*  tooltip ([23929633](https://github.com/neocarto/bertin/commit/239296339afa2115343b51342b6bfee16df687d6))
-*  add parameters in tooltips ([d9b0394a](https://github.com/neocarto/bertin/commit/d9b0394a416921e4f24972aab035b10e54d44b35))
+* topojson ([57b059d](https://github.com/neocarto/bertin/commit/57b059d2d8c8669da6ec223600efeef1e6a732cc))
+* tooltip ([23929633](https://github.com/neocarto/bertin/commit/239296339afa2115343b51342b6bfee16df687d6))
+* add parameters in tooltips ([d9b0394a](https://github.com/neocarto/bertin/commit/d9b0394a416921e4f24972aab035b10e54d44b35))
 *  borders ([d1265d9a](https://github.com/neocarto/bertin/commit/d1265d9a00a3ea449ee4ae0091eab95c3a751ffe))
 *  borders ([d89b833d](https://github.com/neocarto/bertin/commit/d89b833dc6f010020b388e00810add8c10faa4e1))
 *  borders ([5b6ce840](https://github.com/neocarto/bertin/commit/5b6ce840f12262570a54abeaf0cfddd67efe7d89))
@@ -54,4 +54,3 @@
 *  rename mashroom to mushroom ([b27543e5](https://github.com/neocarto/bertin/commit/b27543e53237833c307f221bb182c52df995dfdf))
 *  fix dependencies ([8e3c28f7](https://github.com/neocarto/bertin/commit/8e3c28f711d76861310883ddcf33027df44acfdb))
 *  add position topright, bottom, etc. ([34224afa](https://github.com/neocarto/bertin/commit/34224afacb31701f543881295be97e5247ef268d))
-
