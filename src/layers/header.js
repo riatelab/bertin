@@ -44,19 +44,22 @@ export function addheader(selection, width, options = {}) {
     .attr("fill", background)
     .attr("fill-opacity", backgroundOpacity);
 
-  header
-    .selectAll("text")
-    .data(options.text.split("\n"))
-    .join("text")
-    .attr("x", x)
-    .attr("y", -delta - 5)
-    .attr("font-size", `${fontSize}px`)
-    .attr("dy", (d, i) => i * fontSize)
-    .attr("text-anchor", anchor)
-    .attr("dominant-baseline", "hanging")
-    .attr("fill", fill)
-    .attr("font-family", "sans-serif")
-    .attr("font-weight", "bold")
-    .attr("fill-opacity", 1)
-    .text((d) => d);
+
+    header
+      .selectAll("text")
+      .data(options.text.split("\n"))
+      .join("text")
+      .attr("x", x)
+      //.attr("y", -delta - 5)
+      .attr("y", -delta - 5)
+      .attr("font-size", `${fontSize}px`)
+      .attr("dy", (d, i) => i * fontSize + fontSize/2)
+      .attr("text-anchor", anchor)
+      .attr("dominant-baseline", "central")
+      .attr("fill", fill)
+      .attr("font-family", "sans-serif")
+      .attr("font-weight", "bold")
+      .attr("fill-opacity", 1)
+      .text((d) => d);
+
 }
