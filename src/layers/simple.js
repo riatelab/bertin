@@ -8,6 +8,7 @@ import * as d3scale from "d3-scale";
 import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3geo, d3shape, d3scale, d3scalechromatic,  d3force);
 
+import { topo2geo } from "../helpers/topo2geo.js";
 import { legbox } from "../helpers/leg-box.js";
 import { legends } from "../helpers/legends.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
@@ -29,7 +30,7 @@ export function simple(selection, projection, options = {}, clipid, width, heigh
      "#e5c494",
      "#b3b3b3"
    ];
-   let geojson = options.geojson;
+   let geojson = topo2geo(options.geojson);
    let fill = options.fill ?? cols[Math.floor(Math.random() * cols.length)];
    let strokeLinecap = options.strokeLinecap ?? "round";
    let strokeLinejoin = options.strokeLinejoin ?? "round";

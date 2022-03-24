@@ -6,7 +6,8 @@ import * as d3scalechromatic from "d3-scale-chromatic";
 import * as d3force from "d3-force";
 const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3scale, d3force);
 
-import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
+import { topo2geo } from "../helpers/topo2geo.js";
+import {addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import {legcircles } from "../helpers/leg-circles.js";
 import {poly2points } from "../helpers/poly2points.js";
 import {figuration } from "../helpers/figuration.js";
@@ -25,7 +26,7 @@ export function bubble(selection, projection, options = {}, clipid, width, heigh
     "#e5c494",
     "#b3b3b3"
   ];
-  let geojson = options.geojson;
+  let geojson = topo2geo(options.geojson);
   let values = options.values;
   let fixmax = options.fixmax ?? undefined
   let k = options.k ? options.k : 50;

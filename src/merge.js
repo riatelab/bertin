@@ -1,8 +1,9 @@
 import * as d3array from "d3-array";
 const d3 = Object.assign({}, d3array);
+import { topo2geo } from "./helpers/topo2geo.js";
 
 export function merge(geojson, id_geojson, data, id_data, all = true) {
-  let output = JSON.parse(JSON.stringify(geojson));
+  let output = JSON.parse(JSON.stringify(topo2geo(geojson)));
    let data2 = JSON.parse(JSON.stringify(data));
 
    let ids_geojson = output.features.map((d) => d.properties[id_geojson]);

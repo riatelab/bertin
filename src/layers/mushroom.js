@@ -6,12 +6,13 @@ import * as d3array from "d3-array";
 import * as d3scale from "d3-scale";
 const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojection);
 
+import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import {legcircles } from "../helpers/leg-circles.js";
 import {poly2points } from "../helpers/poly2points.js";
 
 export function mushroom(selection, projection, options = {}, clipid, width, height) {
-  let geojson = options.geojson;
+  let geojson = topo2geo(options.geojson);
   let top_values = options.top_values;
   let bottom_values = options.bottom_values;
 

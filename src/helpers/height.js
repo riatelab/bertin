@@ -1,4 +1,5 @@
 // Imports
+import { topo2geo } from "./topo2geo.js";
 import * as d3selection from "d3-selection";
 import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
@@ -16,7 +17,7 @@ export function getheight(layers, extent, margin, projection, width) {
       } else {
         let l = layers.map((d) => d.geojson).filter((d) => d !== undefined);
         let all = [];
-        l.forEach((d) => all.push(d.features));
+        l.forEach((d) => all.push(topo2geo(d).features));
         ref = {
           type: "FeatureCollection",
           features: all.flat()

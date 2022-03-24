@@ -1,8 +1,9 @@
 import { figuration } from "./helpers/figuration.js";
 import {poly2points } from "./helpers/poly2points.js";
+import { topo2geo } from "./helpers/topo2geo.js";
 
 export function links(options = {}) {
-  let geojson = options.geojson;
+  let geojson = topo2geo(options.geojson);
   let geojson_id = options.geojson_id;
   let data = options.data;
   let data_i = options.data_i ?? "i";

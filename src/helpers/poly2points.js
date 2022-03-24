@@ -1,9 +1,10 @@
 // Imports
 import * as d3geo from "d3-geo";
+import { topo2geo } from "./topo2geo.js";
 const d3 = Object.assign({}, d3geo);
 
 export function poly2points(geojson, largest = true){
-  geojson = JSON.parse(JSON.stringify(geojson));
+  geojson = JSON.parse(JSON.stringify(topo2geo(geojson)));
   const largestPolygon = function (d) {
     var best = {};
     var bestArea = 0;

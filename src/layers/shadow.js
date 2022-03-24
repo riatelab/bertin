@@ -8,6 +8,7 @@ import * as topojsonclient from "topojson-client";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 const topojson = Object.assign({}, topojsonserver, topojsonclient);
 
+import { topo2geo } from "../helpers/topo2geo.js";
 import { figuration } from "../helpers/figuration.js";
 
 export function shadow(selection, projection, geojson, clipid, defs, options = {}) {
@@ -20,7 +21,7 @@ export function shadow(selection, projection, geojson, clipid, defs, options = {
   let fill = col;
   let stroke = "none";
 
-  let topo = topojson.topology({ foo: geojson });
+  let topo = topojson.topology({ foo: topo2geo(geojson) });
   let merged = topojson.merge(topo, topo.objects.foo.geometries);
 
   var blur = defs

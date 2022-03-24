@@ -1,11 +1,13 @@
 import * as topojsonclient from "topojson-client";
 import * as topojsonserver from "topojson-server";
 const topojson = Object.assign({}, topojsonclient, topojsonserver);
+import { topo2geo } from "./helpers/topo2geo.js";
 
 import * as d3array from "d3-array";
 const d3 = Object.assign({}, d3array);
 
 export function borders({ geojson, id, values, type = "rel", share = null }) {
+  geojson = topo2geo(geojson)
   const topo = topojson.topology({ d: geojson });
   const ids = geojson.features.map((d) => d.properties[id]);
   const neighbors = topojson.neighbors(topo.objects["d"].geometries);

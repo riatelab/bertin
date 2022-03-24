@@ -4,12 +4,13 @@ import * as d3geo from "d3-geo";
 import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
+import { topo2geo } from "../helpers/topo2geo.js";
 import {figuration } from "../helpers/figuration.js";
 import {addtooltip } from "../helpers/tooltip.js";
 import {legbox } from "../helpers/leg-box.js";
 
 export function missing(selection, projection, options = {}, clipid){
-  let geojson = options.geojson;
+  let geojson = topo2geo(options.geojson);
   let values = options.values;
   let fill = options.fill ? options.fill : "white";
   let stroke = options.stroke ? options.stroke : "white";

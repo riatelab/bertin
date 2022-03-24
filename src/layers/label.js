@@ -1,10 +1,11 @@
 import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 
+import { topo2geo } from "../helpers/topo2geo.js";
 import {poly2points } from "../helpers/poly2points.js";
 
 export function label(selection, projection, options = {}, clipid){
-  let geojson = options.geojson;
+  let geojson = topo2geo(options.geojson);
   let values = options.values;
   let fill = options.fill ? options.fill : "#474342";
   let fontSize = options.fontSize ? options.fontSize : 10;
