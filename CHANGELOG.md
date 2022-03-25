@@ -5,6 +5,7 @@
 *  dependencies. d3 -> d3 modules ([7bf38eed](https://github.com/neocarto/bertin/commit/7bf38eed0ce65ece529afd7b715347500a60f906))
 
 ##### New Features
+* llow the possibility to define a bbox as extent ([6eea4c0](https://github.com/neocarto/bertin/commit/6eea4c0b67fff5563c56f5bf711ace85c066ea01))
 * subgeo ([5bd10d1](https://github.com/neocarto/bertin/commit/5bd10d11d87326eb85f52caeb54498e329c44197))
 * topojson ([57b059d](https://github.com/neocarto/bertin/commit/57b059d2d8c8669da6ec223600efeef1e6a732cc))
 * tooltip ([23929633](https://github.com/neocarto/bertin/commit/239296339afa2115343b51342b6bfee16df687d6))
@@ -17,7 +18,7 @@
 *  links ([4d9726d2](https://github.com/neocarto/bertin/commit/4d9726d2ba0bc1a5947c17a5336be04d20f0f999))
 *  dots cartogram ([49ba03ae](https://github.com/neocarto/bertin/commit/49ba03ae85ccd85ea022b16bd64d98db9621a1d7))
 *  dots cartogram ([b6e18616](https://github.com/neocarto/bertin/commit/b6e18616b8cc64df44fe0c8a7b261ff5617c42ce))
-*  simple layer able to di choro & typo ([9209ec6f](https://github.com/neocarto/bertin/commit/9209ec6f8c0cbbc965347f99c7f8dc0c681bf686))
+*  simple layer able to choro & typo ([9209ec6f](https://github.com/neocarto/bertin/commit/9209ec6f8c0cbbc965347f99c7f8dc0c681bf686))
 *  bubble type ([dde15f01](https://github.com/neocarto/bertin/commit/dde15f01d7b055204886f747d92d483bd58a4586))
 *  bubble type (work in progress) ([41590536](https://github.com/neocarto/bertin/commit/4159053681423efdcf435bad3a9ad3f9f949bcfd))
 *  spikes ([7ad58ca5](https://github.com/neocarto/bertin/commit/7ad58ca561a409cf630628829ef5d38729661c2f))
