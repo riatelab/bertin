@@ -24,7 +24,7 @@ Pinned version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@0.3.2"
+  src="https://cdn.jsdelivr.net/npm/bertin@0.9.0"
   charset="utf-8"
 ></script>
 ```
@@ -40,7 +40,7 @@ bertin = require("bertin");
 Pinned version
 
 ```js
-bertin = require("bertin@0.3.2");
+bertin = require("bertin@0.9.0");
 ```
 
 ## 2. How to use?
@@ -59,10 +59,11 @@ let geojson = "https://raw.githubusercontent.com/neocarto/bertin/main/data/world
 d3.json(geojson).then(r =>
 document.body.appendChild(bertin.draw({
   params: {
-    projection: d3.geoVanDerGrinten4()
+    projection: d3.geoVanDerGrinten4(),
+    clip:true
   },
   layers: [
-      {type: "layer", geojson: r,  tooltip: ["ISO3", "NAMEen", ""] },
+      {geojson: r,  tooltip: ["$ISO3", "$NAMEen"] },
       {type:"outline"},
       {type:"graticule"}
     ]
@@ -71,7 +72,7 @@ document.body.appendChild(bertin.draw({
 </script>
 ```
 
-See examples [here](https://neocarto.github.io/bertin/examples/layer.html) and [there](https://neocarto.github.io/bertin/examples/layer2.html).
+See examples [here](https://neocarto.github.io/bertin/examples/example1.html) and [there](https://neocarto.github.io/bertin/examples/example2.html).
 
 #### <ins>In Observable</ins>
 

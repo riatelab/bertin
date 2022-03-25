@@ -9,6 +9,7 @@ import { getheight } from "./helpers/height.js";
 import { figuration } from "./helpers/figuration.js";
 import { getcenters } from "./helpers/centroids.js";
 import { proj4d3 } from "./helpers/proj4d3.js";
+import { bbox } from "./bbox.js";
 
 // Layers
 import { graticule } from "./layers/graticule.js";
@@ -39,6 +40,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   let width = params.width ? params.width : 1000;
   let extent = params.extent ? params.extent : null;
+  extent = Array.isArray(extent) && Array.isArray(extent[0]) && Array.isArray(extent[1]) ? bbox(extent) : extent
   let margin = params.margin ? params.margin : 1;
   let background = params.background;
   let clip = params.clip ?? false // test
