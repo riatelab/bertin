@@ -20,5 +20,5 @@ export {spikes} from "./layers/spikes.js"
 export {outline} from "./layers/outline.js"
 export {graticule} from "./layers/graticule.js"
 
-//export {legends} from "./helpers/legends.js"
-//export {thickness} from "./helpers/thickness.js"
+// // TEMP:
+export {dots} from "./helpers/dots.js"
