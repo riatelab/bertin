@@ -78,6 +78,13 @@ See examples [here](https://neocarto.github.io/bertin/examples/example1.html) an
 
 The bertin.js library is really easy to use within Observable. You'll find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin).
 
+#### Help and examples
+
+Many examples are available on [Observable](https://observablehq.com/collection/@neocartocnrs/bertin). Feel free to fork, copy, modify with your own data.
+
+[![](./img/obs.png)](https://observablehq.com/collection/@neocartocnrs/bertin)
+
+
 ## 3. bertin.draw
 
 <b>draw</b>() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first. [Example](https://observablehq.com/@neocartocnrs/hello-bertin-js)
@@ -140,7 +147,7 @@ bertin.draw({
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b> stroke width (default:0.5)
 - <b>strokeLinecap</b>: stroke-linecap (dafault:"round")
-- <b>strokeLinejoin<b/>: stroke-linejoin (default:"round")
+- <b>strokeLinejoin</b>: stroke-linejoin (default:"round")
 - <b>strokeDasharray</b>: stroke-dasharray (default:"none")
 - <b>fillOpacity</b>: fill opacity (default:1)
 - <b>fillOpacity</b>: fill opacity (default:1)
