@@ -78,7 +78,7 @@ See examples [here](https://neocarto.github.io/bertin/examples/example1.html) an
 
 The bertin.js library is really easy to use within Observable. You'll find many examples in [this collection](https://observablehq.com/collection/@neocartocnrs/bertin).
 
-#### Help and examples
+#### <ins>Examples</ins>
 
 Many examples are available on [Observable](https://observablehq.com/collection/@neocartocnrs/bertin). Feel free to fork, copy, modify with your own data.
 
