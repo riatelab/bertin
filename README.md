@@ -4,7 +4,7 @@ _Bertin.js is <ins>**under development**</ins> so not necessarily very stable ye
 
 ![](./img/banner.png)
 
-bertin.js is an easy to use wrapper around [d3js](https://github.com/d3/d3) to facilitate the process of making thematic maps. The principle is to work with layers stacked on each other. As in a GIS, the layers that are displayed above are placed at the top in the code, the layers that are displayed below are placed at the bottom in the code. The layers that can be displayed are of several types: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text... Each type has its own parameters. This list will be completed gradually.
+bertin.js is an easy to use js library bsed on [d3js](https://github.com/d3/d3) to facilitate the process of making thematic maps. The principle is to work with layers stacked on each other. As in a GIS, the layers that are displayed above are placed at the top in the code, the layers that are displayed below are placed at the bottom in the code. The layers that can be displayed are of several types: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text... Each type has its own parameters. This list will be completed gradually.
 
 ### Why Bertin ?
 
@@ -72,7 +72,7 @@ document.body.appendChild(bertin.draw({
 </script>
 ```
 
-See examples [here](https://neocarto.github.io/bertin/examples/example1.html) and [there](https://neocarto.github.io/bertin/examples/example2.html).
+See examples [here](https://neocarto.github.io/bertin/examples/example1.html) and [there](https://neocarto.github.io/bertin/examples/example2.html) and [there](https://neocarto.github.io/bertin/examples/example3.html).
 
 #### <ins>In Observable</ins>
 
@@ -104,9 +104,10 @@ bertin.draw({
 
 - <b>projection</b>: a d3 function or proj4string defining the map projection. Cf [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) & [https://spatialreference.org](https://spatialreference.org/) (default: d3.geoEquirectangular())
 - <b>width</b>: width of the map (default:1000);
-- <b>extent</b>: a feature defining the extent e.g. a country (default: null)
+- <b>extent</b>: a feature or a bbox array defining the extent e.g. a country or [[112, -43],[153, -9]] (default: null)
 - <b>margin</b>: margin around features to be displayed. This option can be useful if the stroke is very heavy (default: 1)
 - <b>background</b>: color of the background (default: "none")
+- <b>clip</b>: a boolen to avoid artefacts of discontinuous projection (default: "false")
 
 </details>
 
@@ -114,7 +115,7 @@ bertin.draw({
 
 #### Simple layer
 
-The _layer_ type allows to display a simple geojson layer (points, lines or polygons).[Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js)) & [example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin)
+The _layer_ type allows to display a simple geojson layer (points, lines or polygons). [Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js). [Example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -125,7 +126,6 @@ bertin.draw({
       type: "layer",
       geojson: *a geojson here*,
       fill: "#e6acdf",
-      tooltip: ["CNTR_ID", "CNTR_NAME", ""]
     }
   ]
 })
@@ -139,6 +139,9 @@ bertin.draw({
 - <b>fill</b>: fill color (default: a random color)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b> stroke width (default:0.5)
+- <b>strokeLinecap</b>: stroke-linecap (dafault:"round")
+- <b>strokeLinejoin<b/>: stroke-linejoin (default:"round")
+- <b>strokeDasharray</b>: stroke-dasharray (default:"none")
 - <b>fillOpacity</b>: fill opacity (default:1)
 - <b>fillOpacity</b>: fill opacity (default:1)
 - <b>symbol</b>: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
@@ -200,7 +203,9 @@ bertin.draw({
 - <b>nbreaks</b>: Number of classes (default:5)
 - <b>breaks</b>: Class breaks (default:null)
 - <b>colors</b>: An array of colors (default: null)
-- <b>method</b>: A method of classification. Jenks, q6, quantiles, equal (default: quantiles)
+- <b>method</b>: A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks)
+- <b>middle</b>: for msd method only. middle class or not  (default:false);
+- <b>k</b>: for  msd method only. number of sd. (default:1);
 - <b>col_missing</b>: Color for missing values (default "#f5f5f5")
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: Stroke width (default: 0.5)
@@ -875,6 +880,35 @@ bertin.draw({
 
 ## 6. Other functions
 
+#### borders
+
+_borders_ is a function that extract borders from polygons, with ids.
+
+<details><summary>Code</summary>
+```js
+bertin.borders({geojson: world, id: "iso3", values: "population", type = "rel"})
+```
+</details>
+
+<details><summary>Code</summary>
+
+- <b>geojson</b>: a geojson
+- <b>id</b>: id codes
+- <b>values</b>: values
+- <b>type</b>: type of discontinuites calcuated. rel = relative. abs = absolue (default:"rel")
+
+</details>
+
+#### bbox
+
+_bbox_ compute a geojson object form an array defing an extent in latitude and longitude.
+
+<details><summary>Code</summary>
+```js
+bertin.bbox([[112, -43],[153, -9]])
+```
+</details>
+
 #### Quickdraw
 
 _quickdraw_ is a function to display one or more layers directly and easily. [Source](https://github.com/neocarto/bertin/blob/main/src/quickdraw.js) [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin)
@@ -898,6 +932,7 @@ bertin.quickdraw(geojson, 1000, 7);
 - param 3 : margin
 
 </details>
+
 
 #### Match
 
@@ -969,6 +1004,53 @@ const data = bertin.merge(
 - param 3 : a json (<ins>compulsory<ins>)
 - param 4 : a string corresponding to the identifier of the features (<ins>compulsory<ins>)
 - param 5 : a boolean. If true, all geometries will be kept. If false, only matched data are kept (default: true)
+
+</details>
+
+#### links
+
+_links_ is a function that create links from geometries (polygons or points) and a data file (i,j,fij). [Example](https://observablehq.com/@neocartocnrs/bertin-js-links)
+
+<details><summary>Code</summary>
+```js
+links = bertin.links({
+  geojson: world,
+  geojson_id: "ISO3",
+  data: migr2019,
+  data_i: "i",
+  data_j: "j"
+})
+```
+</details>
+
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson
+- <b>geojson_id</b>: id of the geojson
+- <b>data</b>: inj,fij data
+- <b>data_i</b>: i id
+- <b>data_j</b>: j id
+
+</details>
+
+#### subgeo
+
+_subgeo_ is a function to extract a part of a geojson (e.g. world countries without antarctica).
+
+<details><summary>Code</summary>
+
+```js
+bertin.subgeo({geojson: world, field : "iso3", operator : "!=", array:["ATA"]});
+```
+</details>
+
+<details><summary>Parameters</summary>
+
+- <b>geojson</b>: a geojson (or topojson)
+- <b>field</b>: a field in properties
+- <b>operator</b>: an operator (default :"==")
+- <b>array</b>: an array of values
 
 </details>
 
