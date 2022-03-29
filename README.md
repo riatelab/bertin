@@ -109,7 +109,7 @@ bertin.draw({
 
 <details><summary>Parameters</summary>
 
-- <b>projection</b>: a d3 function or proj4string defining the map projection. Cf [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) & [https://spatialreference.org](https://spatialreference.org/) (default: d3.geoEquirectangular())
+- <b>projection</b>: a d3 function or proj4string defining the map projection. Cf [d3-geo-projection@4](https://github.com/d3/d3-geo-projection) & [https://spatialreference.org](https://spatialreference.org/) (default: d3.geoEquirectangular()). [Example](https://observablehq.com/@neocartocnrs/bertin-js-projections)
 - <b>width</b>: width of the map (default:1000);
 - <b>extent</b>: a feature or a bbox array defining the extent e.g. a country or [[112, -43],[153, -9]] (default: null)
 - <b>margin</b>: margin around features to be displayed. This option can be useful if the stroke is very heavy (default: 1)
