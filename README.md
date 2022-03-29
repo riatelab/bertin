@@ -1019,8 +1019,9 @@ const data = bertin.merge(
 _links_ is a function that create links from geometries (polygons or points) and a data file (i,j,fij). [Example](https://observablehq.com/@neocartocnrs/bertin-js-links)
 
 <details><summary>Code</summary>
+
 ```js
-links = bertin.links({
+bertin.links({
   geojson: world,
   geojson_id: "ISO3",
   data: migr2019,
