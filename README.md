@@ -250,7 +250,7 @@ layers: [
       type: "typo",
       values: "region",
       pal: "Tableau10",
-      tooltip: ["region", "name", ""],
+      tooltip: ["$region", "$name"],
       leg_title: `The Continents`,
       leg_x: 55,
       leg_y: 180
@@ -301,7 +301,7 @@ bertin.draw({
       geojson: countries,
       values: "pop",
       k: 60,
-      tooltip: ["country", "pop", "(inh.)"],
+      tooltip: ["$country", "$pop", "(inh.)"],
     },
   ],
 });
@@ -321,7 +321,7 @@ bertin.draw({
 - <b>fillOpacity</b>: fill opacity (default: 1)
 - <b>dorling</b>: a boolean (default:false)
 - <b>iteration</b> an integer to define the number of iteration for the Dorling method (default 200)
-- <b>tooltip</b> an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin)
 
 Parameters of the legend
 
@@ -441,7 +441,7 @@ leg_y: 450,
 leg_title: `GDP by world region`,
 leg_txt: "200 billion $",
 fill: "red",
-tooltip: ["name", "region", ""]
+tooltip: ["$name", "$region"]
 }
 ]
 })
@@ -462,7 +462,7 @@ tooltip: ["name", "region", ""]
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
-- <b>tooltip</b> an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - <b>iteration</b> an integer to define the number of iteration for the Dorling method (default 200)
 
 Parameters of the legend
@@ -514,8 +514,8 @@ The *mushroom* type is used to draw a map with 2 superposed proportional semi-ci
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b>: stroke width (default: 0.5)
 - <b>fillOpacity</b>: fill opacity (default: 1)
-- <b>top_tooltip</b>: an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
-- <b>bottom_tooltip</b>: an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>top_tooltip</b>:  an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
+- <b>bottom_tooltip</b>: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 
 Parameters of the legend
 
@@ -550,7 +550,7 @@ bertin.draw({
       values: "pop",
       k: 60,
       w: 8,
-      tooltip: ["country", "pop", "(inh.)"],
+      tooltip: ["$country", "$pop", "(inh.)"],
     },
   ],
 });
@@ -568,7 +568,7 @@ bertin.draw({
 - <b>stroke</b>: stroke color (default: #a31d88)
 - <b>strokeWidth</b>: stroke width (default: 0.7)
 - <b>fillOpacity</b>: fill opacity (default: 0.3)
-- <b>tooltip</b> an array of 3 values defining what to display within the tooltip. The two first values indicates the name of a field in the properties. the third value is a string to indicates the unit (default:"")
+- <b>tooltip</b> an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 
 Parameters of the legend
 
