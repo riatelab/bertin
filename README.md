@@ -4,7 +4,7 @@ _Bertin.js is <ins>**under development**</ins> so not necessarily very stable ye
 
 ![](./img/banner.png)
 
-bertin.js is an easy to use js library bsed on [d3js](https://github.com/d3/d3) to facilitate the process of making thematic maps. The principle is to work with layers stacked on each other. As in a GIS, the layers that are displayed above are placed at the top in the code, the layers that are displayed below are placed at the bottom in the code. The layers that can be displayed are of several types: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text... Each type has its own parameters. This list will be completed gradually.
+bertin.js is an easy to use js library based on [d3js](https://github.com/d3/d3) to facilitate the process of making thematic maps. The principle is to work with layers stacked on each other. As in a GIS, the layers that are displayed above are placed at the top in the code, the layers that are displayed below are placed at the bottom in the code. The layers that can be displayed are of several types: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text... Each type has its own parameters. This list will be completed gradually.
 
 ### Why Bertin ?
 
@@ -47,7 +47,7 @@ bertin = require("bertin@0.9.0");
 
 #### <ins>In browser</ins>
 
-```js
+```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
 <script src="https://cdn.jsdelivr.net/npm/bertin"></script>
