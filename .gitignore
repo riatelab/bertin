@@ -4,3 +4,6 @@ dist/
 
 # History files
 .Rhistory 
+
+# VS Code folders 
+.vscode/*
