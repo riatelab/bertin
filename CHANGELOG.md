@@ -5,6 +5,7 @@
 *  dependencies. d3 -> d3 modules ([7bf38eed](https://github.com/neocarto/bertin/commit/7bf38eed0ce65ece529afd7b715347500a60f906))
 
 ##### New Features
+* Allow the possibility tu make bubble with positive and negative values ([280a029](https://github.com/neocarto/bertin/commit/f9169226d8a2a0d9cf9e0456dba88e8254af96b4))
 * Allow the possibility to define a bbox as extent ([6eea4c0](https://github.com/neocarto/bertin/commit/6eea4c0b67fff5563c56f5bf711ace85c066ea01))
 * subgeo ([5bd10d1](https://github.com/neocarto/bertin/commit/5bd10d11d87326eb85f52caeb54498e329c44197))
 * topojson ([57b059d](https://github.com/neocarto/bertin/commit/57b059d2d8c8669da6ec223600efeef1e6a732cc))
