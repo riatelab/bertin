@@ -111,7 +111,7 @@ export function bubble(selection, projection, options = {}, clipid, width, heigh
     .attr("stroke-opacity", strokeOpacity)
     .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
     .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
-    .attr("r", (d) => radius(d.properties[values]))
+    .attr("r", (d) => radius(Math.abs(d.properties[values])))
     .on("touchmove mousemove", function (event, d) {
 
   if (tooltip) {

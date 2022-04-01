@@ -43,7 +43,7 @@ if (typeof stroke == "object" && stroke.type == "choro") {
   });
 }
 
-if (typeof fill == "object" && fill.type == "typo") {
+if (typeof fill == "object" && (fill.type == "typo" || fill.type == "split")) {
 legtypo(selection, {
     x: fill.leg_x,
     y: fill.leg_y,
@@ -61,7 +61,7 @@ legtypo(selection, {
   });
 }
 
-if (typeof stroke == "object" && stroke.type == "typo") {
+if (typeof stroke == "object" && (stroke.type == "typo" || stroke.type == "split")) {
 legtypo(selection, {
     x: stroke.leg_x,
     y: stroke.leg_y,

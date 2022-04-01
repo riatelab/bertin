@@ -89,27 +89,5 @@ export function chorotypo(features, input){
   }
 
 
-  // split
-
-  if (typeof input == "object" && input.type == "split") {
-    let values = input.values
-    let split = input.split ?? 0
-    let colors = input.colors ? input.colors : ["red","blue"];
-    let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
-
-    const getcol = (val) => {
-      if (val >= split) return colors[0];
-      if (val < split) return colors[1];
-      if (val == undefined) return col_missing;
-    }
-
-    return {
-      getcol: getcol,
-      types: [`>= ${split}`,`< ${split}`],
-      colors: colors
-    };
-
-  }
-
 
 }
