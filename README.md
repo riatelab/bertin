@@ -122,7 +122,7 @@ bertin.draw({
 
 #### Simple layer
 
-The _layer_ type allows to display a simple geojson layer (points, lines or polygons). [Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js). [Example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin)
+The _layer_ type allows to display a simple geojson layer (points, lines or polygons). [Source](https://github.com/neocarto/bertin/blob/main/src/layers/simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js). [Example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -146,7 +146,7 @@ bertin.draw({
 - <b>fill</b>: fill color (default: a random color)
 - <b>stroke</b>: stroke color (default: "white")
 - <b>strokeWidth</b> stroke width (default:0.5)
-- <b>strokeLinecap</b>: stroke-linecap (dafault:"round")
+- <b>strokeLinecap</b>: stroke-linecap (default:"round")
 - <b>strokeLinejoin</b>: stroke-linejoin (default:"round")
 - <b>strokeDasharray</b>: stroke-dasharray (default:"none")
 - <b>fillOpacity</b>: fill opacity (default:1)
@@ -289,7 +289,7 @@ Parameters of the legend
 
 #### Bubble
 
-The _bubble_ type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-bubble.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-symbols?collection=@neocartocnrs/bertin)
+The _bubble_ type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/bubble.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-symbols?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -417,7 +417,7 @@ bertin.draw({
 
 #### Dots cartogram
 
-The _dotcartogram_ type is a method of map representation that follows Dorling's cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map. [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
+The _dotcartogram_ type is a method of map representation that follows Dorling's cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map. [Source](https://github.com/neocarto/bertin/blob/main/src/layer/dotcartogram.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 ```js
@@ -482,7 +482,7 @@ Parameters of the legend
 
 #### Mushroom
 
-The *mushroom* type is used to draw a map with 2 superposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mushroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
+The *mushroom* type is used to draw a map with 2 superposed proportional semi-circles. This type of representation can be used when 2 data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer/mushroom.js) [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -537,7 +537,7 @@ Parameters of the legend
 
 #### Spikes
 
-The _spikes_ type is used to draw a map with spikes. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-spikes.js) [Example](https://observablehq.com/d/12446a15a2642907?collection=@neocartocnrs/bertin)
+The _spikes_ type is used to draw a map with spikes. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/spikes.js) [Example](https://observablehq.com/d/12446a15a2642907?collection=@neocartocnrs/bertin)
 
 <details><summary>Code</summary>
 
@@ -589,7 +589,7 @@ Parameters of the legend
 
 #### Footer
 
-The _footer_ type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
+The _footer_ type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/footer.js).
 
 <details><summary>Code</summary>
 
@@ -620,7 +620,7 @@ bertin.draw({
 
 #### Graticule
 
-The _graticule_ type allows you to display the latitude and longitude lines.[Source](https://github.com/neocarto/bertin/blob/main/src/graticule.js).
+The _graticule_ type allows you to display the latitude and longitude lines.[Source](https://github.com/neocarto/bertin/blob/main/src/layers/graticule.js).
 
 <details><summary>Code</summary>
 
@@ -650,7 +650,7 @@ bertin.draw({
 
 #### Header
 
-The _header_ type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
+The _header_ type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/header.js).
 
 <details><summary>Code</summary>
 
@@ -681,7 +681,7 @@ bertin.draw({
 
 #### Labels
 
-The _label_ type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-labels.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts)
+The _label_ type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/label.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts)
 
 <details><summary>Code</summary>
 
@@ -714,7 +714,7 @@ bertin.draw({
 
 #### Missing
 
-Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That is what the type _missing_ is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
+Sometimes, when making a map by proportional symbols for example, it can be interesting to display in white under the symbols, the countries with missing data. That is what the type _missing_ is for. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/missing.js).
 
 <details><summary>Code</summary>
 
@@ -758,7 +758,7 @@ Parameters of the legend
 
 #### Outline
 
-The _outline_ type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
+The _outline_ type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/outline.js).
 
 <details><summary>Code</summary>
 
@@ -786,7 +786,7 @@ bertin.draw({
 
 #### Scalebar
 
-The _scalebar_ type allows to display a scalebar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js)
+The _scalebar_ type allows to display a scalebar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/layesr/scalerbar.js)
 
 <details><summary>Code</summary>
 
@@ -813,7 +813,7 @@ bertin.draw({
 
 #### Shadow
 
-The _shadow_ type allows to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js)
+The _shadow_ type allows to display a shadow under a layer to give it a relief effect [Source](https://github.com/neocarto/bertin/blob/main/src/layers/shadow.js)
 
 <details><summary>Code</summary>
 
@@ -884,6 +884,34 @@ bertin.draw({
 - <b>frame_opacity</b>: frame opacity (default: 1)
 
 </details>
+
+#### hatch (or hatching)
+
+The _hatch_ type sonly allows to add hatchings on the whole page to make it a bit prettier. [Source](https://github.com/neocarto/bertin/blob/main/src/hatch.js)
+
+<details><summary>Code</summary>
+
+  ```js
+  bertin.draw({
+    layers: [
+      {
+        type: "hatch",
+        angle:45
+      },
+    ],
+  });
+  ```
+
+</details>
+
+  <details><summary>Parameters</summary>
+
+  - <b>stroke</b>: stroke color (default: "#786d6c")
+  - <b>strokeWidth</b>: stroke color (default: 2)
+  - <b>strokeOpacity</b>: stroke-opacity (default: 45)
+  - <b>strokeDasharray</b>: stroke-dasharray (default:"none")
+  - <b>angle</b>: orientation of lines (default: 45)
+  - <b>spacing</b>: spacing beetwen lines (default: 8)
 
 ## 6. Other functions
 

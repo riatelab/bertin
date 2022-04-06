@@ -26,6 +26,7 @@ import { text } from "./layers/text.js";
 import { label } from "./layers/label.js";
 import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
+import { hatch } from "./layers/hatch.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
@@ -146,7 +147,8 @@ if (clip){ // test
     }
 
 
-    // Simple 2 (test)
+    // Simple
+
 
     // simple layers
     if (layer.type == "layer" || layer.type == "simple" || layer.type == undefined) {
@@ -401,6 +403,22 @@ if (layer.type == "label") {
         anchor: layer.anchor
       });
     }
+
+
+    // simple layers
+    if (layer.type == "hatch" || layer.type == "hatching" ) {
+      hatch(svg, {
+        stroke: layer.stroke,
+        strokeWidth: layer.strokeWidth,
+        strokeOpacity: layer.strokeOpacity,
+        angle: layer.angle,
+        spacing: layer.spacing,
+        strokeDasharray: layer.strokeDasharray
+      }, width, height);
+    }
+
+
+
   });
 
   // -----------------------------------------
