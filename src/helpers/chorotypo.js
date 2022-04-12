@@ -66,10 +66,14 @@ export function chorotypo(features, input){
     let pal = input.pal ? input.pal : "Tableau10";
     let colors = input.colors ? input.colors : null;
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
+    let txt_missing = input.txt_missing ? input.txt_missing : "No data";
 
-    let types = Array.from(
-      new Set(features.map((d) => d.properties[values]))
-    );
+    const arr = Array.from(new Set(features.map((d) => d.properties[values])));
+    const types = arr.filter((d) => d != "" && (d != null) & (d != undefined));
+
+    // let types = Array.from(
+    //   new Set(features.map((d) => d.properties[values]))
+    // );
 
     if (colors == null) {
       colors = d3[`scheme${pal}`].slice(0, types.length);
@@ -77,15 +81,17 @@ export function chorotypo(features, input){
       colors = colors.slice(0, types.length);
     }
 
+    // if (types.length < arr.length) {
+    //   types.push(txt_missing);
+    //   colors.push(col_missing);
+    // }
+
+
     return {
-      getcol: d3
-        .scaleOrdinal()
-        .domain(types)
-        .range(colors)
-        .unknown(col_missing),
-      types: types,
-      colors: colors
-    };
+        getcol: d3.scaleOrdinal().domain(types).range(colors).unknown(col_missing),
+        types: types.length == arr.length ? types : [types, txt_missing].flat(),
+        colors: types.length == arr.length ? colors : [colors, col_missing].flat()
+      };
   }
 
 
