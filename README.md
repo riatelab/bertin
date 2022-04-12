@@ -612,7 +612,32 @@ bertin.draw({
 - **strokeWidth**: stroke width (default:0.8)
 - **strokeopacity**: stroke opacity (default:0.5)
 - **strokedasharray**: stroke-dasharray (default:2)
-- **step**: gap between graticules. The value can be a number or an array of two values (default:[10, 10])
+- **step**: gap between graticules. The value can be a number or an array of two values (default: [10, 10])
+
+#### hatch (or hatching)
+
+The _hatch_ type sonly allows to add hatchings on the whole page to make it a bit prettier. [Source](https://github.com/neocarto/bertin/blob/main/src/hatch.js)
+
+#### Code
+  ```js
+  bertin.draw({
+    layers: [
+      {
+        type: "hatch",
+        angle:45
+      },
+    ],
+  });
+  ```
+
+  #### Parameters
+
+  - **stroke**: stroke color (default: "#786d6c")
+  - **strokeWidth**: stroke color (default: 2)
+  - **strokeOpacity**: stroke-opacity (default: 45)
+  - **strokeDasharray**: stroke-dasharray (default:"none")
+  - **angle**: orientation of lines (default: 45)
+  - **spacing**: spacing beetwen lines (default: 8)
 
 ### Header
 
