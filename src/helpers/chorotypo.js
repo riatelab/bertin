@@ -12,52 +12,55 @@ export function chorotypo(features, input){
 
   // choropleth
   if (typeof input == "object" && input.type == "choro") {
-    let values = input.values;
-    let pal = input.pal ? input.pal : "Blues";
-    let nbreaks = input.nbreaks ? input.nbreaks : 5;
-    let breaks = input.breaks ? input.breaks : null;
-    let k = input.k ? input.k : 1;
-    let middle = input.middle ? input.middle : false;
-    let colors = input.colors ? input.colors : null;
-    let method = input.method ? input.method : "quantile";
-    let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
-    let leg_round = input.leg_round !== undefined ? input.leg_round : undefined;
+  let values = input.values;
+  let pal = input.pal ? input.pal : "Blues";
+  let nbreaks = input.nbreaks ? input.nbreaks : 5;
+  let breaks = input.breaks ? input.breaks : null;
+  let k = input.k ? input.k : 1;
+  let middle = input.middle ? input.middle : false;
+  let colors = input.colors ? input.colors : null;
+  let method = input.method ? input.method : "quantile";
+  let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
+  let txt_missing = input.txt_missing ? input.txt_missing : "No data";
+  let leg_round = input.leg_round !== undefined ? input.leg_round : undefined;
 
-    if (method == "q6") {
-      nbreaks = 6;
-    }
-
-
-
-    if (breaks == null) {
-      breaks = stat.breaks({
-        values: features.map((d) => +d.properties[values]),
-        method: method,
-        nb: nbreaks,
-        k:k,
-        middle:middle,
-        precision: leg_round
-      });
-    } else {
-      breaks = d3.sort(breaks);
-    }
-
-    if (colors == null) {
-      colors = d3[`scheme${pal}`][breaks.length - 1];
-    }
-
-    let b = [...breaks];
-    b.pop();
-    b.shift();
-
-    // return d3.scaleThreshold(b, colors).unknown("#col_missing");
-
-    return {
-      getcol: d3.scaleThreshold(b, colors).unknown(col_missing),
-      breaks: breaks,
-      colors: colors
-    };
+  if (method == "q6") {
+    nbreaks = 6;
   }
+
+  const arr = features.map((d) => +d.properties[values]);
+  const val = arr.filter((d) => (d != undefined) & (d != null) && d != "");
+
+  const missing = arr.length == val.length ? null : [txt_missing, col_missing];
+
+  if (breaks == null) {
+    breaks = stat.breaks({
+      values: val,
+      method: method,
+      nb: nbreaks,
+      k: k,
+      middle: middle,
+      precision: leg_round
+    });
+  } else {
+    breaks = d3.sort(breaks);
+  }
+
+  if (colors == null) {
+    colors = d3[`scheme${pal}`][breaks.length - 1];
+  }
+
+  let b = [...breaks];
+  b.pop();
+  b.shift();
+
+  return {
+    getcol: d3.scaleThreshold(b, colors).unknown(col_missing),
+    breaks: breaks,
+    colors: colors,
+    missing: missing
+  };
+}
 
   // typo
 
@@ -69,7 +72,7 @@ export function chorotypo(features, input){
     let txt_missing = input.txt_missing ? input.txt_missing : "No data";
 
     const arr = Array.from(new Set(features.map((d) => d.properties[values])));
-    const types = arr.filter((d) => d != "" && (d != null) & (d != undefined));
+    const types = arr.filter((d) => d != "" && (d != null) && (d != undefined));
 
     // let types = Array.from(
     //   new Set(features.map((d) => d.properties[values]))
@@ -80,12 +83,6 @@ export function chorotypo(features, input){
     } else {
       colors = colors.slice(0, types.length);
     }
-
-    // if (types.length < arr.length) {
-    //   types.push(txt_missing);
-    //   colors.push(col_missing);
-    // }
-
 
     return {
         getcol: d3.scaleOrdinal().domain(types).range(colors).unknown(col_missing),

@@ -18,8 +18,19 @@ export function legchoro(selection, options = {}) {
   let txtcol = options.txtcol ? options.txtcol : "#363636";
   let breaks = options.breaks;
   let colors = options.colors;
+  let missing = options.missing;
 
+  const i_missing = missing != null ? colors.length : -1;
   const span = 0;
+
+  const bks =
+    missing == null
+      ? d3.reverse(breaks)
+      : [d3.reverse(breaks), missing[0]].flat();
+  const col =
+    missing == null
+      ? d3.reverse(colors)
+      : [d3.reverse(colors), missing[1]].flat();
 
   if (x != null && y != null) {
     let leg = selection.append("g");
@@ -43,10 +54,13 @@ export function legchoro(selection, options = {}) {
     }
     leg
       .selectAll("rect")
-      .data(d3.reverse(colors))
+      .data(col)
       .join("rect")
       .attr("x", x)
-      .attr("y", (d, i) => y + delta + (h + span) * i)
+      .attr(
+        "y",
+        (d, i) => y + delta + (h + span) * i + (i === i_missing ? h / 2 : 0)
+      )
       .attr("height", h)
       .attr("width", w)
       .attr("fill", (d) => d)
@@ -57,7 +71,7 @@ export function legchoro(selection, options = {}) {
     leg
       .append("g")
       .selectAll("text")
-      .data(d3.reverse(breaks))
+      .data(bks)
       .join("text")
       .attr("x", x + w + fontSize2 / 2)
       .attr("y", y + delta)
@@ -67,5 +81,6 @@ export function legchoro(selection, options = {}) {
       .attr("text-anchor", "start")
       .attr("dominant-baseline", "central")
       .text((d) => d);
+
   }
 }

@@ -21,7 +21,8 @@ legchoro(selection, {
     fontSize: fill.leg_fontSize,
     fontSize2: fill.leg_fontSize2,
     breaks: chorotypo(geojson.features, fill).breaks,
-    colors: chorotypo(geojson.features, fill).colors
+    colors: chorotypo(geojson.features, fill).colors,
+    missing: chorotypo(geojson.features, fill).missing
   });
 }
 
@@ -39,7 +40,8 @@ if (typeof stroke == "object" && stroke.type == "choro") {
     fontSize: stroke.leg_fontSize,
     fontSize2: stroke.leg_fontSize2,
     breaks: chorotypo(geojson.features, stroke).breaks,
-    colors: chorotypo(geojson.features, stroke).colors
+    colors: chorotypo(geojson.features, stroke).colors,
+    missing: chorotypo(geojson.features, stroke).missing
   });
 }
 
