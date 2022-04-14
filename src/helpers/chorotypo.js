@@ -74,9 +74,6 @@ export function chorotypo(features, input){
     const arr = Array.from(new Set(features.map((d) => d.properties[values])));
     const types = arr.filter((d) => d != "" && (d != null) && (d != undefined));
 
-    // let types = Array.from(
-    //   new Set(features.map((d) => d.properties[values]))
-    // );
 
     if (colors == null) {
       colors = d3[`scheme${pal}`].slice(0, types.length);
@@ -95,21 +92,28 @@ export function chorotypo(features, input){
   // split
 
   if (typeof input == "object" && input.type == "split") {
-    let values = input.values
-    let split = input.split ?? 0
+    let values = input.values;
+    let split = input.split ?? 0;
     let colors = input.colors ? input.colors : ["#F25842", "#4a7cd9"];
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
+    let txt_missing = input.txt_missing ? input.txt_missing : "No data";
+
+    const arr = features.map((d) => d.properties[values]);
+    const arr2 = arr.filter((d) => d != "" && d != null && d != undefined);
 
     const getcol = (val) => {
       if (val >= split) return colors[0];
       if (val < split) return colors[1];
-      if (val == undefined) return col_missing;
-    }
+      if (val == undefined || val == "") return col_missing;
+    };
 
     return {
       getcol: getcol,
-      types: [`>= ${split}`,`< ${split}`],
-      colors: colors
+      types:
+        arr.length == arr2.length
+          ? [`>= ${split}`, `< ${split}`]
+          : [[`>= ${split}`, `< ${split}`], txt_missing].flat(),
+      colors: arr.length == arr2.length ? colors : [colors, col_missing].flat()
     };
 
   }
