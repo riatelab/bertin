@@ -216,6 +216,7 @@ bertin.draw({
 - **middle**: for msd method only. middle class or not (default:false);
 - **k**: for msd method only. number of sd. (default:1);
 - **col_missing**: Color for missing values (default "#f5f5f5")
+- **txt_missing**: Text for missing values (default "No data")
 - **stroke**: stroke color (default: "white")
 - **strokeWidth**: Stroke width (default: 0.5)
 - **fillOpacity**: Fill opacity (default: 1)
@@ -266,6 +267,7 @@ layers: [
 - **colors**: An array containing n colors for n types (default: null)
 - **pal**: a palette of categorical colors (default: "Tableau10") [See](https://observablehq.com/@d3/color-schemes)
 - **col_missing**: Color for missing values (default "#f5f5f5")
+- **txt_missing**: Text for missing values (default "No data")
 - **stroke**: stroke color (default: "white")
 - **strokeWidth**: Stroke width (default: 0.5)
 - **fillOpacity**: Fill opacity (default: 1)
