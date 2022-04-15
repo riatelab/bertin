@@ -1,26 +1,24 @@
 import * as d3selection from "d3-selection";
 import * as d3scale from "d3-scale";
 import * as d3array from "d3-array";
-import {rounding } from "./rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
-export function legthicknessrel(selection, options = {}) {
+export function legthicknessquali(selection, options = {}) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
   let w = options.w ? options.w : 30;
-  let title = options.title ?? null;
+  let title = options.title ? options.title : null;
   let fontSize = options.fontSize ? options.fontSize : 14;
   let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
   let stroke = options.stroke ? options.stroke : "black";
   let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 1;
   let txtcol = options.txtcol ? options.txtcol : "#363636";
-  let breaks = options.breaks;
+  let categories = options.categories;
   let sizes = options.sizes;
-  let round = options.round !== undefined ? options.round : undefined;
 
   sizes = d3.reverse(sizes);
-  breaks = d3.reverse(breaks);
+  categories = d3.reverse(categories);
 
   if (x != null && y != null) {
     let leg = selection.append("g");
@@ -53,14 +51,6 @@ export function legthicknessrel(selection, options = {}) {
       cumul += sizes[i];
     }
 
-    // y txt
-    let y_txt = [];
-    cumul = 0;
-    for (let i = 0; i < breaks.length; i++) {
-      y_txt.push(y + delta + cumul - span / 2);
-      cumul += sizes[i] + span;
-    }
-
     leg
       .selectAll("line")
       .data(sizes)
@@ -71,19 +61,19 @@ export function legthicknessrel(selection, options = {}) {
       .attr("y2", (d, i) => y_lines[i])
       .attr("stroke", stroke)
       .attr("stroke-opacity", strokeOpacity)
-      .attr("stroke-width", (d) => d)
+      .attr("stroke-width", (d) => d);
 
     leg
       .append("g")
       .selectAll("text")
-      .data(breaks)
+      .data(categories)
       .join("text")
       .attr("x", x + w + fontSize2 / 2)
-      .attr("y", (d, i) => y_txt[i])
+      .attr("y", (d, i) => y_lines[i])
       .attr("font-size", `${fontSize2}px`)
       .attr("fill", txtcol)
       .attr("text-anchor", "start")
       .attr("dominant-baseline", "central")
-      .text(d => rounding(d, round));
+      .text((d) => d);
   }
 }

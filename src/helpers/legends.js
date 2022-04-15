@@ -2,6 +2,7 @@ import {legchoro } from "./leg-choro.js"
 import {legtypo } from "./leg-typo.js";
 import {legthicknessabs } from "./leg-thickness-abs.js";
 import {legthicknessrel } from "./leg-thickness-rel.js";
+import {legthicknessquali } from "./leg-thickness-quali.js";
 import {chorotypo } from "./chorotypo.js";
 import {thickness } from "./thickness.js";
 
@@ -113,7 +114,8 @@ if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeW
     fontSize2: strokeWidth.leg_fontSize2,
     stroke: strokeWidth.stroke,
     strokeOpacity: strokeWidth.strokeOpacity,
-    txtcol: strokeWidth.leg_txtcol
+    txtcol: strokeWidth.leg_txtcol,
+    round: strokeWidth.leg_round
 
 });
 

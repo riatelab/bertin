@@ -60,7 +60,7 @@ export function thickness(data, _) {
   if (typeof _ != "number" && typeof _ != "string" && type == "quali") {
     const categories = _.categories;
     const k = _.k ?? 10;
-    const sizes = _.sizes ?? d3.quantize(d3.interpolate(1, k), values.length);
+    const sizes = _.sizes ?? d3.quantize(d3.interpolate(1, k), categories.length);
 
     return {
       type: type,
@@ -70,7 +70,7 @@ export function thickness(data, _) {
         .scaleOrdinal()
         .domain(categories)
         .range(sizes)
-        .unknown("none")
+        .unknown(0)
     };
   }
 
@@ -85,7 +85,7 @@ export function thickness(data, _) {
     let nbsd = _.nbsd ?? 1;
     let middle = _.middle ?? false;
     let method = _.method ?? "quantile";
-    let leg_round = _.leg_round !== undefined ? _.leg_round : undefined;
+    //let leg_round = _.leg_round !== undefined ? _.leg_round : undefined;
 
     if (method == "q6") {
       nbreaks = 6;
@@ -101,8 +101,8 @@ export function thickness(data, _) {
         method: method,
         nb: nbreaks,
         k: nbsd,
-        middle: middle,
-        precision: leg_round
+        middle: middle
+        //precision: leg_round
       });
     } else {
       breaks = d3.sort(breaks);
@@ -120,7 +120,7 @@ export function thickness(data, _) {
       type: type,
       breaks: breaks,
       sizes: sizes,
-      getthickness: d3.scaleThreshold(b, sizes).unknown("none")
+      getthickness: d3.scaleThreshold(b, sizes).unknown(0)
     };
   }
 }
