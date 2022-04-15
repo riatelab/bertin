@@ -13,12 +13,13 @@ export function chorotypo(features, input){
   // choropleth
   if (typeof input == "object" && input.type == "choro") {
   let values = input.values;
-  let pal = input.pal ? input.pal : "Blues";
+//  let pal = input.pal ? input.pal : "Blues";
+  let colors = input.colors ?? "Blues";
   let nbreaks = input.nbreaks ? input.nbreaks : 5;
   let breaks = input.breaks ? input.breaks : null;
   let k = input.k ? input.k : 1;
   let middle = input.middle ? input.middle : false;
-  let colors = input.colors ? input.colors : null;
+  //let colors = input.colors ? input.colors : null;
   let method = input.method ? input.method : "quantile";
   let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
   let txt_missing = input.txt_missing ? input.txt_missing : "No data";
@@ -46,9 +47,9 @@ export function chorotypo(features, input){
     breaks = d3.sort(breaks);
   }
 
-  if (colors == null) {
-    colors = d3[`scheme${pal}`][breaks.length - 1];
-  }
+
+  if (!Array.isArray(colors)){colors = d3[`scheme${colors}`][breaks.length - 1];}
+
 
   let b = [...breaks];
   b.pop();

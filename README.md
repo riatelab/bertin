@@ -191,7 +191,7 @@ bertin.draw({
         values: "gdppc",
         nbreaks: 5,
         method: "quantile",
-        pal: "RdYlGn",
+        colors: "RdYlGn",
         leg_round: -1,
         leg_title: `GDP per inh (in $)`,
         leg_x: 100,
@@ -204,10 +204,9 @@ bertin.draw({
 #### Parameters
 
 - **values**: a string corresponding to the targeted variable in the properties (**compulsory**)
-- **pal**: a palette of categorical colors (default: "Blues") [See](https://observablehq.com/@d3/color-schemes)
 - **nbreaks**: Number of classes (default:5)
 - **breaks**: Class breaks (default:null)
-- **colors**: An array of colors (default: null)
+- **colors**: An array of colors or a palette of categorical colors (default: "Blues") [See](https://observablehq.com/@d3/color-schemes)
 - **method**: A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
 - **middle**: for msd method only. middle class or not (default:false);
 - **k**: for msd method only. number of sd. (default:1);
