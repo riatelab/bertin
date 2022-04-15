@@ -557,6 +557,119 @@ Parameters of the legend
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
 
+### Thickness
+
+On each layer, you can dynamically vary the thickness of the paths. This can be useful to make for example flow maps or discontinuity maps. [Source](https://github.com/neocarto/bertin/blob/main/src/helpers/thickness.js)
+
+
+
+#### Code - Constant Thickness
+
+In order for each object to have the same thickness.
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "layer",
+      geojson: *a geojson here*,
+      strokeWidth: 3,
+    }
+  ]
+})
+```
+
+#### Code - Absolute variation
+
+To vary the thickness proportionally to an absolute quantitative data.
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "layer",
+      geojson: *a geojson here*,
+      strokeWidth: {type:"abs",values:"migration"},
+    }
+  ]
+})
+```
+
+#### Parameters
+
+- **values**: a string corresponding to the targeted variable in the properties(compulsory)
+- **k**: thicken with the largest line (default:10)
+- **fixmax**: Max value to fix the size of the thickest line, in order to make maps comparable (default:undefined)
+
+
+#### Code - Relative variation
+
+To vary the thickness according to classes values
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "layer",
+      geojson: *a geojson here*,
+      strokeWidth: {type:"rel",values:"migration", method: "q6"},
+    }
+  ]
+})
+```
+
+#### Parameters
+
+- **values**: a string corresponding to the targeted variable in the properties(compulsory)
+- **k**: thicken with the largest line (default:10)
+- **nbreaks**: Number of classes (default:5)
+- **breaks**: Class breaks (default:null)
+- **method**: A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles).
+- **middle**: for msd method only. middle class or not (default:false).
+- **sizes**: an array definig the sizes of each classes.
+- **nbsd**: for msd method only. number of sd. (default:1)
+- **sizes**: an array of thicknesses.
+
+#### Code - Catégories
+
+To vary the thickness according to qualitative data.
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "layer",
+      geojson: *a geojson here*,
+      strokeWidth: {type:"rel",values:"flow", categories: ["low", "medium", "high", "very high"]},
+    }
+  ]
+})
+```
+
+#### Parameters
+
+- **values**: a string corresponding to the targeted variable in the properties(compulsory)
+- **k**: thicken with the largest line (default:10)
+- **categories**: an array containing categories
+- **sizes**: an array definig the sizes of each classes.
+- **nbsd**: for msd method only. number of sd. (default:1)
+- **sizes**: an array of thicknesses.
+
+
+#### Parameters of the legends
+
+- **leg_x**: position in x (if this value is not filled, the legend is not displayed)
+- **leg_y**: position in y (if this value is not filled, the legend is not displayed)
+- **leg_w**: width of the lines (default: 30)
+- **leg_text**: text of the box (default: "text of the box")
+- **leg_fontSize**: text font size (default: 10)
+- **leg_fill**: color of the box (same as the layer displayed)
+- **leg_stroke**: stroke of the box (default: "black")
+- **leg_strokeWidth**: stroke-width (default: 0.5)
+- **leg_fillOpacity**: stroke opacity (same as the layer displayed)
+- **leg_txtcol**: color of the text (default: "#363636")
+- **leg_round**: Number of digits (default: undefined)
+
 ## Map components
 
 ### Footer
