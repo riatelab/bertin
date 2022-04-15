@@ -2,7 +2,7 @@ import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 
 export function text(selection, width, height, options = {}){
-  let position = options.position ? options.position : "topright";
+    let position = options.position ? options.position : "topright";
     let text = options.text ? options.text : "Your text here!";
     let fontSize = options.fontSize ? options.fontSize : 15;
     let fontFamily = options.fontFamily ? options.fontFamily : "Robotto";
@@ -18,6 +18,9 @@ export function text(selection, width, height, options = {}){
     let frame_stroke = options.frame_stroke ? options.frame_stroke : "none";
     let frame_strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
     let frame_opacity = options.frame_opacity ? options.frame_opacity : 1;
+
+    let x;
+    let y;
 
     switch (position) {
       case "topleft":
