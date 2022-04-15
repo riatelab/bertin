@@ -6,7 +6,7 @@ import {rounding } from "./rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
-export function legthickness(selection, options = {}) {
+export function legthicknessabs(selection, options = {}) {
   let x = options.x ?? null;
   let y = options.y ?? null;
   let valmax = options.valmax;

@@ -1,8 +1,10 @@
 import {legchoro } from "./leg-choro.js"
 import {legtypo } from "./leg-typo.js";
-import {legthickness } from "./leg-thickness.js";
+import {legthicknessabs } from "./leg-thickness-abs.js";
+import {legthicknessrel } from "./leg-thickness-rel.js";
 import {chorotypo } from "./chorotypo.js";
 import {thickness } from "./thickness.js";
+
 
 export function legends(geojson, selection, fill, stroke, strokeWidth){
 
@@ -81,8 +83,8 @@ legtypo(selection, {
   });
 }
 
-if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeWidth.type == "abs") {
-  legthickness(selection, {
+if (typeof strokeWidth == "object" && strokeWidth.values != undefined && (strokeWidth.type == "abs" ||strokeWidth.type == undefined)) {
+  legthicknessabs(selection, {
   x: strokeWidth.leg_x,
   y: strokeWidth.leg_y,
   valmax: thickness(geojson.features, strokeWidth).valmax,
@@ -96,6 +98,25 @@ if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeW
   w: strokeWidth.leg_w,
   round: strokeWidth.leg_round
 });
+}
+
+if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeWidth.type == "rel") {
+  legthicknessrel(selection, {
+
+    x: strokeWidth.leg_x,
+    y: strokeWidth.leg_y,
+    breaks:thickness(geojson.features, strokeWidth).breaks,
+    sizes: thickness(geojson.features, strokeWidth).sizes,
+    w: strokeWidth.leg_w,
+    title: strokeWidth.leg_title ?? strokeWidth.values,
+    fontSize: strokeWidth.leg_fontSize,
+    fontSize2: strokeWidth.leg_fontSize2,
+    stroke: strokeWidth.stroke,
+    strokeOpacity: strokeWidth.strokeOpacity,
+    txtcol: strokeWidth.leg_txtcol
+
+});
+
 }
 
 

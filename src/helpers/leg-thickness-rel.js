@@ -5,11 +5,11 @@ import {rounding } from "./rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
-export function legthickness2(selection, options = {}) {
+export function legthicknessrel(selection, options = {}) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
   let w = options.w ? options.w : 30;
-  let title = options.title ? options.title : null;
+  let title = options.title ?? null;
   let fontSize = options.fontSize ? options.fontSize : 14;
   let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
   let stroke = options.stroke ? options.stroke : "black";
@@ -17,7 +17,6 @@ export function legthickness2(selection, options = {}) {
   let txtcol = options.txtcol ? options.txtcol : "#363636";
   let breaks = options.breaks;
   let sizes = options.sizes;
-  let missing = options.missing;
 
   sizes = d3.reverse(sizes);
   breaks = d3.reverse(breaks);
