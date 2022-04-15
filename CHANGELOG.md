@@ -1,10 +1,12 @@
-#### 0.9.0 (2022-03-22)
+#### 0.9.7 (2022-04-16)
 
 ##### Continuous Integration
 
 *  dependencies. d3 -> d3 modules ([7bf38eed](https://github.com/neocarto/bertin/commit/7bf38eed0ce65ece529afd7b715347500a60f906))
 
 ##### New Features
+
+* Manage thickness (abs, rel and quali) and legends ([1262dbc](https://github.com/neocarto/bertin/commit/1262dbcf98edd32dfc97913bf881066687c184e5) [0652a4b](https://github.com/neocarto/bertin/commit/0652a4b726658f0a45abb5055a99f4462b67f619) [0652a4b](https://github.com/neocarto/bertin/commit/0652a4b726658f0a45abb5055a99f4462b67f619) [6e18ed9](https://github.com/neocarto/bertin/commit/6e18ed90380479e2c6e59a55a2af0380fd32335e) [2df7bfd](https://github.com/neocarto/bertin/commit/2df7bfdd8155a33945e24b3ba53c2a40bbc509bf) [4206068](https://github.com/neocarto/bertin/commit/42060680230887e71f7a303c6781e83d7329e9ef))
 * Allow the possibility to add hatching ([b931ef2](https://github.com/neocarto/bertin/commit/b931ef2c063cf2a5739a73547dca655f2140d7d9))
 * Allow the possibility to make bubble with positive and negative values ([280a029](https://github.com/neocarto/bertin/commit/f9169226d8a2a0d9cf9e0456dba88e8254af96b4))
 * Allow the possibility to define a bbox as extent ([6eea4c0](https://github.com/neocarto/bertin/commit/6eea4c0b67fff5563c56f5bf711ace85c066ea01))
