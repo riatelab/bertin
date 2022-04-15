@@ -58,17 +58,17 @@ export function thickness(data, _) {
   // Qualitative data (linear scale)
 
   if (typeof _ != "number" && typeof _ != "string" && type == "quali") {
-    const values = _.values;
+    const categories = _.categories;
     const k = _.k ?? 10;
     const sizes = _.sizes ?? d3.quantize(d3.interpolate(1, k), values.length);
 
     return {
       type: type,
-      values: values,
+      categories: categories,
       sizes: sizes,
       getthickness: d3
         .scaleOrdinal()
-        .domain(values)
+        .domain(categories)
         .range(sizes)
         .unknown("none")
     };

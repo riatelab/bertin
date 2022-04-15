@@ -119,5 +119,24 @@ if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeW
 
 }
 
+if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeWidth.type == "quali") {
+  legthicknessquali(selection, {
+
+    x: strokeWidth.leg_x,
+    y: strokeWidth.leg_y,
+    categories:thickness(geojson.features, strokeWidth).categories,
+    sizes: thickness(geojson.features, strokeWidth).sizes,
+    w: strokeWidth.leg_w,
+    title: strokeWidth.leg_title ?? "Catégories",
+    fontSize: strokeWidth.leg_fontSize,
+    fontSize2: strokeWidth.leg_fontSize2,
+    stroke: strokeWidth.stroke,
+    strokeOpacity: strokeWidth.strokeOpacity,
+    txtcol: strokeWidth.leg_txtcol
+
+});
+
+}
+
 
 }
