@@ -81,7 +81,7 @@ legtypo(selection, {
   });
 }
 
-if (typeof strokeWidth == "object" && strokeWidth.values != undefined) {
+if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeWidth.type == "abs") {
   legthickness(selection, {
   x: strokeWidth.leg_x,
   y: strokeWidth.leg_y,
