@@ -7,7 +7,7 @@ import * as stat from "statsbreaks";
 export function thickness(data, _) {
   // default
 
-  const type = _.type ?? "abs";
+  const type = _.type ?? "linear";
 
   // If static value
 
