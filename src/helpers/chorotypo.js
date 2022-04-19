@@ -67,20 +67,22 @@ export function chorotypo(features, input){
 
   if (typeof input == "object" && input.type == "typo") {
     let values = input.values;
-    let pal = input.pal ? input.pal : "Tableau10";
-    let colors = input.colors ? input.colors : null;
+    //let pal = input.pal ? input.pal : "Tableau10";
+    let colors = input.colors ?? "Tableau10";
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
     let txt_missing = input.txt_missing ? input.txt_missing : "No data";
-
     const arr = Array.from(new Set(features.map((d) => d.properties[values])));
-    const types = arr.filter((d) => d != "" && (d != null) && (d != undefined));
+    let types = input.types ?? arr.filter((d) => d != "" && (d != null) && (d != undefined));
+
+  if (!Array.isArray(colors)){colors = d3[`scheme${colors}`].slice(0, types.length)}else{colors.slice(0, types.length)}
 
 
-    if (colors == null) {
-      colors = d3[`scheme${pal}`].slice(0, types.length);
-    } else {
-      colors = colors.slice(0, types.length);
-    }
+
+    // if (colors == null) {
+    //   colors = d3[`scheme${pal}`].slice(0, types.length);
+    // } else {
+    //   colors = colors.slice(0, types.length);
+    // }
 
     return {
         getcol: d3.scaleOrdinal().domain(types).range(colors).unknown(col_missing),

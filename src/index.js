@@ -22,6 +22,6 @@ export {outline} from "./layers/outline.js"
 export {graticule} from "./layers/graticule.js"
 
 // // TEMP:
-export {text} from "./layers/text.js";
+//export {text} from "./layers/text.js";
 
-//export {dots} from "./helpers/dots.js"
+export {dots} from "./helpers/dots.js"
