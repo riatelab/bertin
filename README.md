@@ -35,7 +35,7 @@ Pinned version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@0.9.0"
+  src="https://cdn.jsdelivr.net/npm/bertin@0.9.8"
   charset="utf-8"
 ></script>
 ```
@@ -51,7 +51,7 @@ bertin = require("bertin");
 Pinned version
 
 ```js
-bertin = require("bertin@0.9.0");
+bertin = require("bertin@0.9.8");
 ```
 
 ## Usage
@@ -89,13 +89,13 @@ See examples: [Example 1](https://neocarto.github.io/bertin/examples/example1.ht
 
 #### In Observable Notebook
 
-The bertin.js library is really easy to use within an Observable notebook. You'll find many examples in [this notebook collection](https://observablehq.com/collection/@neocartocnrs/bertin).Feel free to fork, copy, modify with your own data.
+The bertin.js library is really easy to use within an Observable notebook. You'll find many examples in [this notebook collection](https://observablehq.com/collection/@neocartocnrs/bertin). Feel free to fork, copy, modify with your own data.
 
 [![](./img/obs.png)](https://observablehq.com/collection/@neocartocnrs/bertin)
 
 ## Drawing a map
 
-**draw**() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first. [Example](https://observablehq.com/@neocartocnrs/hello-bertin-js)
+**draw**() is the main function of the library. It allows you to make various thematic maps. It allows to display and overlay different types of layers listed below. The layers written on top are displayed first. [Source](https://github.com/neocarto/bertin/blob/main/src/draw.js) [Example](https://observablehq.com/@neocartocnrs/hello-bertin-js)
 
 ### Global parameters
 
@@ -126,7 +126,7 @@ bertin.draw({
 
 ### Simple layer
 
-The _layer_ type allows to display a simple geojson layer (points, lines or polygons). [Source](https://github.com/neocarto/bertin/blob/main/src/layer-simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js) and [Example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin).
+The _layer_ type allows to display a simple geojson layer (points, lines or polygons). [Source](https://github.com/neocarto/bertin/blob/main/src/layers/simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js) and [Example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin).
 
 #### Code
 
@@ -283,7 +283,7 @@ Parameters of the legend
 
 ### Bubble
 
-The _bubble_ type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-bubble.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-symbols?collection=@neocartocnrs/bertin).
+The _bubble_ type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/bubble.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-symbols?collection=@neocartocnrs/bertin).
 
 #### Code
 
@@ -399,9 +399,9 @@ bertin.draw({
 });
 ```
 
-### Dots cartogram
+### Dot cartogram
 
-The _dotcartogram_ type is a method of map representation that follows Dorling's cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map. [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin).
+The _dotcartogram_ type is a method of map representation that follows Dorling's cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/dotcartogram.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin).
 
 #### Code
 
@@ -461,7 +461,7 @@ Parameters of the legend
 
 ### Mushroom
 
-The _mushroom_ type is used to draw a map with 2 superposed proportional semi-circles. This type of representation can be used when two data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-mushroom.js), [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin).
+The _mushroom_ type is used to draw a map with 2 superposed proportional semi-circles. This type of representation can be used when two data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/mushroom.js), [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin).
 
 #### Code
 
@@ -512,7 +512,7 @@ Parameters of the legend
 
 ### Spikes
 
-The _spikes_ type is used to draw a map with spikes. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-spikes.js), [Example](https://observablehq.com/d/12446a15a2642907?collection=@neocartocnrs/bertin).
+The _spikes_ type is used to draw a map with spikes. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/spikes.js), [Example](https://observablehq.com/d/12446a15a2642907?collection=@neocartocnrs/bertin).
 
 #### Code
 
@@ -629,7 +629,7 @@ bertin.draw({
 - **nbsd**: for msd method only. number of sd. (default:1)
 - **sizes**: an array of thicknesses.
 
-#### Code - Catégories
+#### Code - Categories
 
 To vary the thickness according to qualitative data.
 
@@ -673,7 +673,7 @@ bertin.draw({
 
 ### Footer
 
-The _footer_ type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/footer.js).
+The _footer_ type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/footer.js).
 
 #### Code
 
@@ -700,7 +700,7 @@ bertin.draw({
 
 ### Graticule
 
-The _graticule_ type allows you to display the latitude and longitude lines. [Source](https://github.com/neocarto/bertin/blob/main/src/graticule.js).
+The _graticule_ type allows you to display the latitude and longitude lines. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/graticule.js).
 
 #### Code
 
@@ -726,7 +726,7 @@ bertin.draw({
 
 #### hatch (or hatching)
 
-The _hatch_ type only allows to add hatchings on the whole page to make it a bit prettier. [Source](https://github.com/neocarto/bertin/blob/main/src/hatch.js).
+The _hatch_ type only allows to add hatchings on the whole page to make it a bit prettier. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/hatch.js).
 
 #### Code
 
@@ -752,7 +752,7 @@ bertin.draw({
 
 ### Header
 
-The _header_ type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/header.js).
+The _header_ type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/header.js).
 
 #### Code
 
@@ -779,7 +779,7 @@ bertin.draw({
 
 ### Labels
 
-The _label_ type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-labels.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts).
+The _label_ type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/label.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts).
 
 #### Code
 
@@ -809,7 +809,7 @@ bertin.draw({
 
 ### Missing
 
-The _missing_ type displays any missing data when creating a map by proportional symbols. The highlight of graphical elements (in white under the symbols) allows for clear data comprehension of gaps in data. [Source](https://github.com/neocarto/bertin/blob/main/src/layer-missing.js).
+The _missing_ type displays any missing data when creating a map by proportional symbols. The highlight of graphical elements (in white under the symbols) allows for clear data comprehension of gaps in data. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/missing.js).
 
 #### Code
 
@@ -849,7 +849,7 @@ Parameters of the legend
 
 ### Outline
 
-The _outline_ type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/outline.js).
+The _outline_ type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/missing.js).
 
 #### Code
 
@@ -873,7 +873,7 @@ bertin.draw({
 
 ### Scalebar
 
-The _scalebar_ type allows to display a scale bar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/scalerbar.js).
+The _scalebar_ type allows to display a scale bar in miles or kilometers. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/scalebar.js).
 
 #### Code
 
@@ -896,7 +896,7 @@ bertin.draw({
 
 ### Shadow
 
-The _shadow_ type allows to display a shadow under a layer to give it a relief effect. [Source](https://github.com/neocarto/bertin/blob/main/src/shadow.js).
+The _shadow_ type allows to display a shadow under a layer to give it a relief effect. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/shadow.js).
 
 #### Code
 
@@ -923,7 +923,7 @@ bertin.draw({
 
 ### Texts
 
-The _text_ type simply allows you to display text anywhere on the map. [Source](https://github.com/neocarto/bertin/blob/main/src/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
+The _text_ type simply allows you to display text anywhere on the map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/text.js). [Example](https://observablehq.com/d/95fcfac18b213daf?collection=@neocartocnrs/bertin).
 
 #### Code
 
@@ -964,8 +964,7 @@ bertin.draw({
 
 ### borders
 
-_borders_ is a function that extract borders from polygons, with ids.
-
+_borders_ is a function that extract borders from polygons, with ids. [Source](https://github.com/neocarto/bertin/blob/main/src/borders.js)
 #### Code
 
 ```js
@@ -1079,7 +1078,7 @@ const data = bertin.merge(
 
 ### links
 
-_links_ is a function that create links from geometries (polygons or points) and a data file (i,j,fij). [Example](https://observablehq.com/@neocartocnrs/bertin-js-links).
+_links_ is a function that create links from geometries (polygons or points) and a data file (i,j,fij). [Source](https://github.com/neocarto/bertin/blob/main/src/links.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-links).
 
 #### Code
 
@@ -1103,7 +1102,7 @@ bertin.links({
 
 ### subgeo
 
-_subgeo_ function extracts a part of a geojson (e.g. world countries without antarctica).
+_subgeo_ function extracts a part of a geojson (e.g. world countries without antarctica). [Source](https://github.com/neocarto/bertin/blob/main/src/subgeo.js)
 
 #### Code
 

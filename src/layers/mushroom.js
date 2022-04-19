@@ -8,7 +8,7 @@ const d3 = Object.assign({}, d3selection, d3array, d3scale, d3geo, d3geoprojecti
 
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
-import {legcircles } from "../helpers/leg-circles.js";
+import {legcircles } from "../legend/leg-circles.js";
 import {poly2points } from "../helpers/poly2points.js";
 
 export function mushroom(selection, projection, options = {}, clipid, width, height) {
