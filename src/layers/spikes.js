@@ -10,7 +10,7 @@ import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import {rounding } from "../helpers/rounding.js";
 import {poly2points } from "../helpers/poly2points.js";
 import {figuration } from "../helpers/figuration.js";
-import { chorotypo } from "../helpers/chorotypo.js";
+import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
 import { legends } from "../helpers/legends.js";
 
@@ -71,10 +71,10 @@ export function spikes(selection, projection, options = {}, clipid, width, heigh
     )
     .join("path")
     .attr("fill", (d) =>
-      chorotypo(features, fill).getcol(d.properties[fill.values] || undefined)
+      colorize(features, fill).getcol(d.properties[fill.values] || undefined)
     )
     .attr("stroke", (d) =>
-      chorotypo(features, stroke).getcol(d.properties[stroke.values] || undefined)
+      colorize(features, stroke).getcol(d.properties[stroke.values] || undefined)
     )
     .attr("stroke-width", (d) =>
    thickness(features, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)

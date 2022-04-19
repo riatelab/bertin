@@ -14,7 +14,7 @@ import { legends } from "../helpers/legends.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { poly2points } from "../helpers/poly2points.js";
 import { figuration } from "../helpers/figuration.js";
-import { chorotypo } from "../helpers/chorotypo.js";
+import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
 
 //import {thickness } from "./thickness.js";
@@ -66,10 +66,10 @@ export function simple(selection, projection, options = {}, clipid, width, heigh
        .join("path")
        .attr("d", d3.geoPath(projection))
        .attr("fill", (d) =>
-         chorotypo(geojson.features, fill).getcol(d.properties[fill.values] || undefined)
+         colorize(geojson.features, fill).getcol(d.properties[fill.values] || undefined)
        )
        .attr("stroke", (d) =>
-         chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
+         colorize(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
        )
        .attr("stroke-width", (d) =>
       thickness(geojson.features, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)
@@ -177,10 +177,10 @@ export function simple(selection, projection, options = {}, clipid, width, heigh
        ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`
        )
        .attr("fill", (d) =>
-             chorotypo(geojson.features, fill).getcol(d.properties[fill.values] || undefined)
+             colorize(geojson.features, fill).getcol(d.properties[fill.values] || undefined)
            )
            .attr("stroke", (d) =>
-             chorotypo(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
+             colorize(geojson.features, stroke).getcol(d.properties[stroke.values] || undefined)
            )
            .attr("stroke-width", (d) =>
       thickness(geojson.features, strokeWidth).getthickness(d.properties[strokeWidth.values] || undefined)

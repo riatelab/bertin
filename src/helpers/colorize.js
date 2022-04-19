@@ -4,7 +4,7 @@ import * as d3scale from "d3-scale";
 const d3 = Object.assign({}, d3scalechromatic, d3scale, d3array);
 import * as stat from "statsbreaks";
 
-export function chorotypo(features, input){
+export function colorize(features, input){
   if (typeof input == "string")
     return {
       getcol: (d) => input
@@ -76,13 +76,6 @@ export function chorotypo(features, input){
 
   if (!Array.isArray(colors)){colors = d3[`scheme${colors}`].slice(0, types.length)}else{colors.slice(0, types.length)}
 
-
-
-    // if (colors == null) {
-    //   colors = d3[`scheme${pal}`].slice(0, types.length);
-    // } else {
-    //   colors = colors.slice(0, types.length);
-    // }
 
     return {
         getcol: d3.scaleOrdinal().domain(types).range(colors).unknown(col_missing),

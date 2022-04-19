@@ -1,10 +1,10 @@
-import {legchoro } from "./leg-choro.js"
-import {legtypo } from "./leg-typo.js";
-import {legthicknessabs } from "./leg-thickness-abs.js";
-import {legthicknessrel } from "./leg-thickness-rel.js";
-import {legthicknessquali } from "./leg-thickness-quali.js";
-import {chorotypo } from "./chorotypo.js";
-import {thickness } from "./thickness.js";
+import { legchoro } from "./leg-choro.js"
+import { legtypo } from "./leg-typo.js";
+import { legthicknessabs } from "./leg-thickness-abs.js";
+import { legthicknessrel } from "./leg-thickness-rel.js";
+import { legthicknessquali } from "./leg-thickness-quali.js";
+import { colorize } from "./colorize.js";
+import { thickness } from "./thickness.js";
 
 
 export function legends(geojson, selection, fill, stroke, strokeWidth){
@@ -23,9 +23,9 @@ legchoro(selection, {
     title: fill.leg_title ? fill.leg_title : fill.values,
     fontSize: fill.leg_fontSize,
     fontSize2: fill.leg_fontSize2,
-    breaks: chorotypo(geojson.features, fill).breaks,
-    colors: chorotypo(geojson.features, fill).colors,
-    missing: chorotypo(geojson.features, fill).missing
+    breaks: colorize(geojson.features, fill).breaks,
+    colors: colorize(geojson.features, fill).colors,
+    missing: colorize(geojson.features, fill).missing
   });
 }
 
@@ -42,9 +42,9 @@ if (typeof stroke == "object" && stroke.type == "choro") {
     title: stroke.leg_title ? stroke.leg_title : stroke.values,
     fontSize: stroke.leg_fontSize,
     fontSize2: stroke.leg_fontSize2,
-    breaks: chorotypo(geojson.features, stroke).breaks,
-    colors: chorotypo(geojson.features, stroke).colors,
-    missing: chorotypo(geojson.features, stroke).missing
+    breaks: colorize(geojson.features, stroke).breaks,
+    colors: colorize(geojson.features, stroke).colors,
+    missing: colorize(geojson.features, stroke).missing
   });
 }
 
@@ -61,8 +61,8 @@ legtypo(selection, {
     title: fill.leg_title ? fill.leg_title : fill.values,
     fontSize: fill.leg_fontSize,
     fontSize2: fill.leg_fontSize2,
-    types: chorotypo(geojson.features, fill).types,
-    colors: chorotypo(geojson.features, fill).colors
+    types: colorize(geojson.features, fill).types,
+    colors: colorize(geojson.features, fill).colors
   });
 }
 
@@ -79,8 +79,8 @@ legtypo(selection, {
     title: stroke.leg_title ? stroke.leg_title : stroke.values,
     fontSize: stroke.leg_fontSize,
     fontSize2: stroke.leg_fontSize2,
-    types: chorotypo(geojson.features, stroke).types,
-    colors: chorotypo(geojson.features, stroke).colors
+    types: colorize(geojson.features, stroke).types,
+    colors: colorize(geojson.features, stroke).colors
   });
 }
 
