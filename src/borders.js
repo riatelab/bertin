@@ -24,13 +24,17 @@ export function borders({ geojson, id, values, type = "rel", share = null }) {
         var_i: +valbyid.get(e),
         var_j: +valbyid.get(ids[i]),
         disc:
-          type == "rel"
-            ? +valbyid.get(ids[i]) != 0
-              ? +valbyid.get(e) / +valbyid.get(ids[i])
-              : null
-            : +valbyid.get(e) - +valbyid.get(ids[i])
+        type == "rel"
+          ? d3.min([+valbyid.get(e),+valbyid.get(ids[i])]) != 0
+            ? d3.max([+valbyid.get(e),+valbyid.get(ids[i])]) / d3.min([+valbyid.get(e),+valbyid.get(ids[i])])
+            : null
+          : d3.max([+valbyid.get(e),+valbyid.get(ids[i])]) - d3.min([+valbyid.get(e),+valbyid.get(ids[i])])
       }
     }));
+
+
+
+
     r.forEach((e) => {
       let geom = topojson.mesh(
         topo,

@@ -1,7 +1,7 @@
 import { legchoro } from "./leg-choro.js"
 import { legtypo } from "./leg-typo.js";
-import { legthicknessabs } from "./leg-thickness-abs.js";
-import { legthicknessrel } from "./leg-thickness-rel.js";
+import { legthicknesslinear } from "./leg-thickness-linear.js";
+import { legthicknessdiscr } from "./leg-thickness-discr.js";
 import { legthicknessquali } from "./leg-thickness-quali.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
@@ -84,11 +84,12 @@ legtypo(selection, {
   });
 }
 
-if (typeof strokeWidth == "object" && strokeWidth.values != undefined && (strokeWidth.type == "abs" ||strokeWidth.type == undefined)) {
-  legthicknessabs(selection, {
+if (typeof strokeWidth == "object" && strokeWidth.values != undefined && (strokeWidth.type == "linear" ||strokeWidth.type == undefined)) {
+  legthicknesslinear(selection, {
   x: strokeWidth.leg_x,
   y: strokeWidth.leg_y,
   valmax: thickness(geojson.features, strokeWidth).valmax,
+  valmin: thickness(geojson.features, strokeWidth).valmin,
   sizemax: thickness(geojson.features, strokeWidth).sizemax,
   title: strokeWidth.leg_title ?? strokeWidth.values,
   fontSize: strokeWidth.leg_fontSize,
@@ -101,8 +102,8 @@ if (typeof strokeWidth == "object" && strokeWidth.values != undefined && (stroke
 });
 }
 
-if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeWidth.type == "rel") {
-  legthicknessrel(selection, {
+if (typeof strokeWidth == "object" && strokeWidth.values != undefined && strokeWidth.type == "discr") {
+  legthicknessdiscr(selection, {
 
     x: strokeWidth.leg_x,
     y: strokeWidth.leg_y,

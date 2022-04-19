@@ -26,10 +26,12 @@ export function thickness(data, _) {
 
   // Absolute data (linear scale)
 
-  if (typeof _ != "number" && typeof _ != "string" && type == "abs") {
+  if (typeof _ != "number" && typeof _ != "string" && type == "linear") {
     let k = _.k ?? 10;
     let values = _.values;
     let fixmax = _.fixmax ?? undefined;
+   let fixmin = _.fixmin ?? 0;
+
 
     if ("geometry" in data[0] && "properties" in data[0]) {
       data = data.map((d) => d.properties);
@@ -40,6 +42,9 @@ export function thickness(data, _) {
         getcol: (d) => _
       };
 
+
+    if (fixmin == true){fixmin = d3.min(data.map((d) => Math.abs(+d[values])))}
+
     const v =
       fixmax == undefined
         ? d3.max(data.map((d) => Math.abs(+d[values])))
@@ -49,9 +54,10 @@ export function thickness(data, _) {
 
     return {
       type: type,
-      getthickness: d3.scaleLinear().domain([0, v]).range([0, k]),
+      getthickness: d3.scaleLinear().domain([fixmin, v]).range([0, k]),
       valmax: valmax,
-      sizemax: d3.scaleLinear().domain([0, v]).range([0, k])(valmax)
+      valmin : fixmin,
+      sizemax: d3.scaleLinear().domain([fixmin, v]).range([0, k])(valmax)
     };
   }
 
@@ -76,7 +82,7 @@ export function thickness(data, _) {
 
   // Relative data
 
-  if (typeof _ != "number" && typeof _ != "string" && type == "rel") {
+  if (typeof _ != "number" && typeof _ != "string" && type == "discr") {
     const values = _.values;
     let sizes = _.sizes;
     let nbreaks = _.nbreaks ?? 5;

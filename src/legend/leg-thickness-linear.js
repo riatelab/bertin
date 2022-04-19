@@ -6,10 +6,11 @@ import {rounding } from "../helpers/rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
-export function legthicknessabs(selection, options = {}) {
+export function legthicknesslinear(selection, options = {}) {
   let x = options.x ?? null;
   let y = options.y ?? null;
   let valmax = options.valmax;
+  let valmin = options.valmin;
   let sizemax = options.sizemax;
   let title = options.title ?? null;
   let fontSize = options.fontSize ?? 14;
@@ -66,7 +67,7 @@ export function legthicknessabs(selection, options = {}) {
       .attr("dominant-baseline", "hanging")
       .attr("x", x)
       .attr("y", y + delta + sizemax / 2 + fontSize2 / 2)
-      .text("0");
+      .text(rounding(valmin, round));
 
     leg
       .append("text")

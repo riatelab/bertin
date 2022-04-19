@@ -578,9 +578,9 @@ bertin.draw({
 })
 ```
 
-#### Code - Absolute variation
+#### Code - Linear variation
 
-To vary the thickness proportionally to an absolute quantitative data.
+To vary the thickness proportionally to an quantitative data.
 
 ```js
 bertin.draw({
@@ -588,7 +588,7 @@ bertin.draw({
     {
       type: "layer",
       geojson: *a geojson here*,
-      strokeWidth: {type:"abs",values:"migration"},
+      strokeWidth: {type:"linear",values:"migration"},
     }
   ]
 })
@@ -599,6 +599,7 @@ bertin.draw({
 - **values**: a string corresponding to the targeted variable in the properties(compulsory)
 - **k**: thicken with the largest line (default:10)
 - **fixmax**: Max value to fix the size of the thickest line, in order to make maps comparable (default:undefined)
+- **fixmin**: Min value to fix the size of the thinest line. If true, the value is the min data. (default:0)
 
 
 #### Code - Relative variation
@@ -611,7 +612,7 @@ bertin.draw({
     {
       type: "layer",
       geojson: *a geojson here*,
-      strokeWidth: {type:"rel",values:"migration", method: "q6"},
+      strokeWidth: {type:"discr",values:"migration", method: "q6"},
     }
   ]
 })
@@ -639,7 +640,7 @@ bertin.draw({
     {
       type: "layer",
       geojson: *a geojson here*,
-      strokeWidth: {type:"rel",values:"flow", categories: ["low", "medium", "high", "very high"]},
+      strokeWidth: {type:"quali",values:"flow", categories: ["low", "medium", "high", "very high"]},
     }
   ]
 })
