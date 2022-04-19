@@ -8,12 +8,12 @@ const d3 = Object.assign({}, d3selection, d3scalechromatic, d3array, d3geo, d3sc
 
 import { topo2geo } from "../helpers/topo2geo.js";
 import {addtooltip, tooltiptype } from "../helpers/tooltip.js";
-import {legcircles } from "../helpers/leg-circles.js";
+import {legcircles } from "../legend/leg-circles.js";
 import {poly2points } from "../helpers/poly2points.js";
 import {figuration } from "../helpers/figuration.js";
 import {colorize } from "../helpers/colorize.js";
 import {thickness } from "../helpers/thickness.js";
-import {legends } from "../helpers/legends.js";
+import {legends } from "../legend/legends.js";
 
 export function bubble(selection, projection, options = {}, clipid, width, height){
   let cols = [

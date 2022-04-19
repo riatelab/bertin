@@ -10,7 +10,7 @@ import {poly2points } from "../helpers/poly2points.js";
 import {figuration } from "../helpers/figuration.js";
 import {colorize } from "../helpers/colorize.js";
 import {thickness } from "../helpers/thickness.js";
-import {legends } from "../helpers/legends.js";
+import {legends } from "../legend/legends.js";
 
 export function dotcartogram(selection, projection, options = {}, clipid, width, height){
   let cols = [
