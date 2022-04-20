@@ -26,6 +26,7 @@ export function bubble(selection, projection, options = {}, clipid, width, heigh
     "#e5c494",
     "#b3b3b3"
   ];
+  let planar = options.planar ?? false
   let geojson = topo2geo(options.geojson);
   let values = options.values;
   let fixmax = options.fixmax ?? undefined
@@ -67,11 +68,11 @@ export function bubble(selection, projection, options = {}, clipid, width, heigh
       .forceSimulation(features)
       .force(
         "x",
-        d3.forceX((d) => projection(d.geometry.coordinates)[0])
+        d3.forceX((d) => planar ?  d.geometry.coordinates[0]: projection(d.geometry.coordinates)[0])
       )
       .force(
         "y",
-        d3.forceY((d) => projection(d.geometry.coordinates)[1])
+        d3.forceY((d) => planar ? d.geometry.coordinates[1] : projection(d.geometry.coordinates)[1])
       )
       .force(
         "collide",
@@ -109,8 +110,8 @@ export function bubble(selection, projection, options = {}, clipid, width, heigh
     .attr("fill-opacity", fillOpacity)
     .attr("stroke-dasharray", strokeDasharray)
     .attr("stroke-opacity", strokeOpacity)
-    .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
-    .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
+    .attr("cx", (d) => (dorling ? d.x : (planar ? d.geometry.coordinates[0] : projection(d.geometry.coordinates)[0])))
+    .attr("cy", (d) => (dorling ? d.y : (planar ? d.geometry.coordinates[1] : projection(d.geometry.coordinates)[1])))
     .attr("r", (d) => radius(Math.abs(d.properties[values])))
     .on("touchmove mousemove", function (event, d) {
 

@@ -10,15 +10,15 @@ import * as topojsonserver from "topojson-server";
 import * as topojsonclient from "topojson-client";
 const topojson = Object.assign({}, topojsonserver, topojsonclient);
 
-export function dots(geojson, projection, width, height, step, id, values) {
+export function dots(geojson, projection, width, height, step, id, values, dorling) {
   // Regular grid
   let y = d3.range(0 + step / 2, height, step).reverse();
   let x = d3.range(0 + step / 2, width, step);
   let grid = x.map((x, i) => y.map((y) => [x, y])).flat();
 
+
   // planar projection
   const polys = d3.geoProject(geojson, projection);
-
 
   // clip
   const topo = topojson.topology({ foo: polys });
@@ -68,6 +68,6 @@ export function dots(geojson, projection, width, height, step, id, values) {
     });
   });
 
+return  output.sort((a, b) => d3.ascending(a.dots.value, b.dots.value));
 
- return output.sort((a, b) => d3.ascending(a.dots.value, b.dots.value));
 }

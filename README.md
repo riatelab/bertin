@@ -304,6 +304,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **planar**: true if coordinates are always projected on the document (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **k**: size of the largest circle (default:50)
 - **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
@@ -602,7 +603,7 @@ bertin.draw({
 - **fixmin**: Min value to fix the size of the thinest line. If true, the value is the min data. (default:0)
 
 
-#### Code - Relative variation
+#### Code - Discrete variation
 
 To vary the thickness according to classes values
 

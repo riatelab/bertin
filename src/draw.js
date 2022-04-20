@@ -356,6 +356,7 @@ if (layer.type == "label") {
       bubble(svg, projection,  {
         geojson: layer.geojson,
         values: layer.values,
+        planar: layer.planar,
         k: layer.k,
         fixmax: layer.fixmax,
         fill: layer.fill,

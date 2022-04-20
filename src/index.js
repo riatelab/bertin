@@ -7,7 +7,7 @@ export {links} from "./links.js";
 export {borders} from "./borders.js";
 export {subgeo} from "./subgeo.js";
 export {bbox} from "./bbox.js";
-
+export {dots} from "./dots.js"
 
 // layer functions
 
@@ -20,8 +20,3 @@ export {missing} from "./layers/missing.js"
 export {spikes} from "./layers/spikes.js"
 export {outline} from "./layers/outline.js"
 export {graticule} from "./layers/graticule.js"
-
-// // TEMP:
-//export {text} from "./layers/text.js";
-
-export {dots} from "./helpers/dots.js"
