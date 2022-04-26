@@ -76,7 +76,8 @@ export function bubble(selection, projection, options = {}, clipid, width, heigh
       )
       .force(
         "collide",
-        d3.forceCollide((d) => radius(Math.abs(d.properties[values])) + strokeWidth / 2)
+        //d3.forceCollide((d) => radius(Math.abs(d.properties[values])) + strokeWidth / 2)
+        d3.forceCollide((d) => radius(Math.abs(d.properties[values])) + thickness(features, strokeWidth).getthickness(d.properties[strokeWidth.values] || 0) / 2)
       );
 
     for (let i = 0; i < iteration; i++) {

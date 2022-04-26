@@ -8,6 +8,4 @@ options.geojson = regulardots(options.geojson, projection, width, height, option
 options.values = "___value"
 options.planar = true
 
-console.log(options)
-
 bubble(selection, projection, options, clipid, width, height)}
