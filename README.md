@@ -304,7 +304,6 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
-- **planar**: true if coordinates are always projected on the document (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **k**: size of the largest circle (default:50)
 - **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
