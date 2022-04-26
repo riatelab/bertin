@@ -328,6 +328,34 @@ Parameters of the legend
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
 
+
+### Regular Bubble
+
+The _regularbubble_ type is used to draw a map by proportional circles in a regular grid. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularbubble.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-regular-bubbles?collection=@neocartocnrs/bertin).
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "regularbubble",
+      geojson: countries,
+      step:20,
+      values: "pop",
+      k: 60,
+      tooltip: ["$country", "$pop", "(inh.)"],
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **step**: Gap between the points (default:20)
+
+All other parameters are the same as for the bubble layer
+
 ### Stock and ratio
 
 In thematic mapping, we often have to represent an absolute quantitative data with a size variation and relative quantitative data with color variations. For this we can use the bubble type and the choro type together. [Example](https://observablehq.com/d/31a3309790d7bed9?collection=@neocartocnrs/bertin).
