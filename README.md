@@ -1,5 +1,11 @@
 # bertin.js
 
+![npm](https://img.shields.io/npm/v/bertin)
+![jsdeliver](https://img.shields.io/jsdelivr/npm/hw/bertin)
+![license](https://img.shields.io/badge/license-MIT-success)
+![code size](https://img.shields.io/github/languages/code-size/neocarto/bertin)
+
+
 **Bertin.js** is a JavaScript library for visualizing geospatial data on a web map.
 
 _The project is under **active development**. Some of features and options are subject to change. We welcome contributions of all kinds: bug reports, code contributions and documentation._
@@ -17,7 +23,7 @@ _The project is under **active development**. Some of features and options are s
 
 Bertin.js is an easy to use JavaScript library based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
 
-## Who is Bertin
+## Who is Bertin?
 
 Jacques Bertin (1918-2010) was a French cartographer, whose major contribution was a theoretical and practical reflection on all graphic representations (diagrams, maps and graphs), forming the subject of a fundamental treatise, Graphic Semiology, originally published in 1967. Bertin's influence remains strong not only in academics, teaching of cartography today, but also among statisticians and data visualization specialists.
 
