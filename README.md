@@ -4,7 +4,6 @@
 ![jsdeliver](https://img.shields.io/jsdelivr/npm/hw/bertin)
 ![license](https://img.shields.io/badge/license-MIT-success)
 ![code size](https://img.shields.io/github/languages/code-size/neocarto/bertin)
-![commit activity](https://img.shields.io/github/commit-activity/m/neocarto/bertin)
 ![github stars](https://img.shields.io/github/stars/neocarto/bertin?style=social)
 
 
