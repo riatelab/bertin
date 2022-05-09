@@ -7,7 +7,7 @@
 ![github stars](https://img.shields.io/github/stars/neocarto/bertin?style=social)
 
 
-**Bertin.js** is a JavaScript library for visualizing geospatial data on a web map.
+**Bertin.js** is a JavaScript library for visualizing geospatial data and make thematic maps for the web.
 
 _The project is under **active development**. Some of features and options are subject to change. We welcome contributions of all kinds: bug reports, code contributions and documentation._
 
