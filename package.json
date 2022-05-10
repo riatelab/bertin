@@ -1,6 +1,6 @@
 {
   "name": "bertin",
-  "version": "0.9.11",
+  "version": "0.9.12",
   "description": "Thematic mapping",
   "main": "dist/index.js",
   "module": "src/index.js",
@@ -9,7 +9,7 @@
   "exports": {
     "umd": "./dist/index.min.js",
     "default": "./src/index.js"
-},
+  },
   "files": [
     "src",
     "dist"
