@@ -6,6 +6,10 @@
   "module": "src/index.js",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
+  "exports": {
+    "umd": "./dist/index.min.js",
+    "default": "./src/index.js"
+},
   "files": [
     "src",
     "dist"
