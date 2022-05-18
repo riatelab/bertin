@@ -2,7 +2,7 @@
   "name": "bertin",
   "version": "0.9.15",
   "description": "Thematic mapping",
-  "main": "src/index.js",
+  "main": "dist/index.min.js",
   "module": "src/index.js",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
