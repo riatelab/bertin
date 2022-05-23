@@ -2,14 +2,18 @@
   "name": "bertin",
   "version": "0.9.16",
   "description": "Thematic mapping",
-  "main": "src/index.js",
+  "main": "dist/index.min.js",
   "module": "src/index.js",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
-  "scripts": {
-    "build": "rollup --config",
-    "prepare": "npm run build"
+  "exports": {
+    "umd": "./dist/index.min.js",
+    "default": "./src/index.js"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/neocarto/bertin.git"
@@ -27,9 +31,12 @@
   },
   "homepage": "https://github.com/neocarto/bertin#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.16.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "rollup": "^2.59.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-terser": "^7.0.2"
@@ -50,5 +57,9 @@
     "statsbreaks": "^0.2.0",
     "topojson-client": "^3.1.0",
     "topojson-server": "^3.0.1"
+  },
+  "scripts": {
+    "build": "rollup --config",
+    "prepare": "npm run build"
   }
 }
