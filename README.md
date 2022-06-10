@@ -1,4 +1,4 @@
-![logo](img/logo.svg)
+[![logo](img/logo.svg)](https://observablehq.com/@neocartocnrs/bertin-logo)
 
 ![npm](https://img.shields.io/npm/v/bertin)
 ![jsdeliver](https://img.shields.io/jsdelivr/npm/hw/bertin)
