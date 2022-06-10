@@ -33,7 +33,7 @@ export function legchoro(selection, options = {}) {
       : [d3.reverse(colors), missing[1]].flat();
 
   if (x != null && y != null) {
-    let leg = selection.append("g");
+    let leg = selection.append("g").attr("class", "bertinlegend");
 
     let delta = 0;
     if (title != null) {
@@ -81,6 +81,5 @@ export function legchoro(selection, options = {}) {
       .attr("text-anchor", "start")
       .attr("dominant-baseline", "central")
       .text((d) => d);
-
   }
 }

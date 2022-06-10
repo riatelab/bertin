@@ -1,8 +1,7 @@
 import * as d3selection from "d3-selection";
 import * as d3scale from "d3-scale";
 import * as d3array from "d3-array";
-import {rounding } from "../helpers/rounding.js";
-
+import { rounding } from "../helpers/rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
@@ -26,7 +25,7 @@ export function legthicknesslinear(selection, options = {}) {
   const span = 10;
 
   if (x != null && y != null) {
-    let leg = selection.append("g");
+    let leg = selection.append("g").attr("class", "bertinlegend");
 
     let delta = 0;
     if (title != null) {

@@ -33,19 +33,25 @@ import { hatch } from "./layers/hatch.js";
 export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
 
-  let projection = params.projection ? params.projection : d3.geoEquirectangular();
+  let projection = params.projection
+    ? params.projection
+    : d3.geoEquirectangular();
 
   if (typeof projection === "string") {
     projection = proj4d3(projection);
   }
 
-
   let width = params.width ? params.width : 1000;
   let extent = params.extent ? params.extent : null;
-  extent = Array.isArray(extent) && Array.isArray(extent[0]) && Array.isArray(extent[1]) ? bbox(extent) : extent
+  extent =
+    Array.isArray(extent) &&
+    Array.isArray(extent[0]) &&
+    Array.isArray(extent[1])
+      ? bbox(extent)
+      : extent;
   let margin = params.margin ? params.margin : 1;
   let background = params.background;
-  let clip = params.clip ?? false // test
+  let clip = params.clip ?? false; // test
 
   // optimal heights
   let height = getheight(layers, extent, margin, projection, width);
@@ -79,7 +85,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       0,
       -headerdelta,
       width,
-      height + headerdelta + footerdelta
+      height + headerdelta + footerdelta,
     ])
     .attr(
       "style",
@@ -88,7 +94,6 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   // defs
   let defs = svg.append("defs");
-
 
   // font
   defs
@@ -99,16 +104,17 @@ export function draw({ params = {}, layers = {} } = {}) {
     );
 
   // Clip
-let clipid = null
-if (clip){ // test
-  clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
-  svg
-    .append("clipPath")
-    .attr("id", `clip_${clipid}`)
-    .append("path")
-    .datum({ type: "Sphere" })
-    .attr("d", d3.geoPath(projection));
-} // test
+  let clipid = null;
+  if (clip) {
+    // test
+    clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+    svg
+      .append("clipPath")
+      .attr("id", `clip_${clipid}`)
+      .append("path")
+      .datum({ type: "Sphere" })
+      .attr("d", d3.geoPath(projection));
+  } // test
 
   // Background color
   if (background) {
@@ -128,7 +134,7 @@ if (clip){ // test
       fill: o.fill,
       fillOpacity: o.fillOpacity,
       stroke: "none",
-      strokeWidth: "none"
+      strokeWidth: "none",
     });
   }
 
@@ -136,132 +142,165 @@ if (clip){ // test
   layers.reverse().forEach((layer) => {
     // Graticule
     if (layer.type == "graticule") {
-      graticule(svg, projection, {
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        strokeOpacity: layer.strokeOpacity,
-        strokeDasharray: layer.strokeDasharray,
-        strokeLinecap: layer.strokeLinecap,
-        strokeLinejoin: layer.strokeLinejoin,
-        step: layer.step
-      }, clipid);
+      graticule(
+        svg,
+        projection,
+        {
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeOpacity: layer.strokeOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeLinecap: layer.strokeLinecap,
+          strokeLinejoin: layer.strokeLinejoin,
+          step: layer.step,
+        },
+        clipid
+      );
     }
-
 
     // Simple
 
-
     // simple layers
-    if (layer.type == "layer" || layer.type == "simple" || layer.type == undefined) {
-      simple(svg, projection, {
-        geojson: layer.geojson,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        strokeLinecap: layer.strokeLinecap,
-        strokeLinejoin: layer.strokeLinejoin,
-        fillOpacity: layer.fillOpacity,
-        strokeOpacity: layer.strokeOpacity,
-        strokeDasharray: layer.strokeDasharray,
-        symbol: layer.symbol,
-        symbol_size: layer.symbol_size,
-        symbol_iteration: layer.symbol_iteration,
-        symbol_shift: layer.symbol_shift,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_w: layer.leg_w,
-        leg_h: layer.leg_h,
-        leg_title: layer.leg_title,
-        leg_text: layer.leg_text,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_stroke: layer.leg_stroke,
-        leg_fillOpacity: layer.leg_fillOpacity,
-        leg_fill: layer.leg_fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol
-      }, clipid, width, height);
+    if (
+      layer.type == "layer" ||
+      layer.type == "simple" ||
+      layer.type == undefined
+    ) {
+      simple(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeLinecap: layer.strokeLinecap,
+          strokeLinejoin: layer.strokeLinejoin,
+          fillOpacity: layer.fillOpacity,
+          strokeOpacity: layer.strokeOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          symbol: layer.symbol,
+          symbol_size: layer.symbol_size,
+          symbol_iteration: layer.symbol_iteration,
+          symbol_shift: layer.symbol_shift,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_w: layer.leg_w,
+          leg_h: layer.leg_h,
+          leg_title: layer.leg_title,
+          leg_text: layer.leg_text,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_stroke: layer.leg_stroke,
+          leg_fillOpacity: layer.leg_fillOpacity,
+          leg_fill: layer.leg_fill,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
+        },
+        clipid,
+        width,
+        height
+      );
     }
 
     // spikes layers
 
     if (layer.type == "spikes") {
-    spikes(svg, projection, {
-    geojson: layer.geojson,
-    values: layer.values,
-    k: layer.k,
-    w: layer.w,
-    fill: layer.fill,
-    stroke: layer.stroke,
-    strokeWidth: layer.strokeWidth,
-    fillOpacity: layer.fillOpacity,
-    strokeLinecap: layer.strokeLinecap,
-    strokeLinejoin: layer.strokeLinejoin,
-    strokeDasharray: layer.strokeDasharray,
-    strokeOpacity: layer.strokeOpacity,
-    tooltip: layer.tooltip,
-    leg_x: layer.leg_x,
-    leg_y: layer.leg_y,
-    leg_w: layer.leg_w,
-    leg_h: layer.leg_h,
-    leg_title: layer.leg_title,
-    leg_fontSize: layer.leg_fontSize,
-    leg_fontSize2: layer.leg_fontSize2,
-    leg_stroke: layer.leg_stroke,
-    leg_fillOpacity: layer.leg_fillOpacity,
-    leg_strokeWidth: layer.leg_strokeWidth,
-    leg_txtcol: layer.leg_txtcol,
-    leg_round:layer.leg_round
-  }, clipid, width, height);
-}
+      spikes(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          k: layer.k,
+          w: layer.w,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          strokeLinecap: layer.strokeLinecap,
+          strokeLinejoin: layer.strokeLinejoin,
+          strokeDasharray: layer.strokeDasharray,
+          strokeOpacity: layer.strokeOpacity,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_w: layer.leg_w,
+          leg_h: layer.leg_h,
+          leg_title: layer.leg_title,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_stroke: layer.leg_stroke,
+          leg_fillOpacity: layer.leg_fillOpacity,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
+          leg_round: layer.leg_round,
+        },
+        clipid,
+        width,
+        height
+      );
+    }
 
     // mushroom layer
 
     if (layer.type == "mushroom") {
-      mushroom(svg, projection, {
-        geojson: layer.geojson,
-        top_values: layer.top_values,
-        bottom_values: layer.bottom_values,
-        top_fill: layer.top_fill,
-        bottom_fill: layer.bottom_fill,
-        k: layer.k,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        top_tooltip: layer.top_tooltip,
-        bottom_tooltip: layer.bottom_tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_round: layer.leg_round,
-        leg_txtcol: layer.leg_txtcol,
-        leg_title: layer.leg_title,
-        leg_top_txt: layer.leg_top_txt,
-        leg_bottom_txt: layer.leg_bottom_txt,
-        leg_top_fill: layer.leg_top_fill,
-        leg_bottom_fill: layer.leg_bottom_fill,
-        leg_stroke: layer.leg_stroke,
-        leg_strokeWidth: layer.leg_strokeWidth
-      }, clipid, width, height);
+      mushroom(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          top_values: layer.top_values,
+          bottom_values: layer.bottom_values,
+          top_fill: layer.top_fill,
+          bottom_fill: layer.bottom_fill,
+          k: layer.k,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          top_tooltip: layer.top_tooltip,
+          bottom_tooltip: layer.bottom_tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_round: layer.leg_round,
+          leg_txtcol: layer.leg_txtcol,
+          leg_title: layer.leg_title,
+          leg_top_txt: layer.leg_top_txt,
+          leg_bottom_txt: layer.leg_bottom_txt,
+          leg_top_fill: layer.leg_top_fill,
+          leg_bottom_fill: layer.leg_bottom_fill,
+          leg_stroke: layer.leg_stroke,
+          leg_strokeWidth: layer.leg_strokeWidth,
+        },
+        clipid,
+        width,
+        height
+      );
     }
 
     // labels layer
 
-if (layer.type == "label") {
-  label(svg, projection, {
-    geojson: layer.geojson,
-    values: layer.values,
-    fill: layer.fill,
-    fontSize: layer.fontSize,
-    fontFamily: layer.fontFamily,
-    textDecoration: layer.textDecoration,
-    fontWeight: layer.fontWeight,
-    fontStyle: layer.fontStyle,
-    opacity: layer.opacity
-  }, clipid);
-}
+    if (layer.type == "label") {
+      label(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          fill: layer.fill,
+          fontSize: layer.fontSize,
+          fontFamily: layer.fontFamily,
+          textDecoration: layer.textDecoration,
+          fontWeight: layer.fontWeight,
+          fontStyle: layer.fontStyle,
+          opacity: layer.opacity,
+        },
+        clipid
+      );
+    }
 
     // text note
     if (layer.type == "text") {
@@ -281,31 +320,36 @@ if (layer.type == "label") {
         frame_fill: layer.frame_fill,
         frame_stroke: layer.frame_stroke,
         frame_opacity: layer.frame_opacity,
-        frame_strokeWidth: layer.frame_strokeWidth
+        frame_strokeWidth: layer.frame_strokeWidth,
       });
     }
 
     // missing
     if (layer.type == "missing") {
-      missing(svg, projection, {
-        geojson: layer.geojson,
-        values: layer.values,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_w: layer.leg_w,
-        leg_h: layer.leg_h,
-        leg_text: layer.leg_text,
-        leg_fontSize: layer.leg_fontSize,
-        leg_stroke: layer.leg_stroke,
-        leg_fillOpacity: layer.fillOpacity,
-        leg_fill: layer.fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol
-      }, clipid);
+      missing(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_w: layer.leg_w,
+          leg_h: layer.leg_h,
+          leg_text: layer.leg_text,
+          leg_fontSize: layer.leg_fontSize,
+          leg_stroke: layer.leg_stroke,
+          leg_fillOpacity: layer.fillOpacity,
+          leg_fill: layer.fill,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
+        },
+        clipid
+      );
     }
 
     // shadow
@@ -315,104 +359,122 @@ if (layer.type == "label") {
         dx: layer.dx,
         dy: layer.dy,
         opacity: layer.opacity,
-        stdDeviation: layer.stdDeviation
+        stdDeviation: layer.stdDeviation,
       });
     }
 
-  // Dots cartogram
+    // Dots cartogram
 
     if (layer.type == "dotcartogram") {
-      dotcartogram(svg, projection, {
-        geojson: layer.geojson,
-        values: layer.values,
-        radius: layer.radius,
-        nbmax: layer.nbmax,
-        onedot: layer.onedot,
-        span: layer.span,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        strokeDasharray: layer.strokeDasharray,
-        strokeOpacity: layer.strokeOpacity,
-        iteration: layer.iteration,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_title: layer.leg_title,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_txtcol: layer.leg_txtcol,
-        leg_stroke: layer.leg_stroke,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_fill: layer.leg_fill,
-        leg_txt: layer.leg_txt
-
-      }, clipid, width, height);
+      dotcartogram(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          radius: layer.radius,
+          nbmax: layer.nbmax,
+          onedot: layer.onedot,
+          span: layer.span,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeOpacity: layer.strokeOpacity,
+          iteration: layer.iteration,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_title: layer.leg_title,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_txtcol: layer.leg_txtcol,
+          leg_stroke: layer.leg_stroke,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_fill: layer.leg_fill,
+          leg_txt: layer.leg_txt,
+        },
+        clipid,
+        width,
+        height
+      );
     }
 
     // Bubbles
 
     if (layer.type == "bubble") {
-      bubble(svg, projection,  {
-        geojson: layer.geojson,
-        values: layer.values,
-        planar: layer.planar,
-        k: layer.k,
-        fixmax: layer.fixmax,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        strokeDasharray: layer.strokeDasharray,
-        strokeOpacity: layer.strokeOpacity,
-        dorling: layer.dorling,
-        iteration: layer.iteration,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_stroke: layer.leg_stroke,
-        leg_fill: layer.leg_fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol,
-        leg_title: layer.leg_title,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_round: layer.leg_round
-      }, clipid, width, height);
+      bubble(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          planar: layer.planar,
+          k: layer.k,
+          fixmax: layer.fixmax,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeOpacity: layer.strokeOpacity,
+          dorling: layer.dorling,
+          iteration: layer.iteration,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_stroke: layer.leg_stroke,
+          leg_fill: layer.leg_fill,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
+          leg_title: layer.leg_title,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_round: layer.leg_round,
+        },
+        clipid,
+        width,
+        height
+      );
     }
 
     if (layer.type == "regularbubble") {
-      regularbubble(svg, projection,  {
-        geojson: layer.geojson,
-        values: layer.values,
-        step:layer.step,
-        planar: layer.planar,
-        k: layer.k,
-        fixmax: layer.fixmax,
-        fill: layer.fill,
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        fillOpacity: layer.fillOpacity,
-        strokeDasharray: layer.strokeDasharray,
-        strokeOpacity: layer.strokeOpacity,
-        dorling: layer.dorling,
-        iteration: layer.iteration,
-        tooltip: layer.tooltip,
-        leg_x: layer.leg_x,
-        leg_y: layer.leg_y,
-        leg_stroke: layer.leg_stroke,
-        leg_fill: layer.leg_fill,
-        leg_strokeWidth: layer.leg_strokeWidth,
-        leg_txtcol: layer.leg_txtcol,
-        leg_title: layer.leg_title,
-        leg_fontSize: layer.leg_fontSize,
-        leg_fontSize2: layer.leg_fontSize2,
-        leg_round: layer.leg_round
-      }, clipid, width, height);
+      regularbubble(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          step: layer.step,
+          planar: layer.planar,
+          k: layer.k,
+          fixmax: layer.fixmax,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeOpacity: layer.strokeOpacity,
+          dorling: layer.dorling,
+          iteration: layer.iteration,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_stroke: layer.leg_stroke,
+          leg_fill: layer.leg_fill,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
+          leg_title: layer.leg_title,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_round: layer.leg_round,
+        },
+        clipid,
+        width,
+        height
+      );
     }
-
-
 
     // Header
     if (layer.type == "header") {
@@ -422,7 +484,7 @@ if (layer.type == "label") {
         fill: layer.fill,
         background: layer.background,
         backgroundOpacity: layer.backgroundOpacity,
-        anchor: layer.anchor
+        anchor: layer.anchor,
       });
     }
 
@@ -434,25 +496,26 @@ if (layer.type == "label") {
         fill: layer.fill,
         background: layer.background,
         backgroundOpacity: layer.backgroundOpacity,
-        anchor: layer.anchor
+        anchor: layer.anchor,
       });
     }
 
-
     // simple layers
-    if (layer.type == "hatch" || layer.type == "hatching" ) {
-      hatch(svg, {
-        stroke: layer.stroke,
-        strokeWidth: layer.strokeWidth,
-        strokeOpacity: layer.strokeOpacity,
-        angle: layer.angle,
-        spacing: layer.spacing,
-        strokeDasharray: layer.strokeDasharray
-      }, width, height);
+    if (layer.type == "hatch" || layer.type == "hatching") {
+      hatch(
+        svg,
+        {
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeOpacity: layer.strokeOpacity,
+          angle: layer.angle,
+          spacing: layer.spacing,
+          strokeDasharray: layer.strokeDasharray,
+        },
+        width,
+        height
+      );
     }
-
-
-
   });
 
   // -----------------------------------------
@@ -464,7 +527,6 @@ if (layer.type == "label") {
       x: s.x,
       y: s.y,
       units: s.units,
-
     });
   }
 
@@ -473,12 +535,15 @@ if (layer.type == "label") {
     outline(svg, projection, {
       fill: "none",
       stroke: o.stroke,
-      strokeWidth: o.strokeWidth
+      strokeWidth: o.strokeWidth,
     });
   }
 
   // Tootltip
   svg.append("g").attr("id", "info").attr("class", "info");
+
+  // Raise legends
+  svg.selectAll(".bertinlegend").raise();
 
   // build
   return Object.assign(svg.node(), {});

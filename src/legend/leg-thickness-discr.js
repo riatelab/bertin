@@ -1,7 +1,7 @@
 import * as d3selection from "d3-selection";
 import * as d3scale from "d3-scale";
 import * as d3array from "d3-array";
-import {rounding } from "../helpers/rounding.js";
+import { rounding } from "../helpers/rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
@@ -23,7 +23,7 @@ export function legthicknessdiscr(selection, options = {}) {
   breaks = d3.reverse(breaks);
 
   if (x != null && y != null) {
-    let leg = selection.append("g");
+    let leg = selection.append("g").attr("class", "bertinlegend");
 
     let delta = 0;
     if (title != null) {
@@ -71,7 +71,7 @@ export function legthicknessdiscr(selection, options = {}) {
       .attr("y2", (d, i) => y_lines[i])
       .attr("stroke", stroke)
       .attr("stroke-opacity", strokeOpacity)
-      .attr("stroke-width", (d) => d)
+      .attr("stroke-width", (d) => d);
 
     leg
       .append("g")
@@ -84,6 +84,6 @@ export function legthicknessdiscr(selection, options = {}) {
       .attr("fill", txtcol)
       .attr("text-anchor", "start")
       .attr("dominant-baseline", "central")
-      .text(d => rounding(d, round));
+      .text((d) => rounding(d, round));
   }
 }

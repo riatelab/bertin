@@ -1,8 +1,7 @@
 import * as d3selection from "d3-selection";
 import * as d3scale from "d3-scale";
 import * as d3array from "d3-array";
-import {rounding } from "../helpers/rounding.js";
-
+import { rounding } from "../helpers/rounding.js";
 
 const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
@@ -22,20 +21,16 @@ export function legcircles(selection, options = {}) {
   let fontSize = options.fontSize ? options.fontSize : 14;
   let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
   let round = options.round ?? undefined;
-  let fixmax = options.fixmax
+  let fixmax = options.fixmax;
 
-  const valvax = fixmax != undefined ? fixmax : d3.max(values)
-  let radius = d3.scaleSqrt(
-    [0, valvax],
-    [0, k]
-  );
-
+  const valvax = fixmax != undefined ? fixmax : d3.max(values);
+  let radius = d3.scaleSqrt([0, valvax], [0, k]);
 
   //let radius = d3.scaleSqrt([0, d3.max(values)], [0, k]);
   let rmax = radius(d3.max(values));
 
   if (x != null && y != null) {
-    let leg = selection.append("g");
+    let leg = selection.append("g").attr("class", "bertinlegend");
 
     leg
       .selectAll("circle")
