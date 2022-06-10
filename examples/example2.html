@@ -10,7 +10,7 @@ d3.json(geojson).then(r =>
 
 {
 
-let JPN = {type: "FeatureCollection",features: r.features.filter((d) => d.properties.ISO3 == "JPN")};
+let JPN = {type: "FeatureCollection", features: r.features.filter((d) => d.properties.ISO3 == "JPN")};
 
 document.body.appendChild(bertin.draw({
   params: {
