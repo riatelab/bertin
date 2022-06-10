@@ -6,11 +6,15 @@
   "module": "src/index.js",
   "jsdelivr": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
-  "scripts": {
-    "build": "rollup --config",
-    "prepare": "npm run build"
+  "exports": {
+    "umd": "./dist/index.min.js",
+    "default": "./src/index.js"
   },
-  "repository": {
+  "files": [
+    "src",
+    "dist"
+  ],
+   "repository": {
     "type": "git",
     "url": "git+https://github.com/neocarto/bertin.git"
   },
@@ -50,5 +54,8 @@
     "statsbreaks": "^0.2.0",
     "topojson-client": "^3.1.0",
     "topojson-server": "^3.0.1"
+  }, "scripts": {
+    "build": "rollup --config",
+    "prepare": "npm run build"
   }
 }
