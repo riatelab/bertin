@@ -83,6 +83,8 @@ export function dotcartogram(
     simulation.tick();
   }
 
+  console.log(dots);
+
   // Draw
 
   selection
@@ -214,5 +216,12 @@ export function dotcartogram(
   }
 
   // legend (classes)
-  legends(geojson, selection, fill, stroke, strokeWidth);
+
+  legends(
+    { type: "FeatureCollection", features: dots },
+    selection,
+    fill,
+    stroke,
+    strokeWidth
+  );
 }
