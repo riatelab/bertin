@@ -83,8 +83,6 @@ export function dotcartogram(
     simulation.tick();
   }
 
-  console.log(dots);
-
   // Draw
 
   selection
