@@ -23,3 +23,4 @@ export { regularbubble } from "./layers/regularbubble.js";
 
 // // TEMP:
 export { split } from "./helpers/split.js";
+export { dotsinpolygons } from "./helpers/dotsinpolygons.js";

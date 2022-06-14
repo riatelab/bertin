@@ -12,14 +12,11 @@ export function merge(geojson, id_geojson, data, id_data, all = true) {
 
    let geomfields = Object.keys(output.features[0].properties);
 
-   console.log(geomfields);
    if (Object.keys(data2[0]).includes(id_data)) {
      let databyid = d3.index(data2, (d) => d[id_data]);
-     //console.log(databyid);
      output.features.forEach((d) => {
        const mydata = databyid.get(d.properties[id_geojson]);
 
-       //console.log(mydata);
        // if same name of variables in geojson and in data
        if (mydata != null) {
          Object.keys(mydata).forEach((x) => {

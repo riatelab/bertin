@@ -20,20 +20,24 @@ export function split(geojson) {
 
 function sp(feature) {
   let result = [];
-  //const area = d3.geoArea(feature);
-  feature.geometry.coordinates.forEach((d) => {
-    result.push({
-      type: "Feature",
-      //   __total: area,
-      //   __part: d3.geoArea(d),
-      //   __share: d3.geoArea(d) / area,
-      properties: feature.properties,
-      geometry: {
-        type: feature.geometry.type.replace("Multi", ""),
-        coordinates: d,
-      },
-    });
-  });
 
-  return result;
+  if (feature.geometry.type.includes("Multi")) {
+    feature.geometry.coordinates.forEach((d) => {
+      result.push({
+        type: "Feature",
+        properties: feature.properties,
+        geometry: {
+          type: feature.geometry.type.replace("Multi", ""),
+          coordinates: d,
+        },
+      });
+    });
+  } else {
+    result.push({ ...feature });
+  }
+
+  const totalArea = d3.geoArea(feature);
+  result.forEach((d) => (d.__share = d3.geoArea(d) / totalArea));
+
+  return JSON.parse(JSON.stringify(result));
 }

@@ -28,6 +28,7 @@ import { label } from "./layers/label.js";
 import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 import { hatch } from "./layers/hatch.js";
+import { dotdensity } from "./layers/dotdensity.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
@@ -158,8 +159,6 @@ export function draw({ params = {}, layers = {} } = {}) {
       );
     }
 
-    // Simple
-
     // simple layers
     if (
       layer.type == "layer" ||
@@ -171,6 +170,49 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         {
           geojson: layer.geojson,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeLinecap: layer.strokeLinecap,
+          strokeLinejoin: layer.strokeLinejoin,
+          fillOpacity: layer.fillOpacity,
+          strokeOpacity: layer.strokeOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          symbol: layer.symbol,
+          symbol_size: layer.symbol_size,
+          symbol_iteration: layer.symbol_iteration,
+          symbol_shift: layer.symbol_shift,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_w: layer.leg_w,
+          leg_h: layer.leg_h,
+          leg_title: layer.leg_title,
+          leg_text: layer.leg_text,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_stroke: layer.leg_stroke,
+          leg_fillOpacity: layer.leg_fillOpacity,
+          leg_fill: layer.leg_fill,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
+        },
+        clipid,
+        width,
+        height
+      );
+    }
+
+    // dot density
+
+    if (layer.type == "dotdensity") {
+      dotdensity(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          dotvalue: layer.dotvalue,
           fill: layer.fill,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
@@ -500,7 +542,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       });
     }
 
-    // simple layers
+    // Hatch
     if (layer.type == "hatch" || layer.type == "hatching") {
       hatch(
         svg,
