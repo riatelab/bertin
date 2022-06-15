@@ -20,6 +20,8 @@ export function dotdensity(
   options.dotvalue = options.dotvalue ?? nbdots;
   options.symbol_size = options.symbol_size ?? 8;
   options.fill = options.fill ?? "#cc190c";
+  options.leg_text = options.leg_text ?? `= ${options.dotvalue}`;
+  options.leg_type = options.symbol ? options.symbol : "circle";
 
   let splited = split(options.geojson);
 

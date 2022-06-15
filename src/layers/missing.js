@@ -5,11 +5,11 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
 import { topo2geo } from "../helpers/topo2geo.js";
-import {figuration } from "../helpers/figuration.js";
-import {addtooltip } from "../helpers/tooltip.js";
-import {legbox } from "../legend/leg-box.js";
+import { figuration } from "../helpers/figuration.js";
+import { addtooltip } from "../helpers/tooltip.js";
+import { legsimple } from "../legend/leg-simple.js";
 
-export function missing(selection, projection, options = {}, clipid){
+export function missing(selection, projection, options = {}, clipid) {
   let geojson = topo2geo(options.geojson);
   let values = options.values;
   let fill = options.fill ? options.fill : "white";
@@ -38,12 +38,11 @@ export function missing(selection, projection, options = {}, clipid){
     .attr("fill", fill)
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
-    .attr("fill-opacity", fillOpacity)
-
+    .attr("fill-opacity", fillOpacity);
 
   // Legend
 
-  legbox(selection, {
+  legsimple(selection, {
     x: options.leg_x,
     y: options.leg_y,
     w: options.leg_w,
@@ -56,6 +55,6 @@ export function missing(selection, projection, options = {}, clipid){
       : fillOpacity,
     fill: fill,
     strokeWidth: options.leg_strokeWidth,
-    txtcol: options.leg_txtcol
+    txtcol: options.leg_txtcol,
   });
 }

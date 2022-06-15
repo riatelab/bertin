@@ -29,6 +29,7 @@ import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 import { hatch } from "./layers/hatch.js";
 import { dotdensity } from "./layers/dotdensity.js";
+import { logo } from "./layers/logo.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
@@ -189,6 +190,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_h: layer.leg_h,
           leg_title: layer.leg_title,
           leg_text: layer.leg_text,
+          leg_type: layer.leg_type,
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_stroke: layer.leg_stroke,
@@ -226,6 +228,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           symbol_iteration: layer.symbol_iteration,
           symbol_shift: layer.symbol_shift,
           tooltip: layer.tooltip,
+          leg_type: layer.leg_type,
           leg_x: layer.leg_x,
           leg_y: layer.leg_y,
           leg_w: layer.leg_w,
@@ -363,6 +366,16 @@ export function draw({ params = {}, layers = {} } = {}) {
         frame_stroke: layer.frame_stroke,
         frame_opacity: layer.frame_opacity,
         frame_strokeWidth: layer.frame_strokeWidth,
+      });
+    }
+
+    // logo
+    if (layer.type == "logo") {
+      logo(svg, width, height, {
+        url: layer.url,
+        size: layer.size,
+        x: layer.x,
+        y: layer.y,
       });
     }
 

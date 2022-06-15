@@ -20,7 +20,4 @@ export { spikes } from "./layers/spikes.js";
 export { outline } from "./layers/outline.js";
 export { graticule } from "./layers/graticule.js";
 export { regularbubble } from "./layers/regularbubble.js";
-
-// // TEMP:
-export { split } from "./helpers/split.js";
-export { dotsinpolygons } from "./helpers/dotsinpolygons.js";
+export { logo } from "./layers/logo.js";
