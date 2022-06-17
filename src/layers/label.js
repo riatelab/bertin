@@ -2,9 +2,9 @@ import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 
 import { topo2geo } from "../helpers/topo2geo.js";
-import {poly2points } from "../helpers/poly2points.js";
+import { poly2points } from "../helpers/poly2points.js";
 
-export function label(selection, projection, options = {}, clipid){
+export function label(selection, projection, options = {}, clipid) {
   let geojson = topo2geo(options.geojson);
   let values = options.values;
   let fill = options.fill ? options.fill : "#474342";
@@ -13,7 +13,7 @@ export function label(selection, projection, options = {}, clipid){
   let textDecoration = options.textDecoration ? options.textDecoration : "none";
   let fontWeight = options.fontWeight ? options.fontWeight : "normal";
   let fontStyle = options.fontStyle ? options.fontStyle : "normal";
-  let opacity = options.opacity ? options.opacity : 1;
+  let opacity = options.opacity ?? 1;
 
   const features = poly2points(geojson);
 
