@@ -155,6 +155,7 @@ export function simple(
   }
   // If points
   if (figuration(geojson) == "p") {
+    options.leg_type = options.symbol ? options.symbol : "circle";
     const simulation = d3
       .forceSimulation(geojson.features)
       .force(
