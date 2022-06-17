@@ -159,7 +159,7 @@ bertin.draw({
 - **strokeLinejoin**: stroke-linejoin (default:"round")
 - **strokeDasharray**: stroke-dasharray (default:"none")
 - **fillOpacity**: fill opacity (default:1)
-- **fillOpacity**: fill opacity (default:1)
+- **strokeOpacity**: stroke opacity (default:1)
 - **symbol**: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
 - **symbol_size**: if it is a dot layer, a number indicating the size of the symbol (default: 5)
 - **symbol_shift**: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
@@ -170,8 +170,8 @@ Parameters of the legend
 - **leg_x**: position in x (if this value is not filled, the legend is not displayed)
 - **leg_y**: position in y (if this value is not filled, the legend is not displayed)
 - **leg_w**: width of the box (default: 30)
-- **leg_h**: height of the box (default:20)
-- **leg_title**: title of the legend (default; null)
+- **leg_h**: height of the box (default: 20)
+- **leg_title**: title of the legend (default: null)
 - **leg_text**: text of the box (default: "text of the box")
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
@@ -334,7 +334,6 @@ Parameters of the legend
 - **leg_round**: number of digits after the decimal point (default: undefined)
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
-
 
 ### Regular Bubble
 
@@ -544,6 +543,57 @@ Parameters of the legend
 - **leg_top_fill** color of top semi circles (default same as top_fill)
 - **leg_bottom_fill** color of bottom semi circles (default same as bottom_fill)
 - **leg_strokeWidth** stroke width of elements in the legend (default 0.8)
+
+### Dot Density
+
+The _dotdensity_ type allows to display a doty density layer geojson layer from polygons and attribute data. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/dotdensity.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-dot-density-map-bertin?collection=@neocartocnrs/bertin)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "dotdensity",
+      geojson: *a geojson here (polygon)*,
+      values: *a fiel here*
+      dotvalue: *a number*,
+    }
+  ]
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson polygons or Multipolygons (**compulsory**)
+- **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
+- **dotvalue**: a number representing the value of each point (default: a computed number so that there are no more than 1000 dots on the map.)
+- **fill**: fill color (default: a random color)
+- **stroke**: stroke color (default: "white")
+- **strokeWidth** stroke width (default:0.5)
+- **fillOpacity**: fill opacity (default:1)
+- **strokeOpacity**: stroke opacity (default:1)
+- **symbol**: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
+- **symbol_size**: if it is a dot layer, a number indicating the size of the symbol (default: 5)
+- **symbol_shift**: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
+- **symbol_iteration**: Number of iteration to shift symbols (default: 200)
+
+Parameters of the legend
+
+- **leg_x**: position in x (if this value is not filled, the legend is not displayed)
+- **leg_y**: position in y (if this value is not filled, the legend is not displayed)
+- **leg_w**: width of the box (default: 30)
+- **leg_h**: height of the box (default:20)
+- **leg_title**: title of the legend (default: null)
+- **leg_text**: text of the box (default: dot value)
+- **leg_fontSize**: title legend font size (default: 14)
+- **leg_fontSize2**: values font size (default: 10)
+- **leg_fill**: color of the box (same as the layer displayed)
+- **leg_stroke**: stroke of the box (default: "black")
+- **leg_strokeWidth**: stroke-width (default: 0.5)
+- **leg_fillOpacity**: stroke opacity (same as the layer displayed)
+- **leg_txtcol**: color of the text (default: "#363636")
+
 
 ### Spikes
 
