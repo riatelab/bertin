@@ -740,7 +740,6 @@ bertin.draw({
 - **nbsd**: for msd method only. number of sd. (default:1)
 - **sizes**: an array of thicknesses.
 
-
 #### Parameters of the legends
 
 - **leg_x**: position in x (if this value is not filled, the legend is not displayed)
@@ -1045,6 +1044,39 @@ bertin.draw({
 - **frame_stroke**: frame stroke color (default: "none")
 - **frame_strokeWidth**: thickness of the frame contour (default: 1)
 - **frame_opacity**: frame opacity (default: 1)
+
+### Tiles
+
+The _tile_ type allow to display a raster basemap. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/tile.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-tiles?collection=@neocartocnrs/bertin).
+
+**Warning!!!** : It works only with the  d3.geoMercator() projection. Don't forget to choose this projection in the general settings of your map, as below. 
+
+#### Code
+
+```js
+bertin.draw({
+  params: { 
+            projection: d3.geoMercator(),
+            extent: *a geojson*  
+          },
+  layers: [
+    {
+      type: "tile",
+      style: "worldphysical"
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **style**: tile style: "openstreetmap", "opentopomap", "worldterrain", "worldimagery", "worldStreet", "worldphysical", "shadedrelief", "oceanbasemap". (default: "opentopomap")
+- **zoomDelta**: zoom offset. See explanations [here](https://github.com/d3/d3-tile#tile_zoomDelta) (default:0)
+- **tileSize**: tile size. See explanations [here](https://github.com/d3/d3-tile#tile_tileSize) (default:512)
+- **opacity**: tile opacity (default:1)
+-**clip**: a geojson to clip the image
+- **source**: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
+- **increasetilesize**: a value to slightly increase the size of the tiles solve the problem of gap between the tiles with chromium (deafault: 1)
 
 ## Other functions
 

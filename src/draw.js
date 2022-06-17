@@ -29,6 +29,7 @@ import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 import { hatch } from "./layers/hatch.js";
 import { dotdensity } from "./layers/dotdensity.js";
+import { tile } from "./layers/tile.js";
 import { logo } from "./layers/logo.js";
 
 // Main
@@ -109,7 +110,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   let clipid = null;
   if (clip) {
     // test
-    clipid = Date.now().toString(36) + Math.random().toString(36).substr(2);
+    clipid = Date.now().toString(36) + Math.random().toString(36).substring(2);
     svg
       .append("clipPath")
       .attr("id", `clip_${clipid}`)
@@ -158,6 +159,20 @@ export function draw({ params = {}, layers = {} } = {}) {
         },
         clipid
       );
+    }
+
+    // tile
+
+    if (layer.type == "tile") {
+      tile(svg, width, height, projection, {
+        opacity: layer.opacity,
+        tileSize: layer.tileSize,
+        zoomDelta: layer.zoomDelta,
+        style: layer.style,
+        clip: layer.clip,
+        increasetilesize: layer.increasetilesize,
+        source: layer.source,
+      });
     }
 
     // simple layers
