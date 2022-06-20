@@ -835,6 +835,35 @@ bertin.draw({
 - **angle**: orientation of lines (default: 45)
 - **spacing**: spacing between lines (default: 8)
 
+#### Water lines
+
+The _waterlines_ type only allows allows to display lines spaced by a defined distance. It's just a graphic trick to make the maps look nice.   [Source](https://github.com/neocarto/bertin/blob/main/src/layers/waterlines.js).
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "hatch",
+      angle: 45,
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **dist**: distancve between lines (default: 200)
+- **unit**: unit (default: "kilometers")
+- **nb**: number of lines (default: 5)
+- **stroke**: stroke. If more than 1 value is defined, a linear scale is done beetwen values (default:"#5d81ba")
+- **strokeOpacity**: stroke-opacity. If more than 1 value is defined, a linear scale is done beetwen values (default: [1, 0.1])
+- **strokeWidth**: stroke-width. If more than 1 value is defined, a linear scale is done beetwen values(default: [1.2, 0.2])
+- **strokeDasharray**: stroke-dasharray (default: "none")
+- **strokeLinecap**: stroke-linecap (default: "round")
+- **strokeLinejoin**: stroke-linejoin (default: "round")
+
 ### Header
 
 The _header_ type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/header.js).
