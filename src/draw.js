@@ -57,7 +57,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     projection = d3.geoMercator();
   }
 
-  // extent & margin
+  // extent
   let width = params.width ? params.width : 1000;
   let extent = params.extent ? params.extent : null;
   extent =
@@ -66,6 +66,8 @@ export function draw({ params = {}, layers = {} } = {}) {
     Array.isArray(extent[1])
       ? bbox(extent)
       : extent;
+
+  // other global parameters
   let margin = params.margin ? params.margin : 1;
   let background = params.background;
   let clip = params.clip ?? false; // test
@@ -177,11 +179,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     // tiles
 
-    if (
-      layer.type == "tiles" ||
-      layer.type == "tile" ||
-      layer.type == "raster"
-    ) {
+    if (layer.type == "tiles") {
       tiles(svg, width, height, projection, {
         opacity: layer.opacity,
         tileSize: layer.tileSize,

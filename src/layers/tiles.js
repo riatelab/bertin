@@ -13,8 +13,6 @@ export function tiles(selection, width, height, projection, options = {}) {
   let increasetilesize = options.increasetilesize ?? 1;
   let source = options.source ?? "bottomright";
 
-  console.log("tiles.js");
-
   // styles: https://leaflet-extras.github.io/leaflet-providers/preview/
   const styles = [
     {
