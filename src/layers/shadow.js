@@ -11,7 +11,14 @@ const topojson = Object.assign({}, topojsonserver, topojsonclient);
 import { topo2geo } from "../helpers/topo2geo.js";
 import { figuration } from "../helpers/figuration.js";
 
-export function shadow(selection, projection, geojson, clipid, defs, options = {}) {
+export function shadow(
+  selection,
+  projection,
+  geojson,
+  clipid,
+  defs,
+  options = {}
+) {
   let col = options.col ? options.col : "#35383d";
   let dx = options.dx ? options.dx : 3;
   let dy = options.dy ? options.dy : 3;
@@ -24,7 +31,7 @@ export function shadow(selection, projection, geojson, clipid, defs, options = {
   let topo = topojson.topology({ foo: topo2geo(geojson) });
   let merged = topojson.merge(topo, topo.objects.foo.geometries);
 
-  var blur = defs
+  let blur = defs
     .append("filter")
     .attr("id", "blur")
     .append("feGaussianBlur")
