@@ -6,24 +6,6 @@ import * as d3geoprojection from "d3-geo-projection";
 const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 
 export function getheight(layers, extent, margin, projection, width) {
-  // let ref;
-  // if (extent) {
-  //   ref = extent;
-  // } else {
-  //   if (layers.find((d) => d.type == "outline") != undefined) {
-  //     let outline = layers.find((d) => d.type == "outline");
-  //     ref = { type: "Sphere" };
-  //   } else {
-  //     let l = layers.map((d) => d.geojson).filter((d) => d !== undefined);
-  //     let all = [];
-  //     l.forEach((d) => all.push(topo2geo(d).features));
-  //     ref = {
-  //       type: "FeatureCollection",
-  //       features: all.flat()
-  //     };
-  //   }
-  // }
-
   let ref;
 
   const geojsons = layers
@@ -57,11 +39,6 @@ export function getheight(layers, extent, margin, projection, width) {
   if (!extent && geojsons == 0 && types.includes("tiles")) {
     ref = { type: "Sphere" };
   }
-
-  console.log("types: " + types);
-  console.log("geojsons: " + geojsons);
-  console.log("extent: " + extent);
-  console.log("ref: " + ref);
 
   // Adapt scale
 
