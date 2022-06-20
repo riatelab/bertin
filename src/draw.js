@@ -29,21 +29,35 @@ import { spikes } from "./layers/spikes.js";
 import { dotcartogram } from "./layers/dotcartogram.js";
 import { hatch } from "./layers/hatch.js";
 import { dotdensity } from "./layers/dotdensity.js";
-import { tile } from "./layers/tile.js";
+import { tiles } from "./layers/tiles.js";
 import { logo } from "./layers/logo.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
   // default global paramaters
 
+  // projection
   let projection = params.projection
     ? params.projection
-    : d3.geoEquirectangular();
+    : d3.geoEquirectangular(); // default
 
   if (typeof projection === "string") {
     projection = proj4d3(projection);
   }
 
+  // if tiles used, the projection is setted to d3.geoMercator()
+
+  const types = layers.map((d) => d.type);
+  if (
+    types.includes("tiles") ||
+    types.includes("tile") ||
+    types.includes("raster")
+  ) {
+    console.log("test");
+    projection = d3.geoMercator();
+  }
+
+  // extent & margin
   let width = params.width ? params.width : 1000;
   let extent = params.extent ? params.extent : null;
   extent =
@@ -161,10 +175,14 @@ export function draw({ params = {}, layers = {} } = {}) {
       );
     }
 
-    // tile
+    // tiles
 
-    if (layer.type == "tile") {
-      tile(svg, width, height, projection, {
+    if (
+      layer.type == "tiles" ||
+      layer.type == "tile" ||
+      layer.type == "raster"
+    ) {
+      tiles(svg, width, height, projection, {
         opacity: layer.opacity,
         tileSize: layer.tileSize,
         zoomDelta: layer.zoomDelta,

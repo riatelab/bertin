@@ -4,7 +4,7 @@ const d3 = Object.assign({}, d3tile, d3geo);
 
 import { text } from "./text.js";
 
-export function tile(selection, width, height, projection, options = {}) {
+export function tiles(selection, width, height, projection, options = {}) {
   let opacity = options.opacity ?? 1;
   let tileSize = options.tileSize ?? 512;
   let zoomDelta = options.zoomDelta ?? 0;
@@ -12,6 +12,8 @@ export function tile(selection, width, height, projection, options = {}) {
   let style = options.style ?? "opentopomap";
   let increasetilesize = options.increasetilesize ?? 1;
   let source = options.source ?? "bottomright";
+
+  console.log("tiles.js");
 
   // styles: https://leaflet-extras.github.io/leaflet-providers/preview/
   const styles = [

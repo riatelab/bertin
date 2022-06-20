@@ -122,7 +122,7 @@ bertin.draw({
 
 #### Parameters
 
-- **projection**: a d3 function or string defining the map projection. Refer [d3-geo-projection](https://github.com/d3/d3-geo-projection) and [spatialreference.org](https://spatialreference.org/) for more detailed explanation. (default: d3.geoEquirectangular()). [Example](https://observablehq.com/@neocartocnrs/bertin-js-projections).
+- **projection**: a d3 function or string defining the map projection. Refer [d3-geo-projection](https://github.com/d3/d3-geo-projection) and [spatialreference.org](https://spatialreference.org/) for more detailed explanation. (default: d3.geoEquirectangular() except if you use tiles. in this case, the projection is automatically set to d3.geoMercator()). [Example](https://observablehq.com/@neocartocnrs/bertin-js-projections).
 - **width**: width of the map (default:1000);
 - **extent**: a feature or a bbox array defining the extent e.g. a country or [[112, -43],[153, -9]] (default: null)
 - **margin**: margin around features to be displayed. This option can be useful if the stroke is very heavy (default: 1)
@@ -1045,11 +1045,11 @@ bertin.draw({
 - **frame_strokeWidth**: thickness of the frame contour (default: 1)
 - **frame_opacity**: frame opacity (default: 1)
 
-### Tiles
+### Mercator Tiles
 
-The _tile_ type allow to display a raster basemap. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/tile.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-tiles?collection=@neocartocnrs/bertin).
+The _tiles_ type allow to display a raster basemap. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/tile.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-tiles?collection=@neocartocnrs/bertin).
 
-**Warning!!!** : It works only with the  d3.geoMercator() projection. Don't forget to choose this projection in the general settings of your map, as below. 
+**NB: ** It works only with the d3.geoMercator() projection. if tiles layer is used is the *draw* function, the projection is automaticaly setted to d3.geoMercator(). And you can't change it.  
 
 #### Code
 
@@ -1061,7 +1061,7 @@ bertin.draw({
           },
   layers: [
     {
-      type: "tile",
+      type: "tiles",
       style: "worldphysical"
     },
   ],
