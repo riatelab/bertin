@@ -82,14 +82,13 @@ export function tiles(selection, width, height, projection, options = {}) {
     selection
       .append("clipPath")
       .attr("id", `tileclip_${id}`)
-      //.attr("id", `toto`)
       .append("path")
       .datum(clip)
       .attr("d", d3.geoPath(projection));
   }
+
   selection
     .append("g")
-    //.attr("clip-path", `url(#toto`)
     .attr("clip-path", `url(#tileclip_${id}`)
     .selectAll("image")
     .data(tile())
@@ -100,7 +99,6 @@ export function tiles(selection, width, height, projection, options = {}) {
     .attr("width", tile().scale + increasetilesize + "px")
     .attr("height", tile().scale + increasetilesize + "px")
     .attr("opacity", opacity);
-  //.attr("clip-path", clip ? `none` : `url(#tileclip_${id}`);
 
   text(
     selection,

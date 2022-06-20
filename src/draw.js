@@ -53,7 +53,6 @@ export function draw({ params = {}, layers = {} } = {}) {
     types.includes("tile") ||
     types.includes("raster")
   ) {
-    console.log("test");
     projection = d3.geoMercator();
   }
 
