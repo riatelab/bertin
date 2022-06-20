@@ -22,6 +22,7 @@ import { regularbubble } from "./layers/regularbubble.js";
 import { mushroom } from "./layers/mushroom.js";
 import { missing } from "./layers/missing.js";
 import { shadow } from "./layers/shadow.js";
+import { waterlines } from "./layers/waterlines.js";
 import { scalebar } from "./layers/scalebar.js";
 import { text } from "./layers/text.js";
 import { label } from "./layers/label.js";
@@ -445,6 +446,23 @@ export function draw({ params = {}, layers = {} } = {}) {
         dy: layer.dy,
         opacity: layer.opacity,
         stdDeviation: layer.stdDeviation,
+      });
+    }
+
+    // water lines
+
+    if (layer.type == "waterlines") {
+      waterlines(svg, projection, layer.geojson, clipid, {
+        stroke: layer.stroke,
+        dist: layer.dist,
+        unit: layer.unit,
+        nb: layer.nb,
+        strokeOpacity: layer.strokeOpacity,
+        strokeWidth: layer.strokeWidth,
+        stroke: layer.stroke,
+        strokeDasharray: layer.strokeDasharray,
+        strokeLinecap: layer.strokeLinecap,
+        strokeLinejoin: layer.strokeLinejoin,
       });
     }
 

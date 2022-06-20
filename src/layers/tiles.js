@@ -7,9 +7,10 @@ import { text } from "./text.js";
 export function tiles(selection, width, height, projection, options = {}) {
   let opacity = options.opacity ?? 1;
   let tileSize = options.tileSize ?? 512;
-  let zoomDelta = options.zoomDelta ?? 0;
+  let github = options.zoomDelta ?? 0;
   let clip = options.clip ?? undefined;
   let style = options.style ?? "opentopomap";
+  let zoomDelta = options.zoomDelta ?? 1;
   let increasetilesize = options.increasetilesize ?? 1;
   let source = options.source ?? "bottomright";
 

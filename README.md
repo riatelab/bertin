@@ -22,7 +22,7 @@ _The project is under **active development**. Some of features and options are s
 - [Map components](#map-components)
 - [Other functions](#other-functions)
 
-Bertin.js is an easy to use JavaScript library based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
+Bertin.js is an easy to use JavaScript library mainly based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
 
 ## Who is Bertin?
 
@@ -266,8 +266,8 @@ layers: [
 #### Parameters
 
 - **values**: a string corresponding to the targeted variable in the properties (**compulsory**)
-- **colors**: An array containing n colors for n types (default: null)
-- **pal**: a palette of categorical colors (default: "Tableau10"). See the handy [color scheme reference](https://observablehq.com/@d3/color-schemes) for full list of palettes.
+- **colors**: An array containing n colors for n types, or a a palette of categorical colors (default: "Tableau10"). See the handy [color scheme reference](https://observablehq.com/@d3/color-schemes) for full list of palettes.
+- **order**: an array of values to set the order of the colors
 - **col_missing**: Color for missing values (default "#f5f5f5")
 - **txt_missing**: Text for missing values (default "No data")
 - **stroke**: stroke color (default: "white")

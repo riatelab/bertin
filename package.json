@@ -41,6 +41,7 @@
   "dependencies": {
     "@turf/bbox": "^6.5.0",
     "@turf/boolean-point-in-polygon": "^6.5.0",
+    "@turf/buffer": "^6.5.0",
     "@turf/random": "^6.5.0",
     "d3-array": "^3.1.6",
     "d3-force": "^3.0.0",
