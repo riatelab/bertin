@@ -42,18 +42,20 @@ export function draw({ params = {}, layers = {} } = {}) {
     ? params.projection
     : d3.geoEquirectangular(); // default
 
-  if (typeof projection === "string") {
+  if (typeof projection === "string" && projection !== "none") {
     projection = proj4d3(projection);
+  }
+
+  // Use projected geometries
+
+  if (typeof projection === "string" && projection === "none") {
+    projection = d3.geoIdentity().reflectY(true);
   }
 
   // if tiles used, the projection is setted to d3.geoMercator()
 
   const types = layers.map((d) => d.type);
-  if (
-    types.includes("tiles") ||
-    types.includes("tile") ||
-    types.includes("raster")
-  ) {
+  if (types.includes("tiles")) {
     projection = d3.geoMercator();
   }
 
