@@ -459,6 +459,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         dist: layer.dist,
         unit: layer.unit,
         nb: layer.nb,
+        steps: layer.steps,
         strokeOpacity: layer.strokeOpacity,
         strokeWidth: layer.strokeWidth,
         stroke: layer.stroke,

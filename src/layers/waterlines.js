@@ -20,6 +20,7 @@ export function waterlines(
   let dist = options.dist ?? 200;
   let unit = options.unit ?? "kilometers";
   let nb = options.nb ?? 5;
+  let steps = options.steps ?? 8;
 
   let stroke = options.stroke ?? "#5d81ba";
   let strokeOpacity = options.strokeOpacity ?? [1, 0.1];
@@ -33,7 +34,7 @@ export function waterlines(
 
   let features = [];
   for (let i = 1; i <= nb; i++) {
-    features.push(buffer(merged, dist * i, { units: unit }));
+    features.push(buffer(merged, dist * i, { units: unit, steps: steps }));
   }
 
   selection
