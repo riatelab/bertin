@@ -8,8 +8,8 @@ const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 import { getheight } from "./helpers/height.js";
 import { figuration } from "./helpers/figuration.js";
 import { getcenters } from "./helpers/centroids.js";
-import { proj4d3 } from "./helpers/proj4d3.js";
 import { bbox } from "./bbox.js";
+import { getproj } from "./projections/projections.js";
 
 // Layers
 import { graticule } from "./layers/graticule.js";
@@ -35,28 +35,14 @@ import { logo } from "./layers/logo.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
-  // default global paramaters
-
-  // projection
-  let projection = params.projection
-    ? params.projection
-    : d3.geoEquirectangular(); // default
-
-  if (typeof projection === "string" && projection !== "none") {
-    projection = proj4d3(projection);
-  }
-
-  // Use projected geometries
-
-  if (typeof projection === "string" && projection === "none") {
-    projection = d3.geoIdentity().reflectY(true);
-  }
-
-  // if tiles used, the projection is setted to d3.geoMercator()
-
+  // projections
+  let projection = params.projection;
   const types = layers.map((d) => d.type);
   if (types.includes("tiles")) {
     projection = d3.geoMercator();
+  } else {
+    projection = getproj(projection);
+    console.log(projection);
   }
 
   // extent
@@ -160,7 +146,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   }
 
   // ----------------------------------------
-  layers.reverse().forEach((layer) => {
+  [...layers].reverse().forEach((layer) => {
     // Graticule
     if (layer.type == "graticule") {
       graticule(
