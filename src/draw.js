@@ -361,6 +361,8 @@ export function draw({ params = {}, layers = {} } = {}) {
           fontWeight: layer.fontWeight,
           fontStyle: layer.fontStyle,
           opacity: layer.opacity,
+          halo: layer.halo,
+          halo_style: layer.halo_style,
         },
         clipid
       );

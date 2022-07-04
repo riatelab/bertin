@@ -920,6 +920,8 @@ bertin.draw({
 - **fontWeight**: font weight. "normal", "bold", "bolder", "lighter" (default: "normal")
 - **fontStyle**: font style. "normal", "italic", "oblique" (default: "normal")
 - **opacity**: opacity (default: 1)
+- **halo**: boolean to display a halo below the text (default: false)
+- **halo_style**: an array defining the halo style. [color, thickness, opacity]  (default: ["white","4, 0.5)
 
 ### Missing
 

@@ -14,6 +14,8 @@ export function label(selection, projection, options = {}, clipid) {
   let fontWeight = options.fontWeight ? options.fontWeight : "normal";
   let fontStyle = options.fontStyle ? options.fontStyle : "normal";
   let opacity = options.opacity ?? 1;
+  let halo = options.halo ?? false;
+  let halo_style = options.halo_style ?? ["white", 4, 0.5];
 
   const features = poly2points(geojson);
 
@@ -37,5 +39,11 @@ export function label(selection, projection, options = {}, clipid) {
     .attr("font-weight", fontWeight)
     .attr("text-anchor", "middle")
     .attr("dominant-baseline", "middle")
+    .attr("paint-order", "stroke")
+    .attr("stroke", halo ? halo_style[0] : "none")
+    .attr("stroke-width", halo ? halo_style[1] : 0)
+    .attr("stroke-opacity", halo ? halo_style[2] : 0)
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
     .text((d) => d.properties[values]);
 }
