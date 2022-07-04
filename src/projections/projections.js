@@ -1,7 +1,7 @@
 import { stringtod3proj } from "./stringtod3proj.js";
 import { Polar } from "./polar.js";
 import { HoaXiaoguang } from "./hoaxiaoguang.js";
-//import { Spilhaus } from "./spilhaus.js";
+import { Spilhaus } from "./spilhaus.js";
 
 import { proj4d3 } from "./proj4d3.js";
 import * as d3geo from "d3-geo";
@@ -36,9 +36,9 @@ export function getproj(projection) {
     if (projection == "HoaXiaoguang") {
       return HoaXiaoguang();
     }
-    // if (projection == "Spilhaus") {
-    //   return Spilhaus()();
-    // }
+    if (projection == "Spilhaus") {
+      return Spilhaus();
+    }
 
     /* USER projection - if he geometries use a projection system,
   they are displayed in this projection. Then it is impossible 
