@@ -1,8 +1,51 @@
-#### 0.9.7 (2022-04-16)
+# bertin.js - Changelog
 
-##### Continuous Integration
+#### 0.13
 
-*  dependencies. d3 -> d3 modules ([7bf38eed](https://github.com/neocarto/bertin/commit/7bf38eed0ce65ece529afd7b715347500a60f906))
+##### New Features
+
+* Projections are now available internaly ([fdc8db2](https://github.com/neocarto/bertin/commit/fdc8db2516879d79b4da6c08be6e6e29b87acdf2))
+* Allow already prjected basemaps ([0d77f7](https://github.com/neocarto/bertin/commit/0d77f73016b136a6b6386d52e4e4ac697306ed39))
+* Water lines layer layer ([6ef0804](https://github.com/neocarto/bertin/commit/6ef08045d631e6ddd7971b41046d33d2b045ee56))
+
+##### Bug Fixes 
+
+* Order of colors for typologies ([26ba938]((https://github.com/neocarto/bertin/commit/26ba9380555de8c23c825aa6725b7cdabb5a1dad))
+
+#### 0.12
+
+##### New Features
+
+* Tile layer ([bc6debb](https://github.com/neocarto/bertin/commit/bc6debb97c205da81167b0c6552588dc201c37f1))
+
+#### 0.11
+
+##### New Features
+
+* Allow legends for dot density maps ([9d1b2af](https://github.com/neocarto/bertin/commit/9d1b2af9ae8274261ccd17927d347cee9ae6189c))
+* Dot density map layer ([cb4c0f8](https://github.com/neocarto/bertin/commit/cb4c0f8c8edc7a11213dfffe7e981871db7071f1))  ([68bed4a](https://github.com/neocarto/bertin/commit/68bed4a7d0b9c9fe9bba022568ba0a3d5da83007))
+* a split function is added to siply use 2 colors (fot positive and negative values) ([2258259](https://github.com/neocarto/bertin/commit/22582593a0c982f8062e041e624c3758acf387ec))
+
+##### Bug Fixes
+
+* Fix legends for symbols ([f74b95f](https://github.com/neocarto/bertin/commit/f74b95f90c0868298c9b6fc01ce240dc19c47fbe))
+
+#### 0.10
+
+##### New Features
+
+* regular bubble type ([1975d85]((https://github.com/neocarto/bertin/commit/1975d855b950440f4aa33d3c866637c5e4d09ba1))
+
+##### Bug Fixes 
+
+* fix: dot cartogram + typo legend order ([3b28f5f](https://github.com/neocarto/bertin/commit/3b28f5fd2734ff7d257ad7bab52a5500970acebf))
+* Raise legends ([4874ef9](https://github.com/neocarto/bertin/commit/4874ef9cab1eb525497a6b2a0ba4a833aa38ffc9))
+* fix discontinuities ([e927990](https://github.com/neocarto/bertin/commit/e927990b9c362619e98eb7b79c59efb31d665b30))
+
+##### Other Changes
+* merge pal & clors arguments for typo layers ([2c4b97c](https://github.com/neocarto/bertin/commit/2c4b97c6c90cb67f56392f45ce297282113332b1))
+
+#### Before 0.10
 
 ##### New Features
 * Manage thickness (abs, rel and quali) and legends ([1262dbc](https://github.com/neocarto/bertin/commit/1262dbcf98edd32dfc97913bf881066687c184e5) [0652a4b](https://github.com/neocarto/bertin/commit/0652a4b726658f0a45abb5055a99f4462b67f619) [0652a4b](https://github.com/neocarto/bertin/commit/0652a4b726658f0a45abb5055a99f4462b67f619) [6e18ed9](https://github.com/neocarto/bertin/commit/6e18ed90380479e2c6e59a55a2af0380fd32335e) [2df7bfd](https://github.com/neocarto/bertin/commit/2df7bfdd8155a33945e24b3ba53c2a40bbc509bf) [4206068](https://github.com/neocarto/bertin/commit/42060680230887e71f7a303c6781e83d7329e9ef))
