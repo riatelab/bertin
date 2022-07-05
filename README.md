@@ -837,7 +837,7 @@ bertin.draw({
 
 #### Water lines
 
-The _waterlines_ type only allows allows to display lines spaced by a defined distance. It's just a graphic trick to make the maps look nice.   [Source](https://github.com/neocarto/bertin/blob/main/src/layers/waterlines.js).
+The _waterlines_ type only allows to display lines spaced by a defined distance. It's just a graphic trick to make the maps look nice.   [Source](https://github.com/neocarto/bertin/blob/main/src/layers/waterlines.js).
 
 #### Code
 
@@ -845,8 +845,10 @@ The _waterlines_ type only allows allows to display lines spaced by a defined di
 bertin.draw({
   layers: [
     {
-      type: "hatch",
-      angle: 45,
+      type: "waterlines",
+      geojson: world,
+      dist: 100,
+      nb: 5
     },
   ],
 });
@@ -857,12 +859,38 @@ bertin.draw({
 - **dist**: distancve between lines (default: 200)
 - **unit**: unit (default: "kilometers")
 - **nb**: number of lines (default: 5)
+- **steps**: number of steps in @turf/buffer (default: 8)
 - **stroke**: stroke. If more than 1 value is defined, a linear scale is done beetwen values (default:"#5d81ba")
 - **strokeOpacity**: stroke-opacity. If more than 1 value is defined, a linear scale is done beetwen values (default: [1, 0.1])
 - **strokeWidth**: stroke-width. If more than 1 value is defined, a linear scale is done beetwen values(default: [1.2, 0.2])
 - **strokeDasharray**: stroke-dasharray (default: "none")
 - **strokeLinecap**: stroke-linecap (default: "round")
 - **strokeLinejoin**: stroke-linejoin (default: "round")
+
+#### logo
+
+The logo type only allows allows to display a logo on the map from an url. By default, the bertin.js logo is displayed. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/logo.js) [Example](https://observablehq.com/@neocartocnrs/bertin-logo).
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "logo",
+      url: "http://myimage.png"
+      position: "left",
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **url**: a string containing an url(default: bertin logo)
+- **position**: an array of two cootdinates [x, y] or predefined positions as "left", "right" or "middle" (default: "left")
+- **size**: width of the logo. (default: 100)
+
 
 ### Header
 

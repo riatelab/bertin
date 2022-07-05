@@ -23,4 +23,4 @@ export { regularbubble } from "./layers/regularbubble.js";
 
 // test
 
-//export { logo } from "./layers/logo.js";
+export { logo } from "./layers/logo.js";

@@ -42,7 +42,6 @@ export function draw({ params = {}, layers = {} } = {}) {
     projection = d3.geoMercator();
   } else {
     projection = getproj(projection);
-    console.log(projection);
   }
 
   // extent
@@ -395,8 +394,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       logo(svg, width, height, {
         url: layer.url,
         size: layer.size,
-        x: layer.x,
-        y: layer.y,
+        position: layer.position,
       });
     }
 
