@@ -20,7 +20,9 @@ _The project is under **active development**. Some of features and options are s
 - [Drawing a map](#drawing-a-map)
 - [Map types](#map-types)
 - [Map components](#map-components)
+- [Geojson properties selections](#geojson-properties-selections)
 - [Other functions](#other-functions)
+
 
 Bertin.js is an easy to use JavaScript library mainly based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
 
@@ -931,7 +933,7 @@ bertin.draw({
     {
       type: "label",
       geojson: countries,
-      label: "name",
+      values: "name",
     },
   ],
 });
@@ -1137,18 +1139,171 @@ bertin.draw({
 - **source**: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - **increasetilesize**: a value to slightly increase the size of the tiles solve the problem of gap between the tiles with chromium (deafault: 1)
 
+## Geojson properties selections
+
+### properties.add
+
+*properties.add* allows to add a new field in the attribute table. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+#### Code
+
+```js
+bertin.properties.add({
+    geojson: world, 
+    field: "gdppc", 
+    expression: "gdp/pop*1000" 
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson
+- **field**: new colname (string)
+- **expression**:  a string containing an expression
+
+### properties.filter
+
+*properties.filter* allows to filter a geojson from its attribute table.This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+
+#### Code
+
+```js
+bertin.properties.filter({
+    x: world,
+    expression: "pop2022 >= 100000" 
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson
+- **expression**:  a string containing an expression
+
+### properties.head
+
+*properties.head* allows to get the n top values from a given field.This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+
+#### Code
+
+```js
+bertin.properties.head({
+    geojson: world,
+    field: "gdp",
+    nb: 5
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson
+- **field**:  a string containing an colname
+- **nb**: number of features to get (default:10)
+
+### properties.keep
+
+*properties.keep* allows to select one or several columns to keep in the attribute table. All other columns are deleted. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+
+#### Code
+
+```js
+bertin.properties.keep({
+    geojson: world,
+    field: ["ISO3", "pop2020"] 
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson
+- **field**:  fields to keep (string or array of strings) 
+
+### properties.remove
+
+*properties.remove* allows to remove one or several columns in the attribute table. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+#### Code
+
+```js
+bertin.properties.remove({
+    geojson: world,
+    field: ["tmp", "FID"] 
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson
+- **field**:  fields to remove (string or array of strings) 
+
+
+### properties.subset
+
+*properties.subset* allows to remove one or several columns in the attribute table. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+#### Code
+
+```js
+bertin.properties.subset({
+    geojson: world,
+    field: "ISO3",
+    selection:   ["USA", "CAN", "MEX"],
+    inverse: false
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson
+- **field**:  fields to remove (string or array of strings) 
+- **selection**: values to be kept. In the example above, North american countries
+- **inverse**:  default: false. If true, all countries except USA, CAN and MEX are kept 
+
+### properties.table
+
+*properties.subset* allows to get a geojson attribute table [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+#### Code
+
+```js
+bertin.properties.table(*a geojson*)
+```
+### properties.head
+
+*properties.tail* allows to get the n bottom values from a given field. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+
+
+#### Code
+
+```js
+bertin.properties.tail({
+    geojson: world,
+    field: "gdp",
+    nb: 5
+})
+```
+
+#### Parameters
+
+- **geojson**: a geojson
+- **field**:  a string containing an colname
+- **nb**: number of features to get (default:10)
+
 ## Other functions
 
 ### borders
 
 _borders_ is a function that extract borders from polygons, with ids. [Source](https://github.com/neocarto/bertin/blob/main/src/borders.js)
+
 #### Code
 
 ```js
 bertin.borders({geojson: world, id: "iso3", values: "population", type = "rel"})
 ```
 
-#### Code
+#### Parameters
 
 - **geojson**: a geojson
 - **id**: id codes
