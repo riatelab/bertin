@@ -1,16 +1,26 @@
 # bertin.js - Changelog
 
+#### 0.14
+
+##### New Features
+
+* Rhumb lines (portolan chart style) ([6a14952](https://github.com/neocarto/bertin/commit/6a14952355f140759fcfe5f72e5f069fc362be57))
+* helpers for handle geojson properties ([4523273](https://github.com/neocarto/bertin/commit/452327389c3d52532ecd041b2b1e88b9a243423b)) ([d2ea37c](https://github.com/neocarto/bertin/commit/d2ea37c6019070603672f50c3133206cb7cb08c6)) ([f1a4ac4](https://github.com/neocarto/bertin/commit/f1a4ac40d7e300c8b21f11b27d94c20787ad9195))
+* Logo layer ([244a59](https://github.com/neocarto/bertin/commit/244a595d3df77455f0978c7c2eb9cf6efa6b3fd8))
+* Spilhaus projection directly available ([026ccd0](https://github.com/neocarto/bertin/commit/026ccd04dd8c3a98b259f694fc963dda960e3846))
+* Halo for labels ([b879766](https://github.com/neocarto/bertin/commit/b87976605c4ccc470e176a0a82182b704bb30046))
+
 #### 0.13
 
 ##### New Features
 
 * Projections are now available internaly ([fdc8db2](https://github.com/neocarto/bertin/commit/fdc8db2516879d79b4da6c08be6e6e29b87acdf2))
-* Allow already prjected basemaps ([0d77f7](https://github.com/neocarto/bertin/commit/0d77f73016b136a6b6386d52e4e4ac697306ed39))
-* Water lines layer layer ([6ef0804](https://github.com/neocarto/bertin/commit/6ef08045d631e6ddd7971b41046d33d2b045ee56))
+* Allow already projected basemaps ([0d77f7](https://github.com/neocarto/bertin/commit/0d77f73016b136a6b6386d52e4e4ac697306ed39))
+* Water lines layer ([6ef0804](https://github.com/neocarto/bertin/commit/6ef08045d631e6ddd7971b41046d33d2b045ee56))
 
 ##### Bug Fixes 
 
-* Order of colors for typologies ([26ba938]((https://github.com/neocarto/bertin/commit/26ba9380555de8c23c825aa6725b7cdabb5a1dad))
+* Order of colors for typologies ([26ba938](https://github.com/neocarto/bertin/commit/26ba9380555de8c23c825aa6725b7cdabb5a1dad))
 
 #### 0.12
 
