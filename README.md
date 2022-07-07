@@ -837,6 +837,33 @@ bertin.draw({
 - **angle**: orientation of lines (default: 45)
 - **spacing**: spacing between lines (default: 8)
 
+#### Rhumbs
+
+The rhumbs type allows to display "rhumb lines" like on old [portolan charts](https://en.wikipedia.org/wiki/Portolan_chart).  [Source](https://github.com/neocarto/bertin/blob/main/src/layers/rhumbs.js).
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "rhumbs",
+      position: [370, 370],
+      nb: 25
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **nb**: number of lines (default: 10)
+- **position**: position of the center in x and y (default: [height / 4, width - width / 4])
+- **stroke**: stroke color (default: "#786d6c")
+- **strokeWidth**: stroke color (default: 2)
+- **strokeOpacity**: stroke-opacity (default: 45)
+- **strokeDasharray**: stroke-dasharray (default:"none")
+
 #### Water lines
 
 The _waterlines_ type only allows to display lines spaced by a defined distance. It's just a graphic trick to make the maps look nice.   [Source](https://github.com/neocarto/bertin/blob/main/src/layers/waterlines.js).

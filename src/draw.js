@@ -32,6 +32,7 @@ import { hatch } from "./layers/hatch.js";
 import { dotdensity } from "./layers/dotdensity.js";
 import { tiles } from "./layers/tiles.js";
 import { logo } from "./layers/logo.js";
+import { rhumbs } from "./layers/rhumbs.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
@@ -452,6 +453,19 @@ export function draw({ params = {}, layers = {} } = {}) {
         strokeDasharray: layer.strokeDasharray,
         strokeLinecap: layer.strokeLinecap,
         strokeLinejoin: layer.strokeLinejoin,
+      });
+    }
+
+    // rhumbs
+
+    if (layer.type == "rhumbs") {
+      rhumbs(svg, width, height, clipid, {
+        nb: layer.nb,
+        position: layer.position,
+        stroke: layer.stroke,
+        strokeWidth: layer.strokeWidth,
+        strokeOpacity: layer.strokeOpacity,
+        strokeDasharray: layer.strokeDasharray,
       });
     }
 
