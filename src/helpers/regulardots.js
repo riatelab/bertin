@@ -18,7 +18,7 @@ import { topology } from "topojson-server";
 import { merge } from "topojson-client";
 const topojson = Object.assign({}, { topology, merge });
 
-geoProject;
+//geoProject;
 
 export function regulardots(geojson, projection, width, height, step, values) {
   // Regular grid

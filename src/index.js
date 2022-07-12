@@ -22,6 +22,7 @@ export { graticule } from "./layers/graticule.js";
 export { regularbubble } from "./layers/regularbubble.js";
 export { logo } from "./layers/logo.js";
 export { rhumbs } from "./layers/rhumbs.js";
+export { inner } from "./layers/inner.js";
 
 // GIS
 // export { union } from "./helpers/union.js";
@@ -30,4 +31,4 @@ export { rhumbs } from "./layers/rhumbs.js";
 // export { poly2points } from "./helpers/poly2points.js";
 
 // Tests
-export { inner } from "./layers/inner.js";
+export { waterlines2 } from "./layers/waterlines2.js";
