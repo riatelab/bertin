@@ -1,4 +1,5 @@
-import * as d3 from "d3-geo";
+//import * as d3 from "d3-geo";
+import { geoArea } from "d3-geo";
 
 // Multi part to single part geometries
 
@@ -36,8 +37,8 @@ function sp(feature) {
     result.push({ ...feature });
   }
 
-  const totalArea = d3.geoArea(feature);
-  result.forEach((d) => (d.__share = d3.geoArea(d) / totalArea));
+  const totalArea = geoArea(feature);
+  result.forEach((d) => (d.__share = geoArea(d) / totalArea));
 
   return JSON.parse(JSON.stringify(result));
 }

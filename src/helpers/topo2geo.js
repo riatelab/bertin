@@ -1,6 +1,9 @@
-import * as topojsonserver from "topojson-server";
-import * as topojsonclient from "topojson-client";
-const topojson = Object.assign({}, topojsonserver, topojsonclient);
+// import * as topojsonserver from "topojson-server";
+// import * as topojsonclient from "topojson-client";
+// const topojson = Object.assign({}, topojsonserver, topojsonclient);
+
+import { feature } from "topojson-client";
+const topojson = Object.assign({}, { feature });
 
 export function topo2geo(json) {
   if (json.type == "Topology") {

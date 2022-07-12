@@ -1,22 +1,33 @@
-import * as d3selection from "d3-selection";
-const d3 = Object.assign({}, d3selection);
+// import * as d3selection from "d3-selection";
+// const d3 = Object.assign({}, d3selection);
 
+export function tooltiptype(pointer, width, height) {
+  const x_margin = 0.33 * width;
+  const y_margin = 0.25 * height;
 
-export function tooltiptype(pointer, width, height){
-  const x_margin = 0.33 * width
-  const y_margin = 0.25 * height
-
-  if (pointer[0] < x_margin && pointer[1] <y_margin) { return "bottomright";}
-  if (pointer[0] > width - x_margin && pointer[1] <y_margin) { return "bottomleft";}
-  if (pointer[0] < x_margin && pointer[1] > height - y_margin) { return "topright";}
-  if (pointer[0] > width - x_margin && pointer[1] > height - y_margin) { return "topleft";}
-  if (pointer[1] > height - y_margin) { return "top";}
-  if (pointer[0] < x_margin) {  return "right";}
-  if (pointer[0] > width - x_margin) { return "left";}
+  if (pointer[0] < x_margin && pointer[1] < y_margin) {
+    return "bottomright";
+  }
+  if (pointer[0] > width - x_margin && pointer[1] < y_margin) {
+    return "bottomleft";
+  }
+  if (pointer[0] < x_margin && pointer[1] > height - y_margin) {
+    return "topright";
+  }
+  if (pointer[0] > width - x_margin && pointer[1] > height - y_margin) {
+    return "topleft";
+  }
+  if (pointer[1] > height - y_margin) {
+    return "top";
+  }
+  if (pointer[0] < x_margin) {
+    return "right";
+  }
+  if (pointer[0] > width - x_margin) {
+    return "left";
+  }
   return "bottom";
 }
-
-
 
 export function addtooltip(g, params) {
   if (!params) return g.style("display", "none");
@@ -32,22 +43,40 @@ export function addtooltip(g, params) {
   const stroke = params.stroke ?? "#4a4d4b";
   const type = params.type ?? "bottom";
   const l = fields.length;
-  let col =  params.col ?? "#4d4545";
-  if(!Array.isArray(col)){col = Array(l).fill(col) }
+  let col = params.col ?? "#4d4545";
+  if (!Array.isArray(col)) {
+    col = Array(l).fill(col);
+  }
 
   let fontWeight = params.fontWeight;
-  if (fontWeight == undefined && l == 1) { fontWeight = ["bold"]; }
-  if (fontWeight == undefined && l > 1) { fontWeight = ["bold"].concat(Array(l - 1).fill("normal")); }
-  if (typeof fontWeight === "string") { fontWeight = Array(l).fill(fontWeight);}
+  if (fontWeight == undefined && l == 1) {
+    fontWeight = ["bold"];
+  }
+  if (fontWeight == undefined && l > 1) {
+    fontWeight = ["bold"].concat(Array(l - 1).fill("normal"));
+  }
+  if (typeof fontWeight === "string") {
+    fontWeight = Array(l).fill(fontWeight);
+  }
 
   let fontSize = params.fontSize;
-  if (fontSize == undefined && l == 1) { fontSize = [18]; }
-  if (fontSize == undefined && l > 1) { fontSize = [18].concat(Array(l - 1).fill(12));  }
-  if (typeof fontSize === "number") { fontSize = Array(l).fill(fontSize);}
+  if (fontSize == undefined && l == 1) {
+    fontSize = [18];
+  }
+  if (fontSize == undefined && l > 1) {
+    fontSize = [18].concat(Array(l - 1).fill(12));
+  }
+  if (typeof fontSize === "number") {
+    fontSize = Array(l).fill(fontSize);
+  }
 
   let fontStyle = params.fontStyle;
-  if (fontStyle == undefined) { fontStyle = Array(l).fill("normal"); }
-  if (typeof fontStyle === "string") { fontStyle = Array(l).fill(fontStyle);}
+  if (fontStyle == undefined) {
+    fontStyle = Array(l).fill("normal");
+  }
+  if (typeof fontStyle === "string") {
+    fontStyle = Array(l).fill(fontStyle);
+  }
 
   // Display tooltip
 
@@ -61,9 +90,9 @@ export function addtooltip(g, params) {
     .join("path")
     .attr("fill", fill)
     .attr("stroke", stroke)
-    .attr("stroke-width",strokeWidth)
-    .attr("fill-opacity",fillOpacity)
-    .attr("stroke-opacity",strokeOpacity)
+    .attr("stroke-width", strokeWidth)
+    .attr("fill-opacity", fillOpacity)
+    .attr("stroke-opacity", strokeOpacity);
 
   const text = g
     .selectAll("text")
@@ -110,11 +139,17 @@ export function addtooltip(g, params) {
       break;
     case "left":
       text.attr("transform", `translate(${-w - 15},${-y - h / 2})`);
-      path.attr("d", `M0,0l-5,5v${h / 2 + 5}h${-w - 20}v${-h - 20}h${w + 20}v${h / 2 + 5}z`);
+      path.attr(
+        "d",
+        `M0,0l-5,5v${h / 2 + 5}h${-w - 20}v${-h - 20}h${w + 20}v${h / 2 + 5}z`
+      );
       break;
     case "right":
       text.attr("transform", `translate(${15},${-y - h / 2})`);
-      path.attr( "d", `M0,0l5,5v${h / 2 + 5}h${w + 20}v${-h - 20}h${-w - 20}v${h / 2 + 5}z`);
+      path.attr(
+        "d",
+        `M0,0l5,5v${h / 2 + 5}h${w + 20}v${-h - 20}h${-w - 20}v${h / 2 + 5}z`
+      );
       break;
     case "topleft":
       text.attr("transform", `translate(${-w - 10},${-15 - y - h})`);

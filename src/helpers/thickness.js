@@ -1,7 +1,15 @@
-import * as d3array from "d3-array";
-import * as d3scale from "d3-scale";
-import * as d3interpolate from "d3-interpolate";
-const d3 = Object.assign({}, d3interpolate, d3scale, d3array);
+//import * as d3array from "d3-array";
+// import * as d3scale from "d3-scale";
+// import * as d3interpolate from "d3-interpolate";
+// const d3 = Object.assign({}, d3interpolate, d3scale, d3array);
+import { min, max } from "d3-array";
+import { scaleLinear, scaleOrdinal, scaleThreshold } from "d3-scale";
+import { interpolate, quantize } from "d3-interpolate";
+const d3 = Object.assign(
+  {},
+  { min, max, scaleLinear, scaleOrdinal, scaleThreshold, quantize, interpolate }
+);
+
 import * as stat from "statsbreaks";
 
 export function thickness(data, _) {
@@ -20,7 +28,7 @@ export function thickness(data, _) {
     return {
       getthickness: () => 0,
       valmax: 0,
-      sizemax: 0
+      sizemax: 0,
     };
   }
 
@@ -30,8 +38,7 @@ export function thickness(data, _) {
     let k = _.k ?? 10;
     let values = _.values;
     let fixmax = _.fixmax ?? undefined;
-   let fixmin = _.fixmin ?? 0;
-
+    let fixmin = _.fixmin ?? 0;
 
     if ("geometry" in data[0] && "properties" in data[0]) {
       data = data.map((d) => d.properties);
@@ -39,11 +46,12 @@ export function thickness(data, _) {
 
     if (typeof _ == "string" || typeof _ == "number")
       return {
-        getcol: (d) => _
+        getcol: (d) => _,
       };
 
-
-    if (fixmin == true){fixmin = d3.min(data.map((d) => Math.abs(+d[values])))}
+    if (fixmin == true) {
+      fixmin = d3.min(data.map((d) => Math.abs(+d[values])));
+    }
 
     const v =
       fixmax == undefined
@@ -56,8 +64,8 @@ export function thickness(data, _) {
       type: type,
       getthickness: d3.scaleLinear().domain([fixmin, v]).range([0, k]),
       valmax: valmax,
-      valmin : fixmin,
-      sizemax: d3.scaleLinear().domain([fixmin, v]).range([0, k])(valmax)
+      valmin: fixmin,
+      sizemax: d3.scaleLinear().domain([fixmin, v]).range([0, k])(valmax),
     };
   }
 
@@ -66,7 +74,8 @@ export function thickness(data, _) {
   if (typeof _ != "number" && typeof _ != "string" && type == "quali") {
     const categories = _.categories;
     const k = _.k ?? 10;
-    const sizes = _.sizes ?? d3.quantize(d3.interpolate(1, k), categories.length);
+    const sizes =
+      _.sizes ?? d3.quantize(d3.interpolate(1, k), categories.length);
 
     return {
       type: type,
@@ -76,7 +85,7 @@ export function thickness(data, _) {
         .scaleOrdinal()
         .domain(categories)
         .range(sizes)
-        .unknown(0)
+        .unknown(0),
     };
   }
 
@@ -99,7 +108,7 @@ export function thickness(data, _) {
 
     const val = data
       .map((d) => +d.properties[values])
-      .filter((d) => (d != undefined) && (d != null) && d != "");
+      .filter((d) => d != undefined && d != null && d != "");
 
     if (breaks == null) {
       breaks = stat.breaks({
@@ -107,7 +116,7 @@ export function thickness(data, _) {
         method: method,
         nb: nbreaks,
         k: nbsd,
-        middle: middle
+        middle: middle,
         //precision: leg_round
       });
     } else {
@@ -126,7 +135,7 @@ export function thickness(data, _) {
       type: type,
       breaks: breaks,
       sizes: sizes,
-      getthickness: d3.scaleThreshold(b, sizes).unknown(0)
+      getthickness: d3.scaleThreshold(b, sizes).unknown(0),
     };
   }
 }

@@ -7,7 +7,7 @@ const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
 // Helpers
 import { getheight } from "./helpers/height.js";
 import { figuration } from "./helpers/figuration.js";
-import { getcenters } from "./helpers/centroids.js";
+//import { getcenters } from "./helpers/centroids.js";
 import { bbox } from "./bbox.js";
 import { getproj } from "./projections/projections.js";
 

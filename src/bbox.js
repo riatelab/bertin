@@ -1,8 +1,9 @@
 // based on Jacob Rus code
 // See https://observablehq.com/@jrus/sphere-resample
 
-import * as d3geo from "d3-geo";
-const d3 = Object.assign({}, d3geo);
+// import * as d3geo from "d3-geo";
+import { geoEquirectangularRaw } from "d3-geo";
+const d3 = Object.assign({}, { geoEquirectangularRaw });
 
 export function bbox(bounds) {
   let λ0 = bounds[0][0];
@@ -23,8 +24,8 @@ export function bbox(bounds) {
               ? [
                   [
                     [λ0, φ1],
-                    [λ1, φ1]
-                  ]
+                    [λ1, φ1],
+                  ],
                 ] // Antarctica
               : [
                   [
@@ -32,23 +33,22 @@ export function bbox(bounds) {
                     [λ0, φ1],
                     [(λ1 += (λ1 < λ0) * 360), φ1],
                     [λ1, φ0],
-                    [λ0, φ0]
-                  ]
-                ]
-        }
-      }
-    ]
+                    [λ0, φ0],
+                  ],
+                ],
+        },
+      },
+    ],
   };
   return inverseResampleJSON(d3.geoEquirectangularRaw, 0.02)(x);
 }
-
 
 const inverseResampleJSON = (projection, delta) => {
   const maxDepth = 16,
     radians = Math.PI / 180,
     dd = Math.tan((radians * delta) / 2) ** 2;
 
-  const resampleLineTo = function (w0, u0, w1, u1, ll01, depth,array) {
+  const resampleLineTo = function (w0, u0, w1, u1, ll01, depth, array) {
     if (depth--) {
       var w2 = planar_midpoint(w0, w1),
         λφ2 = projection.invert(...w2),
@@ -66,7 +66,7 @@ const inverseResampleJSON = (projection, delta) => {
     }
   };
 
-const resampleChain = (pointarray) =>  {
+  const resampleChain = (pointarray) => {
     let outarray = [];
     let w0 = pointarray[0],
       λφ0 = projection.invert(...w0),
@@ -104,15 +104,15 @@ const resampleChain = (pointarray) =>  {
       MultiPolygon: (o) => o.coordinates.forEach(mapInPlace(resampleChain)),
       Feature: (o) => convert(o.geometry),
       GeometryCollection: (o) => o.geometries.forEach(convert),
-      FeatureCollection: (o) => o.features.forEach(convert)
+      FeatureCollection: (o) => o.features.forEach(convert),
     };
   convert = (o) => (convertType?.[o?.type]?.(o), o);
 
-return function (json) {
+  return function (json) {
     json = JSON.parse(JSON.stringify(json)); // make deep copy
     return convert(json);
   };
-}
+};
 
 const stereo_area2 = ([x0, y0, z0], [x1, y1, z1], [x2, y2, z2]) => {
   var p =
@@ -121,17 +121,19 @@ const stereo_area2 = ([x0, y0, z0], [x1, y1, z1], [x2, y2, z2]) => {
       z0 * ((x1 - x0) * (y2 - y0) - (x2 - x0) * (y1 - y0)),
     q = (x0 + x2) * (x0 + x1) + (y0 + y2) * (y0 + y1) + (z0 + z2) * (z0 + z1);
   return (p * p + !(q * q)) / (q * q); // adding !(q*q) means q==0 => return Infinity
-}
+};
 
-const planar_midpoint = ([x0, y0], [x1, y1]) => [0.5 * (x0 + x1), 0.5 * (y0 + y1)]
-
+const planar_midpoint = ([x0, y0], [x1, y1]) => [
+  0.5 * (x0 + x1),
+  0.5 * (y0 + y1),
+];
 
 const radians = Math.PI / 180;
 const cartesian = ([λ, φ]) => [
-    Math.cos(radians * φ) * Math.cos(radians * λ),
-    Math.cos(radians * φ) * Math.sin(radians * λ),
-    Math.sin(radians * φ)
-  ];
+  Math.cos(radians * φ) * Math.cos(radians * λ),
+  Math.cos(radians * φ) * Math.sin(radians * λ),
+  Math.sin(radians * φ),
+];
 
 const stereo_length2 = ([x0, y0, z0], [x1, y1, z1]) => {
   var pxy = x0 * (y1 - y0) - (x1 - x0) * y0,
@@ -139,4 +141,4 @@ const stereo_length2 = ([x0, y0, z0], [x1, y1, z1]) => {
     pzx = z0 * (x1 - x0) - (z1 - z0) * x0,
     q = x0 * (x1 + x0) + y0 * (y1 + y0) + z0 * (z1 + z0);
   return (pxy * pxy + pyz * pyz + pzx * pzx + !(q * q)) / (q * q); // adding !(q*q) means q==0 => return Infinity
-}
+};

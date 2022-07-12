@@ -1,6 +1,11 @@
-import * as topojsonclient from "topojson-client";
-import * as topojsonserver from "topojson-server";
-const topojson = Object.assign({}, topojsonclient, topojsonserver);
+// import * as topojsonclient from "topojson-client";
+// import * as topojsonserver from "topojson-server";
+// const topojson = Object.assign({}, topojsonclient, topojsonserver);
+
+import { topology } from "topojson-server";
+import { neighbors, mesh } from "topojson-client";
+const topojson = Object.assign({}, { topology, neighbors, mesh });
+
 import { topo2geo } from "./helpers/topo2geo.js";
 
 import * as d3array from "d3-array";

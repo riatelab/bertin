@@ -1,7 +1,12 @@
 import * as d3scalechromatic from "d3-scale-chromatic";
-import * as d3array from "d3-array";
-import * as d3scale from "d3-scale";
-const d3 = Object.assign({}, d3scalechromatic, d3scale, d3array);
+import { sort } from "d3-array";
+import { scaleThreshold, scaleOrdinal } from "d3-scale";
+const d3 = Object.assign({}, d3scalechromatic, {
+  sort,
+  scaleThreshold,
+  scaleOrdinal,
+});
+
 import * as stat from "statsbreaks";
 
 export function colorize(features, input) {
