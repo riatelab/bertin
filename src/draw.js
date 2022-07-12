@@ -23,6 +23,7 @@ import { mushroom } from "./layers/mushroom.js";
 import { missing } from "./layers/missing.js";
 import { shadow } from "./layers/shadow.js";
 import { waterlines } from "./layers/waterlines.js";
+import { inner } from "./layers/inner.js";
 import { scalebar } from "./layers/scalebar.js";
 import { text } from "./layers/text.js";
 import { label } from "./layers/label.js";
@@ -453,6 +454,17 @@ export function draw({ params = {}, layers = {} } = {}) {
         strokeDasharray: layer.strokeDasharray,
         strokeLinecap: layer.strokeLinecap,
         strokeLinejoin: layer.strokeLinejoin,
+      });
+    }
+
+    // inner
+    if (layer.type == "inner") {
+      inner(svg, projection, {
+        geojson: layer.geojson,
+        fill: layer.fill,
+        fillOpacity: layer.fillOpacity,
+        blur: layer.blur,
+        thickness: layer.thickness,
       });
     }
 

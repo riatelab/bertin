@@ -811,7 +811,7 @@ bertin.draw({
 - **strokedasharray**: stroke-dasharray (default:2)
 - **step**: gap between graticules. The value can be a number or an array of two values (default: [10, 10])
 
-#### hatch (or hatching)
+### hatch (or hatching)
 
 The _hatch_ type only allows to add hatchings on the whole page to make it a bit prettier. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/hatch.js).
 
@@ -837,7 +837,34 @@ bertin.draw({
 - **angle**: orientation of lines (default: 45)
 - **spacing**: spacing between lines (default: 8)
 
-#### Rhumbs
+
+### Inner
+
+The _inner_ type allows to display a strip inside the polygon. This inner area can be used to draw preet maps with a vintage style.
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "inner",
+      thickness: 5,
+      fill:"white",
+      blur:4
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **thickness**: a thickness in pixels (default: 7)
+- **fill**: fill color (default: "#9e9477")
+- **fillOpacity**: fill-opacity (default: 0.2)
+- **blur**: blur. feGaussianBlur stdDeviation value (default:4)
+
+### Rhumbs
 
 The rhumbs type allows to display "rhumb lines" like on old [portolan charts](https://en.wikipedia.org/wiki/Portolan_chart).  [Source](https://github.com/neocarto/bertin/blob/main/src/layers/rhumbs.js).
 

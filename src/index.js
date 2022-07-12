@@ -30,4 +30,4 @@ export { rhumbs } from "./layers/rhumbs.js";
 // export { poly2points } from "./helpers/poly2points.js";
 
 // Tests
-export { waterlines2 } from "./layers/waterlines2.js";
+export { inner } from "./layers/inner.js";
