@@ -14,11 +14,12 @@ function hatch(selection, options = {}, width, height) {
   const strokeOpacity = options.strokeOpacity ?? 0.1;
   const angle = options.angle ?? 45;
   const spacing = options.spacing ?? 8;
-  const strokeDasharray = options.strokeDasharray ?? "none"
+  const strokeDasharray = options.strokeDasharray ?? "none";
 
+  const id = Date.now().toString(36) + Math.random().toString(36).substring(2);
   const pattern = defs
     .append("pattern")
-    .attr("id", "hatch")
+    .attr("id", `hatch${id}`)
     .attr("patternUnits", "userSpaceOnUse")
     .attr("width", spacing)
     .attr("height", spacing)
@@ -42,5 +43,5 @@ function hatch(selection, options = {}, width, height) {
     .attr("y", 0)
     .attr("width", width)
     .attr("height", height)
-    .attr("fill", "url('#hatch')");
+    .attr("fill", "url('#hatch" + id + "')");
 }
