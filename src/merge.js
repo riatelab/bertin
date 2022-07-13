@@ -1,5 +1,5 @@
 import { index } from "d3-array";
-const d3 = Object.assign({}, index);
+const d3 = Object.assign({}, { index });
 import { topo2geo } from "./helpers/topo2geo.js";
 
 export function merge(geojson, id_geojson, data, id_data, all = true) {
