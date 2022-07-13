@@ -1,6 +1,3 @@
-// import * as d3selection from "d3-selection";
-// const d3 = Object.assign({}, d3selection);
-
 export function tooltiptype(pointer, width, height) {
   const x_margin = 0.33 * width;
   const y_margin = 0.25 * height;

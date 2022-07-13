@@ -430,8 +430,8 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     // shadow
     if (layer.type == "shadow") {
-      shadow(svg, projection, layer.geojson, clipid, defs, {
-        col: layer.col,
+      shadow(svg, projection, layer.geojson, clipid, {
+        fill: layer.fill,
         dx: layer.dx,
         dy: layer.dy,
         opacity: layer.opacity,

@@ -1114,7 +1114,7 @@ bertin.draw({
 
 #### Parameters
 
-- **col**: color (default: "#35383d")
+- **fill**: color (default: "#35383d")
 - **dx**: shift in x (default: 3)
 - **dy**: shift in y (default: 3)
 - **stdDeviation**: blur (default: 1.5)

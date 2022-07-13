@@ -44,15 +44,6 @@ export function waterlines(
     });
   }
 
-  // selection
-  //   .append("g")
-  //   .attr("fill", "none")
-  //   .selectAll("path")
-  //   .data(features)
-  //   .join("path")
-  //   .attr("d", geoPath())
-  //   .attr("stroke", "red");
-
   selection
     .append("g")
     .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)

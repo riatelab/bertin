@@ -1,4 +1,3 @@
-//import * as d3 from "d3-geo";
 import { geoArea } from "d3-geo";
 
 // Multi part to single part geometries

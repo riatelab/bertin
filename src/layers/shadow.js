@@ -1,48 +1,26 @@
 // import * as d3selection from "d3-selection";
 import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3geoprojection from "d3-geo-projection";
-import * as topojsonserver from "topojson-server";
-import * as topojsonclient from "topojson-client";
+import { geoPath } from "d3-geo";
+const d3 = Object.assign({}, d3selection, { geoPath });
+import { union } from "geotoolbox";
 
-const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
-const topojson = Object.assign({}, topojsonserver, topojsonclient);
-
-import { topo2geo } from "../helpers/topo2geo.js";
-import { figuration } from "../helpers/figuration.js";
-
-export function shadow(
-  selection,
-  projection,
-  geojson,
-  clipid,
-  defs,
-  options = {}
-) {
-  let col = options.col ? options.col : "#35383d";
-  let dx = options.dx ? options.dx : 3;
-  let dy = options.dy ? options.dy : 3;
-  let stdDeviation = options.stdDeviation ? options.stdDeviation : 1.5;
-  let opacity = options.opacity ? options.opacity : 0.7;
-
-  let fill = col;
+export function shadow(selection, projection, geojson, clipid, options = {}) {
+  let fill = options.fill ? options.fill : "#35383d";
+  let dx = options.dx != undefined ? options.dx : 3;
+  let dy = options.dy != undefined ? options.dy : 3;
+  let stdDeviation =
+    options.stdDeviation != undefined ? options.stdDeviation : 1.5;
+  let opacity = options.opacity != undefined ? options.opacity : 0.7;
   let stroke = "none";
 
-  let topo = topojson.topology({ foo: topo2geo(geojson) });
-  let merged = topojson.merge(topo, topo.objects.foo.geometries);
+  let merged = union(geojson);
 
+  let defs = selection.append("defs");
   let blur = defs
     .append("filter")
     .attr("id", "blur")
     .append("feGaussianBlur")
     .attr("stdDeviation", stdDeviation);
-
-  // letstroke =
-
-  // // If lines
-  // if (figuration(geojson) == "l") {
-  //   col = options.col ? options.col : "none";
-  // }
 
   const path = d3.geoPath(projection);
 

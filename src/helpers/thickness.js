@@ -1,7 +1,3 @@
-//import * as d3array from "d3-array";
-// import * as d3scale from "d3-scale";
-// import * as d3interpolate from "d3-interpolate";
-// const d3 = Object.assign({}, d3interpolate, d3scale, d3array);
 import { min, max } from "d3-array";
 import { scaleLinear, scaleOrdinal, scaleThreshold } from "d3-scale";
 import { interpolate, quantize } from "d3-interpolate";

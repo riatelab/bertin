@@ -26,6 +26,5 @@ export { inner } from "./layers/inner.js";
 export { waterlines } from "./layers/waterlines.js";
 
 // GIS
-// export { union } from "./helpers/union.js";
 // export { topo2geo } from "./helpers/topo2geo.js";
 // export { split } from "./helpers/split.js";
