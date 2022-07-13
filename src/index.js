@@ -29,4 +29,3 @@ export { waterlines } from "./layers/waterlines.js";
 // export { union } from "./helpers/union.js";
 // export { topo2geo } from "./helpers/topo2geo.js";
 // export { split } from "./helpers/split.js";
-// export { poly2points } from "./helpers/poly2points.js";

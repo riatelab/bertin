@@ -1,5 +1,5 @@
 import { figuration } from "./helpers/figuration.js";
-import {poly2points } from "./helpers/poly2points.js";
+import { centroid } from "geotoolbox";
 import { topo2geo } from "./helpers/topo2geo.js";
 
 export function links(options = {}) {
@@ -13,7 +13,7 @@ export function links(options = {}) {
   if (figuration(geojson) == "p") {
     dots = geojson.features;
   } else {
-    dots = poly2points(geojson);
+    dots = centroid(geojson).features;
   }
 
   const coordsbyid = new Map(
@@ -23,19 +23,19 @@ export function links(options = {}) {
   // PUISQUE 2 POINTS UFFISENT, FAIRE SANS TURF.JS
   let features = [];
   data.forEach((d) => {
-
-    if(coordsbyid.get(d[data_i]) != undefined && coordsbyid.get(d[data_j]) != undefined){
+    if (
+      coordsbyid.get(d[data_i]) != undefined &&
+      coordsbyid.get(d[data_j]) != undefined
+    ) {
       features.push({
         type: "Feature",
         properties: d,
         geometry: {
           type: "LineString",
-          coordinates: [coordsbyid.get(d[data_i]), coordsbyid.get(d[data_j])]
-        }
-      })
-}
-
-
+          coordinates: [coordsbyid.get(d[data_i]), coordsbyid.get(d[data_j])],
+        },
+      });
+    }
   });
 
   return { type: "FeatureCollection", features: features };

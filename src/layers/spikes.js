@@ -15,7 +15,7 @@ const d3 = Object.assign(
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { rounding } from "../helpers/rounding.js";
-import { poly2points } from "../helpers/poly2points.js";
+import { centroid } from "geotoolbox";
 import { figuration } from "../helpers/figuration.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
@@ -68,7 +68,7 @@ export function spikes(
   if (figuration(geojson) == "p") {
     features = geojson.features;
   } else {
-    features = poly2points(geojson);
+    features = centroid(geojson).features;
   }
 
   const yScale = d3

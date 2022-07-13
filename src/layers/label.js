@@ -2,7 +2,7 @@ import * as d3selection from "d3-selection";
 const d3 = Object.assign({}, d3selection);
 
 import { topo2geo } from "../helpers/topo2geo.js";
-import { poly2points } from "../helpers/poly2points.js";
+import { centroid } from "geotoolbox";
 
 export function label(selection, projection, options = {}, clipid) {
   let geojson = topo2geo(options.geojson);
@@ -17,7 +17,7 @@ export function label(selection, projection, options = {}, clipid) {
   let halo = options.halo ?? false;
   let halo_style = options.halo_style ?? ["white", 4, 0.5];
 
-  const features = poly2points(geojson);
+  const features = centroid(geojson).features;
 
   selection
     .append("g")

@@ -16,7 +16,7 @@ const d3 = Object.assign(
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legcircles } from "../legend/leg-circles.js";
-import { poly2points } from "../helpers/poly2points.js";
+import { centroid } from "geotoolbox";
 
 export function mushroom(
   selection,
@@ -70,8 +70,8 @@ export function mushroom(
   let leg_stroke = options.leg_stroke ? options.leg_stroke : leg_txtcol;
   let leg_strokeWidth = options.leg_strokeWidth ? options.leg_strokeWidth : 0.8;
 
-  const features = poly2points(geojson)
-    .sort((a, b) =>
+  const features = centroid(geojson)
+    .features.sort((a, b) =>
       d3.descending(+a.properties[top_values], +b.properties[top_values])
     )
     .filter((d) => d.geometry.coordinates != undefined);
