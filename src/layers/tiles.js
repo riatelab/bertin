@@ -5,14 +5,15 @@ const d3 = Object.assign({}, { tile, geoPath });
 import { text } from "./text.js";
 
 export function tiles(selection, width, height, projection, options = {}) {
-  let opacity = options.opacity ?? 1;
-  let tileSize = options.tileSize ?? 512;
-  let github = options.zoomDelta ?? 0;
-  let clip = options.clip ?? undefined;
-  let style = options.style ?? "opentopomap";
-  let zoomDelta = options.zoomDelta ?? 1;
-  let increasetilesize = options.increasetilesize ?? 1;
-  let source = options.source ?? "bottomright";
+  let opacity = options.opacity != undefined ? options.opacity : 1;
+  let tileSize = options.tileSize != undefined ? options.tileSize : 512;
+  let github = options.zoomDelta != undefined ? options.zoomDelta : 0;
+  let clip = options.clip != undefined ? options.clip : undefined;
+  let style = options.style ? options.style : "opentopomap";
+  let zoomDelta = options.zoomDelta != undefined ? options.zoomDelta : 1;
+  let increasetilesize =
+    options.increasetilesize != undefined ? options.increasetilesize : 1;
+  let source = options.source ? options.source : "bottomright";
 
   // styles: https://leaflet-extras.github.io/leaflet-providers/preview/
   const styles = [

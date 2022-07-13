@@ -76,14 +76,21 @@ export function simple(
     "#b3b3b3",
   ];
   let geojson = topo2geo(options.geojson);
-  let fill = options.fill ?? cols[Math.floor(Math.random() * cols.length)];
-  let strokeLinecap = options.strokeLinecap ?? "round";
-  let strokeLinejoin = options.strokeLinejoin ?? "round";
-  let strokeDasharray = options.strokeDasharray ?? "none";
-  let stroke = options.stroke ?? "white";
-  let strokeWidth = options.strokeWidth ?? 0.5;
-  let fillOpacity = options.fillOpacity ?? 1;
-  let strokeOpacity = options.strokeOpacity ?? 1;
+  let fill = options.fill
+    ? options.fill
+    : cols[Math.floor(Math.random() * cols.length)];
+  let strokeLinecap = options.strokeLinecap ? options.strokeLinecap : "round";
+  let strokeLinejoin = options.strokeLinejoin
+    ? options.strokeLinejoin
+    : "round";
+  let strokeDasharray =
+    options.strokeDasharray != undefined ? options.strokeDasharray : "none";
+  let stroke = options.stroke ? options.stroke : "white";
+  let strokeWidth =
+    options.strokeWidth != undefined ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 1;
   let tooltip = options.tooltip ? options.tooltip : false;
   if (Array.isArray(tooltip)) {
     tooltip = { fields: tooltip };
@@ -91,10 +98,12 @@ export function simple(
   if (typeof tooltip == "string") {
     tooltip = { fields: [tooltip] };
   }
-  let symbol = options.symbol ?? "circle";
-  let symbol_size = options.symbol_size ?? 40;
-  let symbol_iteration = options.symbol_iteration ?? 200;
-  let symbol_shift = options.symbol_shift ?? 0;
+  let symbol = options.symbol ? options.symbol : "circle";
+  let symbol_size = options.symbol_size != undefined ? options.symbol_size : 40;
+  let symbol_iteration =
+    options.symbol_iteration != undefined ? options.symbol_iteration : 200;
+  let symbol_shift =
+    options.symbol_shift != undefined ? options.symbol_shift : 0;
 
   // If lines
   if (figuration(geojson) == "l") {

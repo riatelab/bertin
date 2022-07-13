@@ -19,11 +19,11 @@ export function colorize(features, input) {
   if (typeof input == "object" && input.type == "choro") {
     let values = input.values;
     //  let pal = input.pal ? input.pal : "Blues";
-    let colors = input.colors ?? "Blues";
-    let nbreaks = input.nbreaks ? input.nbreaks : 5;
+    let colors = input.colors ? input.colors : "Blues";
+    let nbreaks = input.nbreaks != undefined ? input.nbreaks : 5;
     let breaks = input.breaks ? input.breaks : null;
-    let k = input.k ? input.k : 1;
-    let middle = input.middle ? input.middle : false;
+    let k = input.k != undefined ? input.k : 1;
+    let middle = input.middle == true ? true : false;
     //let colors = input.colors ? input.colors : null;
     let method = input.method ? input.method : "quantile";
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
@@ -74,17 +74,20 @@ export function colorize(features, input) {
   if (typeof input == "object" && input.type == "typo") {
     let values = input.values;
     //let pal = input.pal ? input.pal : "Tableau10";
-    let colors = input.colors ?? "Tableau10";
+    let colors = input.colors ? input.colors : "Tableau10";
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
     let txt_missing = input.txt_missing ? input.txt_missing : "No data";
 
     const arr =
-      input.order ??
-      Array.from(new Set(features.map((d) => d.properties[values])));
+      input.order != undefined
+        ? input.order
+        : Array.from(new Set(features.map((d) => d.properties[values])));
 
     //const arr = Array.from(new Set(features.map((d) => d.properties[values])));
     let types =
-      input.types ?? arr.filter((d) => d != "" && d != null && d != undefined);
+      input.types != undefined
+        ? input.types
+        : arr.filter((d) => d != "" && d != null && d != undefined);
 
     if (!Array.isArray(colors)) {
       colors = d3[`scheme${colors}`].slice(0, types.length);
@@ -108,7 +111,7 @@ export function colorize(features, input) {
 
   if (typeof input == "object" && input.type == "split") {
     let values = input.values;
-    let split = input.split ?? 0;
+    let split = input.split != undefined ? input.split 0;
     let colors = input.colors ? input.colors : ["#F25842", "#4a7cd9"];
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
     let txt_missing = input.txt_missing ? input.txt_missing : "No data";

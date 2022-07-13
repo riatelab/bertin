@@ -33,14 +33,15 @@ export function addtooltip(g, params) {
 
   const fields =
     Array.isArray(params.fields) == true ? params.fields : [params.fields];
-  const fill = params.fill ?? "#fcf7e6";
-  const strokeWidth = params.strokeWidth ?? 1;
-  const fillOpacity = params.fillOpacity ?? 1;
-  const strokeOpacity = params.strokeOpacity ?? 1;
-  const stroke = params.stroke ?? "#4a4d4b";
-  const type = params.type ?? "bottom";
+  const fill = params.fill ? params.fill : "#fcf7e6";
+  const strokeWidth = params.strokeWidth != undefined ? params.strokeWidth : 1;
+  const fillOpacity = params.fillOpacity != undefined ? params.fillOpacity : 1;
+  const strokeOpacity =
+    params.strokeOpacity != undefined ? params.strokeOpacity : 1;
+  const stroke = params.stroke ? params.stroke : "#4a4d4b";
+  const type = params.type ? params.type : "bottom";
   const l = fields.length;
-  let col = params.col ?? "#4d4545";
+  let col = params.col ? params.col : "#4d4545";
   if (!Array.isArray(col)) {
     col = Array(l).fill(col);
   }

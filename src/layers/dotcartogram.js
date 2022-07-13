@@ -26,20 +26,26 @@ export function dotcartogram(
 
   let geojson = topo2geo(options.geojson);
   let values = options.values;
-  let radius = options.radius ?? 4;
-  let nbmax = options.nbmax ?? 200;
+  let radius = options.radius != undefined ? options.radius : 4;
+  let nbmax = options.nbmax != undefined ? options.nbmax : 200;
   let onedot =
-    options.onedot ??
-    Math.round(
-      d3.sum(geojson.features.map((d) => +d.properties[values])) / nbmax
-    );
-  let span = options.span ?? 0.5;
-  let fill = options.fill ?? cols[Math.floor(Math.random() * cols.length)];
-  let stroke = options.stroke ?? "none";
-  let strokeWidth = options.strokeWidth ?? 0;
-  let fillOpacity = options.fillOpacity ?? 1;
-  let strokeDasharray = options.strokeDasharray ?? "none";
-  let strokeOpacity = options.strokeOpacity ?? 1;
+    options.onedot != undefined
+      ? options.onedot
+      : Math.round(
+          d3.sum(geojson.features.map((d) => +d.properties[values])) / nbmax
+        );
+  let span = options.span != undefined ? options.span : 0.5;
+  let fill =
+    options.fill != undefined
+      ? options.fill
+      : cols[Math.floor(Math.random() * cols.length)];
+  let stroke = options.stroke != undefined ? options.stroke : "none";
+  let strokeWidth = options.strokeWidth != undefined ? options.strokeWidth : 0;
+  let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
+  let strokeDasharray =
+    options.strokeDasharray != undefined ? options.strokeDasharray : "none";
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 1;
   let tooltip = options.tooltip ? options.tooltip : false;
   if (Array.isArray(tooltip)) {
     tooltip = { fields: tooltip };
@@ -47,7 +53,7 @@ export function dotcartogram(
   if (typeof tooltip == "string") {
     tooltip = { fields: [tooltip] };
   }
-  let iteration = options.iteration ?? 200;
+  let iteration = options.iteration != undefined ? options.iteration : 200;
 
   let features;
 
@@ -160,16 +166,21 @@ export function dotcartogram(
 
   // legend
 
-  const leg_x = options.leg_x ?? null;
-  const leg_y = options.leg_y ?? null;
-  const leg_title = options.leg_title ?? "leg_title";
-  const leg_fontSize = options.leg_fontSize ?? 14;
-  const leg_fontSize2 = options.leg_fontSize2 ?? 10;
-  const leg_txtcol = options.leg_txtcol ?? "#363636";
-  const leg_stroke = options.leg_stroke ?? stroke;
-  const leg_strokeWidth = options.leg_strokeWidth ?? strokeWidth;
+  const leg_x = options.leg_x != undefined ? options.leg_x : null;
+  const leg_y = options.leg_y != undefined ? options.leg_y : null;
+  const leg_title = options.leg_title ? options.leg_title : "leg_title";
+  const leg_fontSize =
+    options.leg_fontSize != undefined ? options.leg_fontSize : 14;
+  const leg_fontSize2 =
+    options.leg_fontSize2 != undefined ? options.leg_fontSize2 : 10;
+  const leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
+  const leg_stroke = options.leg_stroke ? options.leg_stroke : stroke;
+  const leg_strokeWidth =
+    options.leg_strokeWidth != undefined
+      ? options.leg_strokeWidth
+      : strokeWidth;
   const leg_fill = typeof fill == "string" ? fill : options.leg_fill;
-  const leg_txt = options.leg_txt ?? onedot;
+  const leg_txt = options.leg_txt ? options.leg_txt : onedot;
 
   if (leg_x != null && leg_y != null) {
     let delta = 0;

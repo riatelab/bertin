@@ -32,10 +32,14 @@ export function spikes(
   let strokeWidth = options.strokeWidth != undefined ? options.strokeWidth : 1;
   let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
 
-  let strokeLinecap = options.strokeLinecap ?? "round";
-  let strokeLinejoin = options.strokeLinejoin ?? "round";
-  let strokeDasharray = options.strokeDasharray ?? "none";
-  let strokeOpacity = options.strokeOpacity ?? 1;
+  let strokeLinecap = options.strokeLinecap ? options.strokeLinecap : "round";
+  let strokeLinejoin = options.strokeLinejoin
+    ? options.strokeLinejoin
+    : "round";
+  let strokeDasharray =
+    options.strokeDasharray != undefined ? options.strokeDasharray : "none";
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 1;
 
   let tooltip = options.tooltip ? options.tooltip : false;
   if (Array.isArray(tooltip)) {

@@ -18,7 +18,7 @@ export function legcircles(selection, options = {}) {
 (units)`;
   let fontSize = options.fontSize ? options.fontSize : 14;
   let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
-  let round = options.round ?? undefined;
+  let round = options.round != undefined ? options.round : undefined;
   let fixmax = options.fixmax;
 
   const valvax = fixmax != undefined ? fixmax : d3.max(values);

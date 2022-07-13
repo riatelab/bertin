@@ -11,8 +11,10 @@ export function graticule(selection, projection, options = {}, clipid) {
     options.strokeOpacity != undefined ? options.strokeOpacity : 0.5;
   let strokeDasharray =
     options.strokeDasharray != undefined ? options.strokeDasharray : 2;
-  let strokeLinecap = options.strokeLinecap ?? "round";
-  let strokeLinejoin = options.strokeLinejoin ?? "round";
+  let strokeLinecap = options.strokeLinecap ? options.strokeLinecap : "round";
+  let strokeLinejoin = options.strokeLinejoin
+    ? options.strokeLinejoin
+    : "round";
 
   let step = options.step ? options.step : [10, 10];
   step = Array.isArray(step) ? step : [step, step];

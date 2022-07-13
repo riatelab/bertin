@@ -20,19 +20,20 @@ const d3 = Object.assign(
 );
 
 export function legsimple(selection, options = {}) {
-  let type = options.type ?? "box";
+  let type = options.type ? options.type : "box";
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
-  let w = options.w ?? 30;
-  let h = options.h ?? 20;
+  let w = options.w != undefined ? options.w : 30;
+  let h = options.h != undefined ? options.h : 20;
   let title = options.title ? options.title : null;
   let text = options.text ? options.text : `leg_text`;
-  let fontSize = options.fontSize ? options.fontSize : 14;
-  let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
+  let fontSize = options.fontSize != undefined ? options.fontSize : 14;
+  let fontSize2 = options.fontSize2 != undefined ? options.fontSize2 : 10;
   let stroke = options.stroke ? options.stroke : "black";
   let fill = options.fill ? options.fill : "#CCCCCC";
-  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
-  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
+  let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
+  let strokeWidth =
+    options.strokeWidth != undefined ? options.strokeWidth : 0.5;
   let txtcol = options.txtcol ? options.txtcol : "#363636";
 
   if (x != null && y != null) {

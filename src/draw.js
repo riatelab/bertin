@@ -58,7 +58,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // other global parameters
   let margin = params.margin ? params.margin : 1;
   let background = params.background;
-  let clip = params.clip ?? false; // test
+  let clip = params.clip == true ? true : false;
 
   // optimal heights
   let height = getheight(layers, extent, margin, projection, width);

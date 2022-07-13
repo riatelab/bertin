@@ -44,21 +44,25 @@ export function bubble(
     "#e5c494",
     "#b3b3b3",
   ];
-  let planar = options.planar ?? false;
+  let planar = options.planar == true ? true : false;
   let geojson = topo2geo(options.geojson);
   let values = options.values;
-  let fixmax = options.fixmax ?? undefined;
+  let fixmax = options.fixmax != undefined ? options.fixmax : undefined;
   let k = options.k ? options.k : 50;
   let fill = options.fill
     ? options.fill
     : cols[Math.floor(Math.random() * cols.length)];
   let stroke = options.stroke ? options.stroke : "white";
-  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
-  let strokeDasharray = options.strokeDasharray ?? "none";
-  let strokeOpacity = options.strokeOpacity ?? 1;
-  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
+  let strokeWidth =
+    options.strokeWidth != undefined ? options.strokeWidth : 0.5;
+  let strokeDasharray = options.strokeDasharray
+    ? options.strokeDasharray
+    : "none";
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 1;
+  let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
   let dorling = options.dorling ? options.dorling : false;
-  let iteration = options.iteration ? options.iteration : 200;
+  let iteration = options.iteration != undefined ? options.iteration : 200;
   let tooltip = options.tooltip ? options.tooltip : false;
   if (Array.isArray(tooltip)) {
     tooltip = { fields: tooltip };

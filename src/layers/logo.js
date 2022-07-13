@@ -1,9 +1,10 @@
 // logo
 export function logo(selection, width, height, options = {}) {
-  let url =
-    options.url ?? "https://github.com/neocarto/bertin/raw/main/img/logo.png";
+  let url = options.url
+    ? options.url
+    : "https://github.com/neocarto/bertin/raw/main/img/logo.png";
 
-  let position = options.position ?? "left";
+  let position = options.position ? options.position : "left";
 
   const img = new Image();
   img.src = url;
@@ -11,7 +12,7 @@ export function logo(selection, width, height, options = {}) {
   img.onload = () => {
     let x;
     let y;
-    let w = options.size ?? 100;
+    let w = options.size != undefined ? options.size : 100;
     let h = (img.height * w) / img.width;
 
     switch (position) {

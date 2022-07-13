@@ -1,19 +1,20 @@
 export function legthicknesslinear(selection, options = {}) {
-  let x = options.x ?? null;
-  let y = options.y ?? null;
+  let x = options.x != undefined ? options.x : null;
+  let y = options.y != undefined ? options.y : null;
   let valmax = options.valmax;
   let valmin = options.valmin;
   let sizemax = options.sizemax;
-  let title = options.title ?? null;
-  let fontSize = options.fontSize ?? 14;
-  let fontSize2 = options.fontSize2 ?? 10;
-  let fill = options.fill ?? "none";
-  let stroke = options.stroke ?? "black";
-  let strokeWidth = options.strokeWidth ?? 0.4;
-  let fillOpacity = options.fillOpacity ?? 1;
-  let txtcol = options.txtcol ?? "#363636";
-  let w = options.w ?? 75;
-  let round = options.round ?? undefined;
+  let title = options.title ? options.title : null;
+  let fontSize = options.fontSize != undefined ? options.fontSize : 14;
+  let fontSize2 = options.fontSize2 != undefined ? options.fontSize2 : 10;
+  let fill = options.fill ? options.fill : "none";
+  let stroke = options.stroke ? options.stroke : "black";
+  let strokeWidth =
+    options.strokeWidth != undefined ? options.strokeWidth : 0.4;
+  let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
+  let txtcol = options.txtcol ? options.txtcol : "#363636";
+  let w = options.w != undefined ? options.w : 75;
+  let round = options.round != undefined ? options.round : undefined;
 
   const span = 10;
 

@@ -10,9 +10,9 @@ export function label(selection, projection, options = {}, clipid) {
   let textDecoration = options.textDecoration ? options.textDecoration : "none";
   let fontWeight = options.fontWeight ? options.fontWeight : "normal";
   let fontStyle = options.fontStyle ? options.fontStyle : "normal";
-  let opacity = options.opacity ?? 1;
-  let halo = options.halo ?? false;
-  let halo_style = options.halo_style ?? ["white", 4, 0.5];
+  let opacity = options.opacity != undefined ? options.opacity : 1;
+  let halo = options.halo == true ? true : false;
+  let halo_style = options.halo_style ? options.halo_style : ["white", 4, 0.5];
 
   const features = centroid(geojson).features;
 

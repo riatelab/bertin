@@ -1,11 +1,17 @@
 // outline
 export function rhumbs(selection, width, height, clipid, options = {}) {
-  let nb = options.nb ?? 16;
-  let position = options.position ?? [width / 4, height - height / 4];
-  let stroke = options.stroke ?? "#394a70";
-  let strokeWidth = options.strokeWidth ?? 1;
-  let strokeOpacity = options.strokeOpacity ?? 0.3;
-  let strokeDasharray = options.strokeDasharray ?? [3, 2];
+  let nb = options.nb != undefined ? options.nb : 16;
+  let position =
+    options.position != undefined
+      ? options.position
+      : [width / 4, height - height / 4];
+  let stroke = options.stroke ? options.stroke : "#394a70";
+  let strokeWidth = options.strokeWidth != undefined ? options.strokeWidth : 1;
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 0.3;
+  let strokeDasharray = options.strokeDasharray
+    ? options.strokeDasharray
+    : [3, 2];
 
   let angles = [];
   for (let i = 0; i < nb; i++) {

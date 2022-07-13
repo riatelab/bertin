@@ -6,11 +6,12 @@ export function legthicknessdiscr(selection, options = {}) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
   let w = options.w ? options.w : 30;
-  let title = options.title ?? null;
-  let fontSize = options.fontSize ? options.fontSize : 14;
-  let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
+  let title = options.title ? options.title : null;
+  let fontSize = options.fontSize != undefined ? options.fontSize : 14;
+  let fontSize2 = options.fontSize2 != undefined ? options.fontSize2 : 10;
   let stroke = options.stroke ? options.stroke : "black";
-  let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 1;
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 1;
   let txtcol = options.txtcol ? options.txtcol : "#363636";
   let breaks = options.breaks;
   let sizes = options.sizes;

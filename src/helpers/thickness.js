@@ -11,7 +11,7 @@ import * as stat from "statsbreaks";
 export function thickness(data, _) {
   // default
 
-  const type = _.type ?? "linear";
+  const type = _.type ? _.type : "linear";
 
   // If static value
 
@@ -31,10 +31,10 @@ export function thickness(data, _) {
   // Absolute data (linear scale)
 
   if (typeof _ != "number" && typeof _ != "string" && type == "linear") {
-    let k = _.k ?? 10;
+    let k = _.k != undefined ? _.k : 10;
     let values = _.values;
-    let fixmax = _.fixmax ?? undefined;
-    let fixmin = _.fixmin ?? 0;
+    let fixmax = _.fixmax != undefined ? _.fixmax : undefined;
+    let fixmin = _.fixmin != undefined ? _.fixmin : 0;
 
     if ("geometry" in data[0] && "properties" in data[0]) {
       data = data.map((d) => d.properties);
@@ -69,9 +69,10 @@ export function thickness(data, _) {
 
   if (typeof _ != "number" && typeof _ != "string" && type == "quali") {
     const categories = _.categories;
-    const k = _.k ?? 10;
-    const sizes =
-      _.sizes ?? d3.quantize(d3.interpolate(1, k), categories.length);
+    const k = _.k != undefined ? _.k : 10;
+    const sizes = _.sizes
+      ? _.sizes
+      : d3.quantize(d3.interpolate(1, k), categories.length);
 
     return {
       type: type,
@@ -90,13 +91,12 @@ export function thickness(data, _) {
   if (typeof _ != "number" && typeof _ != "string" && type == "discr") {
     const values = _.values;
     let sizes = _.sizes;
-    let nbreaks = _.nbreaks ?? 5;
-    let breaks = _.breaks ?? null;
-    let k = _.k ?? 10;
-    let nbsd = _.nbsd ?? 1;
-    let middle = _.middle ?? false;
-    let method = _.method ?? "quantile";
-    //let leg_round = _.leg_round !== undefined ? _.leg_round : undefined;
+    let nbreaks = _.nbreaks != undefined ? _.nbreaks : 5;
+    let breaks = _.breaks ? _.breaks : null;
+    let k = _.k != undefined ? _.k : 10;
+    let nbsd = _.nbsd != undefined ? _.nbsd : 1;
+    let middle = _.middle == true ? true : false;
+    let method = _.method ? _.method : "quantile";
 
     if (method == "q6") {
       nbreaks = 6;

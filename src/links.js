@@ -6,8 +6,8 @@ export function links(options = {}) {
   let geojson = topo2geo(options.geojson);
   let geojson_id = options.geojson_id;
   let data = options.data;
-  let data_i = options.data_i ?? "i";
-  let data_j = options.data_j ?? "j";
+  let data_i = options.data_i != undefined ? options.data_i : "i";
+  let data_j = options.data_j != undefined ? options.data_j : "j";
 
   let dots;
   if (figuration(geojson) == "p") {
