@@ -1,3 +1,4 @@
+import { rounding } from "../helpers/rounding.js";
 export function legthicknesslinear(selection, options = {}) {
   let x = options.x != undefined ? options.x : null;
   let y = options.y != undefined ? options.y : null;
