@@ -5,7 +5,6 @@ export { quickdraw } from "./quickdraw.js";
 export { table2geo } from "./table2geo.js";
 export { links } from "./links.js";
 export { borders } from "./borders.js";
-//export { subgeo } from "./subgeo.js";
 export { bbox } from "./bbox.js";
 export { properties } from "./properties.js";
 
