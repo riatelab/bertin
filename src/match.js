@@ -1,10 +1,8 @@
 // Imports
+import { create } from "d3-selection";
+import { scaleLinear } from "d3-scale";
+const d3 = Object.assign({}, { create, scaleLinear });
 
-//import { scaleLinear } from "d3-scale";
-
-import * as d3selection from "d3-selection";
-import * as d3scale from "d3-scale";
-const d3 = Object.assign({}, d3selection, d3scale);
 import { topo2geo } from "./helpers/topo2geo.js";
 
 export function match(geojson, id_geojson, data, id_data) {

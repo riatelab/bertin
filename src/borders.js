@@ -1,6 +1,4 @@
-// import * as topojsonclient from "topojson-client";
-// import * as topojsonserver from "topojson-server";
-// const topojson = Object.assign({}, topojsonclient, topojsonserver);
+// TODO : => GEOTOOLBOX
 
 import { topology } from "topojson-server";
 import { neighbors, mesh } from "topojson-client";

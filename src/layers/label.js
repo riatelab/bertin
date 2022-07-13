@@ -1,6 +1,3 @@
-import * as d3selection from "d3-selection";
-const d3 = Object.assign({}, d3selection);
-
 import { topo2geo } from "../helpers/topo2geo.js";
 import { centroid } from "geotoolbox";
 

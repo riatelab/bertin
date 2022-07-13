@@ -1,7 +1,6 @@
 import { union } from "geotoolbox";
-import * as d3selection from "d3-selection";
 import { geoPath } from "d3-geo";
-const d3 = Object.assign({}, d3selection, { geoPath });
+const d3 = Object.assign({}, { geoPath });
 
 export function inner(selection, projection, options = {}) {
   let geojson = options.geojson;

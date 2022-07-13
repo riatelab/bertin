@@ -1,11 +1,7 @@
-// Imports
-import * as d3selection from "d3-selection";
-const d3 = Object.assign({}, d3selection);
-
 // outline
 export function rhumbs(selection, width, height, clipid, options = {}) {
   let nb = options.nb ?? 16;
-  let position = options.position ?? [height / 4, width - width / 4];
+  let position = options.position ?? [width / 4, height - height / 4];
   let stroke = options.stroke ?? "#394a70";
   let strokeWidth = options.strokeWidth ?? 1;
   let strokeOpacity = options.strokeOpacity ?? 0.3;
@@ -29,8 +25,8 @@ export function rhumbs(selection, width, height, clipid, options = {}) {
     .attr("stroke-width", strokeWidth)
     .attr("stroke-dasharray", strokeDasharray)
     .attr("points", function (d, i) {
-      let x2 = position[0] + Math.cos(d) * width;
-      let y2 = position[1] + Math.sin(d) * width;
+      let x2 = position[0] + Math.cos(d) * width * 2;
+      let y2 = position[1] + Math.sin(d) * height * 2;
       return position[0] + "," + position[1] + " " + x2 + "," + y2;
     });
 }

@@ -1,5 +1,8 @@
-import * as geo from "geotoolbox";
-
+import { remove, keep, add, filter, subset, head, tail } from "geotoolbox";
+const geo = Object.assign(
+  {},
+  { remove, keep, add, filter, subset, head, tail }
+);
 export let properties = {
   table: geo.table,
   remove: function remove({ geojson, field }) {

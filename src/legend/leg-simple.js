@@ -1,7 +1,23 @@
-import * as d3selection from "d3-selection";
-import * as d3scale from "d3-scale";
-import * as d3shape from "d3-shape";
-const d3 = Object.assign({}, d3scale, d3selection, d3shape);
+import {
+  symbol,
+  symbolCircle,
+  symbolDiamond,
+  symbolSquare,
+  symbolStar,
+  symbolTriangle,
+  symbolWye,
+} from "d3-shape";
+const d3 = Object.assign(
+  {},
+  {
+    symbolCircle,
+    symbolDiamond,
+    symbolSquare,
+    symbolStar,
+    symbolTriangle,
+    symbolWye,
+  }
+);
 
 export function legsimple(selection, options = {}) {
   let type = options.type ?? "box";
@@ -73,27 +89,24 @@ export function legsimple(selection, options = {}) {
 
     // Symbol
 
-    const symbols = [
-      "circle",
-      "cross",
-      "diamond",
-      "square",
-      "star",
-      "triangle",
-      "wye",
-    ];
+    const symbols = new Map([
+      ["circle", d3.symbolCircle],
+      ["cross", d3.symbolCross],
+      ["diamond", d3.symbolDiamond],
+      ["square", d3.symbolSquare],
+      ["star", d3.symbolStar],
+      ["triangle", d3.symbolTriangle],
+      ["wye", d3.symbolWye],
+    ]);
 
-    if (symbols.includes(type)) {
+    if (symbols.has(type)) {
       const size = options.symbol_size;
 
       leg
         .append("path")
         .attr("x", x)
         .attr("y", y + delta)
-        .attr(
-          "d",
-          d3.symbol().size(size).type(d3.symbols[symbols.indexOf(type)])
-        )
+        .attr("d", d3.symbol().size(symbol_size).type(symbols.get(symbol)))
         .attr("transform", `translate(${x + Math.sqrt(size)},${y + delta})`)
         .attr("fill", fill)
         .attr("stroke", stroke)

@@ -1,7 +1,3 @@
-import * as d3selection from "d3-selection";
-import * as d3scale from "d3-scale";
-const d3 = Object.assign({}, d3scale, d3selection);
-
 export function legbox(selection, options = {}) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;

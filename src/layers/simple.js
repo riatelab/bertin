@@ -1,19 +1,49 @@
 // import * as d3selection from "d3-selection";
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3shape from "d3-shape";
-//import * as d3geoprojection from "d3-geo-projection";
-import * as d3scalechromatic from "d3-scale-chromatic";
-import * as d3scale from "d3-scale";
-import * as d3force from "d3-force";
+// import * as d3geo from "d3-geo";
+// import * as d3shape from "d3-shape";
+// import * as d3scalechromatic from "d3-scale-chromatic";
+// import * as d3scale from "d3-scale";
+// import * as d3force from "d3-force";
+// const d3 = Object.assign(
+//   {},
+//   d3selection,
+//   d3geo,
+//   d3shape,
+//   d3scale,
+//   d3scalechromatic,
+//   d3force
+// );
+
+import { select, pointer } from "d3-selection";
+import {
+  symbol,
+  symbolCircle,
+  symbolDiamond,
+  symbolSquare,
+  symbolStar,
+  symbolTriangle,
+  symbolWye,
+} from "d3-shape";
+import { forceX, forceY, forceCollide, forceSimulation } from "d3-force";
+import { geoPath } from "d3-geo";
 const d3 = Object.assign(
   {},
-  d3selection,
-  d3geo,
-  d3shape,
-  d3scale,
-  d3scalechromatic,
-  d3force
+  {
+    select,
+    pointer,
+    forceX,
+    forceY,
+    forceCollide,
+    forceSimulation,
+    geoPath,
+    symbol,
+    symbolCircle,
+    symbolDiamond,
+    symbolSquare,
+    symbolStar,
+    symbolTriangle,
+    symbolWye,
+  }
 );
 
 import { topo2geo } from "../helpers/topo2geo.js";
@@ -23,6 +53,7 @@ import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { figuration } from "../helpers/figuration.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
+import { map } from "d3-array";
 
 //import {thickness } from "./thickness.js";
 
@@ -174,25 +205,22 @@ export function simple(
       simulation.tick();
     }
 
-    const symbols = [
-      "circle",
-      "cross",
-      "diamond",
-      "square",
-      "star",
-      "triangle",
-      "wye",
-    ];
+    const symbols = new Map([
+      ["circle", d3.symbolCircle],
+      ["cross", d3.symbolCross],
+      ["diamond", d3.symbolDiamond],
+      ["square", d3.symbolSquare],
+      ["star", d3.symbolStar],
+      ["triangle", d3.symbolTriangle],
+      ["wye", d3.symbolWye],
+    ]);
 
     selection
       .append("g")
       .selectAll("path")
       .data(geojson.features)
       .join("path")
-      .attr(
-        "d",
-        d3.symbol().size(symbol_size).type(d3.symbols[symbols.indexOf(symbol)])
-      )
+      .attr("d", d3.symbol().size(symbol_size).type(symbols.get(symbol)))
       .attr(
         "transform",
         (d) =>

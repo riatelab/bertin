@@ -1,9 +1,6 @@
-import * as d3selection from "d3-selection";
-import * as d3scale from "d3-scale";
-import * as d3array from "d3-array";
+import { reverse } from "d3-array";
+const d3 = Object.assign({}, { reverse });
 import { rounding } from "../helpers/rounding.js";
-
-const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
 export function legthicknessdiscr(selection, options = {}) {
   let x = options.x ? options.x : null;

@@ -1,21 +1,19 @@
 // Imports
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3geoprojection from "d3-geo-projection";
-const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
+import { geoPath } from "d3-geo";
+const d3 = Object.assign({}, { geoPath });
 
 // outline
-export function outline(selection, projection,  options = {}) {
+export function outline(selection, projection, options = {}) {
   let fill = options.fill ? options.fill : "#add8f7";
-  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
+  let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
   let stroke = options.stroke ? options.stroke : "none";
-  let strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
+  let strokeWidth = options.strokeWidth != undefined ? options.strokeWidth : 1;
   selection
     .append("g")
     .append("path")
     .attr("d", d3.geoPath(projection)({ type: "Sphere" }))
     .attr("fill", fill)
-    .attr("fill-opacity",fillOpacity)
+    .attr("fill-opacity", fillOpacity)
     .attr("stroke", stroke)
-    .attr("stroke-width", strokeWidth)
+    .attr("stroke-width", strokeWidth);
 }

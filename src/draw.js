@@ -1,13 +1,12 @@
 // Imports
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3geoprojection from "d3-geo-projection";
-const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
+import { geoMercator } from "d3-geo";
+import { create } from "d3-selection";
+import { geoPath } from "d3-geo";
+const d3 = Object.assign({}, { geoMercator, create, geoPath });
 
 // Helpers
 import { getheight } from "./helpers/height.js";
 import { figuration } from "./helpers/figuration.js";
-//import { getcenters } from "./helpers/centroids.js";
 import { bbox } from "./bbox.js";
 import { getproj } from "./projections/projections.js";
 

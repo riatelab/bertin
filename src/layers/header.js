@@ -1,7 +1,3 @@
-// Imports
-import * as d3selection from "d3-selection";
-const d3 = Object.assign({}, d3selection);
-
 // header
 export function addheader(selection, width, options = {}) {
   let fontSize;
@@ -14,9 +10,8 @@ export function addheader(selection, width, options = {}) {
   let text = options.text ? options.text : "";
   let fill = options.fill ? options.fill : "#9e9696";
   let background = options.background ? options.background : "white";
-  let backgroundOpacity = options.backgroundOpacity
-    ? options.backgroundOpacity
-    : 1;
+  let backgroundOpacity =
+    options.backgroundOpacity != undefined ? options.backgroundOpacity : 1;
   let anchor = options.anchor ? options.anchor : "middle";
 
   const delta = fontSize * text.split("\n").length;
@@ -32,8 +27,7 @@ export function addheader(selection, width, options = {}) {
     x = width - 5;
   }
 
-  let header = selection
-    .append("g")
+  let header = selection.append("g");
 
   header
     .append("rect")
@@ -44,22 +38,20 @@ export function addheader(selection, width, options = {}) {
     .attr("fill", background)
     .attr("fill-opacity", backgroundOpacity);
 
-
-    header
-      .selectAll("text")
-      .data(options.text.split("\n"))
-      .join("text")
-      .attr("x", x)
-      //.attr("y", -delta - 5)
-      .attr("y", -delta - 5)
-      .attr("font-size", `${fontSize}px`)
-      .attr("dy", (d, i) => i * fontSize + fontSize/2)
-      .attr("text-anchor", anchor)
-      .attr("dominant-baseline", "central")
-      .attr("fill", fill)
-      .attr("font-family", "sans-serif")
-      .attr("font-weight", "bold")
-      .attr("fill-opacity", 1)
-      .text((d) => d);
-
+  header
+    .selectAll("text")
+    .data(options.text.split("\n"))
+    .join("text")
+    .attr("x", x)
+    //.attr("y", -delta - 5)
+    .attr("y", -delta - 5)
+    .attr("font-size", `${fontSize}px`)
+    .attr("dy", (d, i) => i * fontSize + fontSize / 2)
+    .attr("text-anchor", anchor)
+    .attr("dominant-baseline", "central")
+    .attr("fill", fill)
+    .attr("font-family", "sans-serif")
+    .attr("font-weight", "bold")
+    .attr("fill-opacity", 1)
+    .text((d) => d);
 }

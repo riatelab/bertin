@@ -1,7 +1,3 @@
-// Imports
-import * as d3selection from "d3-selection";
-const d3 = Object.assign({}, d3selection);
-
 // Footer
 export function addfooter(selection, width, height, options = {}) {
   let fontSize;
@@ -32,8 +28,7 @@ export function addfooter(selection, width, height, options = {}) {
     x = width - 5;
   }
 
-  let footer = selection
-    .append("g")
+  let footer = selection.append("g");
 
   footer
     .append("rect")

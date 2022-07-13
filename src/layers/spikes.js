@@ -1,15 +1,9 @@
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3geoprojection from "d3-geo-projection";
-import * as d3array from "d3-array";
-import * as d3scale from "d3-scale";
+import { select, pointer } from "d3-selection";
+import { min, max, descending } from "d3-array";
+import { scaleLinear } from "d3-scale";
 const d3 = Object.assign(
   {},
-  d3selection,
-  d3array,
-  d3scale,
-  d3geo,
-  d3geoprojection
+  { select, pointer, min, max, descending, scaleLinear }
 );
 
 import { topo2geo } from "../helpers/topo2geo.js";
@@ -31,12 +25,12 @@ export function spikes(
 ) {
   let geojson = topo2geo(options.geojson);
   let values = options.values;
-  let k = options.k !== undefined ? options.k : 50;
-  let w = options.w !== undefined ? options.w : 10;
+  let k = options.k != undefined ? options.k : 50;
+  let w = options.w != undefined ? options.w : 10;
   let fill = options.fill ? options.fill : "#ffa3e3";
   let stroke = options.stroke ? options.stroke : "#a31d88";
-  let strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
-  let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
+  let strokeWidth = options.strokeWidth != undefined ? options.strokeWidth : 1;
+  let fillOpacity = options.fillOpacity != undefined ? options.fillOpacity : 1;
 
   let strokeLinecap = options.strokeLinecap ?? "round";
   let strokeLinejoin = options.strokeLinejoin ?? "round";

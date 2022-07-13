@@ -1,8 +1,10 @@
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3array from "d3-array";
-import * as d3force from "d3-force";
-const d3 = Object.assign({}, d3selection, d3array, d3geo, d3force);
+import { sum } from "d3-array";
+import { select, pointer } from "d3-selection";
+import { forceX, forceY, forceCollide, forceSimulation } from "d3-force";
+const d3 = Object.assign(
+  {},
+  { sum, select, pointer, forceX, forceY, forceCollide, forceSimulation }
+);
 
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";

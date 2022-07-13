@@ -1,19 +1,22 @@
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3scale from "d3-scale";
-import * as d3array from "d3-array";
-import * as d3scalechromatic from "d3-scale-chromatic";
-import * as d3force from "d3-force";
+import { min, max, descending } from "d3-array";
+import { scaleSqrt } from "d3-scale";
+import { select, pointer } from "d3-selection";
+import { forceX, forceY, forceCollide, forceSimulation } from "d3-force";
 const d3 = Object.assign(
   {},
-  d3selection,
-  d3scalechromatic,
-  d3array,
-  d3geo,
-  d3scale,
-  d3force
+  {
+    min,
+    max,
+    descending,
+    scaleSqrt,
+    select,
+    pointer,
+    forceX,
+    forceY,
+    forceCollide,
+    forceSimulation,
+  }
 );
-
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legcircles } from "../legend/leg-circles.js";

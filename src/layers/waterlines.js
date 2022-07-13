@@ -1,12 +1,9 @@
 import { BufferOp, GeoJSONReader, GeoJSONWriter } from "@turf/jsts";
-//import { BufferOp, GeoJSONReader, GeoJSONWriter } from "jsts";
 import { union } from "geotoolbox";
-import * as d3selection from "d3-selection";
-import * as d3scale from "d3-scale";
-const d3 = Object.assign({}, d3selection, d3scale);
+import { scaleLinear } from "d3-scale";
 import { geoPath } from "d3-geo";
 import { geoProject } from "d3-geo-projection";
-//const d3 = Object.assign({}, d3selection, geoProject);
+const d3 = Object.assign({}, { scaleLinear, geoPath, geoProject });
 
 export function waterlines(
   selection,
@@ -31,7 +28,7 @@ export function waterlines(
     options.strokeLinejoin != undefined ? options.strokeLinejoin : "round";
 
   let geom = new GeoJSONReader().read(
-    geoProject(union(geojson), projection).features[0]
+    d3.geoProject(union(geojson), projection).features[0]
   );
   let features = [];
   for (let i = 1; i <= nb; i++) {
@@ -50,7 +47,7 @@ export function waterlines(
     .selectAll("path")
     .data(features)
     .join("path")
-    .attr("d", geoPath())
+    .attr("d", d3.geoPath())
     .attr("fill", "none")
     .attr("stroke-opacity", (d, i) =>
       Array.isArray(strokeOpacity)

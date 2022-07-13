@@ -1,8 +1,8 @@
 import { simple } from "./simple.js";
 import { split } from "../helpers/split.js";
 import { dotsinpolygons } from "../helpers/dotsinpolygons.js";
-import * as d3array from "d3-array";
-const d3 = Object.assign({}, d3array);
+import { sum } from "d3-array";
+const d3 = Object.assign({}, { sum });
 
 export function dotdensity(
   selection,

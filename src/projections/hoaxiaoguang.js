@@ -1,5 +1,5 @@
-import * as d3geoprojection from "d3-geo-projection";
-const d3 = Object.assign({}, d3geoprojection);
+import { geoHufnagel } from "d3-geo-projection";
+const d3 = Object.assign({}, { geoHufnagel });
 
 // Approximative projection of HoaXiaoguang (thanks to Fil/@recifs)
 

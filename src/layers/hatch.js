@@ -1,20 +1,18 @@
-// Imports
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3geoprojection from "d3-geo-projection";
-const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
-
 // Graticule
 export // Graticule
 function hatch(selection, options = {}, width, height) {
   let defs = selection.append("defs");
 
-  const stroke = options.stroke ?? "#786d6c";
-  const strokeWidth = options.strokeWidth ?? 2;
-  const strokeOpacity = options.strokeOpacity ?? 0.1;
-  const angle = options.angle ?? 45;
-  const spacing = options.spacing ?? 8;
-  const strokeDasharray = options.strokeDasharray ?? "none";
+  const stroke = options.stroke ? options.stroke : "#786d6c";
+  const strokeWidth =
+    options.strokeWidth != undefined ? options.strokeWidth : 2;
+  const strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 0.1;
+  const angle = options.angle != undefined ? options.angle : 45;
+  const spacing = options.spacing != undefined ? options.spacing : 8;
+  const strokeDasharray = options.strokeDasharray
+    ? options.strokeDasharray
+    : "none";
 
   const id = Date.now().toString(36) + Math.random().toString(36).substring(2);
   const pattern = defs

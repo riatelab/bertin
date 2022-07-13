@@ -1,17 +1,18 @@
 // Imports
-import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
-import * as d3geoprojection from "d3-geo-projection";
-const d3 = Object.assign({}, d3selection, d3geo, d3geoprojection);
+import { geoPath, geoGraticule } from "d3-geo";
+const d3 = Object.assign({}, { geoPath, geoGraticule });
 
 // Graticule
 export function graticule(selection, projection, options = {}, clipid) {
   let stroke = options.stroke ? options.stroke : "white";
-  let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.8;
-  let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 0.5;
-  let strokeDasharray = options.strokeDasharray ? options.strokeDasharray : 2;
-  let strokeLinecap = options.strokeLinecap ?? "round"
-  let strokeLinejoin = options.strokeLinejoin ?? "round"
+  let strokeWidth =
+    options.strokeWidth != undefined ? options.strokeWidth : 0.8;
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : 0.5;
+  let strokeDasharray =
+    options.strokeDasharray != undefined ? options.strokeDasharray : 2;
+  let strokeLinecap = options.strokeLinecap ?? "round";
+  let strokeLinejoin = options.strokeLinejoin ?? "round";
 
   let step = options.step ? options.step : [10, 10];
   step = Array.isArray(step) ? step : [step, step];
@@ -27,6 +28,5 @@ export function graticule(selection, projection, options = {}, clipid) {
     .style("stroke-opacity", strokeOpacity)
     .style("stroke-linecap", strokeLinecap)
     .style("stroke-linejoin", strokeLinejoin)
-    .style("stroke-dasharray", strokeDasharray)
-
+    .style("stroke-dasharray", strokeDasharray);
 }

@@ -1,9 +1,7 @@
-import * as d3selection from "d3-selection";
-import * as d3scale from "d3-scale";
-import * as d3array from "d3-array";
+import { scaleSqrt } from "d3-scale";
+import { max, descending } from "d3-array";
+const d3 = Object.assign({}, { scaleSqrt, max, descending });
 import { rounding } from "../helpers/rounding.js";
-
-const d3 = Object.assign({}, d3array, d3scale, d3selection);
 
 export function legcircles(selection, options = {}) {
   let values = options.values;

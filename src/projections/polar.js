@@ -1,5 +1,5 @@
-import * as d3geo from "d3-geo";
-const d3 = Object.assign({}, d3geo);
+import { geoAzimuthalEquidistant } from "d3-geo";
+const d3 = Object.assign({}, { geoAzimuthalEquidistant });
 
 export function Polar() {
   const projection = d3

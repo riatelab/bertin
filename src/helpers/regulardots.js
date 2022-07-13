@@ -1,22 +1,8 @@
-//import * as booleanPointInPolygon  from "@turf/boolean-point-in-polygon";
-
-//import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
-//const turf = Object.assign({}, booleanPointInPolygon);
-// import * as d3array from "d3-array";
-// import * as d3geo from "d3-geo";
-// import * as d3geoprojection from "d3-geo-projection";
-// const d3 = Object.assign({}, d3array, d3geo, d3geoprojection);
-// import * as topojsonserver from "topojson-server";
-// import * as topojsonclient from "topojson-client";
-// const topojson = Object.assign({}, topojsonserver, topojsonclient);
-
+import { union } from "geotoolbox";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { range, rollup, ascending } from "d3-array";
 import { geoProject } from "d3-geo-projection";
 const d3 = Object.assign({}, { geoProject, range, rollup, ascending });
-import { topology } from "topojson-server";
-import { merge } from "topojson-client";
-const topojson = Object.assign({}, { topology, merge });
 
 //geoProject;
 
@@ -29,9 +15,8 @@ export function regulardots(geojson, projection, width, height, step, values) {
   // planar projection
   const polys = d3.geoProject(geojson, projection);
 
-  // clip
-  const topo = topojson.topology({ foo: polys });
-  const merge = topojson.merge(topo, topo.objects.foo.geometries);
+  const merge = union(polys).features[0].geometry;
+
   let grid2 = [];
   grid.forEach((d, i) => {
     if (booleanPointInPolygon(d, merge)) {

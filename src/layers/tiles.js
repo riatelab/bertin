@@ -1,6 +1,6 @@
-import * as d3tile from "d3-tile";
-import * as d3geo from "d3-geo";
-const d3 = Object.assign({}, d3tile, d3geo);
+import { tile } from "d3-tile";
+import { geoPath } from "d3-geo";
+const d3 = Object.assign({}, { tile, geoPath });
 
 import { text } from "./text.js";
 

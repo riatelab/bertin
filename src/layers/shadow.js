@@ -1,7 +1,5 @@
-// import * as d3selection from "d3-selection";
-import * as d3selection from "d3-selection";
 import { geoPath } from "d3-geo";
-const d3 = Object.assign({}, d3selection, { geoPath });
+const d3 = Object.assign({}, { geoPath });
 import { union } from "geotoolbox";
 
 export function shadow(selection, projection, geojson, clipid, options = {}) {

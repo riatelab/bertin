@@ -1,9 +1,9 @@
 // Thanks to Torben Jansen.
 // See https://observablehq.com/@toja/spilhaus-world-ocean-map-in-a-square
 
-import * as d3geo from "d3-geo";
-import * as d3geoprojection from "d3-geo-projection";
-const d3 = Object.assign({}, d3geo, d3geoprojection);
+//import * as d3geo from "d3-geo";
+import { geoProjection } from "d3-geo";
+const d3 = Object.assign({}, { geoProjection });
 
 function ellipticF(phi, m) {
   const { abs, atan, ln, PI: pi, sin, sqrt } = Math;

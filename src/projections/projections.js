@@ -4,8 +4,8 @@ import { HoaXiaoguang } from "./hoaxiaoguang.js";
 import { Spilhaus } from "./spilhaus.js";
 
 import { proj4d3 } from "./proj4d3.js";
-import * as d3geo from "d3-geo";
-const d3 = Object.assign({}, d3geo);
+import { geoEquirectangular, geoIdentity } from "d3-geo";
+const d3 = Object.assign({}, { geoEquirectangular, geoIdentity });
 
 // This function define the rules concerning projections
 

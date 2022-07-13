@@ -1,9 +1,8 @@
 // proj4d3() is a function developped by @fil. See https://observablehq.com/@fil/proj4js-d3
 import proj4 from "proj4";
-//const proj4 = Object.assign({}, proj4);
 
-import * as d3geo from "d3-geo";
-const d3 = Object.assign({}, d3geo);
+import { geoProjection } from "d3-geo";
+const d3 = Object.assign({}, { geoProjection });
 
 let epsg2154 =
   "+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
