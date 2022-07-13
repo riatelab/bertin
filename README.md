@@ -1487,25 +1487,7 @@ bertin.links({
 
 ### subgeo
 
-_subgeo_ function extracts a part of a geojson (e.g. world countries without antarctica). [Source](https://github.com/neocarto/bertin/blob/main/src/subgeo.js)
-
-#### Code
-
-```js
-bertin.subgeo({
-  geojson: world,
-  field: "iso3",
-  operator: "!=",
-  array: ["ATA"],
-});
-```
-
-#### Parameters
-
-- **geojson**: a geojson (or topojson)
-- **field**: a field in properties
-- **operator**: an operator (default :"==")
-- **array**: an array of values
+Depreciated. See *properties.subset*/
 
 ### table2geo
 
