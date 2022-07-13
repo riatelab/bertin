@@ -1,7 +1,16 @@
-import { remove, keep, add, filter, subset, head, tail } from "geotoolbox";
+import {
+  table,
+  remove,
+  keep,
+  add,
+  filter,
+  subset,
+  head,
+  tail,
+} from "geotoolbox";
 const geo = Object.assign(
   {},
-  { remove, keep, add, filter, subset, head, tail }
+  { table, remove, keep, add, filter, subset, head, tail }
 );
 export let properties = {
   table: geo.table,
