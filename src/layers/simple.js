@@ -1,19 +1,3 @@
-// import * as d3selection from "d3-selection";
-// import * as d3geo from "d3-geo";
-// import * as d3shape from "d3-shape";
-// import * as d3scalechromatic from "d3-scale-chromatic";
-// import * as d3scale from "d3-scale";
-// import * as d3force from "d3-force";
-// const d3 = Object.assign(
-//   {},
-//   d3selection,
-//   d3geo,
-//   d3shape,
-//   d3scale,
-//   d3scalechromatic,
-//   d3force
-// );
-
 import { select, pointer } from "d3-selection";
 import {
   symbol,
@@ -53,9 +37,6 @@ import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { figuration } from "../helpers/figuration.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
-import { map } from "d3-array";
-
-//import {thickness } from "./thickness.js";
 
 export function simple(
   selection,

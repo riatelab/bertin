@@ -10,6 +10,7 @@ import {
 const d3 = Object.assign(
   {},
   {
+    symbol,
     symbolCircle,
     symbolDiamond,
     symbolSquare,
@@ -107,7 +108,7 @@ export function legsimple(selection, options = {}) {
         .append("path")
         .attr("x", x)
         .attr("y", y + delta)
-        .attr("d", d3.symbol().size(symbol_size).type(symbols.get(symbol)))
+        .attr("d", d3.symbol().size(size).type(symbols.get(type)))
         .attr("transform", `translate(${x + Math.sqrt(size)},${y + delta})`)
         .attr("fill", fill)
         .attr("stroke", stroke)
