@@ -891,7 +891,7 @@ bertin.draw({
 - **strokeOpacity**: stroke-opacity (default: 45)
 - **strokeDasharray**: stroke-dasharray (default:"none")
 
-#### Water lines
+#### Water lines (slow/experimental)
 
 The _waterlines_ type only allows to display lines spaced by a defined distance. It's just a graphic trick to make the maps look nice.   [Source](https://github.com/neocarto/bertin/blob/main/src/layers/waterlines.js).
 
@@ -912,9 +912,8 @@ bertin.draw({
 
 #### Parameters
 
-- **dist**: distancve between lines (default: 200)
-- **unit**: unit (default: "kilometers")
-- **nb**: number of lines (default: 5)
+- **dist**: distance between lines in pixels (default: 5)
+- **nb**: number of lines (default: 3)
 - **steps**: number of steps in @turf/buffer (default: 8)
 - **stroke**: stroke. If more than 1 value is defined, a linear scale is done beetwen values (default:"#5d81ba")
 - **strokeOpacity**: stroke-opacity. If more than 1 value is defined, a linear scale is done beetwen values (default: [1, 0.1])

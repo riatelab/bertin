@@ -1,14 +1,12 @@
+import { BufferOp, GeoJSONReader, GeoJSONWriter } from "@turf/jsts";
+//import { BufferOp, GeoJSONReader, GeoJSONWriter } from "jsts";
+import { union } from "geotoolbox";
 import * as d3selection from "d3-selection";
-import * as d3geo from "d3-geo";
 import * as d3scale from "d3-scale";
-import * as topojsonserver from "topojson-server";
-import * as topojsonclient from "topojson-client";
-import buffer from "@turf/buffer";
-
-const d3 = Object.assign({}, d3selection, d3geo, d3scale);
-const topojson = Object.assign({}, topojsonserver, topojsonclient);
-
-import { topo2geo } from "../helpers/topo2geo.js";
+const d3 = Object.assign({}, d3selection, d3scale);
+import { geoPath } from "d3-geo";
+import { geoProject } from "d3-geo-projection";
+//const d3 = Object.assign({}, d3selection, geoProject);
 
 export function waterlines(
   selection,
@@ -17,25 +15,43 @@ export function waterlines(
   clipid,
   options = {}
 ) {
-  let dist = options.dist ?? 200;
-  let unit = options.unit ?? "kilometers";
-  let nb = options.nb ?? 5;
-  let steps = options.steps ?? 8;
+  let dist = options.dist != undefined ? options.dist : 5;
+  let nb = options.nb != undefined ? options.nb : 3;
+  let steps = options.steps != undefined ? options.steps : 8;
+  let stroke = options.stroke != undefined ? options.stroke : "#5d81ba";
+  let strokeOpacity =
+    options.strokeOpacity != undefined ? options.strokeOpacity : [1, 0.1];
+  let strokeWidth =
+    options.strokeWidth != undefined ? options.strokeWidth : [1.2, 0.2];
+  let strokeDasharray =
+    options.strokeDasharray != undefined ? options.strokeDasharray : "none";
+  let strokeLinecap =
+    options.strokeLinecap != undefined ? options.strokeLinecap : "round";
+  let strokeLinejoin =
+    options.strokeLinejoin != undefined ? options.strokeLinejoin : "round";
 
-  let stroke = options.stroke ?? "#5d81ba";
-  let strokeOpacity = options.strokeOpacity ?? [1, 0.1];
-  let strokeWidth = options.strokeWidth ?? [1.2, 0.2];
-  let strokeDasharray = options.strokeDasharray ?? "none";
-  let strokeLinecap = options.strokeLinecap ?? "round";
-  let strokeLinejoin = options.strokeLinejoin ?? "round";
-
-  let topo = topojson.topology({ foo: topo2geo(geojson) });
-  let merged = topojson.merge(topo, topo.objects.foo.geometries);
-
+  let geom = new GeoJSONReader().read(
+    geoProject(union(geojson), projection).features[0]
+  );
   let features = [];
   for (let i = 1; i <= nb; i++) {
-    features.push(buffer(merged, dist * i, { units: unit, steps: steps }));
+    let buff = BufferOp.bufferOp(geom.geometry, i * dist, steps);
+    let newgeom = new GeoJSONWriter().write(buff);
+    features.push({
+      type: "Feature",
+      properties: { dist: i * dist },
+      geometry: newgeom,
+    });
   }
+
+  // selection
+  //   .append("g")
+  //   .attr("fill", "none")
+  //   .selectAll("path")
+  //   .data(features)
+  //   .join("path")
+  //   .attr("d", geoPath())
+  //   .attr("stroke", "red");
 
   selection
     .append("g")
@@ -43,7 +59,7 @@ export function waterlines(
     .selectAll("path")
     .data(features)
     .join("path")
-    .attr("d", d3.geoPath(projection))
+    .attr("d", geoPath())
     .attr("fill", "none")
     .attr("stroke-opacity", (d, i) =>
       Array.isArray(strokeOpacity)
