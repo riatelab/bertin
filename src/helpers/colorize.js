@@ -111,7 +111,7 @@ export function colorize(features, input) {
 
   if (typeof input == "object" && input.type == "split") {
     let values = input.values;
-    let split = input.split != undefined ? input.split 0;
+    let split = input.split != undefined ? input.split : 0;
     let colors = input.colors ? input.colors : ["#F25842", "#4a7cd9"];
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
     let txt_missing = input.txt_missing ? input.txt_missing : "No data";
