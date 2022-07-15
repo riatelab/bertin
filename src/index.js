@@ -23,7 +23,3 @@ export { logo } from "./layers/logo.js";
 export { rhumbs } from "./layers/rhumbs.js";
 export { inner } from "./layers/inner.js";
 export { waterlines } from "./layers/waterlines.js";
-
-// GIS
-// export { topo2geo } from "./helpers/topo2geo.js";
-// export { split } from "./helpers/split.js";
