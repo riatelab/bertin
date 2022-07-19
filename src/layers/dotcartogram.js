@@ -98,11 +98,9 @@ export function dotcartogram(
     .selectAll("circle")
     .data(dots.filter((d) => d.geometry.coordinates != undefined))
     .join("circle")
-    .attr("fill", (d) =>
-      colorize(dots, fill).getcol(d.properties[fill.values] || undefined)
-    )
+    .attr("fill", (d) => colorize(dots, fill).getcol(d.properties[fill.values]))
     .attr("stroke", (d) =>
-      colorize(dots, stroke).getcol(d.properties[stroke.values] || undefined)
+      colorize(dots, stroke).getcol(d.properties[stroke.values])
     )
     .attr("stroke-width", (d) =>
       thickness(dots, strokeWidth).getthickness(

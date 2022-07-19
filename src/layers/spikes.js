@@ -87,12 +87,10 @@ export function spikes(
     )
     .join("path")
     .attr("fill", (d) =>
-      colorize(features, fill).getcol(d.properties[fill.values] || undefined)
+      colorize(features, fill).getcol(d.properties[fill.values])
     )
     .attr("stroke", (d) =>
-      colorize(features, stroke).getcol(
-        d.properties[stroke.values] || undefined
-      )
+      colorize(features, stroke).getcol(d.properties[stroke.values])
     )
     .attr("stroke-width", (d) =>
       thickness(features, strokeWidth).getthickness(

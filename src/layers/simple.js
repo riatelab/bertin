@@ -105,14 +105,10 @@ export function simple(
       .join("path")
       .attr("d", d3.geoPath(projection))
       .attr("fill", (d) =>
-        colorize(geojson.features, fill).getcol(
-          d.properties[fill.values] || undefined
-        )
+        colorize(geojson.features, fill).getcol(d.properties[fill.values])
       )
       .attr("stroke", (d) =>
-        colorize(geojson.features, stroke).getcol(
-          d.properties[stroke.values] || undefined
-        )
+        colorize(geojson.features, stroke).getcol(d.properties[stroke.values])
       )
       .attr("stroke-width", (d) =>
         thickness(geojson.features, strokeWidth).getthickness(
@@ -224,13 +220,11 @@ export function simple(
         )
       )
       .attr("stroke", (d) =>
-        colorize(geojson.features, stroke).getcol(
-          d.properties[stroke.values] || undefined
-        )
+        colorize(geojson.features, stroke).getcol(d.properties[stroke.values])
       )
       .attr("stroke-width", (d) =>
         thickness(geojson.features, strokeWidth).getthickness(
-          d.properties[strokeWidth.values] || undefined
+          d.properties[strokeWidth.values]
         )
       )
       .attr("fill-opacity", fillOpacity)

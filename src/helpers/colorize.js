@@ -34,11 +34,15 @@ export function colorize(features, input) {
       nbreaks = 6;
     }
 
-    const arr = features.map((d) => +d.properties[values]);
-    const val = arr.filter((d) => (d != undefined) & (d != null) && d != "");
+    const arr = features.map((d) => d.properties[values]);
+    const val = arr
+      .filter((d) => +d !== undefined)
+      .filter((d) => +d !== null)
+      .filter((d) => !isNaN(+d))
+      .filter((d) => d !== "");
 
     const missing =
-      arr.length == val.length ? null : [txt_missing, col_missing];
+      arr.length === val.length ? null : [txt_missing, col_missing];
 
     if (breaks == null) {
       breaks = stat.breaks({
@@ -61,8 +65,16 @@ export function colorize(features, input) {
     b.pop();
     b.shift();
 
+    function getcol(val) {
+      if (val === "" || isNaN(+val)) {
+        return col_missing;
+      } else {
+        return d3.scaleThreshold(b, colors).unknown(col_missing)(val);
+      }
+    }
+
     return {
-      getcol: d3.scaleThreshold(b, colors).unknown(col_missing),
+      getcol: getcol,
       breaks: breaks,
       colors: colors,
       missing: missing,
@@ -87,7 +99,7 @@ export function colorize(features, input) {
     let types =
       input.types != undefined
         ? input.types
-        : arr.filter((d) => d != "" && d != null && d != undefined);
+        : arr.filter((d) => d !== "" && d != null && d != undefined);
 
     if (!Array.isArray(colors)) {
       colors = d3[`scheme${colors}`].slice(0, types.length);
@@ -117,12 +129,12 @@ export function colorize(features, input) {
     let txt_missing = input.txt_missing ? input.txt_missing : "No data";
 
     const arr = features.map((d) => d.properties[values]);
-    const arr2 = arr.filter((d) => d != "" && d != null && d != undefined);
+    const arr2 = arr.filter((d) => d !== "" && d != null && d != undefined);
 
     const getcol = (val) => {
       if (val >= split) return colors[0];
       if (val < split) return colors[1];
-      if (val == undefined || val == "") return col_missing;
+      if (val == undefined || val === "") return col_missing;
     };
 
     return {
