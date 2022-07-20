@@ -1,5 +1,5 @@
 import { simple } from "./simple.js";
-import { split } from "../helpers/split.js";
+import { dissolve } from "geotoolbox";
 import { dotsinpolygons } from "../helpers/dotsinpolygons.js";
 import { sum } from "d3-array";
 const d3 = Object.assign({}, { sum });
@@ -28,7 +28,7 @@ export function dotdensity(
     : `= ${options.dotvalue}`;
   options.leg_type = options.symbol ? options.symbol : "circle";
 
-  let splited = split(options.geojson);
+  let splited = dissolve(options.geojson);
 
   splited.features.forEach((d, i) => {
     d.properties.__value = +d.properties[options.values] * d.__share;
