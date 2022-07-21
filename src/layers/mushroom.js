@@ -12,6 +12,7 @@ import { centroid } from "geotoolbox";
 export function mushroom(
   selection,
   projection,
+  planar,
   options = {},
   clipid,
   width,
@@ -61,7 +62,7 @@ export function mushroom(
   let leg_stroke = options.leg_stroke ? options.leg_stroke : leg_txtcol;
   let leg_strokeWidth = options.leg_strokeWidth ? options.leg_strokeWidth : 0.8;
 
-  const features = centroid(geojson)
+  const features = centroid(geojson, { planar: planar })
     .features.sort((a, b) =>
       d3.descending(+a.properties[top_values], +b.properties[top_values])
     )

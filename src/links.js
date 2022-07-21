@@ -8,12 +8,13 @@ export function links(options = {}) {
   let data = options.data;
   let data_i = options.data_i != undefined ? options.data_i : "i";
   let data_j = options.data_j != undefined ? options.data_j : "j";
+  let planar = options.planar ? true : false;
 
   let dots;
   if (figuration(geojson) == "p") {
     dots = geojson.features;
   } else {
-    dots = centroid(geojson).features;
+    dots = centroid(geojson, { planar: planar }).features;
   }
 
   const coordsbyid = new Map(

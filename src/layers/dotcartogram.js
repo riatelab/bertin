@@ -17,6 +17,7 @@ import { legends } from "../legend/legends.js";
 export function dotcartogram(
   selection,
   projection,
+  planar,
   options = {},
   clipid,
   width,
@@ -60,7 +61,7 @@ export function dotcartogram(
   if (figuration(geojson) == "p") {
     features = geojson.features;
   } else {
-    features = centroid(geojson).features;
+    features = centroid(geojson, { planar: planar }).features;
   }
 
   // Dissolve

@@ -29,6 +29,7 @@ import { legends } from "../legend/legends.js";
 export function bubble(
   selection,
   projection,
+  planar,
   options = {},
   clipid,
   width,
@@ -44,7 +45,6 @@ export function bubble(
     "#e5c494",
     "#b3b3b3",
   ];
-  let planar = options.planar == true ? true : false;
   let geojson = topo2geo(options.geojson);
   let values = options.values;
   let fixmax = options.fixmax != undefined ? options.fixmax : undefined;
@@ -70,25 +70,20 @@ export function bubble(
   if (typeof tooltip == "string") {
     tooltip = { fields: [tooltip] };
   }
-  //let choro = options.choro ? options.choro : undefined;
 
   let features;
 
   if (figuration(geojson) == "p") {
     features = geojson.features;
   } else {
-    features = centroid(geojson).features;
+    features = centroid(geojson, { planar: planar }).features;
   }
 
   const valvax =
     fixmax != undefined
       ? fixmax
       : d3.max(features, (d) => Math.abs(+d.properties[values]));
-  let radius = d3.scaleSqrt(
-    [0, valvax],
-    //[0, d3.max(features, (d) => +d.properties[values])],
-    [0, k]
-  );
+  let radius = d3.scaleSqrt([0, valvax], [0, k]);
 
   // Simulation
 
@@ -97,23 +92,14 @@ export function bubble(
       .forceSimulation(features)
       .force(
         "x",
-        d3.forceX((d) =>
-          planar
-            ? d.geometry.coordinates[0]
-            : projection(d.geometry.coordinates)[0]
-        )
+        d3.forceX((d) => projection(d.geometry.coordinates)[0])
       )
       .force(
         "y",
-        d3.forceY((d) =>
-          planar
-            ? d.geometry.coordinates[1]
-            : projection(d.geometry.coordinates)[1]
-        )
+        d3.forceY((d) => projection(d.geometry.coordinates)[1])
       )
       .force(
         "collide",
-        //d3.forceCollide((d) => radius(Math.abs(d.properties[values])) + strokeWidth / 2)
         d3.forceCollide(
           (d) =>
             radius(Math.abs(d.properties[values])) +
@@ -160,20 +146,8 @@ export function bubble(
     .attr("fill-opacity", fillOpacity)
     .attr("stroke-dasharray", strokeDasharray)
     .attr("stroke-opacity", strokeOpacity)
-    .attr("cx", (d) =>
-      dorling
-        ? d.x
-        : planar
-        ? d.geometry.coordinates[0]
-        : projection(d.geometry.coordinates)[0]
-    )
-    .attr("cy", (d) =>
-      dorling
-        ? d.y
-        : planar
-        ? d.geometry.coordinates[1]
-        : projection(d.geometry.coordinates)[1]
-    )
+    .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
+    .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
     .attr("r", (d) => radius(Math.abs(d.properties[values])))
     .on("touchmove mousemove", function (event, d) {
       if (tooltip) {

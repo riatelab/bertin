@@ -1484,6 +1484,7 @@ bertin.links({
 - **data**: inj,fij data
 - **data_i**: i id
 - **data_j**: j id
+- **planar**: a boolean. Set true if coordinates are already projected (default: false)
 
 ### subgeo
 

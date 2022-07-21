@@ -37,6 +37,7 @@ import { rhumbs } from "./layers/rhumbs.js";
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
   // projections
+  let planar = params.projection == "user" ? true : false;
   let projection = params.projection;
   const types = layers.map((d) => d.type);
   if (types.includes("tiles")) {
@@ -274,6 +275,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       spikes(
         svg,
         projection,
+        planar,
         {
           geojson: layer.geojson,
           values: layer.values,
@@ -313,6 +315,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       mushroom(
         svg,
         projection,
+        planar,
         {
           geojson: layer.geojson,
           top_values: layer.top_values,
@@ -351,6 +354,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       label(
         svg,
         projection,
+        planar,
         {
           geojson: layer.geojson,
           values: layer.values,
@@ -486,6 +490,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       dotcartogram(
         svg,
         projection,
+        planar,
         {
           geojson: layer.geojson,
           values: layer.values,
@@ -524,6 +529,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       bubble(
         svg,
         projection,
+        planar,
         {
           geojson: layer.geojson,
           values: layer.values,

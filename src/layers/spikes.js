@@ -18,6 +18,7 @@ import { legends } from "../legend/legends.js";
 export function spikes(
   selection,
   projection,
+  planar,
   options = {},
   clipid,
   width,
@@ -66,7 +67,7 @@ export function spikes(
   if (figuration(geojson) == "p") {
     features = geojson.features;
   } else {
-    features = centroid(geojson).features;
+    features = centroid(geojson, { planar: planar }).features;
   }
 
   const yScale = d3
