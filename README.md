@@ -130,6 +130,7 @@ bertin.draw({
 - **margin**: margin around features to be displayed. This option can be useful if the stroke is very heavy (default: 1)
 - **background**: color of the background (default: "none")
 - **clip**: a boolean to avoid artifacts of discontinuous projection (default: "false")
+- **reverse**: a boolean. By default, the layer placed on the top of the code is display on the top of the map. With reverse = true, your can reverse this order (default: false).
 
 ## Map types
 

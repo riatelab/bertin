@@ -39,6 +39,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // projections
   let planar = params.projection == "user" ? true : false;
   let projection = params.projection;
+  let reverse = params.reverse ? false : true;
   const types = layers.map((d) => d.type);
   if (types.includes("tiles")) {
     projection = d3.geoMercator();
@@ -147,7 +148,10 @@ export function draw({ params = {}, layers = {} } = {}) {
   }
 
   // ----------------------------------------
-  [...layers].reverse().forEach((layer) => {
+
+  let l = reverse ? [...layers] : [...layers].reverse();
+
+  l.forEach((layer) => {
     // Graticule
     if (layer.type == "graticule") {
       graticule(
