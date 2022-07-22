@@ -1,6 +1,34 @@
+
 <img src ="img/logo.svg" width=100></img>
 
 # bertin.js - Changelog
+
+## <ins>1.0</ins> (July 22, 2022) 🥳
+
+##### New Features
+
+* Inner layer (aesthetic purpose only) ([3aac39e](https://github.com/neocarto/bertin/commit/3aac39ef84c8c1a112805395a45319f34bb44029))
+
+
+##### Bug Fixes
+
+* Several mushroom layers one the same page is now allowed([86cac0d](https://github.com/neocarto/bertin/commit/86cac0d7f1eda05914af516f3694f73d4220ec0f))
+
+* Geometries already projected are now completely supported ([f3be781](https://github.com/neocarto/bertin/commit/f3be7816c07dcf9cf251001942654daf6aa904f8))([de54084](https://github.com/neocarto/bertin/commit/de54084f383c76e0a4c13be0a3038ddc7ff19b36))([8715930](https://github.com/neocarto/bertin/commit/871593099e5d5142df3f7464bbe88c6c79b61166))([e48cb39](https://github.com/neocarto/bertin/commit/e48cb39fac3d8f58634775928df1ce37f28266ca))([024e816](https://github.com/neocarto/bertin/commit/024e816908b1c3626a121066802c7f11e24639d6))([d6494da](https://github.com/neocarto/bertin/commit/d6494da0cd1fbad0c3faacbf54ea64d311557213))
+
+
+
+
+
+* Choropleth with 0 value ([c0bf8a8](https://github.com/neocarto/bertin/commit/c0bf8a86e5cf3968d8f7903658f45660c11e77e4))
+* Waterlines is now calulated in planar distance (pixels) ([f0cc192](https://github.com/neocarto/bertin/commit/f0cc192d427e561efc538e7f6d802c54479ad7db))
+
+##### Other Changes
+
+* Allow compatibilty with Rstudio & Quarto ([bc656df](https://github.com/neocarto/bertin/commit/bc656df430121218aed27e121690c0515a905ce2))([65b7da4](https://github.com/neocarto/bertin/commit/65b7da49cae21b5246df9ee7601b939d10d37b17))
+* Propertries.subset replace subgeo function ([363604a](https://github.com/neocarto/bertin/commit/363604ad1e3c17f6cdbfb9189e10192adae8ba62))
+* Several calculations are now based on [geotoolbox](https://github.com/neocarto/geotoolbox) ([f0a66dd](https://github.com/neocarto/bertin/commit/f0a66dde838020c6b45e7b7b3aa904c6eece8243))([5b2a8bf](https://github.com/neocarto/bertin/commit/5b2a8bf0de47aa89a849559c0f40176822bd0c25))([f0a66dd](https://github.com/neocarto/bertin/commit/f0a66dde838020c6b45e7b7b3aa904c6eece8243))([e948681](https://github.com/neocarto/bertin/commit/e94868194c62f1e2db088fb5d16ad1aa1f127435))([02e40d0](https://github.com/neocarto/bertin/commit/02e40d00598000b9f818250b7060d74a17f175d8))([f7e7adb](https://github.com/neocarto/bertin/commit/f7e7adb6b534bb48b273d3029ed924c85a31dc64))([c0bf8a8](https://github.com/neocarto/bertin/commit/c0bf8a86e5cf3968d8f7903658f45660c11e77e4))
+* Better management of dependencies ([6ae5f7a](https://github.com/neocarto/bertin/commit/6ae5f7a319ea377a09d44d6dddf7251dcc991b53))
 
 #### 0.14
 
@@ -20,7 +48,7 @@
 * Allow already projected basemaps ([0d77f7](https://github.com/neocarto/bertin/commit/0d77f73016b136a6b6386d52e4e4ac697306ed39))
 * Water lines layer ([6ef0804](https://github.com/neocarto/bertin/commit/6ef08045d631e6ddd7971b41046d33d2b045ee56))
 
-##### Bug Fixes 
+##### Bug Fixes
 
 * Order of colors for typologies ([26ba938](https://github.com/neocarto/bertin/commit/26ba9380555de8c23c825aa6725b7cdabb5a1dad))
 
