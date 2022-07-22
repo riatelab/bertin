@@ -37,7 +37,7 @@ Jacques Bertin (1918-2010) was a French cartographer, whose major contribution w
 Latest version
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/bertin" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1" charset="utf-8"></script>
 ```
 
 Pinned version
@@ -51,10 +51,10 @@ Pinned version
 
 #### In Observable
 
-Latest version
+Latest major version
 
 ```js
-bertin = require("bertin");
+bertin = require("bertin@1");
 ```
 
 Pinned version
@@ -70,7 +70,7 @@ bertin = require("bertin@0.9.8");
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1"></script>
 
 <script>
   let geojson =
