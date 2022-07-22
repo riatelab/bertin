@@ -153,6 +153,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       graticule(
         svg,
         projection,
+        planar,
         {
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
