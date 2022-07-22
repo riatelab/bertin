@@ -149,7 +149,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   // ----------------------------------------
 
-  let l = reverse ? [...layers] : [...layers].reverse();
+  let l = reverse ? [...layers].reverse() : [...layers];
 
   l.forEach((layer) => {
     // Graticule
