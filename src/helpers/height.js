@@ -2,7 +2,7 @@ import { topo2geo } from "./topo2geo.js";
 import { geoPath } from "d3-geo";
 const d3 = Object.assign({}, { geoPath });
 
-export function getheight(layers, extent, margin, projection, width) {
+export function getheight(layers, extent, margin, projection, planar, width) {
   let ref;
 
   const geojsons = layers
@@ -17,12 +17,12 @@ export function getheight(layers, extent, margin, projection, width) {
   }
 
   // case2:  if outline is defined -> world extent
-  if (!extent && types.includes("outline")) {
+  if (!extent && types.includes("outline") && !planar) {
     ref = { type: "Sphere" };
   }
 
   // case3 : extent defined by layers
-  if (!extent && geojsons > 0 && !types.includes("outline")) {
+  if ((!extent && geojsons > 0 && !types.includes("outline")) || planar) {
     let l = layers.map((d) => d.geojson).filter((d) => d !== undefined);
     let all = [];
     l.forEach((d) => all.push(topo2geo(d).features));

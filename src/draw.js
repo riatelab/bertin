@@ -62,7 +62,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   let clip = params.clip == true ? true : false;
 
   // optimal heights
-  let height = getheight(layers, extent, margin, projection, width);
+  let height = getheight(layers, extent, margin, projection, planar, width);
   let headerdelta = 0;
   let header = layers.find((d) => d.type == "header");
   if (header) {
@@ -138,7 +138,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // Outline (fill)
   let o = layers.find((d) => d.type == "outline");
   if (o) {
-    outline(svg, projection, {
+    outline(svg, projection, planar, {
       fill: o.fill,
       fillOpacity: o.fillOpacity,
       stroke: "none",
@@ -655,7 +655,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   // Outline (stroke)
   if (o) {
-    outline(svg, projection, {
+    outline(svg, projection, planar, {
       fill: "none",
       stroke: o.stroke,
       strokeWidth: o.strokeWidth,
