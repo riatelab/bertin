@@ -651,7 +651,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // Scalebar
   let s = layers.find((d) => d.type == "scalebar");
   if (s) {
-    scalebar(svg, projection, width, height, {
+    scalebar(svg, projection, planar, width, height, {
       x: s.x,
       y: s.y,
       units: s.units,
