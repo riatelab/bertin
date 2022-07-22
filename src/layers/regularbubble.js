@@ -1,5 +1,6 @@
 import { bubble } from "./bubble.js";
 import { regulardots } from "../helpers/regulardots.js";
+import { geoIdentity } from "d3-geo";
 
 export function regularbubble(
   selection,
@@ -18,7 +19,6 @@ export function regularbubble(
     options.values
   );
   options.values = "___value";
-  options.planar = true;
 
-  bubble(selection, projection, options, clipid, width, height);
+  bubble(selection, geoIdentity(), true, options, clipid, width, height);
 }

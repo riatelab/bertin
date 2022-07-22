@@ -23,3 +23,5 @@ export { logo } from "./layers/logo.js";
 export { rhumbs } from "./layers/rhumbs.js";
 export { inner } from "./layers/inner.js";
 export { waterlines } from "./layers/waterlines.js";
+
+export { regulardots } from "./helpers/regulardots.js";
