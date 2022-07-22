@@ -326,6 +326,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
           fillOpacity: layer.fillOpacity,
+          strokeOpacity: layer.strokeOpacity,
           top_tooltip: layer.top_tooltip,
           bottom_tooltip: layer.bottom_tooltip,
           leg_x: layer.leg_x,
@@ -342,7 +343,6 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_stroke: layer.leg_stroke,
           leg_strokeWidth: layer.leg_strokeWidth,
         },
-        clipid,
         width,
         height
       );

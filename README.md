@@ -527,6 +527,7 @@ bertin.draw({
 - **stroke**: stroke color (default: "white")
 - **strokeWidth**: stroke width (default: 0.5)
 - **fillOpacity**: fill opacity (default: 1)
+- **strokeOpacity**: stroke opacity (default: 1)
 - **top_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **bottom_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 

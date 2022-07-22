@@ -14,10 +14,12 @@ export function mushroom(
   projection,
   planar,
   options = {},
-  clipid,
   width,
   height
 ) {
+  let clipid =
+    Date.now().toString(36) + Math.random().toString(36).substring(2);
+
   let geojson = topo2geo(options.geojson);
   let top_values = options.top_values;
   let bottom_values = options.bottom_values;
@@ -28,6 +30,7 @@ export function mushroom(
   let stroke = options.stroke ? options.stroke : "white";
   let strokeWidth = options.strokeWidth ? options.strokeWidth : 0.5;
   let fillOpacity = options.fillOpacity ? options.fillOpacity : 1;
+  let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 1;
   let top_tooltip = options.top_tooltip ? options.top_tooltip : false;
   if (Array.isArray(top_tooltip)) {
     top_tooltip = { fields: top_tooltip };
@@ -229,7 +232,7 @@ export function mushroom(
       .attr("stroke-width", strokeWidth);
   }
 
-  // // Legend
+  // Legend
 
   if (leg_x != null && leg_y != null) {
     const span = 30;
