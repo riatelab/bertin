@@ -1,3 +1,5 @@
+<img src ="img/logo.svg" width=100></img>
+
 # bertin.js - Changelog
 
 #### 0.14
