@@ -13,13 +13,7 @@
 ##### Bug Fixes
 
 * Several mushroom layers one the same page is now allowed([86cac0d](https://github.com/neocarto/bertin/commit/86cac0d7f1eda05914af516f3694f73d4220ec0f))
-
 * Geometries already projected are now completely supported ([f3be781](https://github.com/neocarto/bertin/commit/f3be7816c07dcf9cf251001942654daf6aa904f8))([de54084](https://github.com/neocarto/bertin/commit/de54084f383c76e0a4c13be0a3038ddc7ff19b36))([8715930](https://github.com/neocarto/bertin/commit/871593099e5d5142df3f7464bbe88c6c79b61166))([e48cb39](https://github.com/neocarto/bertin/commit/e48cb39fac3d8f58634775928df1ce37f28266ca))([024e816](https://github.com/neocarto/bertin/commit/024e816908b1c3626a121066802c7f11e24639d6))([d6494da](https://github.com/neocarto/bertin/commit/d6494da0cd1fbad0c3faacbf54ea64d311557213))
-
-
-
-
-
 * Choropleth with 0 value ([c0bf8a8](https://github.com/neocarto/bertin/commit/c0bf8a86e5cf3968d8f7903658f45660c11e77e4))
 * Waterlines is now calulated in planar distance (pixels) ([f0cc192](https://github.com/neocarto/bertin/commit/f0cc192d427e561efc538e7f6d802c54479ad7db))
 
