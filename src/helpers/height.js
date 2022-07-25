@@ -17,12 +17,22 @@ export function getheight(layers, extent, margin, projection, planar, width) {
   }
 
   // case2:  if outline is defined -> world extent
-  if (!extent && types.includes("outline") && !planar) {
+  if (
+    !extent &&
+    (types.includes("outline") || types.includes("tissot")) &&
+    !planar
+  ) {
     ref = { type: "Sphere" };
   }
 
   // case3 : extent defined by layers
-  if ((!extent && geojsons > 0 && !types.includes("outline")) || planar) {
+  if (
+    (!extent &&
+      geojsons > 0 &&
+      !types.includes("outline") &&
+      !types.includes("tissot")) ||
+    planar
+  ) {
     let l = layers.map((d) => d.geojson).filter((d) => d !== undefined);
     let all = [];
     l.forEach((d) => all.push(topo2geo(d).features));

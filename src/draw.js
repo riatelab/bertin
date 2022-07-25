@@ -33,6 +33,7 @@ import { dotdensity } from "./layers/dotdensity.js";
 import { tiles } from "./layers/tiles.js";
 import { logo } from "./layers/logo.js";
 import { rhumbs } from "./layers/rhumbs.js";
+import { tissot } from "./layers/tissot.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
@@ -487,6 +488,25 @@ export function draw({ params = {}, layers = {} } = {}) {
         strokeOpacity: layer.strokeOpacity,
         strokeDasharray: layer.strokeDasharray,
       });
+    }
+
+    // tissot
+
+    if (layer.type == "tissot") {
+      tissot(
+        svg,
+        projection,
+        planar,
+        {
+          step: layer.step,
+          fill: layer.fill,
+          fillOpacity: layer.fillOpacity,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeOpacity: layer.strokeOpacity,
+        },
+        clipid
+      );
     }
 
     // Dots cartogram

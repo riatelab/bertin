@@ -1245,11 +1245,39 @@ bertin.draw({
 - **source**: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - **increasetilesize**: a value to slightly increase the size of the tiles solve the problem of gap between the tiles with chromium (deafault: 1)
 
+###  Tissot's indicatrix 
+
+The _tissot_ type aims to draw Tissot circles to visualize the deformations due to the projection [Source](https://github.com/neocarto/bertin/blob/main/src/layers/tissot.js).
+
+![](./img/tissot.png)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "tissot",
+      step: 20
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **step**: step between circles
+- **fill**: fill (default: "#d91848")
+- **fillOpactity**: fill-opacity (default: 0.5)
+- **stroke**: stroke (default: "#d91848")
+- **strokeOpactity**: stroke-opacity (default: 0.6)
+- **strokeWidth**: stroke-width (default: 1.5)
+
 ## Geojson properties selections
 
 ### properties.add
 
-*properties.add* allows to add a new field in the attribute table. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
+*properties.add* allows to add a new field in the att ribute table. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
 
 #### Code
 
