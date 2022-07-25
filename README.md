@@ -191,6 +191,8 @@ Parameters of the legend
 
 The _choro_ type aims to draw Choropleth maps. This kind of representation is especially suitable for relative quantitative data (rates, indices, densities). The choro type can be applied to the fill or stroke property of a simple layer. [Example](https://observablehq.com/@neocartocnrs/bertin-js-chropoleth?collection=@neocartocnrs/bertin).
 
+![](./img/choro.png)
+
 #### Code
 
 ```js
@@ -248,6 +250,9 @@ Parameters of the legend
 
 The _typo_ type allows to realize a qualitative map. The choro type can be applied to the fill or stroke property of a simple layer. [Example](https://observablehq.com/@neocartocnrs/bertin-js-typo?collection=@neocartocnrs/bertin).
 
+
+![](./img/typo.png)
+
 #### Code
 
 ```js
@@ -298,6 +303,8 @@ Parameters of the legend
 
 The _bubble_ type is used to draw a map by proportional circles. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/bubble.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-symbols?collection=@neocartocnrs/bertin).
 
+![](./img/bubble.png)
+
 #### Code
 
 ```js
@@ -345,6 +352,9 @@ Parameters of the legend
 
 The _regularbubble_ type is used to draw a map by proportional circles in a regular grid. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularbubble.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-regular-bubbles?collection=@neocartocnrs/bertin).
 
+
+![](./img/regularbubble.png)
+
 #### Code
 
 ```js
@@ -371,6 +381,8 @@ All other parameters are the same as for the bubble layer
 ### Stock and ratio
 
 In thematic mapping, we often have to represent an absolute quantitative data with a size variation and relative quantitative data with color variations. For this we can use the bubble type and the choro type together. [Example](https://observablehq.com/d/31a3309790d7bed9?collection=@neocartocnrs/bertin).
+
+![](./img/bubblechoro.png)
 
 #### Code
 
@@ -399,6 +411,8 @@ bertin.draw({
 
 In thematic mapping, we often have to represent an absolute quantitative data with a size variation and relative quantitative data with color variations. For this we can use the bubble type and the typo type together. [Example](https://observablehq.com/d/8c9b22ccdffc718d?collection=@neocartocnrs/bertin).
 
+![](./img/bubbletypo.png)
+
 #### Code
 
 ```js
@@ -421,6 +435,8 @@ bertin.draw({
 
 The _dorling_ parameter can be used with the _bubble_ type to design a Dorling cartogram. [Example](https://observablehq.com/@neocartocnrs/bertin-js-dorling-cartogram?collection=@neocartocnrs/bertin).
 
+![](./img/dorling.png)
+
 #### Code
 
 ```js
@@ -442,6 +458,8 @@ bertin.draw({
 ### Dot cartogram
 
 The _dotcartogram_ type is a method of map representation that follows Dorling's cartograms and dot density maps. The data from each territorial unit are dissolved in such a way that a dot represents a constant quantity, the same on the whole map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/dotcartogram.js) [Example](https://observablehq.com/@neocartocnrs/bertin-js-dots-cartograms?collection=@neocartocnrs/bertin).
+
+![](./img/dotcartogram.png)
 
 #### Code
 
@@ -503,6 +521,8 @@ Parameters of the legend
 
 The _mushroom_ type is used to draw a map with 2 superposed proportional semi-circles. This type of representation can be used when two data with the same order of magnitude need to be compressed. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/mushroom.js), [Example](https://observablehq.com/d/3c51f698ba19546c?collection=@neocartocnrs/bertin).
 
+![](./img/mushroom.png)
+
 #### Code
 
 ```js
@@ -555,6 +575,8 @@ Parameters of the legend
 
 The _dotdensity_ type allows to display a doty density layer geojson layer from polygons and attribute data. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/dotdensity.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-dot-density-map-bertin?collection=@neocartocnrs/bertin)
 
+![](./img/dotdensity.png)
+
 #### Code
 
 ```js
@@ -601,10 +623,11 @@ Parameters of the legend
 - **leg_fillOpacity**: stroke opacity (same as the layer displayed)
 - **leg_txtcol**: color of the text (default: "#363636")
 
-
 ### Spikes
 
 The _spikes_ type is used to draw a map with spikes. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/spikes.js), [Example](https://observablehq.com/d/12446a15a2642907?collection=@neocartocnrs/bertin).
+
+![](./img/spikes.png)
 
 #### Code
 
@@ -652,11 +675,12 @@ Parameters of the legend
 
 On each layer, you can dynamically vary the thickness of the paths. This can be useful to make for example flow maps or discontinuity maps. [Source](https://github.com/neocarto/bertin/blob/main/src/helpers/thickness.js)
 
-
-
 #### Code - Constant Thickness
 
 In order for each object to have the same thickness.
+
+![](./img/thickness.png)
+
 
 ```js
 bertin.draw({
@@ -673,6 +697,8 @@ bertin.draw({
 #### Code - Linear variation
 
 To vary the thickness proportionally to an quantitative data.
+
+![](./img/flows.png)
 
 ```js
 bertin.draw({
@@ -693,7 +719,6 @@ bertin.draw({
 - **fixmax**: Max value to fix the size of the thickest line, in order to make maps comparable (default:undefined)
 - **fixmin**: Min value to fix the size of the thinest line. If true, the value is the min data. (default:0)
 
-
 #### Code - Discrete variation
 
 To vary the thickness according to classes values
@@ -709,7 +734,6 @@ bertin.draw({
   ]
 })
 ```
-
 #### Parameters
 
 - **values**: a string corresponding to the targeted variable in the properties(compulsory)
@@ -725,6 +749,9 @@ bertin.draw({
 #### Code - Categories
 
 To vary the thickness according to qualitative data.
+
+![](./img/thickness_categories.png)
+
 
 ```js
 bertin.draw({
@@ -767,6 +794,8 @@ bertin.draw({
 
 The _footer_ type allows to display text under the map. This is useful to display sources. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/footer.js).
 
+![](./img/footer.png)
+
 #### Code
 
 ```js
@@ -794,6 +823,8 @@ bertin.draw({
 
 The _graticule_ type allows you to display the latitude and longitude lines. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/graticule.js).
 
+![](./img/graticule.png)
+
 #### Code
 
 ```js
@@ -820,6 +851,8 @@ bertin.draw({
 
 The _hatch_ type only allows to add hatchings on the whole page to make it a bit prettier. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/hatch.js).
 
+![](./img/hatch.png)
+
 #### Code
 
 ```js
@@ -832,7 +865,6 @@ bertin.draw({
   ],
 });
 ```
-
 #### Parameters
 
 - **stroke**: stroke color (default: "#786d6c")
@@ -842,10 +874,11 @@ bertin.draw({
 - **angle**: orientation of lines (default: 45)
 - **spacing**: spacing between lines (default: 8)
 
-
 ### Inner
 
 The _inner_ type allows to display a strip inside the polygon. This inner area can be used to draw preet maps with a vintage style.
+
+![](./img/inner.png)
 
 #### Code
 
@@ -873,6 +906,8 @@ bertin.draw({
 
 The rhumbs type allows to display "rhumb lines" like on old [portolan charts](https://en.wikipedia.org/wiki/Portolan_chart).  [Source](https://github.com/neocarto/bertin/blob/main/src/layers/rhumbs.js).
 
+![](./img/rhumbs.png)
+
 #### Code
 
 ```js
@@ -899,6 +934,8 @@ bertin.draw({
 #### Water lines (slow/experimental)
 
 The _waterlines_ type only allows to display lines spaced by a defined distance. It's just a graphic trick to make the maps look nice.   [Source](https://github.com/neocarto/bertin/blob/main/src/layers/waterlines.js).
+
+![](./img/waterlines.png)
 
 #### Code
 
@@ -931,6 +968,8 @@ bertin.draw({
 
 The logo type only allows allows to display a logo on the map from an url. By default, the bertin.js logo is displayed. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/logo.js) [Example](https://observablehq.com/@neocartocnrs/bertin-logo).
 
+![](./img/logolayer.png)
+
 #### Code
 
 ```js
@@ -951,10 +990,11 @@ bertin.draw({
 - **position**: an array of two cootdinates [x, y] or predefined positions as "left", "right" or "middle" (default: "left")
 - **size**: width of the logo. (default: 100)
 
-
 ### Header
 
 The _header_ type allows to display a title above the map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/header.js).
+
+![](./img/header.png)
 
 #### Code
 
@@ -982,6 +1022,8 @@ bertin.draw({
 ### Labels
 
 The _label_ type allows to display labels from a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/label.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-texts).
+
+![](./img/labels.png)
 
 #### Code
 
@@ -1055,6 +1097,8 @@ Parameters of the legend
 
 The _outline_ type is used to display the limits of the earth area in the given projection. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/missing.js).
 
+![](./img/outline.png)
+
 #### Code
 
 ```js
@@ -1101,6 +1145,8 @@ bertin.draw({
 ### Shadow
 
 The _shadow_ type allows to display a shadow under a layer to give it a relief effect. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/shadow.js).
+
+![](./img/shadow.png)
 
 #### Code
 
@@ -1167,6 +1213,8 @@ bertin.draw({
 ### Mercator Tiles
 
 The _tiles_ type allow to display a raster basemap. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/tile.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-tiles?collection=@neocartocnrs/bertin).
+
+![](./img/tile.png)
 
 **NB: ** It works only with the d3.geoMercator() projection. if tiles layer is used is the *draw* function, the projection is automaticaly setted to d3.geoMercator(). And you can't change it.  
 
@@ -1241,7 +1289,6 @@ bertin.properties.filter({
 ### properties.head
 
 *properties.head* allows to get the n top values from a given field.This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
-
 
 #### Code
 
@@ -1328,6 +1375,7 @@ bertin.properties.subset({
 ```js
 bertin.properties.table(*a geojson*)
 ```
+
 ### properties.head
 
 *properties.tail* allows to get the n bottom values from a given field. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
@@ -1445,6 +1493,8 @@ testjoin.unmatched_geom;
 ### Merge
 
 _merge_ is a function to join a geojson and a data file. This is the first step in the mapping process. [Source](https://github.com/neocarto/bertin/blob/main/src/merge.js), [Example](https://observablehq.com/d/608ed06a679bfeca?collection=@neocartocnrs/bertin).
+
+![](./img/merge.png)
 
 #### Code
 
