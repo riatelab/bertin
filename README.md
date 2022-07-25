@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Pinned version
 
 ```js
-bertin = require("bertin@0.9.8");
+bertin = require("bertin@1.0.1");
 ```
 
 ## Usage
@@ -137,6 +137,9 @@ bertin.draw({
 ### Simple layer
 
 The _layer_ type allows to display a simple geojson layer (points, lines or polygons). [Source](https://github.com/neocarto/bertin/blob/main/src/layers/simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js) and [Example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin).
+
+<iframe width="100%" height="340" frameborder="0"
+  src="https://observablehq.com/embed/70a42dfb301a54a4?cells=simple"></iframe>
 
 #### Code
 
