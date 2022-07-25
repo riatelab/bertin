@@ -1,5 +1,6 @@
 import { topo2geo } from "../helpers/topo2geo.js";
 import { centroid } from "geotoolbox";
+import { figuration } from "../helpers/figuration.js";
 
 export function label(selection, projection, planar, options = {}, clipid) {
   let geojson = topo2geo(options.geojson);
@@ -14,7 +15,14 @@ export function label(selection, projection, planar, options = {}, clipid) {
   let halo = options.halo == true ? true : false;
   let halo_style = options.halo_style ? options.halo_style : ["white", 4, 0.5];
 
-  const features = centroid(geojson, { planar: planar }).features;
+  //const features = centroid(geojson, { planar: planar }).features;
+
+  let features;
+  if (figuration(geojson) == "p") {
+    features = geojson.features;
+  } else {
+    features = centroid(geojson, { planar: planar }).features;
+  }
 
   selection
     .append("g")
