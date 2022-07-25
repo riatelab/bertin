@@ -138,15 +138,8 @@ bertin.draw({
 
 The _layer_ type allows to display a simple geojson layer (points, lines or polygons). [Source](https://github.com/neocarto/bertin/blob/main/src/layers/simple.js). [Example 1](https://observablehq.com/@neocartocnrs/hello-bertin-js) and [Example 2](https://observablehq.com/@neocartocnrs/bertin-js-symbols?collection=@neocartocnrs/bertin).
 
-<div id="observablehq-simple-5f5bda51"></div>
+![](./img/simple.png)
 
-<script type="module">
-import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-import define from "https://api.observablehq.com/d/70a42dfb301a54a4@617.js?v=3";
-new Runtime().module(define, name => {
-  if (name === "simple") return new Inspector(document.querySelector("#observablehq-simple-5f5bda51"));
-});
-</script>
 
 #### Code
 
