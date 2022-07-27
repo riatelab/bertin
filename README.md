@@ -44,7 +44,7 @@ Pinned version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@0.9.8"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.0.3"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Pinned version
 
 ```js
-bertin = require("bertin@1.0.1");
+bertin = require("bertin@1.0.3");
 ```
 
 ## Usage
