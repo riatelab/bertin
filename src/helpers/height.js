@@ -19,7 +19,9 @@ export function getheight(layers, extent, margin, projection, planar, width) {
   // case2:  if outline is defined -> world extent
   if (
     !extent &&
-    (types.includes("outline") || types.includes("tissot")) &&
+    (types.includes("outline") ||
+      types.includes("tissot") ||
+      types.includes("geolines")) &&
     !planar
   ) {
     ref = { type: "Sphere" };
@@ -30,7 +32,8 @@ export function getheight(layers, extent, margin, projection, planar, width) {
     (!extent &&
       geojsons > 0 &&
       !types.includes("outline") &&
-      !types.includes("tissot")) ||
+      !types.includes("tissot") &&
+      !types.includes("geolines")) ||
     planar
   ) {
     let l = layers.map((d) => d.geojson).filter((d) => d !== undefined);

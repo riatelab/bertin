@@ -819,6 +819,37 @@ bertin.draw({
 - **background**: background color (default: "white")
 - **backgroundOpacity**: background opacity (default: 1)
 
+
+### Geolines
+
+The _geolines_ type allows you to display geographic lines (equator, tropics, polar circles). [Source](https://github.com/neocarto/bertin/blob/main/src/layers/geolines.js).
+
+![](./img/geolines.png)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "geolines",
+      stroke: "black",
+      strokeWidth: [5, 3, 1],
+    },
+  ],
+});
+```
+
+#### Parameters
+
+*For each parameter, you can set a single value for all lines are an array in that order: [equator, tropics, polar].*
+
+- **stroke**: stroke color (default: "#020e21")
+- **strokeWidth**: stroke width (default: [1.5, 1.2, 0.7])
+- **strokeOpacity**: stroke opacity (default: 1)
+- **strokeDasharray**: stroke-dasharray (default: ["none", 5, 3])
+- **strokeLinecap**: stroke-linecap (default: "but")
+
 ### Graticule
 
 The _graticule_ type allows you to display the latitude and longitude lines. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/graticule.js).
@@ -843,8 +874,8 @@ bertin.draw({
 
 - **stroke**: stroke color (default:"white")
 - **strokeWidth**: stroke width (default:0.8)
-- **strokeopacity**: stroke opacity (default:0.5)
-- **strokedasharray**: stroke-dasharray (default:2)
+- **strokeOpacity**: stroke opacity (default:0.5)
+- **strokeDasharray**: stroke-dasharray (default:2)
 - **step**: gap between graticules. The value can be a number or an array of two values (default: [10, 10])
 
 ### hatch (or hatching)

@@ -12,6 +12,7 @@ import { getproj } from "./projections/projections.js";
 
 // Layers
 import { graticule } from "./layers/graticule.js";
+import { geolines } from "./layers/geolines.js";
 import { outline } from "./layers/outline.js";
 import { addfooter } from "./layers/footer.js";
 import { addheader } from "./layers/header.js";
@@ -167,6 +168,23 @@ export function draw({ params = {}, layers = {} } = {}) {
           strokeLinecap: layer.strokeLinecap,
           strokeLinejoin: layer.strokeLinejoin,
           step: layer.step,
+        },
+        clipid
+      );
+    }
+
+    // geolines
+    if (layer.type == "geolines") {
+      geolines(
+        svg,
+        projection,
+        planar,
+        {
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeOpacity: layer.strokeOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeLinecap: layer.strokeLinecap,
         },
         clipid
       );

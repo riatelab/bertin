@@ -18,6 +18,8 @@ export function rhumbs(selection, width, height, clipid, options = {}) {
     angles[i] = (360 / nb) * i * (Math.PI / 180);
   }
 
+  let size = Math.max(width, height);
+
   selection
     .append("g")
     .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
@@ -31,8 +33,8 @@ export function rhumbs(selection, width, height, clipid, options = {}) {
     .attr("stroke-width", strokeWidth)
     .attr("stroke-dasharray", strokeDasharray)
     .attr("points", function (d, i) {
-      let x2 = position[0] + Math.cos(d) * width * 2;
-      let y2 = position[1] + Math.sin(d) * height * 2;
+      let x2 = position[0] + Math.cos(d) * size;
+      let y2 = position[1] + Math.sin(d) * size;
       return position[0] + "," + position[1] + " " + x2 + "," + y2;
     });
 }
