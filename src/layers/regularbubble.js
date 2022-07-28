@@ -10,6 +10,9 @@ export function regularbubble(
   width,
   height
 ) {
+
+
+  
   options.geojson = regulardots(
     options.geojson,
     projection,

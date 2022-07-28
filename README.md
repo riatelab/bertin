@@ -44,7 +44,7 @@ Pinned version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.0.3"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.0.4"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Pinned version
 
 ```js
-bertin = require("bertin@1.0.3");
+bertin = require("bertin@1.0.4");
 ```
 
 ## Usage
@@ -170,6 +170,7 @@ bertin.draw({
 - **symbol_size**: if it is a dot layer, a number indicating the size of the symbol (default: 5)
 - **symbol_shift**: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
 - **symbol_iteration**: Number of iteration to shift symbols (default: 200)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -249,7 +250,6 @@ Parameters of the legend
 ### Typology
 
 The _typo_ type allows to realize a qualitative map. The choro type can be applied to the fill or stroke property of a simple layer. [Example](https://observablehq.com/@neocartocnrs/bertin-js-typo?collection=@neocartocnrs/bertin).
-
 
 ![](./img/typo.png)
 
@@ -334,6 +334,7 @@ bertin.draw({
 - **dorling**: a boolean (default:false)
 - **iteration**: an integer to define the number of iteration for the Dorling method (default: 200)
 - **tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin).
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -351,7 +352,6 @@ Parameters of the legend
 ### Regular Bubble
 
 The _regularbubble_ type is used to draw a map by proportional circles in a regular grid. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularbubble.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-regular-bubbles?collection=@neocartocnrs/bertin).
-
 
 ![](./img/regularbubble.png)
 
@@ -503,6 +503,7 @@ bertin.draw({
 - **fillOpacity**: fill opacity (default: 1)
 - **tooltip** an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **iteration** an integer to define the number of iteration for the Dorling method (default 200)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -554,6 +555,7 @@ bertin.draw({
 - **strokeOpacity**: stroke opacity (default: 1)
 - **top_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **bottom_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -606,6 +608,7 @@ bertin.draw({
 - **symbol_size**: if it is a dot layer, a number indicating the size of the symbol (default: 5)
 - **symbol_shift**: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
 - **symbol_iteration**: Number of iteration to shift symbols (default: 200)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -657,6 +660,7 @@ bertin.draw({
 - **strokeWidth**: stroke width (default: 0.7)
 - **fillOpacity**: fill opacity (default: 0.3)
 - **tooltip** an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -818,7 +822,7 @@ bertin.draw({
 - **fill**: color of the text (default:"#9e9696")
 - **background**: background color (default: "white")
 - **backgroundOpacity**: background opacity (default: 1)
-
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Geolines
 
@@ -849,6 +853,7 @@ bertin.draw({
 - **strokeOpacity**: stroke opacity (default: 1)
 - **strokeDasharray**: stroke-dasharray (default: ["none", 5, 3])
 - **strokeLinecap**: stroke-linecap (default: "but")
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Graticule
 
@@ -877,6 +882,7 @@ bertin.draw({
 - **strokeOpacity**: stroke opacity (default:0.5)
 - **strokeDasharray**: stroke-dasharray (default:2)
 - **step**: gap between graticules. The value can be a number or an array of two values (default: [10, 10])
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### hatch (or hatching)
 
@@ -904,6 +910,7 @@ bertin.draw({
 - **strokeDasharray**: stroke-dasharray (default:"none")
 - **angle**: orientation of lines (default: 45)
 - **spacing**: spacing between lines (default: 8)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Inner
 
@@ -932,6 +939,7 @@ bertin.draw({
 - **fill**: fill color (default: "#9e9477")
 - **fillOpacity**: fill-opacity (default: 0.2)
 - **blur**: blur. feGaussianBlur stdDeviation value (default:4)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Rhumbs
 
@@ -961,6 +969,7 @@ bertin.draw({
 - **strokeWidth**: stroke color (default: 2)
 - **strokeOpacity**: stroke-opacity (default: 45)
 - **strokeDasharray**: stroke-dasharray (default:"none")
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 #### Water lines (slow/experimental)
 
@@ -994,6 +1003,7 @@ bertin.draw({
 - **strokeDasharray**: stroke-dasharray (default: "none")
 - **strokeLinecap**: stroke-linecap (default: "round")
 - **strokeLinejoin**: stroke-linejoin (default: "round")
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 #### logo
 
@@ -1020,6 +1030,7 @@ bertin.draw({
 - **url**: a string containing an url(default: bertin logo)
 - **position**: an array of two cootdinates [x, y] or predefined positions as "left", "right" or "middle" (default: "left")
 - **size**: width of the logo. (default: 100)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Header
 
@@ -1049,6 +1060,7 @@ bertin.draw({
 - **fill**: color of the text (default:"#9e9696")
 - **background**: background color (default: "white")
 - **backgroundOpacity**: background opacity (default: 1)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Labels
 
@@ -1083,6 +1095,7 @@ bertin.draw({
 - **opacity**: opacity (default: 1)
 - **halo**: boolean to display a halo below the text (default: false)
 - **halo_style**: an array defining the halo style. [color, thickness, opacity]  (default: ["white","4, 0.5)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Missing
 
@@ -1109,6 +1122,7 @@ bertin.draw({
 - **stroke**: stroke color (default: "white")
 - **strokeWidth**: stroke width (default: 0.5)
 - **fillOpacity**: fill opacity (default: 1)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -1149,6 +1163,7 @@ bertin.draw({
 - **opacity**: opacity (default:1)
 - **stroke**: stroke color (default:"none")
 - **strokeWidth**: stroke width (default: 1)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Scalebar
 
@@ -1172,6 +1187,7 @@ bertin.draw({
 - **x**: position in x (if this value is not filled, the legend is displayed on the left)
 - **y**: position in x (if this value is not filled, the legend is displayed at the bottom)
 - **units**: distance unit, miles or kilometers (default: "kilometers")
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Shadow
 
@@ -1201,6 +1217,7 @@ bertin.draw({
 - **dy**: shift in y (default: 3)
 - **stdDeviation**: blur (default: 1.5)
 - **opacity**: opacity (default: 0.7)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Texts
 
@@ -1240,6 +1257,7 @@ bertin.draw({
 - **frame_stroke**: frame stroke color (default: "none")
 - **frame_strokeWidth**: thickness of the frame contour (default: 1)
 - **frame_opacity**: frame opacity (default: 1)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Mercator Tiles
 
@@ -1275,6 +1293,7 @@ bertin.draw({
 -**clip**: a geojson to clip the image
 - **source**: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - **increasetilesize**: a value to slightly increase the size of the tiles solve the problem of gap between the tiles with chromium (deafault: 1)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ###  Tissot's indicatrix 
 
@@ -1303,6 +1322,7 @@ bertin.draw({
 - **stroke**: stroke (default: "#d91848")
 - **strokeOpactity**: stroke-opacity (default: 0.6)
 - **strokeWidth**: stroke-width (default: 1.5)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ## Geojson properties selections
 

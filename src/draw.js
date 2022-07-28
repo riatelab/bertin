@@ -142,6 +142,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   let o = layers.find((d) => d.type == "outline");
   if (o) {
     outline(svg, projection, planar, {
+      display: o.display,
       fill: o.fill,
       fillOpacity: o.fillOpacity,
       stroke: "none",
@@ -161,6 +162,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
           strokeOpacity: layer.strokeOpacity,
@@ -180,6 +182,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
           strokeOpacity: layer.strokeOpacity,
@@ -194,6 +197,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     if (layer.type == "tiles") {
       tiles(svg, width, height, projection, {
+        display: layer.display,
         opacity: layer.opacity,
         tileSize: layer.tileSize,
         zoomDelta: layer.zoomDelta,
@@ -214,6 +218,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         svg,
         projection,
         {
+          display: layer.display,
           geojson: layer.geojson,
           fill: layer.fill,
           stroke: layer.stroke,
@@ -256,6 +261,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         svg,
         projection,
         {
+          display: layer.display,
           geojson: layer.geojson,
           values: layer.values,
           dotvalue: layer.dotvalue,
@@ -301,6 +307,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           geojson: layer.geojson,
           values: layer.values,
           k: layer.k,
@@ -341,6 +348,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           geojson: layer.geojson,
           top_values: layer.top_values,
           bottom_values: layer.bottom_values,
@@ -380,6 +388,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           geojson: layer.geojson,
           values: layer.values,
           fill: layer.fill,
@@ -399,6 +408,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     // text note
     if (layer.type == "text") {
       text(svg, width, height, {
+        display: layer.display,
         position: layer.position,
         text: layer.text,
         fill: layer.fill,
@@ -421,6 +431,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     // logo
     if (layer.type == "logo") {
       logo(svg, width, height, {
+        display: layer.display,
         url: layer.url,
         size: layer.size,
         position: layer.position,
@@ -433,6 +444,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         svg,
         projection,
         {
+          display: layer.display,
           geojson: layer.geojson,
           values: layer.values,
           fill: layer.fill,
@@ -458,6 +470,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     // shadow
     if (layer.type == "shadow") {
       shadow(svg, projection, layer.geojson, clipid, {
+        display: layer.display,
         fill: layer.fill,
         dx: layer.dx,
         dy: layer.dy,
@@ -470,6 +483,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     if (layer.type == "waterlines") {
       waterlines(svg, projection, layer.geojson, clipid, {
+        display: layer.display,
         stroke: layer.stroke,
         dist: layer.dist,
         unit: layer.unit,
@@ -487,6 +501,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     // inner
     if (layer.type == "inner") {
       inner(svg, projection, {
+        display: layer.display,
         geojson: layer.geojson,
         fill: layer.fill,
         fillOpacity: layer.fillOpacity,
@@ -499,6 +514,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     if (layer.type == "rhumbs") {
       rhumbs(svg, width, height, clipid, {
+        display: layer.display,
         nb: layer.nb,
         position: layer.position,
         stroke: layer.stroke,
@@ -516,6 +532,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           step: layer.step,
           fill: layer.fill,
           fillOpacity: layer.fillOpacity,
@@ -535,6 +552,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           geojson: layer.geojson,
           values: layer.values,
           radius: layer.radius,
@@ -574,6 +592,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          display: layer.display,
           geojson: layer.geojson,
           values: layer.values,
           planar: layer.planar,
@@ -610,6 +629,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         svg,
         projection,
         {
+          display: layer.display,
           geojson: layer.geojson,
           values: layer.values,
           step: layer.step,
@@ -645,6 +665,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     // Header
     if (layer.type == "header") {
       addheader(svg, width, {
+        display: layer.display,
         fontSize: layer.fontSize,
         text: layer.text,
         fill: layer.fill,
@@ -657,6 +678,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     // Footer
     if (layer.type == "footer") {
       addfooter(svg, width, height, {
+        display: layer.display,
         fontSize: layer.fontSize,
         text: layer.text,
         fill: layer.fill,
@@ -671,6 +693,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       hatch(
         svg,
         {
+          display: layer.display,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
           strokeOpacity: layer.strokeOpacity,
@@ -690,6 +713,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   let s = layers.find((d) => d.type == "scalebar");
   if (s) {
     scalebar(svg, projection, planar, width, height, {
+      display: s.display,
       x: s.x,
       y: s.y,
       units: s.units,
@@ -699,6 +723,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // Outline (stroke)
   if (o) {
     outline(svg, projection, planar, {
+      display: o.display,
       fill: "none",
       stroke: o.stroke,
       strokeWidth: o.strokeWidth,
