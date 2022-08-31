@@ -1286,7 +1286,14 @@ bertin.draw({
 
 #### Parameters
 
-- **style**: tile style: "openstreetmap", "opentopomap", "worldterrain", "worldimagery", "worldStreet", "worldphysical", "shadedrelief", "oceanbasemap". (default: "opentopomap")
+- **style**: tile style: "openstreetmap", "opentopomap", "worldterrain", "worldimagery", "worldStreet", "worldphysical", "shadedrelief", "oceanbasemap". (default: "opentopomap"). You can alse use configurable like this:
+
+```js
+style: {
+  provider: "OpenStreetMap contributors", 
+  url: (x, y, z) => `https://tile.openstreetmap.org/${z}/${x}/${y}.png`,
+   }
+```
 - **zoomDelta**: zoom offset. See explanations [here](https://github.com/d3/d3-tile#tile_zoomDelta) (default:0)
 - **tileSize**: tile size. See explanations [here](https://github.com/d3/d3-tile#tile_tileSize) (default:512)
 - **opacity**: tile opacity (default:1)

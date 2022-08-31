@@ -69,13 +69,13 @@ export function tiles(selection, width, height, projection, options = {}) {
           `https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/${z}/${y}/${x}.png`,
       },
     ];
-    if (Object.hasOwn(style, "name") && Object.hasOwn(style, "provider") && Object.hasOwn(style, "url")) {
+    if (Object.hasOwn(style, "provider") && Object.hasOwn(style, "url")) {
+      style.name = "user";
       styles.push(style);
       style = style.name;
     }
 
     let url = styles.find((d) => d.name == style).url;
-
 
     let tile = d3
       .tile()
