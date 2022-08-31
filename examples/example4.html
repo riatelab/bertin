@@ -1,0 +1,41 @@
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+<script src="../dist/index.min.js"></script>
+
+<script>
+const geojson = "../data/AUS.json";
+
+d3.json(geojson).then(r =>
+document.body.appendChild(
+  bertin.draw({
+    params: {
+      clip: true,
+      width: 800,
+      background: "#DDD",
+      extent: r,
+      margin: 30
+    },
+    layers: [
+      {
+        geojson: r,
+        fill: "white",
+        fillOpacity: 0,
+        stoke: "white"
+      },
+      {
+        type: "tiles", 
+        style: {
+          name: "MapTiler_streets",
+          provider: `© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France`,
+          url: (x, y, z) => `https://a.tile.openstreetmap.fr/hot/${z}/${x}/${y}.png`,
+        },
+        clip: r
+      },
+      {
+        type: "shadow",
+        geojson: r
+      }
+    ]
+  })
+));
+</script>
