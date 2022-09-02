@@ -5,5 +5,5 @@ export function topo2geo(json) {
   if (json.type == "Topology") {
     return topojson.feature(json, Object.keys(json.objects)[0]);
   }
-  return json;
+  return JSON.parse(JSON.stringify(json));
 }

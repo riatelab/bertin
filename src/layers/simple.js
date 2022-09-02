@@ -178,23 +178,26 @@ export function simple(
     // If points
     if (figuration(geojson) == "p") {
       options.leg_type = options.symbol ? options.symbol : "circle";
-      const simulation = d3
-        .forceSimulation(geojson.features)
-        .force(
-          "x",
-          d3.forceX((d) => projection(d.geometry.coordinates)[0])
-        )
-        .force(
-          "y",
-          d3.forceY((d) => projection(d.geometry.coordinates)[1])
-        )
-        .force(
-          "collide",
-          d3.forceCollide(Math.sqrt(symbol_size) / 2 + symbol_shift / 2)
-        );
 
-      for (let i = 0; i < symbol_iteration; i++) {
-        simulation.tick();
+      if (symbol_shift > 0) {
+        const simulation = d3
+          .forceSimulation(geojson.features)
+          .force(
+            "x",
+            d3.forceX((d) => projection(d.geometry.coordinates)[0])
+          )
+          .force(
+            "y",
+            d3.forceY((d) => projection(d.geometry.coordinates)[1])
+          )
+          .force(
+            "collide",
+            d3.forceCollide(Math.sqrt(symbol_size) / 2 + symbol_shift / 2)
+          );
+
+        for (let i = 0; i < symbol_iteration; i++) {
+          simulation.tick();
+        }
       }
 
       const symbols = new Map([
