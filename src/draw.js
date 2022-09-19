@@ -35,6 +35,7 @@ import { tiles } from "./layers/tiles.js";
 import { logo } from "./layers/logo.js";
 import { rhumbs } from "./layers/rhumbs.js";
 import { tissot } from "./layers/tissot.js";
+import { minimap } from "./layers/minimap.js";
 
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
@@ -191,6 +192,30 @@ export function draw({ params = {}, layers = {} } = {}) {
         },
         clipid
       );
+    }
+
+    // minimap
+    if (layer.type == "minimap" || layer.type == "location") {
+      minimap({
+        x: layer.x,
+        y: layer.y,
+        width: layer.width,
+        projection: layer.projection,
+        geojson: layer.geojson,
+        extent: layer.extent,
+        background: layer.background,
+        geometries: layer.geometries,
+        raise: layer.raise,
+        frame: layer.frame,
+        dot: layer.dot,
+        mainmap: {
+          selection: svg,
+          clipid: clipid,
+          projection: projection,
+          width: width,
+          height: height,
+        },
+      });
     }
 
     // tiles

@@ -25,3 +25,4 @@ export { inner } from "./layers/inner.js";
 export { waterlines } from "./layers/waterlines.js";
 
 export { regulardots } from "./helpers/regulardots.js";
+export { minimap } from "./layers/minimap.js";
