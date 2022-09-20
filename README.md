@@ -962,8 +962,6 @@ bertin.draw({
 ```
 #### Parameters
 
-- **thickness**: a thickness in pixels (default: 7)
-
 - **x**: position in x (default: 5)
 - **y**: position in y (default: 5)
 - **width**: Width (default: 200)
