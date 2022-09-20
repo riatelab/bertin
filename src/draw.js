@@ -203,6 +203,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection: layer.projection,
         geojson: layer.geojson,
         extent: layer.extent,
+        threshold: layer.threshold,
         background: layer.background,
         geometries: layer.geometries,
         raise: layer.raise,
@@ -210,7 +211,6 @@ export function draw({ params = {}, layers = {} } = {}) {
         dot: layer.dot,
         mainmap: {
           selection: svg,
-          clipid: clipid,
           projection: projection,
           width: width,
           height: height,

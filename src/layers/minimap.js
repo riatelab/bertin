@@ -1,7 +1,8 @@
 import { geoPath } from "d3-geo";
-import { geoEquirectangular, geoArea } from "d3-geo";
+import { geoArea } from "d3-geo";
 import { bbox } from "../bbox.js";
-const d3 = Object.assign({}, { geoEquirectangular, geoPath, geoArea });
+import { getproj } from "../projections/projections.js";
+const d3 = Object.assign({}, { geoPath, geoArea });
 
 export function minimap({
   mainmap = {
@@ -9,14 +10,14 @@ export function minimap({
     projection: null,
     width: null,
     height: null,
-    clipid: null,
   },
   x = 5,
   y = 5,
-  precision = 10,
   geojson = land,
   extent = null,
-  projection = d3.geoEquirectangular(),
+  threshold = 0.1,
+  precision = 10,
+  projection = "Equirectangular",
   width = 200,
   background = {
     stroke: "black",
@@ -55,6 +56,10 @@ export function minimap({
     strokeOpacity: 1,
   },
 } = {}) {
+  // inique id
+  const clipid =
+    Date.now().toString(36) + Math.random().toString(36).substring(2);
+
   // extent
 
   extent =
@@ -65,21 +70,53 @@ export function minimap({
       : extent;
 
   const outline = { type: "Sphere" };
+
+  // selection
   let selection = mainmap.selection;
+
+  // projection
+  projection = getproj(projection);
   projection = projection.fitWidth(width, extent ? extent : outline);
-  //projection = projection.fitWidth(width, outline);
   const path = d3.geoPath(projection);
+
+  // extent clip
+  let bb = "";
+  if (extent != null) {
+    bb = path.bounds(extent);
+    selection
+      .append("clipPath")
+      .attr("id", `extent_${clipid}`)
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", bb[1][0])
+      .attr("height", bb[1][1]);
+  }
 
   // Outline (fill)
 
-  selection
-    .append("g")
-    .append("path")
-    .attr("d", path(outline))
-    .attr("fill", background.fill)
-    .attr("fill-opacity", background.fillOpacity)
-    .attr("stroke", "none")
-    .attr("transform", `translate(${x} ${y})`);
+  if (extent == null) {
+    selection
+      .append("g")
+      .append("path")
+      .attr("d", path(outline))
+      .attr("fill", background.fill)
+      .attr("fill-opacity", background.fillOpacity)
+      .attr("stroke", "none")
+      .attr("transform", `translate(${x} ${y})`);
+  } else {
+    selection
+      .append("g")
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", bb[1][0])
+      .attr("height", bb[1][1])
+      .attr("fill", background.fill)
+      .attr("fill-opacity", background.fillOpacity)
+      .attr("stroke", "none")
+      .attr("transform", `translate(${x} ${y})`);
+  }
 
   // world
   selection
@@ -92,19 +129,35 @@ export function minimap({
     .attr("stroke-width", geometries.strokeWidth)
     .attr("stroke-opacity", geometries.strokeOpacity)
     .attr("d", path)
-    .attr("transform", `translate(${x} ${y})`);
+    .attr("transform", `translate(${x} ${y})`)
+    .attr("clip-path", `url(#extent_${clipid}`); // ICI
 
   // Outline (stroke)
 
-  selection
-    .append("g")
-    .append("path")
-    .attr("d", path(outline))
-    .attr("fill", "none")
-    .attr("stroke", background.stroke)
-    .attr("stroke-width", background.strokeWidth)
-    .attr("stroke-opacity", background.strokeOpacity)
-    .attr("transform", `translate(${x} ${y})`);
+  if (extent == null) {
+    selection
+      .append("g")
+      .append("path")
+      .attr("d", path(outline))
+      .attr("fill", "none")
+      .attr("stroke", background.stroke)
+      .attr("stroke-width", background.strokeWidth)
+      .attr("stroke-opacity", background.strokeOpacity)
+      .attr("transform", `translate(${x} ${y})`);
+  } else {
+    selection
+      .append("g")
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", bb[1][0])
+      .attr("height", bb[1][1])
+      .attr("fill", "none")
+      .attr("stroke", background.stroke)
+      .attr("stroke-width", background.strokeWidth)
+      .attr("stroke-opacity", background.strokeOpacity)
+      .attr("transform", `translate(${x} ${y})`);
+  }
 
   // Map area
   let rangx = [];
@@ -132,7 +185,6 @@ export function minimap({
     },
   };
 
-  const threshold = 0.1;
   if (d3.geoArea(rect) > threshold) {
     selection
       .append("g")
@@ -150,16 +202,15 @@ export function minimap({
 
     selection
       .append("clipPath")
-      .attr("id", `clipminimap_${mainmap.clipid}`)
+      .attr("id", `clipminimap_${clipid}`)
       .append("path")
       .datum(rect)
       .attr("d", d3.geoPath(projection));
 
-    // world
     selection
       .append("g")
       .append("path")
-      .attr("clip-path", `url(#clipminimap_${mainmap.clipid}`)
+      .attr("clip-path", `url(#clipminimap_${clipid}`)
       .datum(geojson)
       .attr("fill", raise.fill)
       .attr("fill-opacity", raise.fillOpacity)
