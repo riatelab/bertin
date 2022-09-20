@@ -34,17 +34,17 @@ Jacques Bertin (1918-2010) was a French cartographer, whose major contribution w
 
 #### In browser
 
-Latest version
+Latest major version
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/bertin@1" charset="utf-8"></script>
 ```
 
-Pinned version
+Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.0.4"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.1.0"
   charset="utf-8"
 ></script>
 ```
@@ -57,10 +57,10 @@ Latest major version
 bertin = require("bertin@1");
 ```
 
-Pinned version
+Latest version
 
 ```js
-bertin = require("bertin@1.0.4");
+bertin = require("bertin@1.1.0");
 ```
 
 ## Usage
@@ -940,6 +940,47 @@ bertin.draw({
 - **fillOpacity**: fill-opacity (default: 0.2)
 - **blur**: blur. feGaussianBlur stdDeviation value (default:4)
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+
+### Minimap (location map)
+
+The _minimap_ type (or _location_) allows to display a location map showing the coverage of the map. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/minimap.js). [Example](https://observablehq.com/@neocartocnrs/bertin-js-location-map)
+
+![](./img/minimap.png)
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "minimap",
+      x: 50,
+      y: 50
+      width:300,
+      frame:{fill: "yellow", stroke: "none"}
+    },
+  ],
+});
+```
+#### Parameters
+
+- **thickness**: a thickness in pixels (default: 7)
+
+- **x**: position in x (default: 5)
+- **y**: position in y (default: 5)
+- **width**: Width (default: 200)
+- **projection**: minimap projection (default: "Equirectangular")
+- **geojson**: geometries of the map (default: null)
+- **extent**: minimap extent (default: null)
+- **threshold**: area defining the threshold between dot and polygon representation (default: 0.1)
+- **background**: an object to define the style of the background
+(default: {stroke: "black", strokeWidth: 1, strokeOpacity: 1, fill: "white", fillOpacity: 1})
+- **geometries**: an object to define the style of the basemap
+(default: {fill: "#CCC", stroke: "none", strokeWidth: 1, fillOpacity: 1, strokeOpacity: 1})
+- **raise**: an object to define the style of the highlight area
+(default: {fill: "red", stroke: "none", strokeWidth: 1, fillOpacity: 1, strokeOpacity: 1})
+- **frame**: an object to define the style of the frame
+(default: {stroke: "none", strokeWidth: 1, strokeOpacity: 1, fill: "red", fillOpacity: 0.25})
+- **dot**: an object to define the style of the dot
+(default: {fill: "red", r: 5, stroke: "none", strokeWidth: 1, fillOpacity: 1,strokeOpacity: 1})
 
 ### Rhumbs
 
