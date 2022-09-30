@@ -67,6 +67,7 @@ export function square(
     let fillOpacity =
       options.fillOpacity != undefined ? options.fillOpacity : 1;
     let dorling = options.dorling ? options.dorling : false;
+    let demers = options.demers ? options.demers : false;
     let iteration = options.iteration != undefined ? options.iteration : 200;
     let tooltip = options.tooltip ? options.tooltip : false;
     if (Array.isArray(tooltip)) {
@@ -92,88 +93,105 @@ export function square(
 
     // features -> data
 
+    // let data = [...features]
+    //   .map((d) => {
+    //     return Object.assign(d.properties, {
+    //       x: projection(d.geometry.coordinates)[0],
+    //       y: projection(d.geometry.coordinates)[1],
+    //       size: size(Math.abs(d.properties[values])),
+    //       padding:
+    //         thickness(features, strokeWidth).getthickness(
+    //           d.properties[strokeWidth.values] || 0
+    //         ) / 2,
+    //     });
+    //   })
+    //   .filter((d) => !isNaN(d.x))
+    //   .filter((d) => !isNaN(d.y))
+    //   .filter((d) => d[values] != null);
+
     let data = [...features]
       .map((d) => {
         return Object.assign(d.properties, {
-          x: projection(d.geometry.coordinates)[0],
-          y: projection(d.geometry.coordinates)[1],
-          size: size(Math.abs(d.properties[values])),
-          padding:
+          _x: projection(d.geometry.coordinates)[0],
+          _y: projection(d.geometry.coordinates)[1],
+          _size: size(Math.abs(d.properties[values])),
+          _padding:
             thickness(features, strokeWidth).getthickness(
               d.properties[strokeWidth.values] || 0
             ) / 2,
         });
       })
-      .filter((d) => !isNaN(d.x))
-      .filter((d) => !isNaN(d.y));
+      .filter((d) => !isNaN(d._x))
+      .filter((d) => !isNaN(d._y))
+      .filter((d) => d[values] != null);
 
-    // Collide function (for squares)
+    if (dorling == true || demers == true) {
+      // Collide function (for squares)
 
-    function squareForceCollide() {
-      let nodes;
+      function squareForceCollide() {
+        let nodes;
 
-      function force(alpha) {
-        const quad = d3.quadtree(
-          nodes,
-          (d) => d.x,
-          (d) => d.y
-        );
-        for (const d of nodes) {
-          quad.visit((q, x1, y1, x2, y2) => {
-            let updated = false;
-            if (q.data && q.data !== d) {
-              let x = d.x - q.data.x,
-                y = d.y - q.data.y,
-                xSpacing = d.padding + (q.data.size + d.size) / 2,
-                ySpacing = d.padding + (q.data.size + d.size) / 2,
-                absX = Math.abs(x),
-                absY = Math.abs(y),
-                l,
-                lx,
-                ly;
+        function force(alpha) {
+          const quad = d3.quadtree(
+            nodes,
+            (d) => d._x,
+            (d) => d._y
+          );
+          for (const d of nodes) {
+            quad.visit((q, x1, y1, x2, y2) => {
+              let updated = false;
+              if (q.data && q.data !== d) {
+                let x = d._x - q.data._x,
+                  y = d._y - q.data._y,
+                  xSpacing = d._padding + (q.data._size + d._size) / 2,
+                  ySpacing = d._padding + (q.data._size + d._size) / 2,
+                  absX = Math.abs(x),
+                  absY = Math.abs(y),
+                  l,
+                  lx,
+                  ly;
 
-              if (absX < xSpacing && absY < ySpacing) {
-                l = Math.sqrt(x * x + y * y);
+                if (absX < xSpacing && absY < ySpacing) {
+                  l = Math.sqrt(x * x + y * y);
 
-                lx = (absX - xSpacing) / l;
-                ly = (absY - ySpacing) / l;
+                  lx = (absX - xSpacing) / l;
+                  ly = (absY - ySpacing) / l;
 
-                // the one that's barely within the bounds probably triggered the collision
-                if (Math.abs(lx) > Math.abs(ly)) {
-                  lx = 0;
-                } else {
-                  ly = 0;
+                  // the one that's barely within the bounds probably triggered the collision
+                  if (Math.abs(lx) > Math.abs(ly)) {
+                    lx = 0;
+                  } else {
+                    ly = 0;
+                  }
+                  d._x -= x *= lx;
+                  d._y -= y *= ly;
+                  q.data.x += x;
+                  q.data.y += y;
+
+                  updated = true;
                 }
-                d.x -= x *= lx;
-                d.y -= y *= ly;
-                q.data.x += x;
-                q.data.y += y;
-
-                updated = true;
               }
-            }
-            return updated;
-          });
+              return updated;
+            });
+          }
         }
+
+        force.initialize = (_) => (nodes = _);
+
+        return force;
       }
 
-      force.initialize = (_) => (nodes = _);
+      // simulation
 
-      return force;
-    }
-
-    // Simulation
-
-    if (dorling == true) {
       const simulation = d3
         .forceSimulation(data)
         .force(
-          "x",
-          d3.forceX((d) => d.x)
+          "_x",
+          d3.forceX((d) => d._x)
         )
         .force(
-          "y",
-          d3.forceY((d) => d.y)
+          "_y",
+          d3.forceY((d) => d._y)
         )
         .force("collide", squareForceCollide());
 
@@ -181,6 +199,8 @@ export function square(
         simulation.tick();
       }
     }
+
+    console.log(data);
 
     // Squares
 
@@ -203,10 +223,10 @@ export function square(
       .attr("fill-opacity", fillOpacity)
       .attr("stroke-dasharray", strokeDasharray)
       .attr("stroke-opacity", strokeOpacity)
-      .attr("x", (d) => d.x - d.size / 2)
-      .attr("y", (d) => d.y - d.size / 2)
-      .attr("width", (d) => d.size)
-      .attr("height", (d) => d.size)
+      .attr("x", (d) => d._x - d._size / 2)
+      .attr("y", (d) => d._y - d._size / 2)
+      .attr("width", (d) => d._size)
+      .attr("height", (d) => d._size)
       .on("touchmove mousemove", function (event, d) {
         if (tooltip) {
           selection.select("#info").call(
