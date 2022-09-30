@@ -49,6 +49,7 @@
     "d3-geo-projection": "^4.0.0",
     "d3-geo-scale-bar": "^1.1.1",
     "d3-interpolate": "^3.0.1",
+    "d3-quadtree": "^3.0.1",
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.0.0",
     "d3-selection": "^3.0.0",

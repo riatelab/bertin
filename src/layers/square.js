@@ -1,0 +1,214 @@
+import { min, max, descending } from "d3-array";
+import { quadtree } from "d3-quadtree";
+import { scaleSqrt } from "d3-scale";
+import { select, pointer } from "d3-selection";
+import { forceX, forceY, forceCollide, forceSimulation } from "d3-force";
+const d3 = Object.assign(
+  {},
+  {
+    min,
+    max,
+    descending,
+    scaleSqrt,
+    select,
+    pointer,
+    forceX,
+    forceY,
+    forceCollide,
+    forceSimulation,
+    quadtree,
+  }
+);
+import { topo2geo } from "../helpers/topo2geo.js";
+import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
+//import { legcircles } from "../legend/leg-circles.js";
+import { centroid } from "geotoolbox";
+import { figuration } from "../helpers/figuration.js";
+import { colorize } from "../helpers/colorize.js";
+import { thickness } from "../helpers/thickness.js";
+import { legends } from "../legend/legends.js";
+
+export function square(
+  selection,
+  projection,
+  planar,
+  options = {},
+  clipid,
+  width,
+  height
+) {
+  let display = options.display == false ? false : true;
+  if (display) {
+    let cols = [
+      "#66c2a5",
+      "#fc8d62",
+      "#8da0cb",
+      "#e78ac3",
+      "#a6d854",
+      "#ffd92f",
+      "#e5c494",
+      "#b3b3b3",
+    ];
+    let geojson = topo2geo(options.geojson);
+    let values = options.values;
+    let fixmax = options.fixmax != undefined ? options.fixmax : undefined;
+    let k = options.k ? options.k : 50;
+    let fill = options.fill
+      ? options.fill
+      : cols[Math.floor(Math.random() * cols.length)];
+    let stroke = options.stroke ? options.stroke : "white";
+    let strokeWidth =
+      options.strokeWidth != undefined ? options.strokeWidth : 0.5;
+    let strokeDasharray = options.strokeDasharray
+      ? options.strokeDasharray
+      : "none";
+    let strokeOpacity =
+      options.strokeOpacity != undefined ? options.strokeOpacity : 1;
+    let fillOpacity =
+      options.fillOpacity != undefined ? options.fillOpacity : 1;
+    let dorling = options.dorling ? options.dorling : false;
+    let iteration = options.iteration != undefined ? options.iteration : 200;
+    let tooltip = options.tooltip ? options.tooltip : false;
+    if (Array.isArray(tooltip)) {
+      tooltip = { fields: tooltip };
+    }
+    if (typeof tooltip == "string") {
+      tooltip = { fields: [tooltip] };
+    }
+
+    let features;
+
+    if (figuration(geojson) == "p") {
+      features = geojson.features;
+    } else {
+      features = centroid(geojson, { planar: planar }).features;
+    }
+
+    const valvax =
+      fixmax != undefined
+        ? fixmax
+        : d3.max(features, (d) => Math.abs(+d.properties[values]));
+    let size = d3.scaleSqrt([0, valvax], [0, k * 1.77]);
+
+    // features -> data
+
+    let data = [...features]
+      .map((d) => {
+        return Object.assign(d.properties, {
+          x: projection(d.geometry.coordinates)[0],
+          y: projection(d.geometry.coordinates)[1],
+          size: size(Math.abs(d.properties[values])),
+          padding:
+            thickness(features, strokeWidth).getthickness(
+              d.properties[strokeWidth.values] || 0
+            ) / 2,
+        });
+      })
+      .filter((d) => !isNaN(d.x))
+      .filter((d) => !isNaN(d.y));
+
+    // Collide function (for squares)
+
+    function squareForceCollide() {
+      let nodes;
+
+      function force(alpha) {
+        const quad = d3.quadtree(
+          nodes,
+          (d) => d.x,
+          (d) => d.y
+        );
+        for (const d of nodes) {
+          quad.visit((q, x1, y1, x2, y2) => {
+            let updated = false;
+            if (q.data && q.data !== d) {
+              let x = d.x - q.data.x,
+                y = d.y - q.data.y,
+                xSpacing = d.padding + (q.data.size + d.size) / 2,
+                ySpacing = d.padding + (q.data.size + d.size) / 2,
+                absX = Math.abs(x),
+                absY = Math.abs(y),
+                l,
+                lx,
+                ly;
+
+              if (absX < xSpacing && absY < ySpacing) {
+                l = Math.sqrt(x * x + y * y);
+
+                lx = (absX - xSpacing) / l;
+                ly = (absY - ySpacing) / l;
+
+                // the one that's barely within the bounds probably triggered the collision
+                if (Math.abs(lx) > Math.abs(ly)) {
+                  lx = 0;
+                } else {
+                  ly = 0;
+                }
+                d.x -= x *= lx;
+                d.y -= y *= ly;
+                q.data.x += x;
+                q.data.y += y;
+
+                updated = true;
+              }
+            }
+            return updated;
+          });
+        }
+      }
+
+      force.initialize = (_) => (nodes = _);
+
+      return force;
+    }
+
+    // Simulation
+
+    if (dorling == true) {
+      const simulation = d3
+        .forceSimulation(data)
+        .force(
+          "x",
+          d3.forceX((d) => d.x)
+        )
+        .force(
+          "y",
+          d3.forceY((d) => d.y)
+        )
+        .force("collide", squareForceCollide());
+
+      for (let i = 0; i < iteration; i++) {
+        simulation.tick();
+      }
+    }
+
+    // Squares
+
+    selection
+      .append("g")
+      .selectAll("squares")
+      .data(
+        data.sort((a, b) =>
+          d3.descending(Math.abs(+a[values]), Math.abs(+b[values]))
+        )
+      )
+      .join("rect")
+      .attr("fill", (d) => colorize(data, fill).getcol(d[fill.values]))
+      .attr("stroke", (d) => colorize(data, stroke).getcol(d[stroke.values]))
+      .attr("stroke-width", (d) =>
+        thickness(data, strokeWidth).getthickness(
+          d[strokeWidth.values] || undefined
+        )
+      )
+      .attr("fill-opacity", fillOpacity)
+      .attr("stroke-dasharray", strokeDasharray)
+      .attr("stroke-opacity", strokeOpacity)
+      .attr("x", (d) => d.x - d.size / 2)
+      .attr("y", (d) => d.y - d.size / 2)
+      .attr("width", (d) => d.size)
+      .attr("height", (d) => d.size);
+
+    // legend (classes)
+    legends(geojson, selection, fill, stroke, strokeWidth);
+  }
+}
