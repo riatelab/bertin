@@ -206,7 +206,51 @@ export function square(
       .attr("x", (d) => d.x - d.size / 2)
       .attr("y", (d) => d.y - d.size / 2)
       .attr("width", (d) => d.size)
-      .attr("height", (d) => d.size);
+      .attr("height", (d) => d.size)
+      .on("touchmove mousemove", function (event, d) {
+        if (tooltip) {
+          selection.select("#info").call(
+            addtooltip,
+
+            {
+              fields: (function () {
+                const fields = Array.isArray(tooltip.fields)
+                  ? tooltip.fields
+                  : [tooltip.fields];
+                let result = [];
+                fields.forEach((e) => {
+                  result.push(e[0] == "$" ? `${d[e.substr(1, e.length)]}` : e);
+                });
+                return result;
+              })(),
+              fontWeight: tooltip.fontWeight,
+              fontSize: tooltip.fontSize,
+              fontStyle: tooltip.fontStyle,
+              fill: tooltip.fill,
+              stroke: tooltip.stroke,
+              strokeWidth: tooltip.strokeWidth,
+              fillOpacity: tooltip.fillOpacity,
+              strokeOpacity: tooltip.strokeOpacity,
+              col: tooltip.col,
+              type: tooltiptype(d3.pointer(event, this), width, height),
+            }
+          );
+        }
+        if (tooltip) {
+          selection
+            .select("#info")
+            .attr("transform", `translate(${d3.pointer(event, this)})`);
+          d3.select(this)
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3);
+        }
+      })
+      .on("touchend mouseleave", function () {
+        selection.select("#info").call(addtooltip, null);
+        d3.select(this)
+          .attr("stroke-opacity", strokeOpacity)
+          .attr("fill-opacity", fillOpacity);
+      });
 
     // legend (classes)
     legends(geojson, selection, fill, stroke, strokeWidth);
