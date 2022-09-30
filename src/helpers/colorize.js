@@ -15,6 +15,14 @@ export function colorize(features, input) {
       getcol: (d) => input,
     };
 
+  // To allow features or array of objects
+  features =
+    features[0]["properties"] == undefined
+      ? features
+      : features.map((d) => d.properties);
+
+  console.log(features);
+
   // choropleth
   if (typeof input == "object" && input.type == "choro") {
     let values = input.values;
@@ -34,7 +42,7 @@ export function colorize(features, input) {
       nbreaks = 6;
     }
 
-    const arr = features.map((d) => d.properties[values]);
+    const arr = features.map((d) => d[values]); // here
     const val = arr
       .filter((d) => +d !== undefined)
       .filter((d) => +d !== null)
@@ -93,9 +101,8 @@ export function colorize(features, input) {
     const arr =
       input.order != undefined
         ? input.order
-        : Array.from(new Set(features.map((d) => d.properties[values])));
+        : Array.from(new Set(features.map((d) => d[values]))); // here
 
-    //const arr = Array.from(new Set(features.map((d) => d.properties[values])));
     let types =
       input.types != undefined
         ? input.types
@@ -128,7 +135,7 @@ export function colorize(features, input) {
     let col_missing = input.col_missing ? input.col_missing : "#f5f5f5";
     let txt_missing = input.txt_missing ? input.txt_missing : "No data";
 
-    const arr = features.map((d) => d.properties[values]);
+    const arr = features.map((d) => d[values]); // here
     const arr2 = arr.filter((d) => d !== "" && d != null && d != undefined);
 
     const getcol = (val) => {
