@@ -671,6 +671,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           strokeDasharray: layer.strokeDasharray,
           strokeOpacity: layer.strokeOpacity,
           dorling: layer.dorling,
+          demers: layer.demers,
           iteration: layer.iteration,
           tooltip: layer.tooltip,
           leg_x: layer.leg_x,
