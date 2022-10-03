@@ -44,7 +44,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.1.0"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.2.0"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.1.0");
+bertin = require("bertin@1.2.0");
 ```
 
 ## Usage
@@ -70,7 +70,7 @@ bertin = require("bertin@1.1.0");
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.2.0"></script>
 
 <script>
   let geojson =
@@ -332,6 +332,57 @@ bertin.draw({
 - **strokeWidth**: stroke width (default: 0.5)
 - **fillOpacity**: fill opacity (default: 1)
 - **dorling**: a boolean (default:false)
+- **iteration**: an integer to define the number of iteration for the Dorling method (default: 200)
+- **tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin).
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+
+Parameters of the legend
+
+- **leg_x**: position in x (if this value is not filled, the legend is not displayed)
+- **leg_y**: position in y (if this value is not filled, the legend is not displayed)
+- **leg_fill**: color of the circles (default: "none")
+- **leg_stroke**: stroke of the circles (default: "black")
+- **leg_strokeWidth**: stoke-width (default: 0.8)
+- **leg_txtcol**: color of the text (default: "#363636")
+- **leg_title**: title of the legend (default var_data)
+- **leg_round**: number of digits after the decimal point (default: undefined)
+- **leg_fontSize**: title legend font size (default: 14)
+- **leg_fontSize2**: values font size (default: 10)
+
+
+### Square
+
+The _square_ type is used to draw a map by proportional squares. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/square.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-prop-squares?collection=@neocartocnrs/bertin).
+
+![](./img/square.png)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "square",
+      geojson: countries,
+      values: "pop",
+      k: 60,
+      tooltip: ["$country", "$pop", "(inh.)"],
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **geojson**: a geojson (**compulsory**)
+- **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
+- **k**: size of the largest circle (default:50)
+- **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
+- **fill**: fill color (default: random color)
+- **stroke**: stroke color (default: "white")
+- **strokeWidth**: stroke width (default: 0.5)
+- **fillOpacity**: fill opacity (default: 1)
+- **demers**: a boolean to avoid overlay. Dorling parameter works also (default:false)
 - **iteration**: an integer to define the number of iteration for the Dorling method (default: 200)
 - **tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin).
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
@@ -755,7 +806,6 @@ bertin.draw({
 To vary the thickness according to qualitative data.
 
 ![](./img/thickness_categories.png)
-
 
 ```js
 bertin.draw({
