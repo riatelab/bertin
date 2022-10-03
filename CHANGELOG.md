@@ -3,6 +3,23 @@
 
 # bertin.js - Changelog
 
+#### 1.2.
+
+##### New Features
+
+* Square layer ([dd9cea](https://github.com/neocarto/bertin/commit/dd9cea7d69895b5395c6d48d4a945993521ca59d)) ([9e237a](https://github.com/neocarto/bertin/commit/9e237a41fa659b4fcde40723967de5cc556cc192)) ([f8ccd2](https://github.com/neocarto/bertin/commit/https://github.com/neocarto/bertin/commit/f8ccd2249930dc3f0c410f9c25ba4e0960877817))
+
+#### 1.1.0
+
+##### New Features
+
+* Minimap ([14ed1a](https://github.com/neocarto/bertin/commit/14ed1aee068c6bc2bd391428b0f6c2677dc15639))
+* Tissot's indicatrix ([4c186d](https://github.com/neocarto/bertin/commit/4c186de2237b9a59fa6f8230e2cb3221f691a784))
+
+##### Bug Fixes
+
+* Allow configurable tile styles ([86b3e0](https://github.com/neocarto/bertin/commit/86b3e0a3df6fca3b868a56836fbccd5ea63965c7))
+
 ## <ins>1.0</ins> (July 22, 2022) 🥳
 
 ##### New Features
