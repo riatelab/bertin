@@ -21,8 +21,6 @@ export function colorize(features, input) {
       ? features
       : features.map((d) => d.properties);
 
-  console.log(features);
-
   // choropleth
   if (typeof input == "object" && input.type == "choro") {
     let values = input.values;

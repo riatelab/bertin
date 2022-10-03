@@ -21,7 +21,7 @@ const d3 = Object.assign(
 );
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
-//import { legcircles } from "../legend/leg-circles.js";
+import { legsquares } from "../legend/leg-squares.js";
 import { centroid } from "geotoolbox";
 import { figuration } from "../helpers/figuration.js";
 import { colorize } from "../helpers/colorize.js";
@@ -93,22 +93,6 @@ export function square(
 
     // features -> data
 
-    // let data = [...features]
-    //   .map((d) => {
-    //     return Object.assign(d.properties, {
-    //       x: projection(d.geometry.coordinates)[0],
-    //       y: projection(d.geometry.coordinates)[1],
-    //       size: size(Math.abs(d.properties[values])),
-    //       padding:
-    //         thickness(features, strokeWidth).getthickness(
-    //           d.properties[strokeWidth.values] || 0
-    //         ) / 2,
-    //     });
-    //   })
-    //   .filter((d) => !isNaN(d.x))
-    //   .filter((d) => !isNaN(d.y))
-    //   .filter((d) => d[values] != null);
-
     let data = [...features]
       .map((d) => {
         return Object.assign(d.properties, {
@@ -118,7 +102,9 @@ export function square(
           _padding:
             thickness(features, strokeWidth).getthickness(
               d.properties[strokeWidth.values] || 0
-            ) / 2,
+            ) /
+              2 +
+            0,
         });
       })
       .filter((d) => !isNaN(d._x))
@@ -199,9 +185,6 @@ export function square(
         simulation.tick();
       }
     }
-
-    console.log(data);
-
     // Squares
 
     selection
@@ -274,5 +257,32 @@ export function square(
 
     // legend (classes)
     legends(geojson, selection, fill, stroke, strokeWidth);
+
+    // Legend (squares)
+
+    let array = data.map((d) => Math.abs(+d[values]));
+    let legval = [
+      d3.min(array),
+      size.invert(size(d3.max(array)) / 3),
+      size.invert(size(d3.max(array)) / 1.5),
+      d3.max(array),
+    ];
+
+    legsquares(selection, {
+      x: options.leg_x,
+      y: options.leg_y,
+      round: options.leg_round !== undefined ? options.leg_round : undefined,
+      k: k,
+      fixmax: fixmax,
+      stroke: options.leg_stroke,
+      fill: options.leg_fill,
+      strokeWidth: options.leg_strokeWidth,
+      txtcol: options.leg_txtcol,
+      title: options.leg_title,
+      fontSize: options.leg_fontSize,
+      fontSize2: options.leg_fontSize2,
+      title: options.leg_title ? options.leg_title : values,
+      values: legval,
+    });
   }
 }
