@@ -25,7 +25,7 @@ export function graticule(selection, projection, planar, options = {}, clipid) {
       step = Array.isArray(step) ? step : [step, step];
       selection
         .append("g")
-        .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
+        .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
         .append("path")
         .datum(d3.geoGraticule().step(step))
         .attr("d", d3.geoPath(projection))

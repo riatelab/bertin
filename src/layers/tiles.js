@@ -99,7 +99,7 @@ export function tiles(selection, width, height, projection, options = {}) {
 
     selection
       .append("g")
-      .attr("clip-path", `url(#tileclip_${id}`)
+      .attr("clip-path", `url(#tileclip_${id})`)
       .selectAll("image")
       .data(tile())
       .join("image")

@@ -26,7 +26,7 @@ export function shadow(selection, projection, geojson, clipid, options = {}) {
 
     selection
       .append("g")
-      .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
+      .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
       .append("path")
       .datum(merged)
       .attr("d", path)

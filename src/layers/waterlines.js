@@ -45,7 +45,7 @@ export function waterlines(
 
     selection
       .append("g")
-      .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
+      .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
       .selectAll("path")
       .data(features)
       .join("path")

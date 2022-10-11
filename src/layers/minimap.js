@@ -130,7 +130,7 @@ export function minimap({
     .attr("stroke-opacity", geometries.strokeOpacity)
     .attr("d", path)
     .attr("transform", `translate(${x} ${y})`)
-    .attr("clip-path", `url(#extent_${clipid}`); // ICI
+    .attr("clip-path", `url(#extent_${clipid})`); // ICI
 
   // Outline (stroke)
 
@@ -210,7 +210,7 @@ export function minimap({
     selection
       .append("g")
       .append("path")
-      .attr("clip-path", `url(#clipminimap_${clipid}`)
+      .attr("clip-path", `url(#clipminimap_${clipid})`)
       .datum(geojson)
       .attr("fill", raise.fill)
       .attr("fill-opacity", raise.fillOpacity)
