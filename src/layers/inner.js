@@ -42,7 +42,7 @@ export function inner(selection, projection, options = {}) {
 
     selection
       .append("g")
-      .attr("clip-path", `url(#inner${id}`)
+      .attr("clip-path", `url(#inner${id})`)
       .append("path")
       .datum(merged)
       .attr("fill", "none")
@@ -51,7 +51,7 @@ export function inner(selection, projection, options = {}) {
       .attr("stroke-linejoin", "round")
       .attr("stroke-opacity", fillOpacity)
       .attr("stroke-width", thickness * 2)
-      .attr("filter", `url(#blur${id}`)
+      .attr("filter", `url(#blur${id})`)
       .attr("d", d3.geoPath(projection));
   }
 }

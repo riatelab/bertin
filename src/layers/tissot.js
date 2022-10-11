@@ -15,7 +15,7 @@ export function tissot(selection, projection, planar, options = {}, clipid) {
       let step = options.step ? options.step : 10;
       selection
         .append("g")
-        .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid}`)
+        .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
         .append("path")
         .datum(ts(step))
         .attr("d", geoPath(projection))
