@@ -44,7 +44,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.2.0"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.2.4"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.2.0");
+bertin = require("bertin@1.2.4");
 ```
 
 ## Usage
@@ -1060,7 +1060,7 @@ bertin.draw({
 - **strokeDasharray**: stroke-dasharray (default:"none")
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
-#### Water lines (slow/experimental)
+#### Water lines (slow)
 
 The _waterlines_ type only allows to display lines spaced by a defined distance. It's just a graphic trick to make the maps look nice.   [Source](https://github.com/neocarto/bertin/blob/main/src/layers/waterlines.js).
 
@@ -1085,7 +1085,7 @@ bertin.draw({
 
 - **dist**: distance between lines in pixels (default: 5)
 - **nb**: number of lines (default: 3)
-- **steps**: number of steps in @turf/buffer (default: 8)
+- **precision**: number of steps defining buffers. 1 = not accurate, 8 = accurate. (default: 3)
 - **stroke**: stroke. If more than 1 value is defined, a linear scale is done beetwen values (default:"#5d81ba")
 - **strokeOpacity**: stroke-opacity. If more than 1 value is defined, a linear scale is done beetwen values (default: [1, 0.1])
 - **strokeWidth**: stroke-width. If more than 1 value is defined, a linear scale is done beetwen values(default: [1.2, 0.2])
