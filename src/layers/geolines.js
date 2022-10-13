@@ -1,8 +1,9 @@
-import { geolines as getlines } from "geotoolbox";
+import { geolines as getlines } from "../helpers/geolines.js";
 import { geoPath } from "d3-geo";
 const d3 = Object.assign({}, { geoPath });
 
 export function geolines(selection, projection, planar, options = {}, clipid) {
+
   let display = options.display == false ? false : true;
   if (display) {
     if (!planar) {

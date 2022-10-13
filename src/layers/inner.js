@@ -1,4 +1,4 @@
-import { union } from "geotoolbox";
+import { union } from "../helpers/union.js";
 import { geoPath } from "d3-geo";
 const d3 = Object.assign({}, { geoPath });
 

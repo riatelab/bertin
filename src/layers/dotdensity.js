@@ -1,5 +1,5 @@
 import { simple } from "./simple.js";
-import { dissolve } from "geotoolbox";
+import { dissolve } from "../helpers/dissolve.js";
 import { dotsinpolygons } from "../helpers/dotsinpolygons.js";
 import { sum } from "d3-array";
 const d3 = Object.assign({}, { sum });

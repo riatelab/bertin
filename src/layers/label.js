@@ -1,5 +1,5 @@
 import { topo2geo } from "../helpers/topo2geo.js";
-import { centroid } from "geotoolbox";
+import { centroid } from "../helpers/centroid.js";
 import { figuration } from "../helpers/figuration.js";
 
 export function label(selection, projection, planar, options = {}, clipid) {

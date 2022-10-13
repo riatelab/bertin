@@ -1,4 +1,4 @@
-import { union } from "geotoolbox";
+import { union } from "./union.js";
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { range, rollup, ascending } from "d3-array";
 import { geoProject } from "d3-geo-projection";

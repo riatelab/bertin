@@ -1,5 +1,5 @@
 import { figuration } from "./helpers/figuration.js";
-import { centroid } from "geotoolbox";
+import { centroid } from "./helpers/centroid.js";
 import { topo2geo } from "./helpers/topo2geo.js";
 
 export function links(options = {}) {

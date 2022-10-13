@@ -1,4 +1,4 @@
-import { tissot as ts } from "geotoolbox";
+import { tissot as ts } from "../helpers/tissot.js";
 import { geoPath } from "d3-geo";
 
 export function tissot(selection, projection, planar, options = {}, clipid) {

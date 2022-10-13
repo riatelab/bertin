@@ -1,4 +1,5 @@
-import { union, buffer, aggregate } from "geotoolbox";
+import { buffer } from "../helpers/buffer.js";
+import { union } from "../helpers/union.js";
 import { scaleLinear } from "d3-scale";
 import { geoPath } from "d3-geo";
 import { geoProject } from "d3-geo-projection";
@@ -29,7 +30,7 @@ export function waterlines(
     let strokeLinejoin =
       options.strokeLinejoin != undefined ? options.strokeLinejoin : "round";
 
-    let geom = d3.geoProject(aggregate(geojson), projection);
+    let geom = d3.geoProject(union(geojson), projection);
 
     let features = [];
 

@@ -1,6 +1,6 @@
 import { geoPath } from "d3-geo";
 const d3 = Object.assign({}, { geoPath });
-import { union } from "geotoolbox";
+import { union } from "../helpers/union.js";
 
 export function shadow(selection, projection, geojson, clipid, options = {}) {
   let display = options.display == false ? false : true;

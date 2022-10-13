@@ -1,7 +1,7 @@
 export { draw } from "./draw.js";
+export { quickdraw } from "./quickdraw.js";
 export { match } from "./match.js";
 export { merge } from "./merge.js";
-export { quickdraw } from "./quickdraw.js";
 export { table2geo } from "./table2geo.js";
 export { links } from "./links.js";
 export { borders } from "./borders.js";
@@ -23,6 +23,8 @@ export { logo } from "./layers/logo.js";
 export { rhumbs } from "./layers/rhumbs.js";
 export { inner } from "./layers/inner.js";
 export { waterlines } from "./layers/waterlines.js";
-
 export { regulardots } from "./helpers/regulardots.js";
 export { minimap } from "./layers/minimap.js";
+
+// TESTS
+// export { centroid } from "./helpers/centroid.js";

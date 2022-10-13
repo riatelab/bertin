@@ -22,7 +22,7 @@ const d3 = Object.assign(
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legsquares } from "../legend/leg-squares.js";
-import { centroid } from "geotoolbox";
+import { centroid } from "../helpers/centroid.js";
 import { figuration } from "../helpers/figuration.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";

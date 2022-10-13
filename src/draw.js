@@ -6,7 +6,7 @@ const d3 = Object.assign({}, { geoMercator, create, geoPath });
 
 // Helpers
 import { getheight } from "./helpers/height.js";
-import { figuration } from "./helpers/figuration.js";
+// import { figuration } from "./helpers/figuration.js";
 import { bbox } from "./bbox.js";
 import { getproj } from "./projections/projections.js";
 

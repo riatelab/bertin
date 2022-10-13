@@ -7,7 +7,7 @@ const d3 = Object.assign({}, { descending, max, scaleSqrt, select, pointer });
 import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legcircles } from "../legend/leg-circles.js";
-import { centroid } from "geotoolbox";
+import { centroid } from "../helpers/centroid.js";
 
 export function mushroom(
   selection,
