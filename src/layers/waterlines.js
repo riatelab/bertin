@@ -1,5 +1,4 @@
-import { BufferOp, GeoJSONReader, GeoJSONWriter } from "@turf/jsts";
-import { union } from "geotoolbox";
+import { union, buffer, aggregate } from "geotoolbox";
 import { scaleLinear } from "d3-scale";
 import { geoPath } from "d3-geo";
 import { geoProject } from "d3-geo-projection";
@@ -14,6 +13,7 @@ export function waterlines(
 ) {
   let display = options.display == false ? false : true;
   if (display) {
+    let precision = options.precision != undefined ? options.precision : 3;
     let dist = options.dist != undefined ? options.dist : 5;
     let nb = options.nb != undefined ? options.nb : 3;
     let steps = options.steps != undefined ? options.steps : 8;
@@ -29,18 +29,16 @@ export function waterlines(
     let strokeLinejoin =
       options.strokeLinejoin != undefined ? options.strokeLinejoin : "round";
 
-    let geom = new GeoJSONReader().read(
-      d3.geoProject(union(geojson), projection).features[0]
-    );
+    let geom = d3.geoProject(aggregate(geojson), projection);
+
     let features = [];
+
+    let buff = buffer(geom, { dist: dist, wgs84: false, step: precision });
+    features.push(buff.features[0]);
+
     for (let i = 1; i <= nb; i++) {
-      let buff = BufferOp.bufferOp(geom.geometry, i * dist, steps);
-      let newgeom = new GeoJSONWriter().write(buff);
-      features.push({
-        type: "Feature",
-        properties: { dist: i * dist },
-        geometry: newgeom,
-      });
+      buff = buffer(buff, { dist: dist, wgs84: false, step: precision });
+      features.push(buff.features[0]);
     }
 
     selection

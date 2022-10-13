@@ -41,7 +41,6 @@
   "dependencies": {
     "@turf/bbox": "^6.5.0",
     "@turf/boolean-point-in-polygon": "^6.5.0",
-    "@turf/buffer": "^6.5.0",
     "@turf/random": "^6.5.0",
     "d3-array": "^3.1.6",
     "d3-force": "^3.0.0",
@@ -55,7 +54,7 @@
     "d3-selection": "^3.0.0",
     "d3-shape": "^3.1.0",
     "d3-tile": "^1.0.0",
-    "geotoolbox": "^1.7.0",
+    "geotoolbox": "^1.8.7",
     "proj4": "^2.7.5",
     "statsbreaks": "^0.3.0",
     "topojson-client": "^3.1.0",
