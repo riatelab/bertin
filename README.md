@@ -63,6 +63,10 @@ Latest version
 bertin = require("bertin@1.2.4");
 ```
 
+#### In Quarto
+
+In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allows to combine analyses in R or Python with visualizations made with `bertin`. An example is available [here](https://neocarto.github.io/bertin/examples/quarto.html)
+
 ## Usage
 
 #### In browser
