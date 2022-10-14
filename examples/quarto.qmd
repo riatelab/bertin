@@ -1,0 +1,323 @@
+---
+title: "Let's make maps with ```bertin.js``` in Quarto"
+author: "Nicolas Lambert"
+date: "October 14, 2022"
+format: html
+editor: visual
+theme: cosmo   # cosmo bootswatch theme
+number-sections: true
+---
+
+<img src="quarto_files/img/quartobertin.png" width="700"></img>
+
+
+## What is Quarto?
+
+<img src="quarto_files/img/quarto.png" height="50"></img>
+
+[Quarto®](https://quarto.org/) is an open-source scientific and technical publishing system built on Pandoc. It allows to create dynamic content with Python, R, Julia, and Observable.
+
+## Data handling With R
+
+<img src="quarto_files/img/R.png" height="60"></img>
+
+### R cells
+
+Quarto is a multi-language, next generation version of R Markdown from RStudio, with many new features and capabilities. Like R Markdown, Quarto uses Knitr to execute R code, and is therefore able to render most existing Rmd files without modification.
+
+To write R code, you have to put it in a R chunk as below.
+
+````
+```{r}`r ''`
+# Some stuffs here
+```
+````
+
+### Data import
+
+First, with `read.csv`, we can load tabular data...
+
+```{r}
+stats <-  read.csv(file = '../data/stats.csv')
+```
+
+...and we perform some statistical analysis. Here, for the example, we just create a new variable gdppc (GDP per capita).
+
+```{r}
+stats$gdppc = round(stats$gdp/stats$pop, digits = 2)
+```
+
+To see se table, we use the package `DT`.
+
+```{r}
+library("DT")
+```
+
+```{r}
+#| output: true
+stats %>% datatable()
+```
+
+Second, thanks to ```sf```,  we load geometries (world countries). 
+
+```{r}
+#| output: false
+library(sf)
+geom <- st_read("../data/world.gpkg") 
+```
+
+### Join
+
+Then, we make a join between the attribute data and the base map. 
+
+```{r}
+world = merge(geom, stats, by.x = "ISO3", by.y = "id")
+```
+
+```{r}
+world %>% datatable()
+```
+
+### Passing data from R to ojs
+
+The data is ready. Before making maps, we have to make them accessible to the `ojs` cells. For this we use the `ojs_define` function in a R chunk. To do this with an objet `sf`, we must first convert it to geojson, then pass it to `ojs`. For that,  
+we sugget to use the `geojsonsf` package.
+
+```{r}
+library("geojsonsf")
+ojs_define(data = sf_geojson(world))
+```
+
+If you want to know more about the way to pass variables from R to ojs, you can see [this document](https://neocarto.github.io/Quarto/r_ojs.html).
+
+That's all about R. Now let's go into Observable to plot this data. 
+
+## Data visualization with ojs
+
+We have left R. We are now in the world of Observable. 
+
+<img src="quarto_files/img/observable.png" height="60"></img>
+
+### ojs cells
+
+Quarto includes native support for Observable JS, a set of enhancements to vanilla JavaScript created by Mike Bostock (also the author of D3). Observable JS is distinguished by its reactive runtime, which is especially well suited for interactive data exploration and analysis.
+
+To write ojs code, you have to put it in an ojs chunk as below.
+
+````
+```{ojs}
+// Some stuffs here
+```
+````
+
+Note that with ojs_define, we have passed the variable geo as a string and not actually as an object.
+
+```{ojs}
+data.substr(1, 300)
+```
+
+The first thing to do here is to transform our string into a real object. To do this, we use the javascript statement JSON.parse.
+
+```{ojs}
+countries = JSON.parse(data) 
+countries
+```
+
+Note that unlike the R universe, here we manipulate always data in JSON (JavaScript Object Notation) format. 
+
+
+### Visualize geojson data
+
+First, if you want to view the attribute data, you can write this line:
+
+```{ojs}
+Inputs.table(countries.features.map(d => d.properties))
+```
+
+And to visualize geometries, the package `geoverview` is a good option.
+
+
+```{ojs}
+geo = require("geoverview@1.2.1")
+geo.view(countries)
+```
+
+TODO
+
+Well, we are finally ready to draw thematic maps!
+
+### Load the bertin library
+
+`bertin`  is a JavaScript library for visualizing geospatial data and make
+thematic maps for the web. To use it in Quarto, you can call it with the
+`require` function. You ca, specify the version of the library with
+@major.minor.patch as below. All the versions of the library are available on
+[npm](https://www.npmjs.com/package/bertin). The documentation and the code of
+the library is available [here](https://github.com/neocarto/bertin).
+
+
+```{ojs}
+bertin = require("bertin@1.2.4")
+```
+
+### First steps with `bertin`
+
+To display the geometries quickly, you can use the `quickdraw` function
+
+```{ojs}
+bertin.quickdraw(countries)
+```
+
+But if you want to draw a fully customizable map (projection, colors, etc), you must use the following syntax. All explanations are available in the [documentation](https://github.com/neocarto/bertin). Many examples are available in this Observable [collection](https://observablehq.com/collection/@neocartocnrs/bertin).
+
+```{ojs}
+bertin.draw({
+  params: { projection: "Eckert3" },
+  layers: [{ geojson: countries, fill: "#3996c4" }]
+})
+```
+
+In the layer properties, you can also add layers. You can add other geometries or specific layers include in the library using the `type` parameter.
+
+```{ojs}
+bertin.draw({
+  params: { projection: "Gilbert", width: 500 },
+  layers: [
+    { type: "header", text: "The Blue Marble" },
+    { geojson: countries, fill: "white", stroke:"none" },
+    { type: "graticule" },
+    { type: "outline" }
+  ]
+})
+```
+
+Remember that Observable is a full reactive environment. As a result, you can interactively vary all the elements of the map. 
+
+```{ojs}
+viewof lobes = Inputs.range([6, 30], {label: "Number of lobes", value: 10, step: 1})
+viewof color = Inputs.color({label: "Color", value: "#4682b4"})
+```
+
+```{ojs}
+bertin.draw({
+  params: { projection: `Gingery.lobes(${lobes})`, width: 500, clip: true },
+  layers: [
+    { type: "header", text: `${lobes} lobes` },
+    { geojson: countries, fill: color, stroke:"none" },
+    { type: "graticule" },
+    { type: "outline" }
+  ]
+})
+```
+
+### Typologies
+
+Ta map a qualitative data, you can use the type `typo` instead of a static `fill` value.
+
+```{ojs}
+bertin.draw({
+  params: {
+    projection: "InterruptedHomolosine",
+    clip: true
+  },
+  layers: [
+    {
+      type: "layer",
+      geojson: countries,
+      tooltip: ["$region", "$NAMEen"],
+      fill: {
+        type: "typo",
+        values: "region",
+        strokeWidth: 0.3,
+        colors: "Tableau10",
+        leg_title: `The
+        Continents`,
+        leg_x: 55,
+        leg_y: 180
+      }
+    },
+    { type: "graticule" },
+    { type: "outline" }
+  ]
+})
+```
+
+
+### Bubbles
+
+To draw a map with proportional symbols (absolute quantitative data), you can use the type `bubble`. This map is interactive. Hover over the bubbles with your mouse. 
+
+```{ojs}
+viewof k = Inputs.range([10, 80], { label: "radius max", step: 1, value: 35 })
+viewof dorling = Inputs.toggle({ label: "Dorling Cartogram", value: true })
+bertin.draw({
+  params: { projection: "Bertin1953"},
+  layers: [
+    {
+      type: "bubble",
+      geojson: countries,
+      values: "pop",
+      k: k,
+      dorling: dorling,
+      fill: "#e368c0",
+      tooltip: ["$NAMEen", "$pop", "inhabitants"],
+      leg_round: 0,
+      leg_x: 700,
+      leg_y: 400,
+      leg_round: -1,
+      leg_title: "World Population\nin 2018 (inh.)"
+    },
+    {
+      type: "layer",
+      geojson: countries,
+      fill: "white",
+      fillOpacity: 0.3
+    },
+    { type: "graticule" },
+    { type: "outline" }
+  ]
+})
+```
+
+
+### Choropleth
+
+Ta map a relative quantitative data, you can use the type `choro` instead of a static `fill` value.
+
+```{ojs}
+viewof nbreaks = Inputs.range([3, 9], { label: "nbreaks", step: 1, value: 7 })
+viewof method = Inputs.select(["jenks", "q6", "quantile", "equal", "msd"], {
+  label: "method",
+  value: "quantile"
+})
+choro = bertin.draw({
+  params: { projection: "Eckert3"},
+  layers: [
+    {
+      type: "layer",
+      geojson: countries,
+      fill: {
+        type: "choro",
+        values: "gdppc",
+        nbreaks: nbreaks,
+        method: method,
+        colors: "RdYlGn",
+        leg_round: -2,
+        leg_title: `GDP per inh
+(in $)`,
+        leg_x: 100,
+        leg_y: 200
+      },
+      tooltip: ["$name", "$gdppc", "(current US$)"]
+    },
+    { type: "graticule" },
+    { type: "outline" }
+  ]
+})
+```
+
+## Conclusion
+
+Combining R and Observable javascript allows to take advantage of the strengths of both languages. It allows to combine the statistical analysis possibilities of R and the reactive visualization features of Observable. A win win strategy.
+
+Concerning `bertin`, many other types of maps are possible with `bertin`. Spikes, mushroom, discontinuities, squares, flows, dot cartograms, symbols, etc. You can refer to the [documentation](https://github.com/neocarto/bertin) and to the Observable [notebooks](https://observablehq.com/collection/@neocartocnrs/bertin) to learn how to do it. In the end, once you understand the principle, it is just a matter of filling in the parameters. Or you can simply copy a piece of code, insert your data and modify some parameters. 
