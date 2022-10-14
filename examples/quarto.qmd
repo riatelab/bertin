@@ -17,7 +17,7 @@ number-sections: true
 
 [Quarto®](https://quarto.org/) is an open-source scientific and technical publishing system built on Pandoc. It allows to create dynamic content with Python, R, Julia, and Observable.
 
-## Data handling With R
+## Data handling with R
 
 <img src="quarto_files/img/R.png" height="60"></img>
 
