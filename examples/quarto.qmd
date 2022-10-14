@@ -139,7 +139,7 @@ And to visualize geometries, the package `geoverview` is a good option.
 
 ```{ojs}
 geo = require("geoverview@1.2.1")
-geo.view(countries, {width: 800})
+geo.view(countries, {width: 750})
 ```
 
 Well, we are finally ready to draw thematic maps!
