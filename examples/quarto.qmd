@@ -139,10 +139,8 @@ And to visualize geometries, the package `geoverview` is a good option.
 
 ```{ojs}
 geo = require("geoverview@1.2.1")
-geo.view(countries)
+geo.view(countries, {width: 800})
 ```
-
-TODO
 
 Well, we are finally ready to draw thematic maps!
 
@@ -196,9 +194,6 @@ Remember that Observable is a full reactive environment. As a result, you can in
 ```{ojs}
 viewof lobes = Inputs.range([6, 30], {label: "Number of lobes", value: 10, step: 1})
 viewof color = Inputs.color({label: "Color", value: "#4682b4"})
-```
-
-```{ojs}
 bertin.draw({
   params: { projection: `Gingery.lobes(${lobes})`, width: 500, clip: true },
   layers: [
