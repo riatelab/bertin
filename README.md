@@ -44,7 +44,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.2.4"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.2.5"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.2.4");
+bertin = require("bertin@1.2.5");
 ```
 
 #### In Quarto
@@ -74,7 +74,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.2.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.2.5"></script>
 
 <script>
   let geojson =
