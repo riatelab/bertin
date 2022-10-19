@@ -3,7 +3,21 @@
 
 # bertin.js - Changelog
 
-#### 1.2.
+#### 1.3.0
+
+##### New Features
+
+* Regular square layer ([b3e3b5](https://github.com/neocarto/bertin/commit/b3e3b57db74ec7d20c86d2cb6bfed15dd7cff968)) ([dad9f8](https://github.com/neocarto/bertin/commit/dad9f8e30b774dbf2b25fa02d7c0fe798d412ff0))
+
+##### Bug Fixes
+
+* Extent works with "user" projection ([868531](https://github.com/neocarto/bertin/commit/8685312a70ee069afe21aeb12a2fd634af8bfa8b))
+* Mushroom layer now works withs dots ([7e223e](https://github.com/neocarto/bertin/commit/7e223e211b6560eca220f2f3b36f4f9723329a23))
+* Improve waterlines performance ([860d0f](https://github.com/neocarto/bertin/commit/860d0f801998b82791274a650ba29009dcab4010))
+* Fix missing paranthesis closure for the clip-path and filter URLs -> compatibility with inkscape ([0b9ea1](https://github.com/neocarto/bertin/commit/0b9ea1334e3b4b1572d4cee6ef67f4ca68f33e02)))
+
+
+#### 1.2.0
 
 ##### New Features
 
