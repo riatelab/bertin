@@ -11,12 +11,7 @@ export function getheight(layers, extent, margin, projection, planar, width) {
 
   const types = layers.map((d) => d.type);
 
-  // case 1: defined extent in params
-  if (extent) {
-    ref = extent;
-  }
-
-  // case2:  if outline is defined -> world extent
+  // case1:  if outline is defined -> world extent
   if (
     !extent &&
     (types.includes("outline") ||
@@ -27,7 +22,7 @@ export function getheight(layers, extent, margin, projection, planar, width) {
     ref = { type: "Sphere" };
   }
 
-  // case3 : extent defined by layers
+  // case2 : extent defined by layers
   if (
     (!extent &&
       geojsons > 0 &&
@@ -45,9 +40,14 @@ export function getheight(layers, extent, margin, projection, planar, width) {
     };
   }
 
-  // case 4: ony tiles -> world extent
+  // case 3: ony tiles -> world extent
   if (!extent && geojsons == 0 && types.includes("tiles")) {
     ref = { type: "Sphere" };
+  }
+
+  // case 4: defined extent in params
+  if (extent) {
+    ref = extent;
   }
 
   // Adapt scale
