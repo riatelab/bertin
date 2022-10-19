@@ -44,7 +44,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.2.5"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.3.0"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.2.5");
+bertin = require("bertin@1.3.0");
 ```
 
 #### In Quarto
@@ -73,8 +73,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.2.5"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.3.0"></script>
 
 <script>
   let geojson =
@@ -84,7 +83,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
     document.body.appendChild(
       bertin.draw({
         params: {
-          projection: d3.geoVanDerGrinten4(),
+          projection: "VanDerGrinten4",
           clip: true,
         },
         layers: [
@@ -432,6 +431,35 @@ bertin.draw({
 - **step**: Gap between the points (default:20)
 
 All other parameters are the same as for the bubble layer
+
+### Regular Square
+
+The _regularsquare_ type is used to draw a map by proportional squares in a regular grid. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularsquare.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-regular-squares?collection=@neocartocnrs/bertin).
+
+![](./img/regularsquare.png)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "regularbubble",
+      geojson: countries,
+      step:20,
+      values: "pop",
+      k: 60,
+      tooltip: ["$country", "$pop", "(inh.)"],
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **step**: Gap between the points (default:20)
+
+All other parameters are the same as for the square layer
 
 ### Stock and ratio
 
