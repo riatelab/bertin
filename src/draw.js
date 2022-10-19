@@ -20,6 +20,7 @@ import { simple } from "./layers/simple.js";
 import { bubble } from "./layers/bubble.js";
 import { square } from "./layers/square.js";
 import { regularbubble } from "./layers/regularbubble.js";
+import { regularsquare } from "./layers/regularsquare.js";
 import { mushroom } from "./layers/mushroom.js";
 import { missing } from "./layers/missing.js";
 import { shadow } from "./layers/shadow.js";
@@ -712,6 +713,47 @@ export function draw({ params = {}, layers = {} } = {}) {
           strokeDasharray: layer.strokeDasharray,
           strokeOpacity: layer.strokeOpacity,
           dorling: layer.dorling,
+          iteration: layer.iteration,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_stroke: layer.leg_stroke,
+          leg_fill: layer.leg_fill,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
+          leg_title: layer.leg_title,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_round: layer.leg_round,
+        },
+        clipid,
+        width,
+        height
+      );
+    }
+
+    // Points Bertin (carrés)
+
+    if (layer.type == "regularsquare") {
+      regularsquare(
+        svg,
+        projection,
+        {
+          display: layer.display,
+          geojson: layer.geojson,
+          values: layer.values,
+          step: layer.step,
+          planar: layer.planar,
+          k: layer.k,
+          fixmax: layer.fixmax,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeOpacity: layer.strokeOpacity,
+          dorling: layer.dorling,
+          demers: layer.demers,
           iteration: layer.iteration,
           tooltip: layer.tooltip,
           leg_x: layer.leg_x,

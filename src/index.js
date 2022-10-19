@@ -19,6 +19,7 @@ export { spikes } from "./layers/spikes.js";
 export { outline } from "./layers/outline.js";
 export { graticule } from "./layers/graticule.js";
 export { regularbubble } from "./layers/regularbubble.js";
+export { regularsquare } from "./layers/regularsquare.js";
 export { logo } from "./layers/logo.js";
 export { rhumbs } from "./layers/rhumbs.js";
 export { inner } from "./layers/inner.js";
