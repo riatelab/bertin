@@ -22,7 +22,6 @@ export function grid({
   output = "dots", // dots or squares
   blur = 0, // blur value with d3.blur2()
 } = {}) {
-  // TODO : SI value non renseignée, mettre la valeur 1.
 
   // ---------------
   // Build empty grid

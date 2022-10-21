@@ -39,7 +39,6 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
-    "@turf/area": "^6.5.0",
     "@turf/bbox": "^6.5.0",
     "@turf/boolean-point-in-polygon": "^6.5.0",
     "@turf/intersect": "^6.5.0",
