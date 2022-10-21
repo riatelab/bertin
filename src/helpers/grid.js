@@ -22,15 +22,14 @@ export function grid({
   output = "dots", // dots or squares
   blur = 0, // blur value with d3.blur2()
 } = {}) {
-
   // ---------------
   // Build empty grid
   // ---------------
 
   let x = d3.range(0 + step / 2, width, step);
   let y = d3.range(0 + step / 2, height, step).reverse();
-  const grid_width = x.length;
-  const grid_height = y.length;
+  const grid_height = x.length;
+  const grid_width = y.length;
 
   // Dot grid
   let grid = x.map((x, i) => y.map((y) => [x, y])).flat();
@@ -95,6 +94,22 @@ export function grid({
 
     let squarevalues = [];
 
+    // squaregrid.forEach((square) => {
+    //   let squareval = [];
+    //   dots.forEach((dot) => {
+    //     if (
+    //       turf.booleanPointInPolygon(
+    //         { type: "Point", coordinates: dot[1] },
+    //         { type: "Polygon", coordinates: [square] }
+    //       )
+    //     ) {
+    //       squareval.push(val.get(dot[0]));
+    //     }
+    //   });
+
+    //   squarevalues.push(d3.sum(squareval));
+    // });
+
     squaregrid.forEach((square) => {
       let squareval = [];
       let squareval_a = [];
@@ -112,7 +127,6 @@ export function grid({
           } else {
             squareval.push(val.get(dot[0]));
           }
-          squareval.push(val.get(dot[0]));
         }
       });
       if (ratio) {
@@ -120,7 +134,6 @@ export function grid({
       } else {
         squarevalues.push(d3.sum(squareval));
       }
-      squarevalues.push(d3.sum(squareval));
     });
 
     const squarevalues2 = d3.blur2(
