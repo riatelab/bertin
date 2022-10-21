@@ -1,16 +1,17 @@
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
-import area from "@turf/area";
+//import area from "@turf/area";
 import intersect from "@turf/intersect";
-const turf = Object.assign({}, { booleanPointInPolygon, area, intersect });
+const turf = Object.assign({}, { booleanPointInPolygon, intersect });
 
 import { range, rollup, ascending, blur2, sum, flatGroup } from "d3-array";
+import { geoPath } from "d3-geo";
 import { geoProject } from "d3-geo-projection";
-import { figuration } from "./figuration.js";
+
 const d3 = Object.assign(
   {},
-  { geoProject, range, rollup, ascending, blur2, sum, flatGroup }
+  { geoProject, range, rollup, ascending, blur2, sum, flatGroup, geoPath }
 );
-
+import { figuration } from "./figuration.js";
 export function grid({
   geojson, // A geojson (dots or polygons)
   values = null, // A field in properties with absolute quantitative values
@@ -18,7 +19,7 @@ export function grid({
   width, // width of the map
   height, // height of the map
   step = 20, // gap between points
-  output = "dots",
+  output = "dots", // dots or squares
   blur = 0, // blur value with d3.blur2()
 } = {}) {
   // TODO : SI value non renseignée, mettre la valeur 1.
@@ -48,14 +49,36 @@ export function grid({
     )
     .flat();
 
-  // Values
+  // Values (One or two fields)
   let val;
-  if (values !== null) {
+  let ratio = false;
+
+  if (values !== null && !Array.isArray(values)) {
     val = new Map(
       geojson.features.map((d, i) => {
         return [i, +d.properties[values]];
       })
     );
+  } else if (values !== null && Array.isArray(values) && values.length == 1) {
+    val = new Map(
+      geojson.features.map((d, i) => {
+        return [i, +d.properties[values[0]]];
+      })
+    );
+  } else if (values !== null && Array.isArray(values) && values.length == 2) {
+    ratio = true;
+    val = [
+      new Map(
+        geojson.features.map((d, i) => {
+          return [i, +d.properties[values[0]]];
+        })
+      ),
+      new Map(
+        geojson.features.map((d, i) => {
+          return [i, +d.properties[values[1]]];
+        })
+      ),
+    ];
   } else {
     val = new Map(geojson.features.map((d, i) => [i, 1]));
   }
@@ -72,10 +95,11 @@ export function grid({
     dots = dots.features.map((d, i) => [i, d.geometry.coordinates]);
 
     let squarevalues = [];
-    let squarecount = [];
 
     squaregrid.forEach((square) => {
       let squareval = [];
+      let squareval_a = [];
+      let squareval_b = [];
       dots.forEach((dot) => {
         if (
           turf.booleanPointInPolygon(
@@ -83,11 +107,21 @@ export function grid({
             { type: "Polygon", coordinates: [square] }
           )
         ) {
+          if (ratio) {
+            squareval_a.push(val[0].get(dot[0]));
+            squareval_b.push(val[1].get(dot[0]));
+          } else {
+            squareval.push(val.get(dot[0]));
+          }
           squareval.push(val.get(dot[0]));
         }
       });
+      if (ratio) {
+        squarevalues.push(d3.sum(squareval_a) / d3.sum(squareval_b));
+      } else {
+        squarevalues.push(d3.sum(squareval));
+      }
       squarevalues.push(d3.sum(squareval));
-      squarecount.push(squareval.length);
     });
 
     const squarevalues2 = d3.blur2(
@@ -139,7 +173,7 @@ export function grid({
   if (figuration(geojson) == "z") {
     // get planr coordinates
     const polys = d3.geoProject(geojson, projection);
-    const polysareas = polys.features.map((d) => turf.area(d));
+    const polysareas = polys.features.map((d) => d3.geoPath().area(d));
 
     // Build intersected pieces
     let intersections = [];
@@ -151,7 +185,7 @@ export function grid({
         });
 
         if (piece !== null) {
-          let piecarea = turf.area(piece);
+          let piecarea = d3.geoPath().area(piece);
           let fullarea = polysareas[i2];
           intersections.push({
             id_square: i1,
@@ -165,16 +199,29 @@ export function grid({
       });
     });
 
+    console.log(intersections);
+
     // Aggregate values
     let aggr = d3.flatGroup(intersections, (d) => d.id_square);
 
     let result = [];
-    aggr.forEach((d) => {
-      result.push([
-        d[0],
-        d3.sum(d[1].map((d) => d.share * val.get(d.id_poly))),
-      ]);
-    });
+
+    if (ratio) {
+      aggr.forEach((d) => {
+        result.push([
+          d[0],
+          d3.sum(d[1].map((d) => d.share * val[0].get(d.id_poly))) /
+            d3.sum(d[1].map((d) => d.share * val[1].get(d.id_poly))),
+        ]);
+      });
+    } else {
+      aggr.forEach((d) => {
+        result.push([
+          d[0],
+          d3.sum(d[1].map((d) => d.share * val.get(d.id_poly))),
+        ]);
+      });
+    }
 
     // Get data & blur
     let valbyid = new Map(result);
@@ -210,7 +257,7 @@ export function grid({
       squaregrid.forEach((d, i) => {
         features.push({
           type: "Feature",
-          properties: { id: i, value: valbyid.get(i) },
+          properties: { id: i, value: gridval2[i] },
           geometry: { type: "Polygon", coordinates: [d] },
         });
       });

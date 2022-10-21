@@ -7,6 +7,7 @@ export { links } from "./links.js";
 export { borders } from "./borders.js";
 export { bbox } from "./bbox.js";
 export { properties } from "./properties.js";
+export { grid } from "./helpers/grid.js";
 
 // layer functions
 export { simple } from "./layers/simple.js";
@@ -20,12 +21,9 @@ export { outline } from "./layers/outline.js";
 export { graticule } from "./layers/graticule.js";
 export { regularbubble } from "./layers/regularbubble.js";
 export { regularsquare } from "./layers/regularsquare.js";
+export { regulargrid } from "./layers/regulargrid.js";
 export { logo } from "./layers/logo.js";
 export { rhumbs } from "./layers/rhumbs.js";
 export { inner } from "./layers/inner.js";
 export { waterlines } from "./layers/waterlines.js";
-export { regulardots } from "./helpers/regulardots.js";
 export { minimap } from "./layers/minimap.js";
-
-// Ttmp
-export { grid } from "./helpers/grid.js";

@@ -20,6 +20,7 @@ import { bubble } from "./layers/bubble.js";
 import { square } from "./layers/square.js";
 import { regularbubble } from "./layers/regularbubble.js";
 import { regularsquare } from "./layers/regularsquare.js";
+import { regulargrid } from "./layers/regulargrid.js";
 import { mushroom } from "./layers/mushroom.js";
 import { missing } from "./layers/missing.js";
 import { shadow } from "./layers/shadow.js";
@@ -767,6 +768,52 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
+        },
+        clipid,
+        width,
+        height
+      );
+    }
+
+    // Regular grid
+    if (layer.type == "regulargrid" || layer.type == "grid") {
+      regulargrid(
+        svg,
+        projection,
+        {
+          display: layer.display,
+          geojson: layer.geojson,
+          values: layer.values,
+          step: layer.step,
+          blur: layer.blur,
+          planar: layer.planar,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeLinecap: layer.strokeLinecap,
+          strokeLinejoin: layer.strokeLinejoin,
+          fillOpacity: layer.fillOpacity,
+          strokeOpacity: layer.strokeOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          symbol: layer.symbol,
+          symbol_size: layer.symbol_size,
+          symbol_iteration: layer.symbol_iteration,
+          symbol_shift: layer.symbol_shift,
+          tooltip: layer.tooltip,
+          leg_x: layer.leg_x,
+          leg_y: layer.leg_y,
+          leg_w: layer.leg_w,
+          leg_h: layer.leg_h,
+          leg_title: layer.leg_title,
+          leg_text: layer.leg_text,
+          leg_type: layer.leg_type,
+          leg_fontSize: layer.leg_fontSize,
+          leg_fontSize2: layer.leg_fontSize2,
+          leg_stroke: layer.leg_stroke,
+          leg_fillOpacity: layer.leg_fillOpacity,
+          leg_fill: layer.leg_fill,
+          leg_strokeWidth: layer.leg_strokeWidth,
+          leg_txtcol: layer.leg_txtcol,
         },
         clipid,
         width,
