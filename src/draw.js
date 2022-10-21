@@ -6,7 +6,6 @@ const d3 = Object.assign({}, { geoMercator, create, geoPath });
 
 // Helpers
 import { getheight } from "./helpers/height.js";
-// import { figuration } from "./helpers/figuration.js";
 import { bbox } from "./bbox.js";
 import { getproj } from "./projections/projections.js";
 
@@ -703,6 +702,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           geojson: layer.geojson,
           values: layer.values,
           step: layer.step,
+          blur: layer.blur,
           planar: layer.planar,
           k: layer.k,
           fixmax: layer.fixmax,
@@ -743,6 +743,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           geojson: layer.geojson,
           values: layer.values,
           step: layer.step,
+          blur: layer.blur,
           planar: layer.planar,
           k: layer.k,
           fixmax: layer.fixmax,

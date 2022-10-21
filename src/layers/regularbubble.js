@@ -1,5 +1,5 @@
 import { bubble } from "./bubble.js";
-import { regulardots } from "../helpers/regulardots.js";
+import { grid } from "../helpers/grid.js";
 import { geoIdentity } from "d3-geo";
 
 export function regularbubble(
@@ -10,18 +10,17 @@ export function regularbubble(
   width,
   height
 ) {
+  options.geojson = grid({
+    geojson: options.geojson,
+    projection: projection,
+    width: width,
+    height: height,
+    step: options.step,
+    values: options.values,
+    blur: options.blur,
+  });
 
-
-  
-  options.geojson = regulardots(
-    options.geojson,
-    projection,
-    width,
-    height,
-    options.step != undefined ? options.step : 20,
-    options.values
-  );
-  options.values = "___value";
+  options.values = "value";
 
   bubble(selection, geoIdentity(), true, options, clipid, width, height);
 }

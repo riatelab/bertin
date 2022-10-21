@@ -6,7 +6,6 @@
 ![code size](https://img.shields.io/github/languages/code-size/neocarto/bertin)
 ![github stars](https://img.shields.io/github/stars/neocarto/bertin?style=social)
 
-
 **Bertin.js** is a JavaScript library for visualizing geospatial data and make thematic maps for the web.
 
 _The project is under **active development**. Some of features and options are subject to change. We welcome contributions of all kinds: bug reports, code contributions and documentation._
@@ -23,8 +22,7 @@ _The project is under **active development**. Some of features and options are s
 - [Geojson properties selections](#geojson-properties-selections)
 - [Other functions](#other-functions)
 
-
-Bertin.js is an easy to use JavaScript library mainly based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
+`bertin` is an easy to use JavaScript library mainly based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
 
 ## Who is Bertin?
 
@@ -44,7 +42,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.3.0"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.4.0"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +58,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.3.0");
+bertin = require("bertin@1.4.0");
 ```
 
 #### In Quarto
@@ -73,7 +71,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.3.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.4.0"></script>
 
 <script>
   let geojson =
@@ -405,7 +403,7 @@ Parameters of the legend
 
 ### Regular Bubble
 
-The _regularbubble_ type is used to draw a map by proportional circles in a regular grid. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularbubble.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-regular-bubbles?collection=@neocartocnrs/bertin).
+The _regularbubble_ type is used to draw a map by proportional circles in a regular grid, from absolute quantitative data. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularbubble.js), [Example and methodology](https://observablehq.com/@neocartocnrs/bertin-js-regular-bubbles?collection=@neocartocnrs/bertin).
 
 ![](./img/regularbubble.png)
 
@@ -420,7 +418,7 @@ bertin.draw({
       step:20,
       values: "pop",
       k: 60,
-      tooltip: ["$country", "$pop", "(inh.)"],
+      tooltip: "$value",
     },
   ],
 });
@@ -434,7 +432,7 @@ All other parameters are the same as for the bubble layer
 
 ### Regular Square
 
-The _regularsquare_ type is used to draw a map by proportional squares in a regular grid. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularsquare.js), [Example](https://observablehq.com/@neocartocnrs/bertin-js-regular-squares?collection=@neocartocnrs/bertin).
+The _regularsquare_ type is used to draw a map by proportional squares in a regular grid, from absolute quantitative data. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularsquare.js), [Example ans methodology](https://observablehq.com/@neocartocnrs/bertin-js-regular-squares?collection=@neocartocnrs/bertin).
 
 ![](./img/regularsquare.png)
 
@@ -444,12 +442,12 @@ The _regularsquare_ type is used to draw a map by proportional squares in a regu
 bertin.draw({
   layers: [
     {
-      type: "regularbubble",
+      type: "regularsquare",
       geojson: countries,
       step:20,
       values: "pop",
       k: 60,
-      tooltip: ["$country", "$pop", "(inh.)"],
+      tooltip: "$value",
     },
   ],
 });
