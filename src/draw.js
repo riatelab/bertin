@@ -21,6 +21,7 @@ import { square } from "./layers/square.js";
 import { regularbubble } from "./layers/regularbubble.js";
 import { regularsquare } from "./layers/regularsquare.js";
 import { regulargrid } from "./layers/regulargrid.js";
+import { smooth } from "./layers/smooth.js";
 import { mushroom } from "./layers/mushroom.js";
 import { missing } from "./layers/missing.js";
 import { shadow } from "./layers/shadow.js";
@@ -814,6 +815,42 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fill: layer.leg_fill,
           leg_strokeWidth: layer.leg_strokeWidth,
           leg_txtcol: layer.leg_txtcol,
+        },
+        clipid,
+        width,
+        height
+      );
+    }
+
+    // Smooth
+    if (
+      layer.type == "smooth" ||
+      layer.type == "contour" ||
+      layer.type == "heatmap"
+    ) {
+      smooth(
+        svg,
+        projection,
+        {
+          display: layer.display,
+          geojson: layer.geojson,
+          values: layer.values,
+          grid_step: layer.grid_step,
+          grid_blur: layer.grid_blur,
+          remove: layer.remove,
+          fill: layer.fill,
+          reverse: layer.reverse,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeLinecap: layer.strokeLinecap,
+          strokeLinejoin: layer.strokeLinejoin,
+          fillOpacity: layer.fillOpacity,
+          strokeOpacity: layer.strokeOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          thresholds: layer.thresholds,
+          bandwidth: layer.bandwidth,
+          cellsize: layer.cellsize,
+          colorcurve: layer.colorcurve,
         },
         clipid,
         width,
