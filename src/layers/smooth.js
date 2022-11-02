@@ -1,4 +1,6 @@
 import { grid } from "../helpers/grid.js";
+import { figuration } from "../helpers/figuration.js";
+import { centroid } from "../helpers/centroid.js";
 import { geoIdentity, geoPath } from "d3-geo";
 import { contourDensity } from "d3-contour";
 import { scaleSequentialQuantile } from "d3-scale";
@@ -23,6 +25,7 @@ export function smooth(
 ) {
   // Variables
   let display = options.display == false ? false : true;
+  let clip = options.clip != undefined ? options.clip : undefined;
   let reverse = options.reverse == undefined ? false : options.reverse;
   let fill = options.fill ? options.fill : "RdYlGn";
   let strokeLinecap = options.strokeLinecap ? options.strokeLinecap : "round";
@@ -45,32 +48,40 @@ export function smooth(
   let cellsize = options.cellSize != undefined ? options.cellSize : 1;
   let colorcurve = options.colorcurve != undefined ? options.colorcurve : 2;
 
+  let id = Date.now().toString(36) + Math.random().toString(36).substring(2);
   if (display) {
     let data;
 
-    if (options.grid_step != undefined || options.grid_blur != undefined) {
-      let grid_step = options.grid_step != undefined ? options.grid_step : 20;
-      let grid_blur = options.grid_blur != undefined ? options.grid_blur : 0;
+    if (figuration(options.geojson) == "z") {
+      if (options.clip) {
+        // test
 
-      options.geojson = grid({
-        geojson: options.geojson,
-        projection: projection,
-        width: width,
-        height: height,
-        step: grid_step,
-        values: options.values,
-        blur: grid_blur,
-      });
+        selection
+          .append("clipPath")
+          .attr("id", `clip_${id}`)
+          .append("path")
+          .datum(options.geojson)
+          .attr("d", d3.geoPath(projection));
+      }
 
-      data = decompose(options.geojson, "value", 1000, d3.geoIdentity());
+      if (options.grid_step != undefined || options.grid_blur != undefined) {
+        let grid_step = options.grid_step != undefined ? options.grid_step : 20;
+        let grid_blur = options.grid_blur != undefined ? options.grid_blur : 0;
 
-      // console.log("GRID");
-      // console.log(data);
-    } else {
-      data = decompose(options.geojson, options.values, 1000, projection);
-
-      // console.log("PAS GRID");
-      // console.log(data);
+        let mygrid = grid({
+          geojson: options.geojson,
+          projection: projection,
+          width: width,
+          height: height,
+          step: grid_step,
+          blur: grid_blur,
+          values: options.values,
+        });
+        data = decompose(mygrid, "value", 1000, d3.geoIdentity());
+      } else {
+        options.geojson = centroid(options.geojson);
+        data = decompose(options.geojson, options.values, 1000, projection);
+      }
     }
 
     let contour = d3
@@ -140,9 +151,14 @@ export function smooth(
 
     contours.splice(0, remove);
 
+    // Smooth
+
     selection
       .append("g")
-      .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
+      .attr(
+        "clip-path",
+        options.clip == undefined ? `none` : `url(#clip_${id})`
+      )
       .selectAll("path")
       .data(contours)
       .join("path")
@@ -155,10 +171,6 @@ export function smooth(
       .attr("stroke-linecap", strokeLinecap)
       .attr("stroke-linejoin", strokeLinejoin)
       .attr("stroke-dasharray", strokeDasharray);
-
-    //   console.log(options.geojson);
-
-    //   simple(selection, geoIdentity(), options, clipid, width, height);
   }
 }
 

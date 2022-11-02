@@ -432,7 +432,7 @@ All other parameters are the same as for the bubble layer
 
 ### Regular Square
 
-The _regularsquare_ type is used to draw a map by proportional squares in a regular grid, from absolute quantitative data. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularsquare.js), [Example ans methodology](https://observablehq.com/@neocartocnrs/bertin-js-regular-squares?collection=@neocartocnrs/bertin).
+The _regularsquare_ type is used to draw a map by proportional squares in a regular grid, from absolute quantitative data. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regularsquare.js), [Example and methodology](https://observablehq.com/@neocartocnrs/bertin-js-regular-squares?collection=@neocartocnrs/bertin).
 
 ![](./img/regularsquare.png)
 
@@ -458,6 +458,40 @@ bertin.draw({
 - **step**: Gap between the points (default:20)
 
 All other parameters are the same as for the square layer
+
+### Regular grid
+
+The _regulargrid_ type is a way to transform an irregular geographic mesh into a regular mesh. The values of the grid cells are obtained in proportion to the intersected surface. This representation mode is only suitable for absolute quantitative data. But you can use 2 quantitative data to compute a ratio [Source](https://github.com/neocarto/bertin/blob/main/src/layers/regulargrid.js), [Example and methodology](https://observablehq.com/@neocartocnrs/bertin-js-regular-grid).
+
+![](./img/regulargrid.png)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "regulargrid",
+      geojson: countries,
+      step:20,
+      values: "pop",
+      fill:{
+        nbreaks: 6,
+        method: "quantile",
+        colors: "Blues"
+      }
+      tooltip: "$value",
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **step**: Gap between the points (default:20)
+- **blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0)
+
+All other parameters are the same as for [choropleth maps](https://github.com/neocarto/bertin#choropleth)
 
 ### Stock and ratio
 
@@ -755,6 +789,57 @@ Parameters of the legend
 - **leg_round**: rounding (default: undefined)
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
+
+### Smooth
+
+The _smooth_ type (or heatmap or contour) is a way to produce a continuous représentations from quantitative data. The algorithm is complex. The values produced do not really make sense. Explanations with the parameters. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/smooth.js), [Example and methodology](https://observablehq.com/@neocartocnrs/smooth).
+
+![](./img/smooth.png)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+ {
+      type: "smooth",
+      geojson: data,
+      values: "pop",
+      thresholds: 50,
+      bandwidth: 25,
+      colorcurve: 1,
+    },
+  ],
+});
+```
+
+#### Parameters
+
+ - **geojson**: a geojson (**compulsory**)
+- **values**: a string corresponding to the targeted variable in the properties
+- **stroke**: stroke color (default: "white")
+- **strokeWidth** stroke width (default:0.5)
+- **strokeLinecap**: stroke-linecap (default:"round")
+- **strokeLinejoin**: stroke-linejoin (default:"round")
+- **strokeDasharray**: stroke-dasharray (default:"none")
+- **fillOpacity**: fill opacity (default:1)
+- **strokeOpacity**: stroke opacity (default:1)
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+
+Contour parameters
+
+-**fill**: color palette (default: RdYlGn)
+-**thresholds**: number of classes (default: 100)
+-**bandwidth**: bandwidth (the standard deviation) of the Gaussian kernel and returns the estimate. (default: 5)
+-**colorcurve**: a value to curve the color interpolation (default: 2)
+-**reverse**: a boolean reverse the colors (default: false)
+-**remove**: number of polygons to remove (default: 0)
+-**clip**: a boolean to clip the contours with the input geojson (default: false)
+
+By default, the smooth layer is calculated from dots or centroids. But it is possible to go through a regular grid by using theses parameters.  
+
+- **grid_step**: Gap between the points (default:20)
+- **grid_blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0)
 
 ### Thickness
 

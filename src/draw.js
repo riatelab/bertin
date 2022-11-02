@@ -833,6 +833,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         {
           display: layer.display,
+          clip: layer.clip,
           geojson: layer.geojson,
           values: layer.values,
           grid_step: layer.grid_step,
