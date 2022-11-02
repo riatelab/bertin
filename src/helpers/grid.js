@@ -85,30 +85,12 @@ export function grid({
   // POINTS
   // ----------------
 
-  // If dots, affecter toute la valeur au point le plus proche
-
   if (figuration(geojson) == "p") {
     // get planar coordinates
     let dots = d3.geoProject(geojson, projection);
     dots = dots.features.map((d, i) => [i, d.geometry.coordinates]);
 
     let squarevalues = [];
-
-    // squaregrid.forEach((square) => {
-    //   let squareval = [];
-    //   dots.forEach((dot) => {
-    //     if (
-    //       turf.booleanPointInPolygon(
-    //         { type: "Point", coordinates: dot[1] },
-    //         { type: "Polygon", coordinates: [square] }
-    //       )
-    //     ) {
-    //       squareval.push(val.get(dot[0]));
-    //     }
-    //   });
-
-    //   squarevalues.push(d3.sum(squareval));
-    // });
 
     squaregrid.forEach((square) => {
       let squareval = [];
@@ -210,8 +192,6 @@ export function grid({
         }
       });
     });
-
-    console.log(intersections);
 
     // Aggregate values
     let aggr = d3.flatGroup(intersections, (d) => d.id_square);

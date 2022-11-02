@@ -2,9 +2,6 @@ import { simple } from "./simple.js";
 import { grid } from "../helpers/grid.js";
 import { geoIdentity } from "d3-geo";
 
-// TODO
-// values : Possibiliter de rentrer un array de 2 stocks
-
 export function regulargrid(
   selection,
   projection,
@@ -23,6 +20,18 @@ export function regulargrid(
     values: options.values,
     blur: options.blur,
   });
+
+  if (options.fill == undefined) {
+    options.fill = { nbreaks: 6, method: "quantile", colors: "Blues" };
+  }
+
+  if (typeof options.fill == "object" && options.fill.values == undefined) {
+    options.fill.values = "value";
+  }
+
+  if (typeof options.fill == "object" && options.fill.type == undefined) {
+    options.fill.type = "choro";
+  }
 
   simple(selection, geoIdentity(), options, clipid, width, height);
 }
