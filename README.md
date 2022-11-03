@@ -42,7 +42,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.3.3"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.4.0"
   charset="utf-8"
 ></script>
 ```
@@ -58,7 +58,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.3.3");
+bertin = require("bertin@1.4.0");
 ```
 
 #### In Quarto
@@ -71,7 +71,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.3.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.4.0"></script>
 
 <script>
   let geojson =
@@ -815,7 +815,7 @@ bertin.draw({
 
 #### Parameters
 
- - **geojson**: a geojson (**compulsory**)
+- **geojson**: a geojson (**compulsory**)
 - **values**: a string corresponding to the targeted variable in the properties
 - **stroke**: stroke color (default: "white")
 - **strokeWidth** stroke width (default:0.5)
@@ -828,7 +828,7 @@ bertin.draw({
 
 Contour parameters
 
--**fill**: color palette (default: RdYlGn)
+-**fill**: color palette. "Blues", "Greens", "Greys", "Oranges", "Purples", "Reds", "BrBG", "PRGn", "PiYG", "PuOr", "RdBu", "RdYlBu", "RdYlGn", "Spectral","Turbo","Viridis","Inferno", "Magma", "Plasma", "Cividis", "Warm", "Cool", "CubehelixDefault", "BuGn", "BuPu", "GnBu", "OrRd", "PuBuGn", "PuBu", "PuRd", "RdPu", "YlGnBu", "YlGn", "YlOrBr", "YlOrRd", "Rainbow", "Sinebow". (default: RdYlGn)
 -**thresholds**: number of classes (default: 100)
 -**bandwidth**: bandwidth (the standard deviation) of the Gaussian kernel and returns the estimate. (default: 5)
 -**colorcurve**: a value to curve the color interpolation (default: 2)

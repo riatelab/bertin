@@ -3,6 +3,18 @@
 
 # bertin.js - Changelog
 
+#### 1.4.0
+
+##### New Features
+
+* Smooth layer ([71d828](https://github.com/neocarto/bertin/commit/71d828f4b4a333eef4bf262eca43a9587a55c11f)) ([913b87](https://github.com/neocarto/bertin/commit/913b87d470907519fa93fe7fdb1004c7562a5c53)) ([8b278b](https://github.com/neocarto/bertin/commit/8b278b78ea4b43ff628e488b2a11b851596e6316)) ([49b03a](https://github.com/neocarto/bertin/commit/49b03a9256beac3e179f3890fb7ee64c586f942c))
+* Regular grid layer ([36aeb6](https://github.com/neocarto/bertin/commit/36aeb6299def23251ea7224335f721d8610f7198))
+
+
+##### Bug Fixes
+
+* Area calculation for grids ([931861](https://github.com/neocarto/bertin/commit/931861b399f6a91f5037717049ead9ffaee1ab41)) ([bbb3f7](https://github.com/neocarto/bertin/commit/bbb3f76eb7c883ea26d680719b2b0465b75bce9e)) ([5104b0](https://github.com/neocarto/bertin/commit/5104b0f29286a14d107bd07da3fae5f49f5099c7))
+
 #### 1.3.0
 
 ##### New Features
