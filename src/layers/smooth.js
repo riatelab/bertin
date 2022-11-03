@@ -48,6 +48,8 @@ export function smooth(
   let cellsize = options.cellSize != undefined ? options.cellSize : 1;
   let colorcurve = options.colorcurve != undefined ? options.colorcurve : 2;
 
+  let nbdots = 1000;
+
   let id = Date.now().toString(36) + Math.random().toString(36).substring(2);
   if (display) {
     let data;
@@ -77,11 +79,15 @@ export function smooth(
           blur: grid_blur,
           values: options.values,
         });
-        data = decompose(mygrid, "value", 1000, d3.geoIdentity());
+        data = decompose(mygrid, "value", nbdots, d3.geoIdentity());
       } else {
         options.geojson = centroid(options.geojson);
-        data = decompose(options.geojson, options.values, 1000, projection);
+        data = decompose(options.geojson, options.values, nbdots, projection);
       }
+    }
+
+    if (figuration(options.geojson) == "p") {
+      data = decompose(options.geojson, options.values, nbdots, projection);
     }
 
     let contour = d3
