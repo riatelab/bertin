@@ -79,15 +79,30 @@ export function smooth(
           blur: grid_blur,
           values: options.values,
         });
-        data = decompose(mygrid, "value", nbdots, d3.geoIdentity());
+        data = decompose({
+          geojson: mygrid,
+          values: "value",
+          nb: nbdots,
+          projection: d3.geoIdentity(),
+        });
       } else {
         options.geojson = centroid(options.geojson);
-        data = decompose(options.geojson, options.values, nbdots, projection);
+        data = decompose({
+          geojson: options.geojson,
+          values: options.values,
+          nb: nbdots,
+          projection: projection,
+        });
       }
     }
 
     if (figuration(options.geojson) == "p") {
-      data = decompose(options.geojson, options.values, nbdots, projection);
+      data = decompose({
+        geojson: options.geojson,
+        values: options.values,
+        nb: nbdots,
+        projection: projection,
+      });
     }
 
     let contour = d3
@@ -180,23 +195,40 @@ export function smooth(
   }
 }
 
-function decompose(geojson, values, nb = 10000, projection) {
-  // number of dots
-  let k = 1;
-  let total = d3.sum(geojson.features.map((d) => d.properties[values]));
-  if (total > nb) {
-    k = total / nb;
-  }
+function decompose(_ = {}) {
+  let geojson = _.geojson;
+  let values = _.values;
+  let nb = _.nb ? _.nb : 1000;
+  let projection = _.projection;
 
   let result = [];
-  geojson.features.forEach((d) => {
-    let coords = projection(d.geometry.coordinates);
 
-    let nb = Math.round(d.properties[values] / k);
-    for (let i = 0; i <= nb; i++) {
-      result.push(coords);
+  if (values == undefined) {
+    geojson.features.forEach((d) => {
+      result.push(projection(d.geometry.coordinates));
+    });
+  } else {
+    // number of dots
+    let k = 1;
+    let total;
+
+    total = d3.sum(geojson.features.map((d) => d.properties[values]));
+
+    if (total > nb) {
+      k = total / nb;
     }
-  });
+
+    console.log(values);
+
+    geojson.features.forEach((d) => {
+      let coords = projection(d.geometry.coordinates);
+
+      let nb = Math.round(d.properties[values] / k);
+      for (let i = 0; i <= nb; i++) {
+        result.push(coords);
+      }
+    });
+  }
 
   return result;
 }
