@@ -859,6 +859,26 @@ export function draw({ params = {}, layers = {} } = {}) {
       );
     }
 
+    // Custom
+
+    if (layer.type == "custom") {
+      const { draw, type, ...restOfLayer } = layer;
+      if (typeof draw === "function") {
+        draw(
+          svg,
+          projection,
+          {
+            ...restOfLayer,
+          },
+          clipid,
+          width,
+          height
+        );
+      } else {
+        console.warn(`'draw' function missing for layer type: ${layer.type}`);
+      }
+    }
+
     // Header
     if (layer.type == "header") {
       addheader(svg, width, {

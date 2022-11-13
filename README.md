@@ -19,6 +19,7 @@ _The project is under **active development**. Some of features and options are s
 - [Drawing a map](#drawing-a-map)
 - [Map types](#map-types)
 - [Map components](#map-components)
+- [Custom Layer](#custom-layer)
 - [Geojson properties selections](#geojson-properties-selections)
 - [Other functions](#other-functions)
 
@@ -1534,6 +1535,35 @@ bertin.draw({
 - **strokeOpactity**: stroke-opacity (default: 0.6)
 - **strokeWidth**: stroke-width (default: 1.5)
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+
+## Custom Layer
+
+The _custom_ type allows you to provide your own draw function to create custom layer.
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "custom",
+      draw: function (
+        svg, // D3 selection for SVG
+        projection, // Current projection.
+        layer_parameters, // All parameters (like geojson) provided as part of this layer.
+        clipid, // ID for the clipPath.
+        width, // Width of the SVG
+        height // Heigt of the SVG
+      ) {
+        /* ...code to draw... */
+      },
+      /* ...any parameters you provide here will be available
+       * in the passed draw function
+       */
+    },
+  ],
+});
+```
 
 ## Geojson properties selections
 
