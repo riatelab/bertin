@@ -4,7 +4,7 @@ export function text(selection, width, height, options = {}) {
     let position = options.position ? options.position : "topright";
     let text = options.text ? options.text : "Your text here!";
     let fontSize = options.fontSize ? options.fontSize : 15;
-    let fontFamily = options.fontFamily ? options.fontFamily : "Robotto";
+    let fontFamily = options.fontFamily ? options.fontFamily : "Roboto";
     let margin = options.margin ? options.margin : 0;
     let textDecoration = options.textDecoration
       ? options.textDecoration
