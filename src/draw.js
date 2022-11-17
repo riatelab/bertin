@@ -45,6 +45,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // projections
   let planar = params.projection == "user" ? true : false;
   let projection = params.projection;
+  let height = params.height;
   let reverse = params.reverse ? false : true;
   const types = layers.map((d) => d.type);
   if (types.includes("tiles")) {
@@ -69,7 +70,10 @@ export function draw({ params = {}, layers = {} } = {}) {
   let clip = params.clip == true ? true : false;
 
   // optimal heights
-  let height = getheight(layers, extent, margin, projection, planar, width);
+  height =
+    height == undefined
+      ? getheight(layers, extent, margin, projection, planar, width)
+      : height;
   let headerdelta = 0;
   let header = layers.find((d) => d.type == "header");
   if (header) {
