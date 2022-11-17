@@ -9,7 +9,7 @@ export function label(selection, projection, planar, options = {}, clipid) {
     let values = options.values;
     let fill = options.fill ? options.fill : "#474342";
     let fontSize = options.fontSize ? options.fontSize : 10;
-    let fontFamily = options.fontFamily ? options.fontFamily : "Robotto";
+    let fontFamily = options.fontFamily ? options.fontFamily : "Roboto";
     let textDecoration = options.textDecoration
       ? options.textDecoration
       : "none";
