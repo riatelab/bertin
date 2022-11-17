@@ -861,21 +861,15 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     // Custom
 
-    if (layer.type == "custom") {
-      const { draw, type, ...restOfLayer } = layer;
+    if (layer.type == "custom" || layer.type == "function") {
+      const { render, type, ...restOfLayer } = layer;
       if (typeof draw === "function") {
-        draw(
-          svg,
-          projection,
-          {
-            ...restOfLayer,
-          },
-          clipid,
-          width,
-          height
-        );
+        let map = { projection, width, height, clipid };
+        render(svg, map, {
+          ...restOfLayer,
+        });
       } else {
-        console.warn(`'draw' function missing for layer type: ${layer.type}`);
+        console.warn(`'render' function missing for layer type: ${layer.type}`);
       }
     }
 

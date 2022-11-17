@@ -1538,32 +1538,77 @@ bertin.draw({
 
 ## Custom Layer
 
-The _custom_ type allows you to provide your own draw function to create custom layer.
+The _custom_ type (or __function__ type) allows you to provide your own render function to create custom layer. [[Example](https://observablehq.com/@neocartocnrs/combine-d3-js-bertin-js-with-custom-layers)]
 
-#### Code
+#### Code 
 
 ```js
 bertin.draw({
   layers: [
     {
       type: "custom",
-      draw: function (
-        svg, // D3 selection for SVG
-        projection, // Current projection.
-        layer_parameters, // All parameters (like geojson) provided as part of this layer.
-        clipid, // ID for the clipPath.
-        width, // Width of the SVG
-        height // Heigt of the SVG
-      ) {
-        /* ...code to draw... */
-      },
-      /* ...any parameters you provide here will be available
-       * in the passed draw function
-       */
+      render: function (svg, map) {
+        svg
+          .append("g")
+          .append("rect")
+          .attr("x", map.width / 2)
+          .attr("y", map.height / 2)
+          .attr("height", 100)
+          .attr("width", 200)
+          .style("fill", "red");
+      }
     },
-  ],
-});
+    { geojson: world, fill: "white" },
+    { type: "graticule" },
+    { type: "outline" }
+  ]
+})
 ```
+
+Or with an external function
+
+```js
+function drawRectangle(svg, map, options) {
+  const { fill, stroke, strokeWidth } = options; // Will have all options (parameters) set in the curret layer object, right?
+  svg
+    .append("g")
+    .append("rect")
+    .attr("x", map.width / 2)
+    .attr("y", map.height / 2)
+    .attr("height", 100)
+    .attr("width", 200)
+    .style("fill", fill)
+    .style("stroke", stroke)
+    .style("stroke-width", strokeWidth);
+}
+```
+
+then:
+
+```js
+bertin.draw({
+  params: { extent: world, width: 1000 },
+  layers: [
+    {
+      type: "function",
+      render: drawRectangle,
+      fill: "red",
+      stroke: "blue",
+      strokeWidth: 10
+    },
+    { geojson: world, fill: "white" },
+    { type: "graticule" },
+    { type: "outline" }
+  ]
+})
+```
+
+with
+
+`map.width`: the width of the map 
+`map.height`: the height of the map  
+`map.projection`: the projection of the map
+`map.clipid`: the unique id of the map
 
 ## Geojson properties selections
 
@@ -1572,6 +1617,7 @@ bertin.draw({
 *properties.add* allows to add a new field in the att ribute table. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
 
 #### Code
+
 
 ```js
 bertin.properties.add({
