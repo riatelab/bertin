@@ -3,6 +3,19 @@
 
 # bertin.js - Changelog
 
+
+#### 1.5.0
+
+##### New Features
+
+* Custom layer ([d526f7](https://github.com/neocarto/bertin/commit/d526f7c484be0a4d4fa8ea79e010625be40da99b)) ([c24d35](https://github.com/neocarto/bertin/commit/c24d35f1dfa2e7d29c81e65d9b71d1b6322dad84))
+
+##### Bug Fixes
+
+* Corrects default font family to 'Roboto' ([a9fdb9](https://github.com/neocarto/bertin/commit/a9fdb91dfaed4c6df942bf0f4386d8ae18ccef50))
+
+
+
 #### 1.4.0
 
 ##### New Features
