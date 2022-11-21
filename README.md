@@ -259,18 +259,19 @@ The _typo_ type allows to realize a qualitative map. The choro type can be appli
 
 ```js
 bertin.draw({
-layers: [
-  {
-    type: "layer",
-    geojson: data,
-    fill: {
-      type: "typo",
-      values: "region",
-      pal: "Tableau10",
-      tooltip: ["$region", "$name"],
-      leg_title: `The Continents`,
-      leg_x: 55,
-      leg_y: 180
+  layers: [
+    {
+      type: "layer",
+      geojson: data,
+      fill: {
+        type: "typo",
+        values: "region",
+        pal: "Tableau10",
+        tooltip: ["$region", "$name"],
+        leg_title: `The Continents`,
+        leg_x: 55,
+        leg_y: 180
+      }
     }
   ]
 })
