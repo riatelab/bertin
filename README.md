@@ -1930,7 +1930,7 @@ bertin.table2geo(cities, "lat", "lng");
 
 ### Info
 
-After creating a map, you can have access to the map info (width, height, projection).
+After creating a map, you can have access to the map info (width, total height, map height, footer height, header height, projection).
 
 #### Code
 

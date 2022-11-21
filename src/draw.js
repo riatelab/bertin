@@ -956,7 +956,10 @@ export function draw({ params = {}, layers = {} } = {}) {
   return Object.assign(svg.node(), {
     info: {
       width: width,
-      height: height,
+      height: height + headerdelta + footerdelta,
+      height_map: height,
+      height_header: headerdelta,
+      height_footer: footerdelta,
       projection: projection,
     },
   });
