@@ -1927,3 +1927,25 @@ bertin.table2geo(cities, "lat", "lng");
 - param 1 : a geojson (**compulsory**)
 - param 2 : latitude
 - param 3 : longitude
+
+### Info
+
+After creating a map, you can have access to the map info (width, height, projection).
+
+#### Code
+
+```js
+mymap = bertin.draw({
+  params: {
+    projection: d3.geoBertin1953(),
+    width: 750,
+  },
+  layers: [...]
+})
+```
+
+then
+
+```js
+mymap.info
+```

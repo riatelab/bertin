@@ -952,5 +952,12 @@ export function draw({ params = {}, layers = {} } = {}) {
   svg.selectAll(".bertinlegend").raise();
 
   // build
-  return Object.assign(svg.node(), {});
+
+  return Object.assign(svg.node(), {
+    info: {
+      width: width,
+      height: height,
+      projection: projection,
+    },
+  });
 }
