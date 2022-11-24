@@ -40,6 +40,8 @@ import { rhumbs } from "./layers/rhumbs.js";
 import { tissot } from "./layers/tissot.js";
 import { minimap } from "./layers/minimap.js";
 
+import { test } from "./layers/test.js"; // TEST
+
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
   // projections
@@ -98,6 +100,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // svg document
   const svg = d3
     .create("svg")
+    .attr("id", "bertinmap")
     .attr("width", width)
     .attr("height", height + headerdelta + footerdelta)
     .attr("viewBox", [
@@ -282,7 +285,8 @@ export function draw({ params = {}, layers = {} } = {}) {
         },
         clipid,
         width,
-        height
+        height,
+        viewofdata
       );
     }
 
@@ -903,6 +907,15 @@ export function draw({ params = {}, layers = {} } = {}) {
       });
     }
 
+    // test
+    if (layer.type == "test") {
+      test(svg, projection, {
+        geojson: layer.geojson,
+        fill: layer.fill,
+        export_properties: layer.export_properties,
+      });
+    }
+
     // Hatch
     if (layer.type == "hatch" || layer.type == "hatching") {
       hatch(
@@ -951,9 +964,25 @@ export function draw({ params = {}, layers = {} } = {}) {
   // Raise legends
   svg.selectAll(".bertinlegend").raise();
 
-  // build
+  // Viewof coordinates
 
-  return Object.assign(svg.node(), {
+  if (typeof layers.find((d) => d.export_properties) == "undefined") {
+    let coords = [];
+    svg.on("mousemove", function (ev) {
+      const { offsetX, offsetY } = ev;
+      coords = projection.invert([offsetX, offsetY]);
+      svg.dispatch("input");
+    });
+
+    Object.defineProperty(svg.node(), "value", {
+      get: () => coords,
+      configurable: true,
+    });
+  }
+
+  // Static properties
+
+  Object.assign(svg.node(), {
     info: {
       width: width,
       height: height + headerdelta + footerdelta,
@@ -963,4 +992,6 @@ export function draw({ params = {}, layers = {} } = {}) {
       projection: projection,
     },
   });
+
+  return svg.node();
 }

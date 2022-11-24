@@ -47,6 +47,7 @@ export function simple(
   clipid,
   width,
   height
+  //viewofdata
 ) {
   let display = options.display == false ? false : true;
   if (display) {
@@ -127,6 +128,8 @@ export function simple(
         .attr("stroke-linejoin", strokeLinejoin)
         .attr("stroke-dasharray", strokeDasharray)
         .on("touchmove mousemove", function (event, d) {
+          viewofdata = "cpicpi"; // TEST
+          selection.dispatch("input"); // TEST
           if (tooltip) {
             selection.select("#info").call(
               addtooltip,
