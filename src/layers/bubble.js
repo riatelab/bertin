@@ -67,6 +67,7 @@ export function bubble(
     let dorling = options.dorling ? options.dorling : false;
     let iteration = options.iteration != undefined ? options.iteration : 200;
     let tooltip = options.tooltip ? options.tooltip : false;
+    let view_properties = options.view_properties ? true : false;
     if (Array.isArray(tooltip)) {
       tooltip = { fields: tooltip };
     }
@@ -120,6 +121,7 @@ export function bubble(
 
     // Bubbles
 
+    let viewdata = {};
     selection
       .append("g")
       .selectAll("circle")
@@ -157,6 +159,17 @@ export function bubble(
       )
       .attr("r", (d) => radius(Math.abs(d.properties[values])))
       .on("touchmove mousemove", function (event, d) {
+        if (view_properties) {
+          d3.select(this)
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3);
+          viewdata = d.properties;
+          selection.dispatch("input");
+          Object.defineProperty(selection.node(), "value", {
+            get: () => viewdata,
+            configurable: true,
+          });
+        }
         if (tooltip) {
           selection.select("#info").call(
             addtooltip,
@@ -191,19 +204,25 @@ export function bubble(
           selection
             .select("#info")
             .attr("transform", `translate(${d3.pointer(event, this)})`);
-          d3.select(this)
-            .attr("stroke-opacity", strokeOpacity - 0.3)
-            .attr("fill-opacity", fillOpacity - 0.3);
-          //.raise();
         }
       })
       .on("touchend mouseleave", function () {
+        if (view_properties) {
+          viewdata = {};
+          selection.dispatch("input");
+        }
         selection.select("#info").call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity);
-        //.lower();
       });
+
+    if (view_properties) {
+      Object.defineProperty(selection.node(), "value", {
+        get: () => viewdata,
+        configurable: true,
+      });
+    }
 
     // legend (classes)
     legends(geojson, selection, fill, stroke, strokeWidth);

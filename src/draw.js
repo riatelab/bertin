@@ -282,11 +282,11 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fill: layer.leg_fill,
           leg_strokeWidth: layer.leg_strokeWidth,
           leg_txtcol: layer.leg_txtcol,
+          view_properties: layer.view_properties,
         },
         clipid,
         width,
-        height,
-        viewofdata
+        height
       );
     }
 
@@ -653,6 +653,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
+          view_properties: layer.view_properties,
         },
         clipid,
         width,
@@ -694,6 +695,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
+          view_properties: layer.view_properties,
         },
         clipid,
         width,
@@ -912,7 +914,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       test(svg, projection, {
         geojson: layer.geojson,
         fill: layer.fill,
-        export_properties: layer.export_properties,
+        view_properties: layer.view_properties,
       });
     }
 
@@ -976,7 +978,6 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     Object.defineProperty(svg.node(), "value", {
       get: () => coords,
-      configurable: true,
     });
   }
 

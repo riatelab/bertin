@@ -70,6 +70,7 @@ export function square(
     let demers = options.demers ? options.demers : false;
     let iteration = options.iteration != undefined ? options.iteration : 200;
     let tooltip = options.tooltip ? options.tooltip : false;
+    let view_properties = options.view_properties ? true : false;
     if (Array.isArray(tooltip)) {
       tooltip = { fields: tooltip };
     }
@@ -186,7 +187,7 @@ export function square(
       }
     }
     // Squares
-
+    let viewdata = {};
     selection
       .append("g")
       .selectAll("squares")
@@ -211,6 +212,17 @@ export function square(
       .attr("width", (d) => d._size)
       .attr("height", (d) => d._size)
       .on("touchmove mousemove", function (event, d) {
+        if (view_properties) {
+          d3.select(this)
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3);
+          viewdata = d;
+          selection.dispatch("input");
+          Object.defineProperty(selection.node(), "value", {
+            get: () => viewdata,
+            configurable: true,
+          });
+        }
         if (tooltip) {
           selection.select("#info").call(
             addtooltip,
@@ -243,17 +255,25 @@ export function square(
           selection
             .select("#info")
             .attr("transform", `translate(${d3.pointer(event, this)})`);
-          d3.select(this)
-            .attr("stroke-opacity", strokeOpacity - 0.3)
-            .attr("fill-opacity", fillOpacity - 0.3);
         }
       })
       .on("touchend mouseleave", function () {
+        if (view_properties) {
+          viewdata = {};
+          selection.dispatch("input");
+        }
         selection.select("#info").call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity);
       });
+
+    if (view_properties) {
+      Object.defineProperty(selection.node(), "value", {
+        get: () => viewdata,
+        configurable: true,
+      });
+    }
 
     // legend (classes)
     legends(geojson, selection, fill, stroke, strokeWidth);

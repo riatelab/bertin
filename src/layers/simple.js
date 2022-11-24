@@ -47,7 +47,6 @@ export function simple(
   clipid,
   width,
   height
-  //viewofdata
 ) {
   let display = options.display == false ? false : true;
   if (display) {
@@ -92,6 +91,10 @@ export function simple(
       options.symbol_iteration != undefined ? options.symbol_iteration : 200;
     let symbol_shift =
       options.symbol_shift != undefined ? options.symbol_shift : 0;
+    let view_properties = options.view_properties ? true : false;
+
+    // viewof data
+    let viewdata = {};
 
     // If lines
     if (figuration(geojson) == "l") {
@@ -128,8 +131,18 @@ export function simple(
         .attr("stroke-linejoin", strokeLinejoin)
         .attr("stroke-dasharray", strokeDasharray)
         .on("touchmove mousemove", function (event, d) {
-          viewofdata = "cpicpi"; // TEST
-          selection.dispatch("input"); // TEST
+          if (view_properties) {
+            d3.select(this)
+              .attr("stroke-opacity", strokeOpacity - 0.3)
+              .attr("fill-opacity", fillOpacity - 0.3);
+            viewdata = d.properties;
+            selection.dispatch("input");
+            Object.defineProperty(selection.node(), "value", {
+              get: () => viewdata,
+              configurable: true,
+            });
+          }
+
           if (tooltip) {
             selection.select("#info").call(
               addtooltip,
@@ -171,6 +184,10 @@ export function simple(
           }
         })
         .on("touchend mouseleave", function () {
+          if (view_properties) {
+            viewdata = {};
+            selection.dispatch("input");
+          }
           selection.select("#info").call(addtooltip, null);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity)
@@ -245,6 +262,14 @@ export function simple(
         .attr("stroke-linejoin", strokeLinejoin)
         .attr("stroke-dasharray", strokeDasharray)
         .on("touchmove mousemove", function (event, d) {
+          if (view_properties) {
+            viewdata = d.properties;
+            selection.dispatch("input");
+            Object.defineProperty(selection.node(), "value", {
+              get: () => viewdata,
+              configurable: true,
+            });
+          }
           if (tooltip) {
             selection.select("#info").call(
               addtooltip,
@@ -295,12 +320,24 @@ export function simple(
           }
         })
         .on("touchend mouseleave", function () {
+          if (view_properties) {
+            viewdata = {};
+            selection.dispatch("input");
+          }
           selection.select("#info").call(addtooltip, null);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity)
             .attr("fill-opacity", fillOpacity);
           //.lower();
         });
+    }
+
+    // define exported propertes
+    if (view_properties) {
+      Object.defineProperty(selection.node(), "value", {
+        get: () => viewdata,
+        configurable: true,
+      });
     }
 
     // Legend
