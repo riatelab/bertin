@@ -59,7 +59,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.5.0");
+bertin = require("bertin@1.5.5");
 ```
 
 #### In Quarto
@@ -72,7 +72,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.5.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.5.5"></script>
 
 <script>
   let geojson =
