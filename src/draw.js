@@ -40,8 +40,6 @@ import { rhumbs } from "./layers/rhumbs.js";
 import { tissot } from "./layers/tissot.js";
 import { minimap } from "./layers/minimap.js";
 
-import { test } from "./layers/test.js"; // TEST
-
 // Main
 export function draw({ params = {}, layers = {} } = {}) {
   // projections
@@ -282,7 +280,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fill: layer.leg_fill,
           leg_strokeWidth: layer.leg_strokeWidth,
           leg_txtcol: layer.leg_txtcol,
-          view_properties: layer.view_properties,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -369,6 +367,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_strokeWidth: layer.leg_strokeWidth,
           leg_txtcol: layer.leg_txtcol,
           leg_round: layer.leg_round,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -410,6 +409,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_bottom_fill: layer.leg_bottom_fill,
           leg_stroke: layer.leg_stroke,
           leg_strokeWidth: layer.leg_strokeWidth,
+          viewof: layer.viewof,
         },
         width,
         height
@@ -613,6 +613,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_strokeWidth: layer.leg_strokeWidth,
           leg_fill: layer.leg_fill,
           leg_txt: layer.leg_txt,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -653,7 +654,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
-          view_properties: layer.view_properties,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -695,7 +696,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
-          view_properties: layer.view_properties,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -737,6 +738,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -779,6 +781,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -825,6 +828,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fill: layer.leg_fill,
           leg_strokeWidth: layer.leg_strokeWidth,
           leg_txtcol: layer.leg_txtcol,
+          viewof: layer.viewof,
         },
         clipid,
         width,
@@ -909,15 +913,6 @@ export function draw({ params = {}, layers = {} } = {}) {
       });
     }
 
-    // test
-    if (layer.type == "test") {
-      test(svg, projection, {
-        geojson: layer.geojson,
-        fill: layer.fill,
-        view_properties: layer.view_properties,
-      });
-    }
-
     // Hatch
     if (layer.type == "hatch" || layer.type == "hatching") {
       hatch(
@@ -968,7 +963,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   // Viewof coordinates
 
-  if (typeof layers.find((d) => d.export_properties) == "undefined") {
+  if (typeof layers.find((d) => d.viewof) == "undefined") {
     let coords = [];
     svg.on("mousemove", function (ev) {
       const { offsetX, offsetY } = ev;

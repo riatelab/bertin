@@ -68,7 +68,10 @@ export function spikes(
     let leg_txtcol = options.leg_txtcol ? options.leg_txtcol : "#363636";
     let leg_round =
       options.leg_round !== undefined ? options.leg_round : undefined;
+    let viewof = options.viewof ? true : false;
     let features;
+
+    let viewdata = {};
 
     if (figuration(geojson) == "p") {
       features = geojson.features;
@@ -122,6 +125,17 @@ export function spikes(
       )
       //.attr("clip-path", `url(#clip_${clipid}_rectangle)`)
       .on("touchmove mousemove", function (event, d) {
+        if (viewof) {
+          d3.select(this)
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3);
+          viewdata = d.properties;
+          selection.dispatch("input");
+          Object.defineProperty(selection.node(), "value", {
+            get: () => viewdata,
+            configurable: true,
+          });
+        }
         if (tooltip) {
           selection.select("#info").call(
             addtooltip,
@@ -163,12 +177,23 @@ export function spikes(
         }
       })
       .on("touchend mouseleave", function () {
+        if (viewof) {
+          viewdata = {};
+          selection.dispatch("input");
+        }
         selection.select("#info").call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity)
           .lower();
       });
+
+    if (viewof) {
+      Object.defineProperty(selection.node(), "value", {
+        get: () => viewdata,
+        configurable: true,
+      });
+    }
 
     // Legend
 

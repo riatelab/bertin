@@ -91,7 +91,7 @@ export function simple(
       options.symbol_iteration != undefined ? options.symbol_iteration : 200;
     let symbol_shift =
       options.symbol_shift != undefined ? options.symbol_shift : 0;
-    let view_properties = options.view_properties ? true : false;
+    let viewof = options.viewof ? true : false;
 
     // viewof data
     let viewdata = {};
@@ -131,7 +131,7 @@ export function simple(
         .attr("stroke-linejoin", strokeLinejoin)
         .attr("stroke-dasharray", strokeDasharray)
         .on("touchmove mousemove", function (event, d) {
-          if (view_properties) {
+          if (viewof) {
             d3.select(this)
               .attr("stroke-opacity", strokeOpacity - 0.3)
               .attr("fill-opacity", fillOpacity - 0.3);
@@ -184,7 +184,7 @@ export function simple(
           }
         })
         .on("touchend mouseleave", function () {
-          if (view_properties) {
+          if (viewof) {
             viewdata = {};
             selection.dispatch("input");
           }
@@ -262,7 +262,7 @@ export function simple(
         .attr("stroke-linejoin", strokeLinejoin)
         .attr("stroke-dasharray", strokeDasharray)
         .on("touchmove mousemove", function (event, d) {
-          if (view_properties) {
+          if (viewof) {
             viewdata = d.properties;
             selection.dispatch("input");
             Object.defineProperty(selection.node(), "value", {
@@ -320,7 +320,7 @@ export function simple(
           }
         })
         .on("touchend mouseleave", function () {
-          if (view_properties) {
+          if (viewof) {
             viewdata = {};
             selection.dispatch("input");
           }
@@ -333,7 +333,7 @@ export function simple(
     }
 
     // define exported propertes
-    if (view_properties) {
+    if (viewof) {
       Object.defineProperty(selection.node(), "value", {
         get: () => viewdata,
         configurable: true,

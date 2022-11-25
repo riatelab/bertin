@@ -70,7 +70,7 @@ export function square(
     let demers = options.demers ? options.demers : false;
     let iteration = options.iteration != undefined ? options.iteration : 200;
     let tooltip = options.tooltip ? options.tooltip : false;
-    let view_properties = options.view_properties ? true : false;
+    let viewof = options.viewof ? true : false;
     if (Array.isArray(tooltip)) {
       tooltip = { fields: tooltip };
     }
@@ -212,7 +212,7 @@ export function square(
       .attr("width", (d) => d._size)
       .attr("height", (d) => d._size)
       .on("touchmove mousemove", function (event, d) {
-        if (view_properties) {
+        if (viewof) {
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
             .attr("fill-opacity", fillOpacity - 0.3);
@@ -255,10 +255,13 @@ export function square(
           selection
             .select("#info")
             .attr("transform", `translate(${d3.pointer(event, this)})`);
+          d3.select(this)
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3);
         }
       })
       .on("touchend mouseleave", function () {
-        if (view_properties) {
+        if (viewof) {
           viewdata = {};
           selection.dispatch("input");
         }
@@ -268,7 +271,7 @@ export function square(
           .attr("fill-opacity", fillOpacity);
       });
 
-    if (view_properties) {
+    if (viewof) {
       Object.defineProperty(selection.node(), "value", {
         get: () => viewdata,
         configurable: true,

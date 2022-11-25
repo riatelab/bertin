@@ -51,6 +51,7 @@ export function dotcartogram(
       options.strokeDasharray != undefined ? options.strokeDasharray : "none";
     let strokeOpacity =
       options.strokeOpacity != undefined ? options.strokeOpacity : 1;
+    let viewof = options.viewof ? true : false;
     let tooltip = options.tooltip ? options.tooltip : false;
     if (Array.isArray(tooltip)) {
       tooltip = { fields: tooltip };
@@ -97,7 +98,7 @@ export function dotcartogram(
     }
 
     // Draw
-
+    let viewdata = {};
     selection
       .append("g")
       .selectAll("circle")
@@ -121,6 +122,17 @@ export function dotcartogram(
       .attr("cy", (d) => d.y)
       .attr("r", radius)
       .on("touchmove mousemove", function (event, d) {
+        if (viewof) {
+          d3.select(this)
+            .attr("stroke-opacity", strokeOpacity - 0.3)
+            .attr("fill-opacity", fillOpacity - 0.3);
+          viewdata = d.properties;
+          selection.dispatch("input");
+          Object.defineProperty(selection.node(), "value", {
+            get: () => viewdata,
+            configurable: true,
+          });
+        }
         if (tooltip) {
           selection.select("#info").call(
             addtooltip,
@@ -158,16 +170,25 @@ export function dotcartogram(
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
             .attr("fill-opacity", fillOpacity - 0.3);
-          //.raise();
         }
       })
       .on("touchend mouseleave", function () {
+        if (viewof) {
+          viewdata = {};
+          selection.dispatch("input");
+        }
         selection.select("#info").call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity);
-        //.lower();
       });
+
+    if (viewof) {
+      Object.defineProperty(selection.node(), "value", {
+        get: () => viewdata,
+        configurable: true,
+      });
+    }
 
     // legend
 

@@ -128,7 +128,7 @@ bertin.draw({
 
 - **projection**: a d3 function or string defining the map projection. Refer [d3-geo-projection](https://github.com/d3/d3-geo-projection) and [spatialreference.org](https://spatialreference.org/) for more detailed explanation. (default: d3.geoEquirectangular() except if you use tiles. in this case, the projection is automatically set to d3.geoMercator()). Moreover, if you define projection as "user", you can display a basemap already projected. [Example](https://observablehq.com/@neocartocnrs/bertin-js-projections). Note alsa that custom projections are available. Try "Polar", "Spilhaus" or "HoaXiaoguang".
 - **width**: width of the map (default:1000);
-- **extent**: a feature or a bbox array defining the extent e.g. a country or [[112, -43],[153, -9]] (default: null)
+- **extent**: a feature or a bbox array defining the extent e.g. a country or `[[112, -43],[153, -9]]` (default: null)
 - **margin**: margin around features to be displayed. This option can be useful if the stroke is very heavy (default: 1)
 - **background**: color of the background (default: "none")
 - **clip**: a boolean to avoid artifacts of discontinuous projection (default: "false")
@@ -173,6 +173,7 @@ bertin.draw({
 - **symbol_shift**: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
 - **symbol_iteration**: Number of iteration to shift symbols (default: 200)
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
 
@@ -338,6 +339,7 @@ bertin.draw({
 - **iteration**: an integer to define the number of iteration for the Dorling method (default: 200)
 - **tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin).
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
 
@@ -389,6 +391,7 @@ bertin.draw({
 - **iteration**: an integer to define the number of iteration for the Dorling method (default: 200)
 - **tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin).
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
 
@@ -621,6 +624,7 @@ bertin.draw({
 - **tooltip** an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **iteration** an integer to define the number of iteration for the Dorling method (default 200)
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
 
@@ -673,6 +677,7 @@ bertin.draw({
 - **top_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **bottom_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
 
@@ -778,6 +783,7 @@ bertin.draw({
 - **fillOpacity**: fill opacity (default: 0.3)
 - **tooltip** an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
 
@@ -1949,3 +1955,37 @@ then
 ```js
 mymap.info
 ```
+
+### Observable viewof
+
+Within [Observable](https://observablehq.com/), you can use `bertin` maps as Inputs by using `viewof`. In Observable, a view is a user interface element that directly controls a value in the notebook. See explanations here: https://observablehq.com/@observablehq/views.
+
+In `bertin`, you can define which layer(s) are used by specifying the viewof parameter at the layer level. It works for simple, bubble, square, dotcartogram, mushroom, regularbubble, regularsquare, regulargrid and spikes layer. 
+
+#### Code
+
+```js
+viewof map = bertin.draw({
+  layers: [
+    {
+      type: "bubble",
+      geojson: *a geojson*,
+      values:"pop",
+      viewof: true
+    },
+    {
+      type: "layer",
+      geojson: *another geojson*,
+      viewof: false
+    }
+  ]
+})
+```
+
+Then 
+
+```js
+map
+```
+
+If you do not specify any particular layer, map will return the coordinates of the mouse cursor. 

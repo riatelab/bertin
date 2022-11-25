@@ -70,6 +70,8 @@ export function mushroom(
     let leg_strokeWidth = options.leg_strokeWidth
       ? options.leg_strokeWidth
       : 0.8;
+    let viewof = options.viewof ? true : false;
+    let viewdata = {};
 
     const features = centroid(geojson, { planar: planar })
       .features.sort((a, b) =>
@@ -97,7 +99,18 @@ export function mushroom(
         .attr("stroke", stroke)
         .attr("stroke-width", strokeWidth)
         .attr("clip-path", "url(#top-clip_" + clipid + i + ")")
-        .on("touchmove mousemove", function (event, d) {
+        .on("touchmove mousemove", function (event) {
+          if (viewof) {
+            d3.select(this)
+              .attr("stroke-opacity", strokeOpacity - 0.3)
+              .attr("fill-opacity", fillOpacity - 0.3);
+            viewdata = features[i].properties;
+            selection.dispatch("input");
+            Object.defineProperty(selection.node(), "value", {
+              get: () => viewdata,
+              configurable: true,
+            });
+          }
           if (top_tooltip) {
             selection.select("#info").call(
               addtooltip,
@@ -141,6 +154,10 @@ export function mushroom(
           }
         })
         .on("touchend mouseleave", function () {
+          if (viewof) {
+            viewdata = {};
+            selection.dispatch("input");
+          }
           selection.select("#info").call(addtooltip, null);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity)
@@ -167,7 +184,18 @@ export function mushroom(
         .attr("stroke", stroke)
         .attr("stroke-width", strokeWidth)
         .attr("clip-path", "url(#bottom-clip_" + clipid + i + ")")
-        .on("touchmove mousemove", function (event, d) {
+        .on("touchmove mousemove", function (event) {
+          if (viewof) {
+            d3.select(this)
+              .attr("stroke-opacity", strokeOpacity - 0.3)
+              .attr("fill-opacity", fillOpacity - 0.3);
+            viewdata = features[i].properties;
+            selection.dispatch("input");
+            Object.defineProperty(selection.node(), "value", {
+              get: () => viewdata,
+              configurable: true,
+            });
+          }
           if (bottom_tooltip) {
             selection.select("#info").call(
               addtooltip,
@@ -211,6 +239,10 @@ export function mushroom(
           }
         })
         .on("touchend mouseleave", function () {
+          if (viewof) {
+            viewdata = {};
+            selection.dispatch("input");
+          }
           selection.select("#info").call(addtooltip, null);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity)
@@ -236,6 +268,13 @@ export function mushroom(
         .attr("y2", cy)
         .attr("stroke", stroke)
         .attr("stroke-width", strokeWidth);
+    }
+
+    if (viewof) {
+      Object.defineProperty(selection.node(), "value", {
+        get: () => viewdata,
+        configurable: true,
+      });
     }
 
     // Legend
