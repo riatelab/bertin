@@ -836,13 +836,13 @@ bertin.draw({
 
 Contour parameters
 
--**fill**: color palette. "Blues", "Greens", "Greys", "Oranges", "Purples", "Reds", "BrBG", "PRGn", "PiYG", "PuOr", "RdBu", "RdYlBu", "RdYlGn", "Spectral","Turbo","Viridis","Inferno", "Magma", "Plasma", "Cividis", "Warm", "Cool", "CubehelixDefault", "BuGn", "BuPu", "GnBu", "OrRd", "PuBuGn", "PuBu", "PuRd", "RdPu", "YlGnBu", "YlGn", "YlOrBr", "YlOrRd", "Rainbow", "Sinebow". (default: RdYlGn)
--**thresholds**: number of classes (default: 100)
--**bandwidth**: bandwidth (the standard deviation) of the Gaussian kernel and returns the estimate. (default: 5)
--**colorcurve**: a value to curve the color interpolation (default: 2)
--**reverse**: a boolean reverse the colors (default: false)
--**remove**: number of polygons to remove (default: 0)
--**clip**: a boolean to clip the contours with the input geojson (default: false)
+- **fill**: color palette. "Blues", "Greens", "Greys", "Oranges", "Purples", "Reds", "BrBG", "PRGn", "PiYG", "PuOr", "RdBu", "RdYlBu", "RdYlGn", "Spectral","Turbo","Viridis","Inferno", "Magma", "Plasma", "Cividis", "Warm", "Cool", "CubehelixDefault", "BuGn", "BuPu", "GnBu", "OrRd", "PuBuGn", "PuBu", "PuRd", "RdPu", "YlGnBu", "YlGn", "YlOrBr", "YlOrRd", "Rainbow", "Sinebow". (default: RdYlGn)
+- **thresholds**: number of classes (default: 100)
+- **bandwidth**: bandwidth (the standard deviation) of the Gaussian kernel and returns the estimate. (default: 5)
+- **colorcurve**: a value to curve the color interpolation (default: 2)
+- **reverse**: a boolean reverse the colors (default: false)
+- **remove**: number of polygons to remove (default: 0)
+- **clip**: a boolean to clip the contours with the input geojson (default: false)
 
 By default, the smooth layer is calculated from dots or centroids. But it is possible to go through a regular grid by using theses parameters.  
 
