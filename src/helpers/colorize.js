@@ -40,7 +40,7 @@ export function colorize(features, input) {
       nbreaks = 6;
     }
 
-    const arr = features.map((d) => d[values]); // here
+    const arr = features.map((d) => d[values]);
     const val = arr
       .filter((d) => d !== undefined)
       .filter((d) => d !== null)

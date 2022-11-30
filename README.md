@@ -351,6 +351,7 @@ Parameters of the legend
 - **leg_txtcol**: color of the text (default: "#363636")
 - **leg_title**: title of the legend (default var_data)
 - **leg_round**: number of digits after the decimal point (default: undefined)
+- **leg_divisor**: A number to divide to the values in the legend. For example, 1000 is used to convert units to thousands. 1000000 allows to convert units into millions (default: 1).
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
 
@@ -403,6 +404,7 @@ Parameters of the legend
 - **leg_txtcol**: color of the text (default: "#363636")
 - **leg_title**: title of the legend (default var_data)
 - **leg_round**: number of digits after the decimal point (default: undefined)
+- **leg_divisor**: A number to divide to the values in the legend. For example, 1000 is used to convert units to thousands. 1000000 allows to convert units into millions (default: 1).
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
 

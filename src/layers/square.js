@@ -297,6 +297,7 @@ export function square(
       x: options.leg_x,
       y: options.leg_y,
       round: options.leg_round !== undefined ? options.leg_round : undefined,
+      divisor: options.leg_divisor,
       k: k,
       fixmax: fixmax,
       stroke: options.leg_stroke,

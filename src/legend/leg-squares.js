@@ -19,6 +19,7 @@ export function legsquares(selection, options = {}) {
   let fontSize = options.fontSize ? options.fontSize : 14;
   let fontSize2 = options.fontSize2 ? options.fontSize2 : 10;
   let round = options.round != undefined ? options.round : undefined;
+  let divisor = options.divisor != undefined ? options.divisor : 1;
   let fixmax = options.fixmax;
 
   const valvax = fixmax != undefined ? fixmax : d3.max(values);
@@ -101,6 +102,6 @@ export function legsquares(selection, options = {}) {
       .attr("font-size", fontSize2)
       .attr("dominant-baseline", "central")
       .attr("fill", txtcol)
-      .text((d) => rounding(d, round));
+      .text((d) => rounding(d / divisor, round));
   }
 }
