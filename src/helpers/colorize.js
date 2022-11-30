@@ -42,8 +42,8 @@ export function colorize(features, input) {
 
     const arr = features.map((d) => d[values]); // here
     const val = arr
-      .filter((d) => +d !== undefined)
-      .filter((d) => +d !== null)
+      .filter((d) => d !== undefined)
+      .filter((d) => d !== null)
       .filter((d) => !isNaN(+d))
       .filter((d) => d !== "");
 
