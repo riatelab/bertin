@@ -1,7 +1,9 @@
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 //import area from "@turf/area";
+import bbox from "@turf/bbox";
 import intersect from "@turf/intersect";
-const turf = Object.assign({}, { booleanPointInPolygon, intersect });
+import RBush from 'rbush';
+const turf = Object.assign({}, { booleanPointInPolygon, intersect, bbox });
 
 import { range, rollup, ascending, blur2, sum, flatGroup } from "d3-array";
 import { geoPath } from "d3-geo";
@@ -12,6 +14,19 @@ const d3 = Object.assign(
   { geoProject, range, rollup, ascending, blur2, sum, flatGroup, geoPath }
 );
 import { figuration } from "./figuration.js";
+
+// Function that returns the bbox of a GeoJSON feature/geometry
+// in the format expected by the rbush library.
+const getBbox = (feature) => {
+  const t = turf.bbox(feature);
+  return {
+    minX: t[0],
+    minY: t[1],
+    maxX: t[2],
+    maxY: t[3],
+  };
+};
+
 export function grid({
   geojson, // A geojson (dots or polygons)
   values = null, // A field in properties with absolute quantitative values
@@ -169,21 +184,36 @@ export function grid({
     const polys = d3.geoProject(geojson, projection);
     const polysareas = polys.features.map((d) => d3.geoPath().area(d));
 
+    // Create an RTree
+    const polysRTree = new RBush();
+    polysRTree.load( //
+      polys.features.map((d, i) => {
+        const b = getBbox(d);
+        // We store the index of the feature alongside the bbox,
+        // so we can retrieve the feature later.
+        b.ix = i;
+        return b;
+     }),
+    );
+
     // Build intersected pieces
     let intersections = [];
     squaregrid.forEach((square, i1) => {
-      polys.features.forEach((poly, i2) => {
-        let piece = turf.intersect(poly, {
-          type: "Polygon",
-          coordinates: [square],
-        });
+      // Geojson geometry for the square
+      const squaregeo = { type: "Polygon", coordinates: [square] };
+      // Get polygons whose bbox intersects the square
+      const result = polysRTree.search(getBbox(squaregeo));
+      result.forEach((d) => {
+        const id_poly = d.ix;
+        const poly = polys.features[id_poly];
+        let piece = turf.intersect(poly, squaregeo);
 
         if (piece !== null) {
           let piecarea = d3.geoPath().area(piece);
-          let fullarea = polysareas[i2];
+          let fullarea = polysareas[id_poly];
           intersections.push({
             id_square: i1,
-            id_poly: i2,
+            id_poly: id_poly,
             area_piece: piecarea,
             area_poly: fullarea,
             share: piecarea / fullarea,
