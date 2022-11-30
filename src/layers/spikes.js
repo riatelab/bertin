@@ -50,7 +50,7 @@ export function spikes(
     if (Array.isArray(tooltip)) {
       tooltip = { fields: tooltip };
     }
-    if (typeof tooltip == "string") {
+    if (typeof tooltip == "function" || typeof tooltip == "string") {
       tooltip = { fields: [tooltip] };
     }
     let leg_x = options.leg_x ? options.leg_x : null;
@@ -142,14 +142,18 @@ export function spikes(
 
             {
               fields: (function () {
-                const fields = Array.isArray(tooltip.fields)
-                  ? tooltip.fields
-                  : [tooltip.fields];
+                const fields = tooltip.fields;
                 let result = [];
                 fields.forEach((e) => {
-                  result.push(
-                    e[0] == "$" ? `${d.properties[e.substr(1, e.length)]}` : e
-                  );
+                  let val = "";
+                  if (typeof e == "function") {
+                    val = [d].map(e)[0];
+                  } else if (typeof e == "string" && e[0] == "$") {
+                    val = `${d.properties[e.substring(1, e.length)]}`;
+                  } else if (typeof e == "string") {
+                    val = e;
+                  }
+                  result.push(val == "" ? "N/A" : val);
                 });
                 return result;
               })(),

@@ -43,7 +43,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.5.7"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.5.8"
   charset="utf-8"
 ></script>
 ```
@@ -59,7 +59,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.5.7");
+bertin = require("bertin@1.5.8");
 ```
 
 #### In Quarto
@@ -72,7 +72,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.5.7"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.5.8"></script>
 
 <script>
   let geojson =
@@ -225,7 +225,7 @@ bertin.draw({
 - **values**: a string corresponding to the targeted variable in the properties (**compulsory**)
 - **nbreaks**: Number of classes (default:5)
 - **breaks**: Class breaks (default:null)
-- **colors**: An array of colors or a palette of categorical colors (default: "Blues") [See](https://observablehq.com/@d3/color-schemes)
+- **colors**: An array of colors or a palette of colors (Blues", "Greens", "Greys", "Oranges", "Purples", "Reds", "BrBG", "PRGn", "PiYG", "PuOr", "RdBu", "RdYlBu", "RdYlGn", "Spectral","Turbo","Viridis","Inferno", "Magma", "Plasma", "Cividis", "Warm", "Cool", "CubehelixDefault", "BuGn", "BuPu", "GnBu", "OrRd", "PuBuGn", "PuBu", "PuRd", "RdPu", "YlGnBu", "YlGn", "YlOrBr", "YlOrRd", "Rainbow", "Sinebow". default: Blues) [See](https://observablehq.com/@d3/color-schemes)
 - **method**: A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
 - **middle**: for msd method only. middle class or not (default:false);
 - **k**: for msd method only. number of sd. (default:1);

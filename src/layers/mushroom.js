@@ -37,12 +37,22 @@ export function mushroom(
     if (Array.isArray(top_tooltip)) {
       top_tooltip = { fields: top_tooltip };
     }
-    if (typeof top_tooltip == "string") {
+    if (typeof top_tooltip == "function" || typeof top_tooltip == "string") {
       top_tooltip = { fields: [top_tooltip] };
     }
     let bottom_tooltip = options.bottom_tooltip
       ? options.bottom_tooltip
       : false;
+    if (Array.isArray(bottom_tooltip)) {
+      bottom_tooltip = { fields: bottom_tooltip };
+    }
+    if (
+      typeof bottom_tooltip == "function" ||
+      typeof bottom_tooltip == "string"
+    ) {
+      bottom_tooltip = { fields: [bottom_tooltip] };
+    }
+
     if (Array.isArray(bottom_tooltip)) {
       bottom_tooltip = { fields: bottom_tooltip };
     }
@@ -112,21 +122,24 @@ export function mushroom(
             });
           }
           if (top_tooltip) {
+            let d = features[i];
             selection.select("#info").call(
               addtooltip,
 
               {
                 fields: (function () {
-                  const fields = Array.isArray(top_tooltip.fields)
-                    ? top_tooltip.fields
-                    : [top_tooltip.fields];
+                  const fields = top_tooltip.fields;
                   let result = [];
                   fields.forEach((e) => {
-                    result.push(
-                      e[0] == "$"
-                        ? `${features[i].properties[e.substr(1, e.length)]}`
-                        : e
-                    );
+                    let val = "";
+                    if (typeof e == "function") {
+                      val = [d].map(e)[0];
+                    } else if (typeof e == "string" && e[0] == "$") {
+                      val = `${d.properties[e.substring(1, e.length)]}`;
+                    } else if (typeof e == "string") {
+                      val = e;
+                    }
+                    result.push(val == "" ? "N/A" : val);
                   });
                   return result;
                 })(),
@@ -197,21 +210,24 @@ export function mushroom(
             });
           }
           if (bottom_tooltip) {
+            let d = features[i];
             selection.select("#info").call(
               addtooltip,
 
               {
                 fields: (function () {
-                  const fields = Array.isArray(bottom_tooltip.fields)
-                    ? bottom_tooltip.fields
-                    : [bottom_tooltip.fields];
+                  const fields = bottom_tooltip.fields;
                   let result = [];
                   fields.forEach((e) => {
-                    result.push(
-                      e[0] == "$"
-                        ? `${features[i].properties[e.substr(1, e.length)]}`
-                        : e
-                    );
+                    let val = "";
+                    if (typeof e == "function") {
+                      val = [d].map(e)[0];
+                    } else if (typeof e == "string" && e[0] == "$") {
+                      val = `${d.properties[e.substring(1, e.length)]}`;
+                    } else if (typeof e == "string") {
+                      val = e;
+                    }
+                    result.push(val == "" ? "N/A" : val);
                   });
                   return result;
                 })(),

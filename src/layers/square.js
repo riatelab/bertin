@@ -69,15 +69,14 @@ export function square(
     let dorling = options.dorling ? options.dorling : false;
     let demers = options.demers ? options.demers : false;
     let iteration = options.iteration != undefined ? options.iteration : 200;
-    let tooltip = options.tooltip ? options.tooltip : false;
     let viewof = options.viewof ? true : false;
+    let tooltip = options.tooltip ? options.tooltip : false;
     if (Array.isArray(tooltip)) {
       tooltip = { fields: tooltip };
     }
-    if (typeof tooltip == "string") {
+    if (typeof tooltip == "function" || typeof tooltip == "string") {
       tooltip = { fields: [tooltip] };
     }
-
     let features;
 
     if (figuration(geojson) == "p") {
@@ -224,32 +223,35 @@ export function square(
           });
         }
         if (tooltip) {
-          selection.select("#info").call(
-            addtooltip,
-
-            {
-              fields: (function () {
-                const fields = Array.isArray(tooltip.fields)
-                  ? tooltip.fields
-                  : [tooltip.fields];
-                let result = [];
-                fields.forEach((e) => {
-                  result.push(e[0] == "$" ? `${d[e.substr(1, e.length)]}` : e);
-                });
-                return result;
-              })(),
-              fontWeight: tooltip.fontWeight,
-              fontSize: tooltip.fontSize,
-              fontStyle: tooltip.fontStyle,
-              fill: tooltip.fill,
-              stroke: tooltip.stroke,
-              strokeWidth: tooltip.strokeWidth,
-              fillOpacity: tooltip.fillOpacity,
-              strokeOpacity: tooltip.strokeOpacity,
-              col: tooltip.col,
-              type: tooltiptype(d3.pointer(event, this), width, height),
-            }
-          );
+          d.properties = d;
+          selection.select("#info").call(addtooltip, {
+            fields: (function () {
+              const fields = tooltip.fields;
+              let result = [];
+              fields.forEach((e) => {
+                let val = "";
+                if (typeof e == "function") {
+                  val = [d].map(e)[0];
+                } else if (typeof e == "string" && e[0] == "$") {
+                  val = `${d.properties[e.substring(1, e.length)]}`;
+                } else if (typeof e == "string") {
+                  val = e;
+                }
+                result.push(val == "" ? "N/A" : val);
+              });
+              return result;
+            })(),
+            fontWeight: tooltip.fontWeight,
+            fontSize: tooltip.fontSize,
+            fontStyle: tooltip.fontStyle,
+            fill: tooltip.fill,
+            stroke: tooltip.stroke,
+            strokeWidth: tooltip.strokeWidth,
+            fillOpacity: tooltip.fillOpacity,
+            strokeOpacity: tooltip.strokeOpacity,
+            col: tooltip.col,
+            type: tooltiptype(d3.pointer(event, this), width, height),
+          });
         }
         if (tooltip) {
           selection

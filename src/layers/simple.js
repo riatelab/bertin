@@ -81,9 +81,10 @@ export function simple(
     if (Array.isArray(tooltip)) {
       tooltip = { fields: tooltip };
     }
-    if (typeof tooltip == "string") {
+    if (typeof tooltip == "function" || typeof tooltip == "string") {
       tooltip = { fields: [tooltip] };
     }
+
     let symbol = options.symbol ? options.symbol : "circle";
     let symbol_size =
       options.symbol_size != undefined ? options.symbol_size : 40;
@@ -144,34 +145,34 @@ export function simple(
           }
 
           if (tooltip) {
-            selection.select("#info").call(
-              addtooltip,
-
-              {
-                fields: (function () {
-                  const fields = Array.isArray(tooltip.fields)
-                    ? tooltip.fields
-                    : [tooltip.fields];
-                  let result = [];
-                  fields.forEach((e) => {
-                    result.push(
-                      e[0] == "$" ? `${d.properties[e.substr(1, e.length)]}` : e
-                    );
-                  });
-                  return result;
-                })(),
-                fontWeight: tooltip.fontWeight,
-                fontSize: tooltip.fontSize,
-                fontStyle: tooltip.fontStyle,
-                fill: tooltip.fill,
-                stroke: tooltip.stroke,
-                strokeWidth: tooltip.strokeWidth,
-                fillOpacity: tooltip.fillOpacity,
-                strokeOpacity: tooltip.strokeOpacity,
-                col: tooltip.col,
-                type: tooltiptype(d3.pointer(event, this), width, height),
-              }
-            );
+            selection.select("#info").call(addtooltip, {
+              fields: (function () {
+                const fields = tooltip.fields;
+                let result = [];
+                fields.forEach((e) => {
+                  let val = "";
+                  if (typeof e == "function") {
+                    val = [d].map(e)[0];
+                  } else if (typeof e == "string" && e[0] == "$") {
+                    val = `${d.properties[e.substring(1, e.length)]}`;
+                  } else if (typeof e == "string") {
+                    val = e;
+                  }
+                  result.push(val == "" ? "N/A" : val);
+                });
+                return result;
+              })(),
+              fontWeight: tooltip.fontWeight,
+              fontSize: tooltip.fontSize,
+              fontStyle: tooltip.fontStyle,
+              fill: tooltip.fill,
+              stroke: tooltip.stroke,
+              strokeWidth: tooltip.strokeWidth,
+              fillOpacity: tooltip.fillOpacity,
+              strokeOpacity: tooltip.strokeOpacity,
+              col: tooltip.col,
+              type: tooltiptype(d3.pointer(event, this), width, height),
+            });
           }
           if (tooltip) {
             selection
@@ -276,14 +277,18 @@ export function simple(
 
               {
                 fields: (function () {
-                  const fields = Array.isArray(tooltip.fields)
-                    ? tooltip.fields
-                    : [tooltip.fields];
+                  const fields = tooltip.fields;
                   let result = [];
                   fields.forEach((e) => {
-                    result.push(
-                      e[0] == "$" ? `${d.properties[e.substr(1, e.length)]}` : e
-                    );
+                    let val = "";
+                    if (typeof e == "function") {
+                      val = [d].map(e)[0];
+                    } else if (typeof e == "string" && e[0] == "$") {
+                      val = `${d.properties[e.substring(1, e.length)]}`;
+                    } else if (typeof e == "string") {
+                      val = e;
+                    }
+                    result.push(val == "" ? "N/A" : val);
                   });
                   return result;
                 })(),
