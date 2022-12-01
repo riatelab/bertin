@@ -22,6 +22,7 @@ _The project is under **active development**. Some of features and options are s
 - [Custom Layer](#custom-layer)
 - [Geojson properties selections](#geojson-properties-selections)
 - [Other functions](#other-functions)
+- [Bonus: a cheat sheet](#bonus-a-cheat-sheet)
 
 `bertin` is an easy to use JavaScript library mainly based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
 
@@ -1992,7 +1993,7 @@ map
 
 If you do not specify any particular layer, map will return the coordinates of the mouse cursor.
 
-#### Bonus: a cheat sheet
+## Bonus: a cheat sheet
 
 What's available in the bertin javascript library? What types of maps can be made? Thanks to this cheat sheet, you have an overview of the "types" available in the library. All these thumbnails are generated for real with the bertin@1.5.9 in [this notebook](https://observablehq.com/@neocartocnrs/sheet-cheat-bertin).
 
