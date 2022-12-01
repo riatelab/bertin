@@ -1990,4 +1990,10 @@ Then
 map
 ```
 
-If you do not specify any particular layer, map will return the coordinates of the mouse cursor. 
+If you do not specify any particular layer, map will return the coordinates of the mouse cursor.
+
+#### Bonus: a cheat sheet
+
+What's available in the bertin javascript library? What types of maps can be made? Thanks to this cheat sheet, you have an overview of the "types" available in the library. All these thumbnails are generated for real in this notebook with the bertin@1.5.9.
+
+![](./img/cheatsheetbertin.png)
