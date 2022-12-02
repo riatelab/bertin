@@ -8,7 +8,7 @@
 
 **Bertin.js** is a JavaScript library for visualizing geospatial data and make thematic maps for the web.
 
-_The project is under **active development**. Some of features and options are subject to change. We welcome contributions of all kinds: bug reports, code contributions and documentation. A todo list of the next improvements is available [here](TODO.md)_
+_The project is under **active development**. Some of features and options are subject to change. We welcome contributions of all kinds: bug reports, code contributions and documentation. A todo list of the next improvements is available [here](TODO.md)._
 
 ![](./img/banner.png)
 
