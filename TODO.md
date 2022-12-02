@@ -10,6 +10,7 @@
 
 ### Things to think about it
 
+- Allow customization of line marker styles (https://github.com/neocarto/bertin/issues/85)
 - remove `jsts` depedency?
 - refactor things?
 - comment the code
