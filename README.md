@@ -1028,7 +1028,7 @@ bertin.draw({
 - **strokeWidth**: stroke width (default: [1.5, 1.2, 0.7])
 - **strokeOpacity**: stroke opacity (default: 1)
 - **strokeDasharray**: stroke-dasharray (default: ["none", 5, 3])
-- **strokeLinecap**: stroke-linecap (default: "but")
+- **strokeLinecap**: stroke-linecap (default: "butt")
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Graticule
@@ -1044,7 +1044,7 @@ bertin.draw({
   layers: [
     {
       type: "graticule",
-      fill: "#644580",
+      stroke: "#644580",
       step: [20, 10],
     },
   ],
