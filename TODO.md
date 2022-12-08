@@ -7,6 +7,7 @@
 - add several epsg projections
 - improve svg output file (header, layers, ...) for a better compatibility with inkscape and illustrator.
 - Accept javascript functions in addition to strings in several parameters. E.g in properties.js (Cf what is done for tooltips).
+- North arrow
 
 ### Things to think about it
 
