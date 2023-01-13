@@ -7,3 +7,7 @@ export { links } from "./links.js";
 export { borders } from "./borders.js";
 export { bbox } from "./bbox.js";
 export { properties } from "./properties.js";
+
+// test
+
+export { grid } from "./helpers/grid.js";

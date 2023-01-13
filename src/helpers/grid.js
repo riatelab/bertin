@@ -2,7 +2,7 @@ import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 //import area from "@turf/area";
 import bbox from "@turf/bbox";
 import intersect from "@turf/intersect";
-import RBush from 'rbush';
+import RBush from "rbush";
 const turf = Object.assign({}, { booleanPointInPolygon, intersect, bbox });
 
 import { range, rollup, ascending, blur2, sum, flatGroup } from "d3-array";
@@ -35,7 +35,8 @@ export function grid({
   height, // height of the map
   step = 20, // gap between points
   output = "dots", // dots or squares
-  blur = 0, // blur value with d3.blur2()
+  blur = 0, // blur value with d3.blur2(),
+  keep = false,
 } = {}) {
   // ---------------
   // Build empty grid
@@ -186,14 +187,15 @@ export function grid({
 
     // Create an RTree
     const polysRTree = new RBush();
-    polysRTree.load( //
+    polysRTree.load(
+      //
       polys.features.map((d, i) => {
         const b = getBbox(d);
         // We store the index of the feature alongside the bbox,
         // so we can retrieve the feature later.
         b.ix = i;
         return b;
-     }),
+      })
     );
 
     // Build intersected pieces
@@ -285,13 +287,20 @@ export function grid({
       });
     }
 
-    let FeatureCollection = {
-      type: "FeatureCollection",
-      features: features
-        .filter((d) => d.properties.value > 0)
-        .sort((a, b) => d3.ascending(a.properties.value, b.properties.value)),
-    };
-
-    return FeatureCollection;
+    if (keep == true) {
+      return {
+        type: "FeatureCollection",
+        features: features
+          //.filter((d) => d.properties.value > 0)
+          .sort((a, b) => d3.ascending(a.properties.value, b.properties.value)),
+      };
+    } else {
+      return {
+        type: "FeatureCollection",
+        features: features
+          .filter((d) => d.properties.value > 0)
+          .sort((a, b) => d3.ascending(a.properties.value, b.properties.value)),
+      };
+    }
   }
 }

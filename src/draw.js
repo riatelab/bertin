@@ -20,6 +20,7 @@ import { bubble } from "./layers/bubble.js";
 import { square } from "./layers/square.js";
 import { regularbubble } from "./layers/regularbubble.js";
 import { regularsquare } from "./layers/regularsquare.js";
+import { joyplot } from "./layers/joyplot.js";
 import { regulargrid } from "./layers/regulargrid.js";
 import { smooth } from "./layers/smooth.js";
 import { mushroom } from "./layers/mushroom.js";
@@ -741,6 +742,31 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize2: layer.leg_fontSize2,
           leg_round: layer.leg_round,
           viewof: layer.viewof,
+        },
+        clipid,
+        width,
+        height
+      );
+    }
+
+    // joyplot
+
+    if (layer.type == "joyplot") {
+      joyplot(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          step: layer.step,
+          blur: layer.blur,
+          k: layer.k,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeOpacity: layer.strokeOpacity,
         },
         clipid,
         width,
