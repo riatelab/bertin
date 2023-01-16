@@ -67,6 +67,10 @@ export function draw({ params = {}, layers = {} } = {}) {
 
   // other global parameters
   let margin = params.margin ? params.margin : 1;
+  if (!Array.isArray(margin)) {
+    margin = [margin, margin, margin, margin];
+  }
+  
   let background = params.background;
   let clip = params.clip == true ? true : false;
 

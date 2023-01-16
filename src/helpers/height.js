@@ -52,12 +52,29 @@ export function getheight(layers, extent, margin, projection, planar, width) {
 
   // Adapt scale
 
+  // const [[x0, y0], [x1, y1]] = d3
+  //   .geoPath(projection.fitWidth(width - margin * 2, ref))
+  //   .bounds(ref);
+
+  // let trans = projection.translate();
+  // projection.translate([trans[0] + margin, trans[1] + margin]);
+
+  // return Math.ceil(y1 - y0) + margin * 2;
+
+  // Adapt scale
+
+  // margin : top, right, bottom, left
+
   const [[x0, y0], [x1, y1]] = d3
-    .geoPath(projection.fitWidth(width - margin * 2, ref))
+    .geoPath(projection.fitWidth(width - margin[1] - margin[3], ref))
     .bounds(ref);
 
-  let trans = projection.translate();
-  projection.translate([trans[0] + margin, trans[1] + margin]);
+  console.log([x0, y0], [x1, y1]);
 
-  return Math.ceil(y1 - y0) + margin * 2;
+  let trans = projection.translate();
+
+  //console.log(trans);
+  projection.translate([trans[0] + margin[3], trans[1] + margin[0]]);
+
+  return Math.ceil(y1 - y0) + margin[0] + margin[2];
 }

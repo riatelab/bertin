@@ -44,7 +44,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.5.9"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.5.10"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.5.9");
+bertin = require("bertin@1.5.10");
 ```
 
 #### In Quarto
@@ -73,7 +73,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.5.9"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.5.10"></script>
 
 <script>
   let geojson =
@@ -130,7 +130,7 @@ bertin.draw({
 - **projection**: a d3 function or string defining the map projection. Refer [d3-geo-projection](https://github.com/d3/d3-geo-projection) and [spatialreference.org](https://spatialreference.org/) for more detailed explanation. (default: d3.geoEquirectangular() except if you use tiles. in this case, the projection is automatically set to d3.geoMercator()). Moreover, if you define projection as "user", you can display a basemap already projected. [Example](https://observablehq.com/@neocartocnrs/bertin-js-projections). Note alsa that custom projections are available. Try "Polar", "Spilhaus" or "HoaXiaoguang".
 - **width**: width of the map (default:1000);
 - **extent**: a feature or a bbox array defining the extent e.g. a country or `[[112, -43],[153, -9]]` (default: null)
-- **margin**: margin around features to be displayed. This option can be useful if the stroke is very heavy (default: 1)
+- **margin**: margin around features to be displayed. You can specify a single value or an array [top, right, bottom, left]. (default: 1)
 - **background**: color of the background (default: "none")
 - **clip**: a boolean to avoid artifacts of discontinuous projection (default: "false")
 - **reverse**: a boolean. By default, the layer placed on the top of the code is display on the top of the map. With reverse = true, your can reverse this order (default: false).
