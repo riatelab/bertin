@@ -227,7 +227,7 @@ bertin.draw({
 - **nbreaks**: Number of classes (default:5)
 - **breaks**: Class breaks (default:null)
 - **colors**: An array of colors or a palette of colors (Blues", "Greens", "Greys", "Oranges", "Purples", "Reds", "BrBG", "PRGn", "PiYG", "PuOr", "RdBu", "RdYlBu", "RdYlGn", "Spectral","Turbo","Viridis","Inferno", "Magma", "Plasma", "Cividis", "Warm", "Cool", "CubehelixDefault", "BuGn", "BuPu", "GnBu", "OrRd", "PuBuGn", "PuBu", "PuRd", "RdPu", "YlGnBu", "YlGn", "YlOrBr", "YlOrRd", "Rainbow", "Sinebow". default: Blues) [See](https://observablehq.com/@d3/color-schemes)
-- **method**: A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
+- **method**: A method of classification. Jenks, q6, quantiles, geometric, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
 - **middle**: for msd method only. middle class or not (default:false);
 - **k**: for msd method only. number of sd. (default:1);
 - **col_missing**: Color for missing values (default "#f5f5f5")
