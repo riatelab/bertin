@@ -9,5 +9,4 @@ export { bbox } from "./bbox.js";
 export { properties } from "./properties.js";
 
 // test
-export { grid2 } from "./helpers/grid2.js";
 export { grid } from "./helpers/grid.js";

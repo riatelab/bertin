@@ -5,21 +5,13 @@ import intersect from "@turf/intersect";
 import RBush from "rbush";
 const turf = Object.assign({}, { booleanPointInPolygon, intersect, bbox });
 
-import {
-  range,
-  rollup,
-  ascending,
-  blur2,
-  sum,
-  mean,
-  flatGroup,
-} from "d3-array";
+import { range, rollup, ascending, blur2, sum, flatGroup } from "d3-array";
 import { geoPath } from "d3-geo";
 import { geoProject } from "d3-geo-projection";
 
 const d3 = Object.assign(
   {},
-  { geoProject, range, rollup, ascending, blur2, sum, mean, flatGroup, geoPath }
+  { geoProject, range, rollup, ascending, blur2, sum, flatGroup, geoPath }
 );
 import { figuration } from "./figuration.js";
 
@@ -45,8 +37,6 @@ export function grid({
   output = "dots", // dots or squares
   blur = 0, // blur value with d3.blur2(),
   keep = false,
-  operation = "sum",
-  accurate = true,
 } = {}) {
   // ---------------
   // Build empty grid
@@ -56,8 +46,6 @@ export function grid({
   let y = d3.range(0 + step / 2, height, step).reverse();
   const grid_height = x.length;
   const grid_width = y.length;
-
-  const squarearea = step * step;
 
   // Dot grid
   let grid = x.map((x, i) => y.map((y) => [x, y])).flat();
@@ -142,11 +130,7 @@ export function grid({
       if (ratio) {
         squarevalues.push(d3.sum(squareval_a) / d3.sum(squareval_b));
       } else {
-        if (operation == "sun") {
-          squarevalues.push(d3.sum(squareval));
-        } else {
-          squarevalues.push(d3.mean(squareval));
-        }
+        squarevalues.push(d3.sum(squareval));
       }
     });
 
@@ -182,23 +166,14 @@ export function grid({
       });
     }
 
-    if (keep == true) {
-      return {
-        type: "FeatureCollection",
-        features: features
-          //.filter((d) => d.properties.value > 0)
-          .sort((a, b) => d3.ascending(a.properties.value, b.properties.value)),
-      };
-    } else {
-      return {
-        type: "FeatureCollection",
-        features: features
-          .filter((d) => d.properties.value > 0)
-          .sort((a, b) => d3.ascending(a.properties.value, b.properties.value)),
-      };
-    }
+    let FeatureCollection = {
+      type: "FeatureCollection",
+      features: features
+        .filter((d) => d.properties.value > 0)
+        .sort((a, b) => d3.ascending(a.properties.value, b.properties.value)),
+    };
 
-    //return FeatureCollection;
+    return FeatureCollection;
   }
 
   // ---------------
@@ -210,105 +185,66 @@ export function grid({
     const polys = d3.geoProject(geojson, projection);
     const polysareas = polys.features.map((d) => d3.geoPath().area(d));
 
+    // Create an RTree
+    const polysRTree = new RBush();
+    polysRTree.load(
+      //
+      polys.features.map((d, i) => {
+        const b = getBbox(d);
+        // We store the index of the feature alongside the bbox,
+        // so we can retrieve the feature later.
+        b.ix = i;
+        return b;
+      })
+    );
+
+    // Build intersected pieces
+    let intersections = [];
+    squaregrid.forEach((square, i1) => {
+      // Geojson geometry for the square
+      const squaregeo = { type: "Polygon", coordinates: [square] };
+      // Get polygons whose bbox intersects the square
+      const result = polysRTree.search(getBbox(squaregeo));
+      result.forEach((d) => {
+        const id_poly = d.ix;
+        const poly = polys.features[id_poly];
+        let piece = turf.intersect(poly, squaregeo);
+
+        if (piece !== null) {
+          let piecarea = d3.geoPath().area(piece);
+          let fullarea = polysareas[id_poly];
+          intersections.push({
+            id_square: i1,
+            id_poly: id_poly,
+            area_piece: piecarea,
+            area_poly: fullarea,
+            share: piecarea / fullarea,
+            feature: piece,
+          });
+        }
+      });
+    });
+
+    // Aggregate values
+    let aggr = d3.flatGroup(intersections, (d) => d.id_square);
+
     let result = [];
 
-    // Not accurate calculation (dot in poly)
-    if (accurate == false) {
-      grid.forEach((d, i) => {
-        for (let j = 0; j < polys.features.length; j++) {
-          if (
-            turf.booleanPointInPolygon(
-              { type: "Point", coordinates: d },
-              polys.features[j]
-            )
-          ) {
-            result.push([i, j]);
-            j = polys.features.length;
-          }
-        }
-      });
-
-      let nbbycounytry = d3.rollup(
-        result,
-        (v) => v.length,
-        (d) => d[1]
-      );
-
-      result = result.map((d) => {
-        if (operation == "sum") {
-          let nb =
-            nbbycounytry.get(d[1]) != undefined ? nbbycounytry.get(d[1]) : 1;
-          return [d[0], val.get(d[1]) / nb];
-        } else {
-          return [d[0], val.get(d[1])];
-        }
+    if (ratio) {
+      aggr.forEach((d) => {
+        result.push([
+          d[0],
+          d3.sum(d[1].map((d) => d.share * val[0].get(d.id_poly))) /
+            d3.sum(d[1].map((d) => d.share * val[1].get(d.id_poly))),
+        ]);
       });
     } else {
-      //Accurate calculation (intersections)
-
-      // Create an RTree
-      const polysRTree = new RBush();
-      polysRTree.load(
-        //
-        polys.features.map((d, i) => {
-          const b = getBbox(d);
-          // We store the index of the feature alongside the bbox,
-          // so we can retrieve the feature later.
-          b.ix = i;
-          return b;
-        })
-      );
-
-      // Build intersected pieces
-      let intersections = [];
-      squaregrid.forEach((square, i1) => {
-        // Geojson geometry for the square
-        const squaregeo = { type: "Polygon", coordinates: [square] };
-        // Get polygons whose bbox intersects the square
-        const result = polysRTree.search(getBbox(squaregeo));
-        result.forEach((d) => {
-          const id_poly = d.ix;
-          const poly = polys.features[id_poly];
-          let piece = turf.intersect(poly, squaregeo);
-
-          if (piece !== null) {
-            let piecarea = d3.geoPath().area(piece);
-            let fullarea = polysareas[id_poly];
-            intersections.push({
-              id_square: i1,
-              id_poly: id_poly,
-              area_piece: piecarea,
-              area_poly: fullarea,
-              share: piecarea / fullarea,
-              share2: piecarea / squarearea,
-              feature: piece,
-            });
-          }
-        });
+      aggr.forEach((d) => {
+        result.push([
+          d[0],
+          d3.sum(d[1].map((d) => d.share * val.get(d.id_poly))),
+        ]);
       });
-
-      // Aggregate values
-      let aggr = d3.flatGroup(intersections, (d) => d.id_square);
-
-      //let result = [];
-
-      if (ratio) {
-        aggr.forEach((d) => {
-          result.push([
-            d[0],
-            d3.sum(d[1].map((d) => d.share * val[0].get(d.id_poly))) /
-              d3.sum(d[1].map((d) => d.share * val[1].get(d.id_poly))),
-          ]);
-        });
-      } else {
-        let sh = operation == "sum" ? "share" : "share2";
-        aggr.forEach((d) => {
-          result.push([
-            d[0],
-            d3.sum(d[1].map((d) => d[sh] * val.get(d.id_poly))),
-          ]);
-        });
-      }
     }
 
     // Get data & blur

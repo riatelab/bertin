@@ -16,7 +16,7 @@ const d3 = Object.assign(
   }
 );
 
-export function joyplot(
+export function ridge(
   selection,
   projection,
   options = {},
@@ -33,6 +33,7 @@ export function joyplot(
     ? options.strokeDasharray
     : "none";
   let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 1;
+  let accurate = options.accurate == true ? true : false;
 
   let mygrid = grid({
     geojson: options.geojson,
@@ -43,6 +44,8 @@ export function joyplot(
     height: height,
     keep: true,
     step: options.step,
+    operation: options.operation,
+    accurate: accurate,
   })
     .features.map((d) => ({
       x: d.geometry.coordinates[0],
@@ -71,35 +74,34 @@ export function joyplot(
       coordinates: coords,
     };
 
-    features.push({ type: "Feature", properties: {}, geometry: linetring });
+    features.push({ type: "Feature", properties: { y }, geometry: linetring });
   });
 
-  // svg
-  //     .append("clipPath")
-  //     .attr("id", `clip_${clipid}`)
-  //     .append("path")
-  //     .datum({ type: "Sphere" })
-  //     .attr("d", d3.geoPath(projection));
+  let clip =
+    "ridge" + Date.now().toString(36) + Math.random().toString(36).substring(2);
 
-  selection
-    .append("clipPath")
-    .attr("id", "test")
-    .append("path")
-    .datum(options.geojson)
-    .attr("d", d3.geoPath(projection));
-
-  selection
+  let g = selection
     .append("g")
-    //.attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
-    //.attr("clip-path", `url(#test)`)
     .attr("fill", fill)
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
     .attr("fill-opacity", fillOpacity)
     .attr("stroke-opacity", strokeOpacity)
-    .attr("stroke-dasharray", strokeDasharray)
-    .selectAll("path")
-    .data(features)
-    .join("path")
-    .attr("d", d3.geoPath());
+    .attr("stroke-dasharray", strokeDasharray);
+
+  features.forEach((d, i) => {
+    g.append("clipPath")
+      .attr("id", clip + i)
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("height", d.properties.y - strokeWidth - 1)
+      .attr("width", width)
+      .attr("fill", "blue");
+
+    g.append("path")
+      .datum(d)
+      .attr("d", d3.geoPath())
+      .attr("clip-path", "url(#" + clip + i + ")");
+  });
 }

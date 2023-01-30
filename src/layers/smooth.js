@@ -1,4 +1,4 @@
-import { grid } from "../helpers/grid.js";
+import { grid } from "../helpers/grid_old.js";
 import { figuration } from "../helpers/figuration.js";
 import { centroid } from "../helpers/centroid.js";
 import { geoIdentity, geoPath } from "d3-geo";

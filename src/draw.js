@@ -20,7 +20,7 @@ import { bubble } from "./layers/bubble.js";
 import { square } from "./layers/square.js";
 import { regularbubble } from "./layers/regularbubble.js";
 import { regularsquare } from "./layers/regularsquare.js";
-//import { joyplot } from "./layers/joyplot.js";
+import { ridge } from "./layers/ridge.js";
 import { regulargrid } from "./layers/regulargrid.js";
 import { smooth } from "./layers/smooth.js";
 import { mushroom } from "./layers/mushroom.js";
@@ -753,30 +753,32 @@ export function draw({ params = {}, layers = {} } = {}) {
       );
     }
 
-    // joyplot
+    // ridge
 
-    // if (layer.type == "joyplot") {
-    //   joyplot(
-    //     svg,
-    //     projection,
-    //     {
-    //       geojson: layer.geojson,
-    //       values: layer.values,
-    //       step: layer.step,
-    //       blur: layer.blur,
-    //       k: layer.k,
-    //       fill: layer.fill,
-    //       stroke: layer.stroke,
-    //       strokeWidth: layer.strokeWidth,
-    //       fillOpacity: layer.fillOpacity,
-    //       strokeDasharray: layer.strokeDasharray,
-    //       strokeOpacity: layer.strokeOpacity,
-    //     },
-    //     clipid,
-    //     width,
-    //     height
-    //   );
-    // }
+    if (layer.type == "ridge") {
+      ridge(
+        svg,
+        projection,
+        {
+          geojson: layer.geojson,
+          values: layer.values,
+          step: layer.step,
+          blur: layer.blur,
+          k: layer.k,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          fillOpacity: layer.fillOpacity,
+          strokeDasharray: layer.strokeDasharray,
+          strokeOpacity: layer.strokeOpacity,
+          operation: layer.operation,
+          accurate: layer.accurate,
+        },
+        clipid,
+        width,
+        height
+      );
+    }
 
     // Points Bertin (carrés)
 
