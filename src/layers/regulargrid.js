@@ -1,5 +1,5 @@
 import { simple } from "./simple.js";
-import { grid } from "../helpers/grid_old.js";
+import { grid } from "../helpers/grid.js";
 import { geoIdentity } from "d3-geo";
 
 export function regulargrid(
@@ -19,6 +19,8 @@ export function regulargrid(
     step: options.step,
     values: options.values,
     blur: options.blur,
+    intersection: options.intersection,
+    operation: options.operation,
   });
 
   if (options.fill == undefined) {

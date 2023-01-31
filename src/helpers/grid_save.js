@@ -46,7 +46,7 @@ export function grid({
   blur = 0, // blur value with d3.blur2(),
   keep = false,
   operation = "sum",
-  intersection = true,
+  accurate = true,
 } = {}) {
   // ---------------
   // Build empty grid
@@ -142,7 +142,7 @@ export function grid({
       if (ratio) {
         squarevalues.push(d3.sum(squareval_a) / d3.sum(squareval_b));
       } else {
-        if (operation == "sum") {
+        if (operation == "sun") {
           squarevalues.push(d3.sum(squareval));
         } else {
           squarevalues.push(d3.mean(squareval));
@@ -213,8 +213,7 @@ export function grid({
     let result = [];
 
     // Not accurate calculation (dot in poly)
-
-    if (intersection == false) {
+    if (accurate == false) {
       grid.forEach((d, i) => {
         for (let j = 0; j < polys.features.length; j++) {
           if (
@@ -239,12 +238,7 @@ export function grid({
         if (operation == "sum") {
           let nb =
             nbbycounytry.get(d[1]) != undefined ? nbbycounytry.get(d[1]) : 1;
-
-          if (ratio) {
-            return [d[0], val[0].get(d[1]) / nb / (val[1].get(d[1]) / nb)];
-          } else {
-            return [d[0], val.get(d[1]) / nb];
-          }
+          return [d[0], val.get(d[1]) / nb];
         } else {
           return [d[0], val.get(d[1])];
         }

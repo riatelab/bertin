@@ -33,7 +33,9 @@ export function ridge(
     ? options.strokeDasharray
     : "none";
   let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 1;
-  let accurate = options.accurate == true ? true : false;
+  let intersection = options.intersection == true ? true : false;
+
+  console.log(intersection);
 
   let mygrid = grid({
     geojson: options.geojson,
@@ -45,7 +47,7 @@ export function ridge(
     keep: true,
     step: options.step,
     operation: options.operation,
-    accurate: accurate,
+    intersection: intersection,
   })
     .features.map((d) => ({
       x: d.geometry.coordinates[0],
