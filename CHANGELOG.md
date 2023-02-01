@@ -3,6 +3,20 @@
 
 # bertin.js - Changelog
 
+### 1.6.0
+
+##### New Features
+
+* Ridge type ([9f6200](https://github.com/neocarto/bertin/commit/9f6200aa15c93bf3a1228bbfdadf22b54d2c0e35)) ([daf9a0](https://github.com/neocarto/bertin/commit/daf9a007eb034962760fbfd8cf09d0a0a0fadd52)) ([3b0eb8](https://github.com/neocarto/bertin/commit/3b0eb87a86a30ebffb66e2d9adff6390107a2c8c)) ([454004](https://github.com/neocarto/bertin/commit/454004aad7c8e0b2db685da908135a3e32ed814d))
+* Geometric progression for choropleth maps ([058032](https://github.com/neocarto/bertin/commit/058032cedfdbb7ac807a1b540203a58627f0d044))
+* Allow margin [top, right, bottom, left] ([62a275](https://github.com/neocarto/bertin/commit/62a2750ca21d2ee61bb30ef2ce7465132e5851a2))
+* Allow functions in tooltips ([163e1c](https://github.com/neocarto/bertin/commit/163e1cc1764739104187bf29cd2a409c9c5b758f))
+* Using spatial index to speed-up grid based portrayals ([aa3524](https://github.com/neocarto/bertin/commit/aa3524099ac3ecdde82893b6a91f4088104a7d24)) ([b419d0](https://github.com/neocarto/bertin/commit/b419d036ecbc9b92dd189b1f11c943c2a0a70608))
+* Allow viewof in Observable ([3a6f70](https://github.com/neocarto/bertin/commit/3a6f7014a7d273851ade031ae6dafe7b618377c2)) ([811093](https://github.com/neocarto/bertin/commit/811093f1c774219ff791413a6ed244cd85177798))
+
+##### Bug Fixes
+
+* No data in legend on choro maps was missing ([b8efce](https://github.com/neocarto/bertin/commit/b8efce4aae35fb33cdf7b5dd6b900189578c0400))
 
 #### 1.5.0
 
