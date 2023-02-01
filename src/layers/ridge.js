@@ -42,7 +42,8 @@ export function ridge(
   if (display) {
     let mygrid = grid({
       geojson: options.geojson,
-      blur: options.blur ? options.blur : 0.4,
+      blur:
+        options.blur == null || options.blur == undefined ? 0.4 : options.blur,
       values: options.values,
       projection: projection,
       width: width,
