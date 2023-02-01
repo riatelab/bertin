@@ -24,6 +24,7 @@ export function ridge(
   width,
   height
 ) {
+  let display = options.display == false ? false : true;
   let k = options.k ? options.k : 100;
   let fill = options.fill ? options.fill : "#508bab";
   let stroke = options.stroke ? options.stroke : "white";
@@ -33,77 +34,86 @@ export function ridge(
     ? options.strokeDasharray
     : "none";
   let strokeOpacity = options.strokeOpacity ? options.strokeOpacity : 1;
-  let intersection = options.intersection == true ? true : false;
+  let operator = options.operator ? options.operator : "sum";
+  let geoprocessing = options.geoprocessing
+    ? options.geoprocessing
+    : "dotinpoly";
 
-  console.log(intersection);
+  if (display) {
+    let mygrid = grid({
+      geojson: options.geojson,
+      blur: options.blur ? options.blur : 0.4,
+      values: options.values,
+      projection: projection,
+      width: width,
+      height: height,
+      keep: true,
+      step: options.step,
+      operator: operator,
+      geoprocessing: geoprocessing,
+    })
+      .features.map((d) => ({
+        x: d.geometry.coordinates[0],
+        y: d.geometry.coordinates[1],
+        value: d.properties.value,
+      }))
+      .sort((a, b) => d3.ascending(a.y, b.y) || d3.ascending(a.x, b.x));
 
-  let mygrid = grid({
-    geojson: options.geojson,
-    blur: options.blur,
-    values: options.values,
-    projection: projection,
-    width: width,
-    height: height,
-    keep: true,
-    step: options.step,
-    operation: options.operation,
-    intersection: intersection,
-  })
-    .features.map((d) => ({
-      x: d.geometry.coordinates[0],
-      y: d.geometry.coordinates[1],
-      value: d.properties.value,
-    }))
-    .sort((a, b) => d3.ascending(a.y, b.y) || d3.ascending(a.x, b.x));
+    let ycoords = Array.from(new Set(mygrid.map((d) => d.y)));
 
-  let ycoords = Array.from(new Set(mygrid.map((d) => d.y)));
+    let scale = d3
+      .scaleLinear()
+      .domain([0, d3.max(mygrid.map((d) => d.value))])
+      .range([0, k]);
 
-  let scale = d3
-    .scaleLinear()
-    .domain([0, d3.max(mygrid.map((d) => d.value))])
-    .range([0, k]);
+    let features = [];
 
-  let features = [];
+    ycoords.forEach((y) => {
+      let coords = [];
+      mygrid
+        .filter((d) => d.y == y)
+        .forEach((d) => coords.push([d.x, d.y - scale(d.value)]));
 
-  ycoords.forEach((y) => {
-    let coords = [];
-    mygrid
-      .filter((d) => d.y == y)
-      .forEach((d) => coords.push([d.x, d.y - scale(d.value)]));
+      let linetring = {
+        type: "LineString",
+        coordinates: coords,
+      };
 
-    let linetring = {
-      type: "LineString",
-      coordinates: coords,
-    };
+      features.push({
+        type: "Feature",
+        properties: { y },
+        geometry: linetring,
+      });
+    });
 
-    features.push({ type: "Feature", properties: { y }, geometry: linetring });
-  });
+    let clip =
+      "ridge" +
+      Date.now().toString(36) +
+      Math.random().toString(36).substring(2);
 
-  let clip =
-    "ridge" + Date.now().toString(36) + Math.random().toString(36).substring(2);
+    let g = selection
+      .append("g")
+      .attr("fill", fill)
+      .attr("stroke", stroke)
+      .attr("stroke-width", strokeWidth)
+      .attr("fill-opacity", fillOpacity)
+      .attr("stroke-opacity", strokeOpacity)
+      .attr("stroke-dasharray", strokeDasharray);
 
-  let g = selection
-    .append("g")
-    .attr("fill", fill)
-    .attr("stroke", stroke)
-    .attr("stroke-width", strokeWidth)
-    .attr("fill-opacity", fillOpacity)
-    .attr("stroke-opacity", strokeOpacity)
-    .attr("stroke-dasharray", strokeDasharray);
+    features.forEach((d, i) => {
+      g.append("clipPath")
+        .attr("id", clip + i)
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("height", d.properties.y - strokeWidth - 1)
+        .attr("width", width)
+        .attr("fill", "blue");
 
-  features.forEach((d, i) => {
-    g.append("clipPath")
-      .attr("id", clip + i)
-      .append("rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("height", d.properties.y - strokeWidth - 1)
-      .attr("width", width)
-      .attr("fill", "blue");
-
-    g.append("path")
-      .datum(d)
-      .attr("d", d3.geoPath())
-      .attr("clip-path", "url(#" + clip + i + ")");
-  });
+      g.append("path")
+        .datum(d)
+        .attr("d", d3.geoPath())
+        .attr("clip-path", "url(#" + clip + i + ")");
+    });
+  }
 }

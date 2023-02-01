@@ -19,8 +19,8 @@ export function regulargrid(
     step: options.step,
     values: options.values,
     blur: options.blur,
-    intersection: options.intersection,
-    operation: options.operation,
+    geoprocessing: options.geoprocessing,
+    operator: options.operator,
   });
 
   if (options.fill == undefined) {

@@ -435,6 +435,9 @@ bertin.draw({
 #### Parameters
 
 - **step**: Gap between the points (default:20)
+- **operator**: "sum" for absolute quantitative data or "mean" for relative data (default: "sum". highly recommended)
+- **geoprocessing**: "intersection" (intersection between polygons and grid squares. Assignment of values in proportion to the intersected area) or "dotinpoly" (considers each grid square and assigns the value of the underlying polygon or the weighted average of intersecting polygons. ). (Default: "intersection")
+- **blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0)
 
 All other parameters are the same as for the bubble layer
 
@@ -464,6 +467,9 @@ bertin.draw({
 #### Parameters
 
 - **step**: Gap between the points (default:20)
+- **operator**: "sum" for absolute quantitative data or "mean" for relative data (default: "sum". highly recommended)
+- **geoprocessing**: "intersection" (intersection between polygons and grid squares. Assignment of values in proportion to the intersected area) or "dotinpoly" (considers each grid square and assigns the value of the underlying polygon or the weighted average of intersecting polygons. ). (Default: "intersection")
+- **blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0)
 
 All other parameters are the same as for the square layer
 
@@ -497,6 +503,8 @@ bertin.draw({
 #### Parameters
 
 - **step**: Gap between the points (default:20)
+- **operator**: "sum" for absolute quantitative data or "mean" for relative data (default: "sum")
+- **geoprocessing**: "intersection" (intersection between polygons and grid squares. Assignment of values in proportion to the intersected area) or "dotinpoly" (considers each grid square and assigns the value of the underlying polygon or the weighted average of intersecting polygons. ). (Default: "intersection")
 - **blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0)
 
 All other parameters are the same as for [choropleth maps](https://github.com/neocarto/bertin#choropleth)
@@ -801,6 +809,51 @@ Parameters of the legend
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
 
+### Ridge
+
+The _ridge_ type allows to produce 2.5D maps by varying the height of lines. The method takes as input polygons or multi polygons. [source](https://github.com/neocarto/bertin/blob/main/src/layers/ridge.js)[Example](https://observablehq.com/@neocartocnrs/ridge?collection=@neocartocnrs/bertin).
+
+![](./img/ridge.png)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+ {
+      type: "ridge",
+      geojson: data,
+      values: "pop",
+      step: 30,
+      blur: 0.4,
+      k: 50
+    },
+  ],
+});
+```
+
+#### Parameters
+
+
+- **geojson**: a geojson (**compulsory**)
+- **values**: a string corresponding to the targeted variable in the properties
+- **stroke**: stroke color (default: "white")
+- **strokeWidth** stroke width (default: 0.5)
+- **fillOpacity**: fill opacity (default: 1)
+- **strokeOpacity**: stroke opacity (default: 1)
+- **strokeDasharray**: stroke-dasharray (default: "none")
+- **step**: Gap between the points (default: 20)
+- **k**: Height of lines (default: 100)
+- **operator**: "sum" for absolute quantitative data or "mean" for relative data (default: "mean")
+- **geoprocessing**: "intersection" (intersection between polygons and grid squares. Assignment of values in proportion to the intersected area) or "dotinpoly" (considers each grid square and assigns the value of the underlying polygon or the weighted average of intersecting polygons. ). (Default: "dotinpoly")
+- **blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0.4)
+
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+
+
+
+ue)
+
 ### Smooth
 
 The _smooth_ type (or heatmap or contour) is a way to produce a continuous représentations from quantitative data. The algorithm is complex. The values produced do not really make sense. Explanations with the parameters. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/smooth.js), [Example and methodology](https://observablehq.com/@neocartocnrs/smooth).
@@ -851,6 +904,9 @@ By default, the smooth layer is calculated from dots or centroids. But it is pos
 
 - **grid_step**: Gap between the points (default:20)
 - **grid_blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0)
+- **grid_operator**: "sum" for absolute quantitative data or "mean" for relative data (default: "sum". highly recommended)
+- **grid_geoprocessing**: "intersection" (intersection between polygons and grid squares. Assignment of values in proportion to the intersected area) or "dotinpoly" (considers each grid square and assigns the value of the underlying polygon or the weighted average of intersecting polygons. ). (Default: "intersection")
+
 
 ### Thickness
 

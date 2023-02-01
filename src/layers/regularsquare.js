@@ -1,5 +1,5 @@
 import { square } from "./square.js";
-import { grid } from "../helpers/grid_old.js";
+import { grid } from "../helpers/grid.js";
 import { geoIdentity } from "d3-geo";
 
 export function regularsquare(
@@ -18,6 +18,8 @@ export function regularsquare(
     step: options.step,
     values: options.values,
     blur: options.blur,
+    geoprocessing: options.geoprocessing,
+    operator: options.operator,
   });
 
   options.values = "value";

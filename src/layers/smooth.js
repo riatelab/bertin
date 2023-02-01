@@ -1,4 +1,4 @@
-import { grid } from "../helpers/grid_old.js";
+import { grid } from "../helpers/grid.js";
 import { figuration } from "../helpers/figuration.js";
 import { centroid } from "../helpers/centroid.js";
 import { geoIdentity, geoPath } from "d3-geo";
@@ -69,6 +69,12 @@ export function smooth(
       if (options.grid_step != undefined || options.grid_blur != undefined) {
         let grid_step = options.grid_step != undefined ? options.grid_step : 20;
         let grid_blur = options.grid_blur != undefined ? options.grid_blur : 0;
+        let grid_geoprocessing =
+          options.grid_geoprocessing != undefined
+            ? options.grid_geoprocessing
+            : "intersection";
+        let grid_operator =
+          options.grid_operator != undefined ? options.grid_operator : "sum";
 
         let mygrid = grid({
           geojson: options.geojson,
@@ -77,6 +83,8 @@ export function smooth(
           height: height,
           step: grid_step,
           blur: grid_blur,
+          operator: grid_operator,
+          geoprocessing: grid_geoprocessing,
           values: options.values,
         });
         data = decompose({
