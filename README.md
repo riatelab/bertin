@@ -21,7 +21,7 @@ _The project is under **active development**. Some of features and options are s
 - [Map components](#map-components)
 - [Custom Layer](#custom-layer)
 - [Geojson properties selections](#geojson-properties-selections)
-- [Other functions](#other-functions)
+- [Other fubrowsernctions](#other-functions)
 - [Bonus: a cheat sheet](#bonus-a-cheat-sheet)
 
 `bertin` is an easy to use JavaScript library mainly based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
@@ -811,7 +811,7 @@ Parameters of the legend
 
 ### Ridge
 
-The _ridge_ type allows to produce 2.5D maps by varying the height of lines. The method takes as input polygons or multi polygons. [source](https://github.com/neocarto/bertin/blob/main/src/layers/ridge.js)[Example](https://observablehq.com/@neocartocnrs/ridge?collection=@neocartocnrs/bertin).
+The _ridge_ type allows to produce 2.5D maps by varying the height of lines. The method takes as input polygons or multi polygons. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/ridge.js) [Example](https://observablehq.com/@neocartocnrs/ridge?collection=@neocartocnrs/bertin).
 
 ![](./img/ridge.png)
 
