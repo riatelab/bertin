@@ -69,7 +69,7 @@ export function grid({
     }
   }
 
-  //return result;
+  // return result;
 
   // blur
 
@@ -258,7 +258,7 @@ function polydotcompute(geojson, grid, val, projection, ratio, operator) {
 
   let gridval = grid.dots
     .map((d, i) => valbyid.get(i))
-    .map((v) => (v === undefined ? 0 : v));
+    .map((v) => (v === undefined || isNaN(v) ? 0 : v));
 
   return gridval;
 }
