@@ -87,7 +87,8 @@ export function mushroom(
       .features.sort((a, b) =>
         d3.descending(+a.properties[top_values], +b.properties[top_values])
       )
-      .filter((d) => d.geometry.coordinates != undefined);
+      .filter((d) => d.geometry.coordinates != undefined)
+      .filter((d) => !isNaN(d.geometry.coordinates[0]));
 
     const max_top = d3.max(features, (d) => +d.properties[top_values]);
     const max_bottom = d3.max(features, (d) => +d.properties[bottom_values]);

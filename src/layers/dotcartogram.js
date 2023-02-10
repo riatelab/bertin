@@ -66,7 +66,9 @@ export function dotcartogram(
     if (figuration(geojson) == "p") {
       features = geojson.features;
     } else {
-      features = centroid(geojson, { planar: planar }).features;
+      features = centroid(geojson, { planar: planar }).features.filter(
+        (d) => !isNaN(d.geometry.coordinates[0])
+      );
     }
 
     // Dissolve
