@@ -1,4 +1,4 @@
-// outline
+// rhumbs
 export function rhumbs(selection, width, height, clipid, options = {}) {
   let display = options.display == false ? false : true;
   if (display) {

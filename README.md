@@ -44,7 +44,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.6.1"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.6.4"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +60,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.6.1");
+bertin = require("bertin@1.6.4");
 ```
 
 #### In Quarto
@@ -73,7 +73,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.6.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.6.4"></script>
 
 <script>
   let geojson =
@@ -1435,6 +1435,44 @@ bertin.draw({
 - **stroke**: stroke color (default:"none")
 - **strokeWidth**: stroke width (default: 1)
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+
+### Path
+
+The _path_ type is used to display any svg path [Source](https://github.com/neocarto/bertin/blob/main/src/layers/path.js) [Example](https://observablehq.com/@neocartocnrs/bertin-path?collection=@neocartocnrs/bertin)
+
+#### Code
+
+```js
+bertin.draw({
+  layers: [
+    {
+      type: "path",
+      d: "m 99.330229,64.978319 -9.724281,-1.057429 -3.946379,8.950188 -3.94638,-8.950188 -9.72428,1.057429 5.7779,-7.89276 -5.7779,-7.892759 9.72428,1.05743 3.94638,-8.950189 3.94638,8.950189 9.72428,-1.057429 -5.777901,7.892759 z",
+      fill:"blue",
+      sroke: "none",
+      scale: 2
+
+    },
+  ],
+});
+```
+
+#### Parameters
+
+- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **d**: string containg svg path
+- **x**: x position (default: 0)
+- **y**: y position (default: 0)
+- **scale**: scale (default: 1)
+- **rotate**: angle (defalut: 0)
+- **style**: "fit", "raw" or "repeat". "fit" allows to set the path on the top left of the document. "raw" uses the coordinates as they are. "repeat" alows to build a pattern from the path (default: "fit")
+- **fill**: fill color (default: "#add8f7")
+- **opacity**: opacity (default:1)
+- **stroke**: stroke color (default:"none")
+- **strokeWidth**: stroke width (default: 1)
+- **strokeLinecap**: stroke-linecap (default:"round")
+- **strokeLinejoin**: stroke-linejoin (default:"round")
+- **strokeDasharray**: stroke-dasharray (default:"none")
 
 ### Scalebar
 

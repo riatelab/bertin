@@ -21,6 +21,7 @@ import { square } from "./layers/square.js";
 import { regularbubble } from "./layers/regularbubble.js";
 import { regularsquare } from "./layers/regularsquare.js";
 import { ridge } from "./layers/ridge.js";
+import { path } from "./layers/path.js";
 import { regulargrid } from "./layers/regulargrid.js";
 import { smooth } from "./layers/smooth.js";
 import { mushroom } from "./layers/mushroom.js";
@@ -971,6 +972,35 @@ export function draw({ params = {}, layers = {} } = {}) {
         },
         width,
         height
+      );
+    }
+
+    // Path
+
+    if (layer.type == "path") {
+      path(
+        svg,
+        width,
+        height,
+        {
+          display: layer.display,
+          d: layer.d,
+          x: layer.x,
+          y: layer.y,
+          rotate: layer.rotate,
+          margin: layer.margin,
+          style: layer.style,
+          scale: layer.scale,
+          fill: layer.fill,
+          stroke: layer.stroke,
+          strokeWidth: layer.strokeWidth,
+          strokeLinecap: layer.strokeLinecap,
+          strokeLinejoin: layer.strokeLinejoin,
+          fillOpacity: layer.fillOpacity,
+          strokeOpacity: layer.strokeOpacity,
+          strokeDasharray: layer.strokeDasharray,
+        },
+        clipid
       );
     }
   });
