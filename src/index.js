@@ -10,3 +10,4 @@ export { properties } from "./properties.js";
 
 // test
 export { grid } from "./helpers/grid.js";
+export { geoimport } from "./helpers/geoimport.js";

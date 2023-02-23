@@ -1,5 +1,13 @@
+import { feature } from "topojson-client";
+const topojson = Object.assign({}, { feature });
+
 export function featurecollection(x) {
   x = JSON.parse(JSON.stringify(x));
+
+  if (x.type == "Topology" && !Array.isArray(x)) {
+    return topojson.feature(x, Object.keys(x.objects)[0]);
+  }
+
   if (x.type == "FeatureCollection" && !Array.isArray(x)) {
     return x;
   } else if (
@@ -21,6 +29,26 @@ export function featurecollection(x) {
         properties: {},
         geometry: d,
       })),
+    };
+  } else if (
+    typeof x == "object" &&
+    [
+      "Point",
+      "LineString",
+      "Polygon",
+      "MultiPoint",
+      "MultiLineString",
+      "MultiPolygon",
+    ].includes(x.type)
+  ) {
+    return {
+      type: "FeatureCollection",
+      features: [{ type: "Feature", properties: {}, geometry: x }],
+    };
+  } else if (typeof x == "object" && x.type == "Feature") {
+    return {
+      type: "FeatureCollection",
+      features: [x],
     };
   } else {
     return x;
