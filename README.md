@@ -1089,7 +1089,7 @@ bertin.draw({
 
 ### Graticule
 
-The _graticule_ type allows you to display the latitude and longitude lines. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/graticule.js).
+The _graticule_ type allows you to display the latitude and longitude lines around . [Source](https://github.com/neocarto/bertin/blob/main/src/layers/graticule.js).
 
 ![](./img/graticule.png)
 
@@ -1114,6 +1114,7 @@ bertin.draw({
 - **strokeOpacity**: stroke opacity (default:0.5)
 - **strokeDasharray**: stroke-dasharray (default:2)
 - **step**: gap between graticules. The value can be a number or an array of two values (default: [10, 10])
+- **spread**:  A value in degrees to extend the graticules beyond the geometries ss(default: 0)
 - **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### hatch (or hatching)

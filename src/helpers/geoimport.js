@@ -9,8 +9,6 @@ export function geoimport(x, options = { rewind: true }) {
   // rewind
   let type = figuration(geojson);
 
-  console.log(type);
-
   if (type == "z" && options.rewind === true) {
     rewind(geojson, { mutate: true });
   }
