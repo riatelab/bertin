@@ -226,8 +226,6 @@ function decompose(_ = {}) {
       k = total / nb;
     }
 
-    console.log(values);
-
     geojson.features.forEach((d) => {
       let coords = projection(d.geometry.coordinates);
 

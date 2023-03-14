@@ -11,6 +11,7 @@ import { getproj } from "./projections/projections.js";
 
 // Layers
 import { graticule } from "./layers/graticule.js";
+import { graticule2 } from "./layers/graticule.js";
 import { geolines } from "./layers/geolines.js";
 import { outline } from "./layers/outline.js";
 import { addfooter } from "./layers/footer.js";
@@ -76,10 +77,10 @@ export function draw({ params = {}, layers = {} } = {}) {
   let clip = params.clip == true ? true : false;
 
   // optimal heights
-  height =
-    height == undefined
-      ? getheight(layers, extent, margin, projection, planar, width)
-      : height;
+
+  let myheight = getheight(layers, extent, margin, projection, planar, width);
+
+  height = height == undefined ? myheight.height : height;
   let headerdelta = 0;
   let header = layers.find((d) => d.type == "header");
   if (header) {
@@ -170,7 +171,8 @@ export function draw({ params = {}, layers = {} } = {}) {
   let l = reverse ? [...layers].reverse() : [...layers];
 
   l.forEach((layer) => {
-    // Graticule
+    // graticule
+
     if (layer.type == "graticule") {
       graticule(
         svg,
@@ -185,8 +187,10 @@ export function draw({ params = {}, layers = {} } = {}) {
           strokeLinecap: layer.strokeLinecap,
           strokeLinejoin: layer.strokeLinejoin,
           step: layer.step,
+          spread: layer.spread,
         },
-        clipid
+        clipid,
+        myheight.bbox
       );
     }
 
@@ -1059,6 +1063,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       height_header: headerdelta,
       height_footer: footerdelta,
       projection: projection,
+      bbox: myheight.bbox,
     },
   });
 
