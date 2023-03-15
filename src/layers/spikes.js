@@ -6,7 +6,6 @@ const d3 = Object.assign(
   { select, pointer, min, max, descending, scaleLinear }
 );
 
-import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { rounding } from "../helpers/rounding.js";
 import { centroid } from "../helpers/centroid.js";
@@ -26,7 +25,7 @@ export function spikes(
 ) {
   let display = options.display == false ? false : true;
   if (display) {
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let values = options.values;
     let k = options.k != undefined ? options.k : 50;
     let w = options.w != undefined ? options.w : 10;

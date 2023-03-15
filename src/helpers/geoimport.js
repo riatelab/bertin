@@ -1,9 +1,20 @@
 import { featurecollection } from "./featurecollection.js";
 import { figuration } from "./figuration.js";
+import { table2geo } from "../table2geo.js";
 import { rewind } from "./rewind.js";
+import { dissolve } from "./dissolve.js";
 
-export function geoimport(x, options = { rewind: true }) {
-  // featurecollection
+export function geoimport(x, options = { rewind: false }) {
+  // Import csv directly if lat & long or coordinates
+  if (
+    Array.isArray(x) &&
+    typeof x[0].geometry !== "object" &&
+    typeof x[0].coordinates !== "object"
+  ) {
+    return table2geo(x);
+  }
+
+  // features or geometries to featureCollection
   let geojson = featurecollection(x);
 
   // rewind
@@ -13,9 +24,11 @@ export function geoimport(x, options = { rewind: true }) {
     rewind(geojson, { mutate: true });
   }
 
-  // Disolve if multipoints ?
+  // Disolve if multipoints
 
-  // Import csv directly if dots ?
+  if (type == "p") {
+    geojson = dissolve(geojson);
+  }
 
   return geojson;
 }

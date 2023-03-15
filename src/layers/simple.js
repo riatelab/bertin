@@ -32,7 +32,6 @@ const d3 = Object.assign(
   }
 );
 
-import { topo2geo } from "../helpers/topo2geo.js";
 import { legsimple } from "../legend/leg-simple.js";
 import { legends } from "../legend/legends.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
@@ -60,7 +59,7 @@ export function simple(
       "#e5c494",
       "#b3b3b3",
     ];
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let fill = options.fill
       ? options.fill
       : cols[Math.floor(Math.random() * cols.length)];

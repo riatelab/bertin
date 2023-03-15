@@ -17,7 +17,6 @@ const d3 = Object.assign(
     forceSimulation,
   }
 );
-import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legcircles } from "../legend/leg-circles.js";
 import { centroid } from "../helpers/centroid.js";
@@ -47,7 +46,7 @@ export function bubble(
       "#e5c494",
       "#b3b3b3",
     ];
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let values = options.values;
     let fixmax = options.fixmax != undefined ? options.fixmax : undefined;
     let k = options.k ? options.k : 50;

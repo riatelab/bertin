@@ -49,8 +49,6 @@ export function graticule(
         ],
       ];
 
-      console.log(bb);
-
       let step = options.step ? options.step : [10, 10];
       step = Array.isArray(step) ? step : [step, step];
       selection

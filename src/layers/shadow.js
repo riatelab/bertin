@@ -2,9 +2,10 @@ import { geoPath } from "d3-geo";
 const d3 = Object.assign({}, { geoPath });
 import { union } from "../helpers/union.js";
 
-export function shadow(selection, projection, geojson, clipid, options = {}) {
+export function shadow(selection, projection, clipid, options = {}) {
   let display = options.display == false ? false : true;
   if (display) {
+    let geojson = options.geojson;
     let fill = options.fill ? options.fill : "#35383d";
     let dx = options.dx != undefined ? options.dx : 3;
     let dy = options.dy != undefined ? options.dy : 3;

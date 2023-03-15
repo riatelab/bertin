@@ -8,10 +8,10 @@ const d3 = Object.assign({}, { geoMercator, create, geoPath });
 import { getheight } from "./helpers/height.js";
 import { bbox } from "./bbox.js";
 import { getproj } from "./projections/projections.js";
+import { geoimport } from "./helpers/geoimport.js";
 
 // Layers
 import { graticule } from "./layers/graticule.js";
-import { graticule2 } from "./layers/graticule.js";
 import { geolines } from "./layers/geolines.js";
 import { outline } from "./layers/outline.js";
 import { addfooter } from "./layers/footer.js";
@@ -56,6 +56,14 @@ export function draw({ params = {}, layers = {} } = {}) {
   } else {
     projection = getproj(projection);
   }
+
+  // geoimport & rewind
+
+  layers.forEach((d) => {
+    if (d["geojson"] !== undefined) {
+      d["geojson"] = geoimport(d["geojson"], { rewind: d["rewind"] });
+    }
+  });
 
   // extent
   let width = params.width ? params.width : 1000;
@@ -220,6 +228,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         width: layer.width,
         projection: layer.projection,
         geojson: layer.geojson,
+        rewind: layer.rewind,
         extent: layer.extent,
         threshold: layer.threshold,
         background: layer.background,
@@ -263,6 +272,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           fill: layer.fill,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
@@ -296,6 +306,10 @@ export function draw({ params = {}, layers = {} } = {}) {
         width,
         height
       );
+
+      console.log("geojson : " + layer.geojson);
+      console.log("data : " + layer.data);
+      console.log("=> " + layer.geojson || layer.data);
     }
 
     // dot density
@@ -307,6 +321,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           dotvalue: layer.dotvalue,
           fill: layer.fill,
@@ -353,6 +368,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           k: layer.k,
           w: layer.w,
@@ -395,6 +411,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           top_values: layer.top_values,
           bottom_values: layer.bottom_values,
           top_fill: layer.top_fill,
@@ -436,6 +453,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           fill: layer.fill,
           fontSize: layer.fontSize,
@@ -492,6 +510,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           fill: layer.fill,
           stroke: layer.stroke,
@@ -515,8 +534,10 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     // shadow
     if (layer.type == "shadow") {
-      shadow(svg, projection, layer.geojson, clipid, {
+      shadow(svg, projection, clipid, {
         display: layer.display,
+        geojson: layer.geojson,
+        rewind: layer.rewind,
         fill: layer.fill,
         dx: layer.dx,
         dy: layer.dy,
@@ -549,6 +570,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       inner(svg, projection, {
         display: layer.display,
         geojson: layer.geojson,
+        rewind: layer.rewind,
         fill: layer.fill,
         fillOpacity: layer.fillOpacity,
         blur: layer.blur,
@@ -600,6 +622,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           radius: layer.radius,
           nbmax: layer.nbmax,
@@ -641,6 +664,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           planar: layer.planar,
           k: layer.k,
@@ -683,6 +707,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           planar: layer.planar,
           k: layer.k,
@@ -725,6 +750,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           step: layer.step,
           blur: layer.blur,
@@ -769,6 +795,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           step: layer.step,
           blur: layer.blur,
@@ -797,6 +824,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           step: layer.step,
           blur: layer.blur,
@@ -841,6 +869,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         {
           display: layer.display,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           step: layer.step,
           blur: layer.blur,
@@ -895,6 +924,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           display: layer.display,
           clip: layer.clip,
           geojson: layer.geojson,
+          rewind: layer.rewind,
           values: layer.values,
           grid_step: layer.grid_step,
           grid_blur: layer.grid_blur,

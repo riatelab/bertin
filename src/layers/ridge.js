@@ -1,5 +1,4 @@
 import { grid } from "../helpers/grid.js";
-import { figuration } from "../helpers/figuration.js";
 import { select } from "d3-selection";
 import { scaleLinear } from "d3-scale";
 import { ascending, max } from "d3-array";

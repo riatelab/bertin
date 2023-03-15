@@ -19,7 +19,6 @@ const d3 = Object.assign(
     quadtree,
   }
 );
-import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legsquares } from "../legend/leg-squares.js";
 import { centroid } from "../helpers/centroid.js";
@@ -49,7 +48,7 @@ export function square(
       "#e5c494",
       "#b3b3b3",
     ];
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let values = options.values;
     let fixmax = options.fixmax != undefined ? options.fixmax : undefined;
     let k = options.k ? options.k : 50;

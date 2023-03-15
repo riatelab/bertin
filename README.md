@@ -161,6 +161,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **fill**: fill color (default: a random color)
 - **stroke**: stroke color (default: "white")
 - **strokeWidth** stroke width (default:0.5)
@@ -329,6 +330,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **k**: size of the largest circle (default:50)
 - **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
@@ -382,6 +384,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **k**: size of the largest circle (default:50)
 - **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
@@ -623,6 +626,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **radius**: radius of dots (default:4)
 - **nbmax**: number max of circles on the map (default:200)
@@ -676,6 +680,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **top_values**: a string corresponding to the targeted top variable in the properties (**compulsory**)
 - **bottom_values**: a string corresponding to the targeted bottom variable in the properties(**compulsory**)
 - **top_fill**: top fill color (default: "#d64f4f")
@@ -730,6 +735,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson polygons or Multipolygons (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **dotvalue**: a number representing the value of each point (default: a computed number so that there are no more than 1000 dots on the map.)
 - **fill**: fill color (default: a random color)
@@ -785,6 +791,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **k**: height of the highest peak (default:50)
 - **w**: width of the spikes (default:10)
@@ -834,8 +841,8 @@ bertin.draw({
 
 #### Parameters
 
-
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties
 - **stroke**: stroke color (default: "white")
 - **strokeWidth** stroke width (default: 0.5)
@@ -880,6 +887,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties
 - **stroke**: stroke color (default: "white")
 - **strokeWidth** stroke width (default:0.5)
@@ -1357,6 +1365,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties (**compulsory**)
 - **fill**: fill color (default: "#474342")
 - **fontSize**: font size (default: 10)
@@ -1389,6 +1398,7 @@ bertin.draw({
 #### Parameters
 
 - **geojson**: a geojson (**compulsory**)
+- **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties (**compulsory**)
 - **fill**: fill color (default: "white")
 - **stroke**: stroke color (default: "white")
@@ -1723,7 +1733,6 @@ with
 
 #### Code
 
-
 ```js
 bertin.properties.add({
     geojson: world, 
@@ -1780,7 +1789,6 @@ bertin.properties.head({
 ### properties.keep
 
 *properties.keep* allows to select one or several columns to keep in the attribute table. All other columns are deleted. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
-
 
 #### Code
 
@@ -1850,7 +1858,6 @@ bertin.properties.table(*a geojson*)
 ### properties.head
 
 *properties.tail* allows to get the n bottom values from a given field. This function return a new object and do not modify the initial object. [Example](https://observablehq.com/@neocartocnrs/bertins-js-deal-with-with-geojson-properties?collection=@neocartocnrs/bertin). [Code](https://github.com/neocarto/bertin/blob/main/src/properties.js).
-
 
 #### Code
 
@@ -2018,7 +2025,7 @@ Depreciated. See *properties.subset*/
 
 ### table2geo
 
-_table2geo_ function converts a data table with lat/lon fields to a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/table2geo.js), [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin).
+_table2geo_ function converts a data table with lat/lon fields or a coords field to a geojson. [Source](https://github.com/neocarto/bertin/blob/main/src/table2geo.js), [Example](https://observablehq.com/d/8d5d24e4d175a0bf?collection=@neocartocnrs/bertin).
 
 #### Code
 
@@ -2026,10 +2033,16 @@ _table2geo_ function converts a data table with lat/lon fields to a geojson. [So
 bertin.table2geo(cities, "lat", "lng");
 ```
 
+Or
+
+```js
+bertin.table2geo(cities, "coords");
+```
+
 #### Parameters
 
 - param 1 : a geojson (**compulsory**)
-- param 2 : latitude
+- param 2 : latitude (or coords)
 - param 3 : longitude
 
 ### Info

@@ -5,7 +5,7 @@ import { geoIdentity, geoPath } from "d3-geo";
 import { contourDensity } from "d3-contour";
 import { scaleSequentialQuantile } from "d3-scale";
 import * as d3scalechromatic from "d3-scale-chromatic";
-import { map, sum } from "d3-array";
+import { sum } from "d3-array";
 
 const d3 = Object.assign({}, d3scalechromatic, {
   sum,

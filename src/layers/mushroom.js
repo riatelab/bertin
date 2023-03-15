@@ -4,7 +4,6 @@ import { select, pointer } from "d3-selection";
 
 const d3 = Object.assign({}, { descending, max, scaleSqrt, select, pointer });
 
-import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legcircles } from "../legend/leg-circles.js";
 import { centroid } from "../helpers/centroid.js";
@@ -22,7 +21,7 @@ export function mushroom(
     let clipid =
       Date.now().toString(36) + Math.random().toString(36).substring(2);
 
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let top_values = options.top_values;
     let bottom_values = options.bottom_values;
 

@@ -1,7 +1,6 @@
 import { geoPath } from "d3-geo";
 const d3 = Object.assign({}, { geoPath });
 
-import { topo2geo } from "../helpers/topo2geo.js";
 import { figuration } from "../helpers/figuration.js";
 import { addtooltip } from "../helpers/tooltip.js";
 import { legsimple } from "../legend/leg-simple.js";
@@ -9,7 +8,7 @@ import { legsimple } from "../legend/leg-simple.js";
 export function missing(selection, projection, options = {}, clipid) {
   let display = options.display == false ? false : true;
   if (display) {
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let values = options.values;
     let fill = options.fill ? options.fill : "white";
     let stroke = options.stroke ? options.stroke : "white";

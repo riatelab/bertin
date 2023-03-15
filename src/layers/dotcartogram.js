@@ -6,7 +6,6 @@ const d3 = Object.assign(
   { sum, select, pointer, forceX, forceY, forceCollide, forceSimulation }
 );
 
-import { topo2geo } from "../helpers/topo2geo.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { centroid } from "../helpers/centroid.js";
 import { figuration } from "../helpers/figuration.js";
@@ -27,7 +26,7 @@ export function dotcartogram(
   if (display) {
     let cols = ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3"];
 
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let values = options.values;
     let radius = options.radius != undefined ? options.radius : 4;
     let nbmax = options.nbmax != undefined ? options.nbmax : 200;

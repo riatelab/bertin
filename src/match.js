@@ -3,10 +3,10 @@ import { create } from "d3-selection";
 import { scaleLinear } from "d3-scale";
 const d3 = Object.assign({}, { create, scaleLinear });
 
-import { topo2geo } from "./helpers/topo2geo.js";
+import { geoimport } from "./helpers/geoimport.js";
 
 export function match(geojson, id_geojson, data, id_data) {
-  geojson = topo2geo(geojson);
+  geojson = geoimport(geojson);
   let ids_geojson = geojson.features.map((d) => d.properties[id_geojson]);
   let ids_data = data.map((d) => d[id_data]);
   let all = Array.from(new Set(ids_geojson.concat(ids_data)));

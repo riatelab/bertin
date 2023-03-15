@@ -1,11 +1,10 @@
-import { topo2geo } from "../helpers/topo2geo.js";
 import { centroid } from "../helpers/centroid.js";
 import { figuration } from "../helpers/figuration.js";
 
 export function label(selection, projection, planar, options = {}, clipid) {
   let display = options.display == false ? false : true;
   if (display) {
-    let geojson = topo2geo(options.geojson);
+    let geojson = options.geojson;
     let values = options.values;
     let fill = options.fill ? options.fill : "#474342";
     let fontSize = options.fontSize ? options.fontSize : 10;

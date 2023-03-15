@@ -1,9 +1,9 @@
 import { figuration } from "./helpers/figuration.js";
 import { centroid } from "./helpers/centroid.js";
-import { topo2geo } from "./helpers/topo2geo.js";
+import { geoimport } from "./helpers/geoimport.js";
 
 export function links(options = {}) {
-  let geojson = topo2geo(options.geojson);
+  let geojson = geoimport(options.geojson);
   let geojson_id = options.geojson_id;
   let data = options.data;
   let data_i = options.data_i != undefined ? options.data_i : "i";
