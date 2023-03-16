@@ -1,3 +1,5 @@
+import { getattr } from "../helpers/getattr.js";
+
 // rhumbs
 export function rhumbs(selection, width, height, clipid, options = {}) {
   let display = options.display == false ? false : true;
@@ -16,29 +18,80 @@ export function rhumbs(selection, width, height, clipid, options = {}) {
       ? options.strokeDasharray
       : [3, 2];
 
-    let angles = [];
-    for (let i = 0; i < nb; i++) {
-      angles[i] = (360 / nb) * i * (Math.PI / 180);
-    }
+    let angles = getangle(nb);
 
     let size = Math.max(width, height);
 
     selection
       .append("g")
-      .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
-      .selectAll("polyline")
-      .data(angles)
-      .enter()
-      .append("polyline")
+      .attr("class", options.id)
       .attr("fill", "none")
       .attr("stroke", stroke)
       .attr("stroke-opacity", strokeOpacity)
       .attr("stroke-width", strokeWidth)
       .attr("stroke-dasharray", strokeDasharray)
+      .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
+      .selectAll("polyline")
+      .data(angles)
+      .join("polyline")
       .attr("points", function (d, i) {
         let x2 = position[0] + Math.cos(d) * size;
         let y2 = position[1] + Math.sin(d) * size;
         return position[0] + "," + position[1] + " " + x2 + "," + y2;
       });
+
+    // Update function
+    selection.node().update = update;
+    function update({
+      id = null,
+      attr = null,
+      value = null,
+      duration = 0,
+    } = {}) {
+      selection
+        .select(`g.${id}`)
+        .transition()
+        .duration(duration)
+        .attr(getattr(attr), value)
+        .style(getattr(attr), value);
+
+      if (attr == "nb") {
+        selection
+          .select(`g.${id}`)
+          .selectAll("polyline")
+          .data(getangle(value))
+          .join("polyline")
+          .transition()
+          .duration(duration)
+          .attr("points", function (d, i) {
+            let x2 = position[0] + Math.cos(d) * size;
+            let y2 = position[1] + Math.sin(d) * size;
+            return position[0] + "," + position[1] + " " + x2 + "," + y2;
+          });
+      }
+
+      if (attr == "position") {
+        selection
+          .select(`g.${id}`)
+          .selectAll("polyline")
+          .data(angles)
+          .join("polyline")
+          .transition()
+          .duration(duration)
+          .attr("points", function (d, i) {
+            let x2 = value[0] + Math.cos(d) * size;
+            let y2 = value[1] + Math.sin(d) * size;
+            return value[0] + "," + value[1] + " " + x2 + "," + y2;
+          });
+      }
+    }
   }
+}
+
+function getangle(nb) {
+  let angles = [];
+  for (let i = 0; i < nb; i++) {
+    angles[i] = (360 / nb) * i * (Math.PI / 180);
+  }
+  return angles;
 }

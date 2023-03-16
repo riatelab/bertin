@@ -2,7 +2,8 @@
 import { geoMercator } from "d3-geo";
 import { create } from "d3-selection";
 import { geoPath } from "d3-geo";
-const d3 = Object.assign({}, { geoMercator, create, geoPath });
+import { transition } from "d3-transition";
+const d3 = Object.assign({}, { geoMercator, create, geoPath, transition });
 
 // Helpers
 import { getheight } from "./helpers/height.js";
@@ -306,10 +307,6 @@ export function draw({ params = {}, layers = {} } = {}) {
         width,
         height
       );
-
-      console.log("geojson : " + layer.geojson);
-      console.log("data : " + layer.data);
-      console.log("=> " + layer.geojson || layer.data);
     }
 
     // dot density
@@ -583,6 +580,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     if (layer.type == "rhumbs") {
       rhumbs(svg, width, height, clipid, {
         display: layer.display,
+        id: layer.id,
         nb: layer.nb,
         position: layer.position,
         stroke: layer.stroke,
@@ -600,6 +598,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          id: layer.id,
           display: layer.display,
           step: layer.step,
           fill: layer.fill,
@@ -1068,6 +1067,10 @@ export function draw({ params = {}, layers = {} } = {}) {
   // Raise legends
   svg.selectAll(".bertinlegend").raise();
 
+  // Update
+
+  //svg.node().update = update;
+
   // Viewof coordinates
 
   if (typeof layers.find((d) => d.viewof) == "undefined") {
@@ -1098,4 +1101,13 @@ export function draw({ params = {}, layers = {} } = {}) {
   });
 
   return svg.node();
+
+  // function update({ id = null, attr = null, value = null, duration = 0 } = {}) {
+  //   svg
+  //     .select(`g.${id}`)
+  //     .transition()
+  //     .duration(duration)
+  //     .attr(attr, value)
+  //     .style(attr, value);
+  // }
 }
