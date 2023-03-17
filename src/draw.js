@@ -11,6 +11,9 @@ import { bbox } from "./bbox.js";
 import { getproj } from "./projections/projections.js";
 import { geoimport } from "./helpers/geoimport.js";
 
+// Update
+import { update_main } from "./update/update_main.js";
+
 // Layers
 import { graticule } from "./layers/graticule.js";
 import { geolines } from "./layers/geolines.js";
@@ -579,7 +582,7 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     if (layer.type == "rhumbs") {
       rhumbs(svg, width, height, clipid, {
-        display: layer.display,
+        visibility: layer.visibility,
         id: layer.id,
         nb: layer.nb,
         position: layer.position,
@@ -599,7 +602,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         planar,
         {
           id: layer.id,
-          display: layer.display,
+          visibility: layer.visibility,
           step: layer.step,
           fill: layer.fill,
           fillOpacity: layer.fillOpacity,
@@ -661,6 +664,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          id: layer.id,
           display: layer.display,
           geojson: layer.geojson,
           rewind: layer.rewind,
@@ -995,7 +999,8 @@ export function draw({ params = {}, layers = {} } = {}) {
       hatch(
         svg,
         {
-          display: layer.display,
+          id: layer.id,
+          visibility: layer.visibility,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
           strokeOpacity: layer.strokeOpacity,
@@ -1100,14 +1105,27 @@ export function draw({ params = {}, layers = {} } = {}) {
     },
   });
 
-  return svg.node();
+  // Update function
+  svg.node().update = function update({
+    id = null,
+    attr = null,
+    value = null,
+    duration = 0,
+    delay = 0,
+  } = {}) {
+    update_main({
+      svg,
+      projection,
+      width,
+      height,
+      id,
+      attr,
+      value,
+      duration,
+      delay,
+    });
+  };
 
-  // function update({ id = null, attr = null, value = null, duration = 0 } = {}) {
-  //   svg
-  //     .select(`g.${id}`)
-  //     .transition()
-  //     .duration(duration)
-  //     .attr(attr, value)
-  //     .style(attr, value);
-  // }
+  // Output
+  return svg.node();
 }

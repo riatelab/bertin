@@ -125,6 +125,8 @@ export function bubble(
     let viewdata = {};
     selection
       .append("g")
+      .attr("class", options.id)
+      .attr("type", "bubble")
       .selectAll("circle")
       .data(
         features

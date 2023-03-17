@@ -3,6 +3,7 @@ export function getattr(attr) {
     ["strokeOpacity", "stroke-opacity"],
     ["strokeWidth", "stroke-width"],
     ["fillOpactity", "fill-opacity"],
+    ["strokeDasharray", "stroke-dasharray"],
   ]);
 
   let result = dico.get(attr);
