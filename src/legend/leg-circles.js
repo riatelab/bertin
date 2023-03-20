@@ -3,7 +3,7 @@ import { max, descending } from "d3-array";
 const d3 = Object.assign({}, { scaleSqrt, max, descending });
 import { rounding } from "../helpers/rounding.js";
 
-export function legcircles(selection, options = {}) {
+export function legcircles(selection, id, options = {}) {
   let values = options.values;
   let k = options.k ? options.k : 50;
   let stroke = options.stroke ? options.stroke : "black";
@@ -29,7 +29,10 @@ export function legcircles(selection, options = {}) {
   let rmax = radius(d3.max(values));
 
   if (x != null && y != null) {
-    let leg = selection.append("g").attr("class", "bertinlegend");
+    let leg = selection
+      .append("g")
+      .attr("class", "bertinlegend")
+      .attr("class", "leg_" + id);
 
     leg
       .selectAll("circle")

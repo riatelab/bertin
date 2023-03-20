@@ -274,6 +274,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         svg,
         projection,
         {
+          id: layer.id,
           display: layer.display,
           geojson: layer.geojson,
           rewind: layer.rewind,

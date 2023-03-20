@@ -332,7 +332,7 @@ bertin.draw({
 - **geojson**: a geojson (**compulsory**)
 - **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
 - **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
-- **k**: size of the largest circle (default:50)
+- **<ins>k</ins>**: size of the largest circle (default:50)
 - **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
 - **fill**: fill color (default: random color)
 - **stroke**: stroke color (default: "white")

@@ -84,11 +84,19 @@ export function bubble(
       );
     }
 
-    const valvax =
+    const valmax =
       fixmax != undefined
         ? fixmax
         : d3.max(features, (d) => Math.abs(+d.properties[values]));
-    let radius = d3.scaleSqrt([0, valvax], [0, k]);
+    let radius = d3.scaleSqrt([0, valmax], [0, k]);
+
+    let array = features.map((d) => Math.abs(+d.properties[values]));
+    let legval = [
+      d3.min(array),
+      radius.invert(radius(d3.max(array)) / 3),
+      radius.invert(radius(d3.max(array)) / 1.5),
+      d3.max(array),
+    ];
 
     // Simulation
 
@@ -126,6 +134,28 @@ export function bubble(
     selection
       .append("g")
       .attr("class", options.id)
+      .attr(
+        "data-layer",
+        JSON.stringify({
+          valmax,
+          k,
+          values,
+          fixmax,
+          legval,
+          leg_x: options.leg_x,
+          leg_y: options.leg_y,
+          leg_round: options.leg_round,
+          leg_divisor: options.leg_divisor,
+          leg_stroke: options.leg_stroke,
+          leg_fill: options.leg_fill,
+          leg_strokeWidth: options.leg_strokeWidth,
+          leg_txtcol: options.leg_txtcol,
+          leg_title: options.leg_title,
+          leg_fontSize: options.leg_fontSize,
+          leg_fontSize2: options.leg_fontSize2,
+          leg_title: options.leg_title,
+        })
+      )
       .attr("type", "bubble")
       .selectAll("circle")
       .data(
@@ -238,15 +268,8 @@ export function bubble(
     legends(geojson, selection, fill, stroke, strokeWidth);
 
     // Legend (circles)
-    let array = features.map((d) => Math.abs(+d.properties[values]));
-    let legval = [
-      d3.min(array),
-      radius.invert(radius(d3.max(array)) / 3),
-      radius.invert(radius(d3.max(array)) / 1.5),
-      d3.max(array),
-    ];
 
-    legcircles(selection, {
+    legcircles(selection, options.id, {
       x: options.leg_x,
       y: options.leg_y,
       round: options.leg_round !== undefined ? options.leg_round : undefined,

@@ -3,6 +3,7 @@ import { update_default } from "./update_default.js";
 import { update_tissot } from "./update_tissot.js";
 import { update_rhumbs } from "./update_rhumbs.js";
 import { update_bubble } from "./update_bubble.js";
+import { update_simple } from "./update_simple.js";
 
 export function update_main({
   svg,
@@ -30,6 +31,10 @@ export function update_main({
     case "bubble":
       console.log("update bubble");
       update_bubble({ svg, id, attr, width, height, value, duration, delay });
+      break;
+    case "simple":
+      console.log("update simple");
+      update_simple({ svg, id, attr, width, height, value, duration, delay });
       break;
     default:
       console.log("update default");
