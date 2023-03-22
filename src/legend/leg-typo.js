@@ -24,7 +24,10 @@ export function legtypo(selection, options = {}) {
   // title = "Title of the legend";
 
   if (x != null && y != null) {
-    let leg = selection.append("g").attr("class", "bertinlegend");
+    let leg = selection
+      .append("g")
+      .attr("class", "bertinlegend")
+      .attr("class", options.id);
 
     let delta = 0;
     if (title != null) {

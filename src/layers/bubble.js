@@ -139,6 +139,9 @@ export function bubble(
         JSON.stringify({
           valmax,
           k,
+          dorling,
+          iteration,
+          strokeWidth,
           values,
           fixmax,
           legval,

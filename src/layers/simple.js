@@ -93,6 +93,31 @@ export function simple(
       options.symbol_shift != undefined ? options.symbol_shift : 0;
     let viewof = options.viewof ? true : false;
 
+    let leg = {
+      x: options.leg_x,
+      y: options.leg_y,
+      w: options.leg_w,
+      h: options.leg_h,
+      symbol_size: symbol_size,
+      type: options.symbol ? options.symbol : "circle",
+      title: options.leg_title,
+      text: options.leg_text,
+      fontSize: options.leg_fontSize,
+      fontSize2: options.leg_fontSize2,
+      stroke: options.leg_stroke,
+      fillOpacity: options.leg_fillOpacity
+        ? options.leg_fillOpacity
+        : fillOpacity,
+      fill: options.leg_fill ? options.leg_fill : fill,
+      strokeWidth: options.leg_strokeWidth,
+      txtcol: options.leg_txtcol,
+      symbol: options.symbol,
+      symbol_size: options.symbol_size,
+      symbol_iteration: options.symbol_iteration,
+      symbol_shift: options.symbol_shift,
+      viewof: options.viewof,
+    };
+
     // viewof data
     let viewdata = {};
 
@@ -110,7 +135,7 @@ export function simple(
       selection
         .append("g")
         .attr("class", options.id)
-        .attr("data-layer", JSON.stringify({ fill }))
+        .attr("data-layer", JSON.stringify({ fill, stroke, strokeWidth, leg }))
         .attr("type", "simple")
         .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
         .selectAll("path")
@@ -235,6 +260,9 @@ export function simple(
 
       selection
         .append("g")
+        .attr("class", options.id)
+        .attr("data-layer", JSON.stringify({ fill, stroke, strokeWidth, leg }))
+        .attr("type", "simple")
         .selectAll("path")
         .data(geojson.features)
         .join("path")
@@ -351,24 +379,7 @@ export function simple(
     legends(geojson, selection, fill, stroke, strokeWidth);
 
     // legend (simple)
-    legsimple(selection, {
-      x: options.leg_x,
-      y: options.leg_y,
-      w: options.leg_w,
-      h: options.leg_h,
-      symbol_size: symbol_size,
-      type: options.leg_type,
-      title: options.leg_title,
-      text: options.leg_text,
-      fontSize: options.leg_fontSize,
-      fontSize2: options.leg_fontSize2,
-      stroke: options.leg_stroke,
-      fillOpacity: options.leg_fillOpacity
-        ? options.leg_fillOpacity
-        : fillOpacity,
-      fill: options.leg_fill ? options.leg_fill : fill,
-      strokeWidth: options.leg_strokeWidth,
-      txtcol: options.leg_txtcol,
-    });
+    console.log("leg");
+    legsimple(selection, leg, options.id);
   }
 }

@@ -1,13 +1,19 @@
 import { legcircles } from "../legend/leg-circles.js";
 import { scaleSqrt } from "d3-scale";
 import { min, max } from "d3-array";
-const d3 = Object.assign({}, { min, max, scaleSqrt });
+import { thickness } from "../helpers/thickness.js";
+import { forceX, forceY, forceCollide, forceSimulation } from "d3-force";
+const d3 = Object.assign(
+  {},
+  { min, max, scaleSqrt, forceX, forceY, forceCollide, forceSimulation }
+);
 
 export function update_bubble({
   svg,
   id = null,
   attr = null,
   value = null,
+  projection,
   duration = 0,
   delay = 0,
 } = {}) {
@@ -24,14 +30,54 @@ export function update_bubble({
     let datalayer = JSON.parse(node.attr("data-layer"));
     let radius = d3.scaleSqrt([0, datalayer.valmax], [0, value]);
 
-    node
-      .selectAll("circle")
-      // .data(data)
-      // .join("circle")
-      .transition()
-      .delay(delay)
-      .duration(duration)
-      .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
+    // If dorling
+
+    console.log(datalayer.strokeWidth.values);
+
+    if (datalayer.dorling == true) {
+      let features = node.selectAll("circle").data();
+      const simulation = d3
+        .forceSimulation(features)
+        .force(
+          "x",
+          d3.forceX((d) => projection(d.geometry.coordinates)[0])
+        )
+        .force(
+          "y",
+          d3.forceY((d) => projection(d.geometry.coordinates)[1])
+        )
+        .force(
+          "collide",
+          d3.forceCollide(
+            (d) =>
+              radius(Math.abs(d.properties[datalayer.values])) +
+              thickness(features, datalayer.strokeWidth).getthickness(
+                d.properties[datalayer.strokeWidth.values] || 0
+              ) /
+                2
+          )
+        );
+
+      for (let i = 0; i < datalayer.iteration; i++) {
+        simulation.tick();
+      }
+
+      node
+        .selectAll("circle")
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("cx", (d) => d.x)
+        .attr("cy", (d) => d.y)
+        .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
+    } else {
+      node
+        .selectAll("circle")
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
+    }
 
     // legend
 

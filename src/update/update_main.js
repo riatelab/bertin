@@ -30,7 +30,17 @@ export function update_main({
       break;
     case "bubble":
       console.log("update bubble");
-      update_bubble({ svg, id, attr, width, height, value, duration, delay });
+      update_bubble({
+        svg,
+        id,
+        attr,
+        width,
+        height,
+        value,
+        projection,
+        duration,
+        delay,
+      });
       break;
     case "simple":
       console.log("update simple");

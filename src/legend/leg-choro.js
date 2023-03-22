@@ -30,7 +30,10 @@ export function legchoro(selection, options = {}) {
       : [d3.reverse(colors), missing[1]].flat();
 
   if (x != null && y != null) {
-    let leg = selection.append("g").attr("class", "bertinlegend");
+    let leg = selection
+      .append("g")
+      .attr("class", "bertinlegend")
+      .attr("class", options.id);
 
     let delta = 0;
     if (title != null) {
@@ -60,10 +63,10 @@ export function legchoro(selection, options = {}) {
       )
       .attr("height", h)
       .attr("width", w)
-      .attr("fill", (d) => d)
       .attr("stroke", stroke)
       .attr("stroke-width", strokeWidth)
-      .attr("fill-opacity", fillOpacity);
+      .attr("fill-opacity", fillOpacity)
+      .attr("fill", (d) => d);
 
     leg
       .append("g")

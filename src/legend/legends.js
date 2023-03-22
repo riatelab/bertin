@@ -6,7 +6,7 @@ import { legthicknessquali } from "./leg-thickness-quali.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
 
-export function legends(geojson, selection, fill, stroke, strokeWidth) {
+export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
   if (typeof fill == "object" && fill.type == "choro") {
     legchoro(selection, {
       x: fill.leg_x,
@@ -23,6 +23,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth) {
       breaks: colorize(geojson.features, fill).breaks,
       colors: colorize(geojson.features, fill).colors,
       missing: colorize(geojson.features, fill).missing,
+      id: "leg_" + id,
     });
   }
 
@@ -42,6 +43,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth) {
       breaks: colorize(geojson.features, stroke).breaks,
       colors: colorize(geojson.features, stroke).colors,
       missing: colorize(geojson.features, stroke).missing,
+      id: "leg_" + id,
     });
   }
 
@@ -63,6 +65,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth) {
       fontSize2: fill.leg_fontSize2,
       types: colorize(geojson.features, fill).types,
       colors: colorize(geojson.features, fill).colors,
+      id: "leg_" + id,
     });
   }
 
@@ -84,6 +87,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth) {
       fontSize2: stroke.leg_fontSize2,
       types: colorize(geojson.features, stroke).types,
       colors: colorize(geojson.features, stroke).colors,
+      id: "leg_" + id,
     });
   }
 
@@ -106,6 +110,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth) {
       txtcol: strokeWidth.leg_txtcol,
       w: strokeWidth.leg_w,
       round: strokeWidth.leg_round,
+      id: "leg_" + id,
     });
   }
 
@@ -127,6 +132,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth) {
       strokeOpacity: strokeWidth.strokeOpacity,
       txtcol: strokeWidth.leg_txtcol,
       round: strokeWidth.leg_round,
+      id: "leg_" + id,
     });
   }
 
@@ -147,6 +153,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth) {
       stroke: strokeWidth.stroke,
       strokeOpacity: strokeWidth.strokeOpacity,
       txtcol: strokeWidth.leg_txtcol,
+      id: "leg_" + id,
     });
   }
 }

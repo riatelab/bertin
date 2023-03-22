@@ -22,7 +22,7 @@ const d3 = Object.assign(
   }
 );
 
-export function legsimple(selection, options = {}) {
+export function legsimple(selection, options = {}, id) {
   let type = options.type ? options.type : "box";
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
@@ -40,7 +40,10 @@ export function legsimple(selection, options = {}) {
   let txtcol = options.txtcol ? options.txtcol : "#363636";
 
   if (x != null && y != null) {
-    let leg = selection.append("g").attr("class", "bertinlegend");
+    let leg = selection
+      .append("g")
+      .attr("class", "bertinlegend")
+      .attr("class", "leg_" + id);
 
     let delta = 0;
     if (title != null) {
@@ -131,12 +134,5 @@ export function legsimple(selection, options = {}) {
         .attr("dominant-baseline", "middle")
         .text((d) => d);
     }
-
-    // leg
-    //   .append("circle")
-    //   .attr("cx", x)
-    //   .attr("cy", y)
-    //   .attr("r", 4)
-    //   .attr("fill", "red");
   }
 }

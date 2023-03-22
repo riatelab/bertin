@@ -1,4 +1,6 @@
 import { colorize } from "../helpers/colorize.js";
+import { legends } from "../legend/legends.js";
+import { legsimple } from "../legend/leg-simple.js";
 export function update_simple({
   svg,
   id = null,
@@ -8,35 +10,69 @@ export function update_simple({
   delay = 0,
 } = {}) {
   let node = svg.select(`g.${id}`);
-  node
-    .selectAll("path")
-    .transition()
-    .delay(delay)
-    .duration(duration)
-    .style(attr, value);
+  let leg = svg.select(`g.leg_${id}`);
+  let datalayer = JSON.parse(node.attr("data-layer"));
 
-  if (attr == "fill" && typeof value == "object") {
-    console.log("obj");
+  if (attr == "fill" || attr == "stroke") {
+    datalayer.leg[attr] = value;
+    switch (typeof value) {
+      case "string":
+        node
+          .selectAll("path")
+          .transition()
+          .delay(delay)
+          .duration(duration)
+          .style(attr, value);
 
-    let datalayer = JSON.parse(node.attr("data-layer"));
-    console.log("before");
-    console.log(value);
-    value = { ...datalayer.fill, ...value };
-    console.log("after");
-    console.log(value);
-    datalayer.fill = value;
-    svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
+        leg.remove();
+        legsimple(svg, datalayer.leg, id);
+        break;
+      case "object":
+        value =
+          typeof datalayer[attr] == "object"
+            ? { ...datalayer[attr], ...value }
+            : value;
 
-    console.log(datalayer.fill);
+        datalayer[attr] = value;
+
+        console.log(value);
+
+        svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
+
+        node
+          .selectAll("path")
+          .transition()
+          .delay(delay)
+          .duration(duration)
+          .style(attr, (d) =>
+            colorize(node.selectAll("path").data(), value).getcol(
+              d.properties[value.values]
+            )
+          );
+
+        leg.remove();
+
+        legends(
+          {
+            type: "FeatureCollection",
+            features: node.selectAll("path").data(),
+          },
+          svg,
+          value,
+          datalayer.stroke,
+          datalayer.strokeWidth,
+          id,
+          delay,
+          duration
+        );
+        break;
+    }
+  } else {
     node
       .selectAll("path")
       .transition()
       .delay(delay)
       .duration(duration)
-      .style("fill", (d) =>
-        colorize(node.selectAll("path").data(), value).getcol(
-          d.properties[value.values]
-        )
-      );
+      .style(attr, value);
   }
 }
