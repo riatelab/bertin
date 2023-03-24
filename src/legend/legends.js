@@ -23,7 +23,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
       breaks: colorize(geojson.features, fill).breaks,
       colors: colorize(geojson.features, fill).colors,
       missing: colorize(geojson.features, fill).missing,
-      id: "leg_" + id,
+      id: "legboxfill_" + id,
     });
   }
 
@@ -43,7 +43,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
       breaks: colorize(geojson.features, stroke).breaks,
       colors: colorize(geojson.features, stroke).colors,
       missing: colorize(geojson.features, stroke).missing,
-      id: "leg_" + id,
+      id: "legboxstroke_" + id,
     });
   }
 
@@ -65,7 +65,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
       fontSize2: fill.leg_fontSize2,
       types: colorize(geojson.features, fill).types,
       colors: colorize(geojson.features, fill).colors,
-      id: "leg_" + id,
+      id: "legboxfill_" + id,
     });
   }
 
@@ -87,7 +87,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
       fontSize2: stroke.leg_fontSize2,
       types: colorize(geojson.features, stroke).types,
       colors: colorize(geojson.features, stroke).colors,
-      id: "leg_" + id,
+      id: "legboxstroke_" + id,
     });
   }
 
@@ -110,7 +110,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
       txtcol: strokeWidth.leg_txtcol,
       w: strokeWidth.leg_w,
       round: strokeWidth.leg_round,
-      id: "leg_" + id,
+      id: "legthickness_" + id,
     });
   }
 
@@ -132,7 +132,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
       strokeOpacity: strokeWidth.strokeOpacity,
       txtcol: strokeWidth.leg_txtcol,
       round: strokeWidth.leg_round,
-      id: "leg_" + id,
+      id: "legthickness_" + id,
     });
   }
 
@@ -153,7 +153,7 @@ export function legends(geojson, selection, fill, stroke, strokeWidth, id) {
       stroke: strokeWidth.stroke,
       strokeOpacity: strokeWidth.strokeOpacity,
       txtcol: strokeWidth.leg_txtcol,
-      id: "leg_" + id,
+      id: "legthickness_" + id,
     });
   }
 }

@@ -99,7 +99,6 @@ export function simple(
       w: options.leg_w,
       h: options.leg_h,
       symbol_size: symbol_size,
-      type: options.symbol ? options.symbol : "circle",
       title: options.leg_title,
       text: options.leg_text,
       fontSize: options.leg_fontSize,
@@ -225,7 +224,7 @@ export function simple(
     }
     // If points
     if (figuration(geojson) == "p") {
-      options.leg_type = options.symbol ? options.symbol : "circle";
+      leg.type = options.symbol ? options.symbol : "circle";
 
       if (symbol_shift > 0) {
         const simulation = d3
@@ -376,10 +375,9 @@ export function simple(
     }
 
     // Legend
-    legends(geojson, selection, fill, stroke, strokeWidth);
+    legends(geojson, selection, fill, stroke, strokeWidth, options.id);
 
     // legend (simple)
-    console.log("leg");
     legsimple(selection, leg, options.id);
   }
 }

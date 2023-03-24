@@ -10,11 +10,10 @@ export function update_simple({
   delay = 0,
 } = {}) {
   let node = svg.select(`g.${id}`);
-  let leg = svg.select(`g.leg_${id}`);
+  let leg = svg.select(`g.legbox_${id}`);
   let datalayer = JSON.parse(node.attr("data-layer"));
 
   if (attr == "fill" || attr == "stroke") {
-    datalayer.leg[attr] = value;
     switch (typeof value) {
       case "string":
         node
@@ -33,12 +32,6 @@ export function update_simple({
             ? { ...datalayer[attr], ...value }
             : value;
 
-        datalayer[attr] = value;
-
-        console.log(value);
-
-        svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
-
         node
           .selectAll("path")
           .transition()
@@ -49,6 +42,9 @@ export function update_simple({
               d.properties[value.values]
             )
           );
+
+        datalayer[attr] = value;
+        svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
 
         leg.remove();
 

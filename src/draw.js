@@ -12,7 +12,7 @@ import { getproj } from "./projections/projections.js";
 import { geoimport } from "./helpers/geoimport.js";
 
 // Update
-import { update_main } from "./update/update_main.js";
+import { update_main } from "./update/update-main.js";
 
 // Layers
 import { graticule } from "./layers/graticule.js";

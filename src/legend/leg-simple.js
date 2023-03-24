@@ -43,7 +43,7 @@ export function legsimple(selection, options = {}, id) {
     let leg = selection
       .append("g")
       .attr("class", "bertinlegend")
-      .attr("class", "leg_" + id);
+      .attr("class", "legbox_" + id);
 
     let delta = 0;
     if (title != null) {

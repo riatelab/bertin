@@ -32,7 +32,7 @@ export function legcircles(selection, id, options = {}) {
     let leg = selection
       .append("g")
       .attr("class", "bertinlegend")
-      .attr("class", "leg_" + id);
+      .attr("class", "legcircle_" + id);
 
     leg
       .selectAll("circle")

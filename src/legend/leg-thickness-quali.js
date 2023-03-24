@@ -18,7 +18,10 @@ export function legthicknessquali(selection, options = {}) {
   categories = d3.reverse(categories);
 
   if (x != null && y != null) {
-    let leg = selection.append("g").attr("class", "bertinlegend");
+    let leg = selection
+      .append("g")
+      .attr("class", "bertinlegend")
+      .attr("class", "legthickness_" + id);
 
     let delta = 0;
     if (title != null) {

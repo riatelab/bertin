@@ -1,7 +1,6 @@
 import { min, max, descending } from "d3-array";
 import { scaleSqrt } from "d3-scale";
 import { select, pointer } from "d3-selection";
-import { forceX, forceY, forceCollide, forceSimulation } from "d3-force";
 const d3 = Object.assign(
   {},
   {
@@ -11,12 +10,9 @@ const d3 = Object.assign(
     scaleSqrt,
     select,
     pointer,
-    forceX,
-    forceY,
-    forceCollide,
-    forceSimulation,
   }
 );
+import { simulation_circles } from "../helpers/simulation-circles.js";
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
 import { legcircles } from "../legend/leg-circles.js";
 import { centroid } from "../helpers/centroid.js";
@@ -101,27 +97,13 @@ export function bubble(
     // Simulation
 
     if (dorling == true) {
-      const simulation = d3
-        .forceSimulation(features)
-        .force(
-          "x",
-          d3.forceX((d) => projection(d.geometry.coordinates)[0])
-        )
-        .force(
-          "y",
-          d3.forceY((d) => projection(d.geometry.coordinates)[1])
-        )
-        .force(
-          "collide",
-          d3.forceCollide(
-            (d) =>
-              radius(Math.abs(d.properties[values])) +
-              thickness(features, strokeWidth).getthickness(
-                d.properties[strokeWidth.values] || 0
-              ) /
-                2
-          )
-        );
+      const simulation = simulation_circles(
+        features,
+        values,
+        strokeWidth,
+        radius,
+        projection
+      );
 
       for (let i = 0; i < iteration; i++) {
         simulation.tick();
@@ -268,7 +250,7 @@ export function bubble(
     }
 
     // legend (classes)
-    legends(geojson, selection, fill, stroke, strokeWidth);
+    legends(geojson, selection, fill, stroke, strokeWidth, options.id);
 
     // Legend (circles)
 

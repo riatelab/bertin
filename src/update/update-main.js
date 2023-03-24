@@ -1,9 +1,9 @@
 import { getattr } from "../helpers/getattr.js";
-import { update_default } from "./update_default.js";
-import { update_tissot } from "./update_tissot.js";
-import { update_rhumbs } from "./update_rhumbs.js";
-import { update_bubble } from "./update_bubble.js";
-import { update_simple } from "./update_simple.js";
+import { update_default } from "./update-default.js";
+import { update_tissot } from "./update-tissot.js";
+import { update_rhumbs } from "./update-rhumbs.js";
+import { update_bubble } from "./update-bubble.js";
+import { update_simple } from "./update-simple.js";
 
 export function update_main({
   svg,
@@ -16,7 +16,7 @@ export function update_main({
   duration = 0,
   delay = 0,
 } = {}) {
-  attr = getattr(attr);
+  //attr = getattr(attr);
   let type = svg.select(`g.${id}`).attr("type");
 
   switch (type) {
