@@ -124,6 +124,8 @@ export function bubble(
           dorling,
           iteration,
           strokeWidth,
+          fill,
+          stroke,
           values,
           fixmax,
           legval,

@@ -709,6 +709,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
+          id: layer.id,
           display: layer.display,
           geojson: layer.geojson,
           rewind: layer.rewind,

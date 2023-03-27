@@ -23,7 +23,7 @@ export function legthicknesslinear(selection, options = {}) {
     let leg = selection
       .append("g")
       .attr("class", "bertinlegend")
-      .attr("class", "legthickness_" + id);
+      .attr("class", options.id);
 
     let delta = 0;
     if (title != null) {

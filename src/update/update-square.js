@@ -8,7 +8,7 @@ import { scaleSqrt } from "d3-scale";
 import { min, max } from "d3-array";
 const d3 = Object.assign({}, { min, max, scaleSqrt });
 
-export function update_bubble({
+export function update_square({
   svg,
   id = null,
   attr = null,
@@ -25,8 +25,6 @@ export function update_bubble({
       : value;
   datalayer[attr] = value;
   svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
-
-  console.log(datalayer);
 
   // DORLING
   if (attr == "dorling") {
@@ -200,11 +198,11 @@ export function update_bubble({
   // FILL OR STROKE
   else if (attr == "fill" || attr == "stroke") {
     svg.selectAll(`g.legbox${attr}_${id}`).remove();
-
+    console.log(datalayer);
     switch (typeof value) {
       case "string":
         node
-          .selectAll("circle")
+          .selectAll("rect")
           .transition()
           .delay(delay)
           .duration(duration)
@@ -212,21 +210,20 @@ export function update_bubble({
         break;
       case "object":
         node
-          .selectAll("circle")
+          .selectAll("rect")
           .transition()
           .delay(delay)
           .duration(duration)
           .style(attr, (d) =>
-            colorize(node.selectAll("circle").data(), value).getcol(
-              d.properties[value.values]
+            colorize(node.selectAll("rect").data(), value).getcol(
+              d[value.values]
             )
           );
-
         if (typeof value == "object") {
           legends(
             {
               type: "FeatureCollection",
-              features: node.selectAll("circle").data(),
+              features: node.selectAll("rect").data(),
             },
             svg,
             attr == "fill" ? value : undefined,
@@ -235,7 +232,6 @@ export function update_bubble({
             id
           );
         }
-
         break;
     }
   }
@@ -311,7 +307,7 @@ export function update_bubble({
   // OTHER
   else {
     node
-      .selectAll("circle")
+      .selectAll("rect")
       .transition()
       .delay(delay)
       .duration(duration)

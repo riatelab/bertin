@@ -84,11 +84,11 @@ export function square(
       features = centroid(geojson, { planar: planar }).features;
     }
 
-    const valvax =
+    const valmax =
       fixmax != undefined
         ? fixmax
         : d3.max(features, (d) => Math.abs(+d.properties[values]));
-    let size = d3.scaleSqrt([0, valvax], [0, k * 1.77]);
+    let size = d3.scaleSqrt([0, valmax], [0, k * 1.77]);
 
     // features -> data
 
@@ -109,6 +109,14 @@ export function square(
       .filter((d) => !isNaN(d._x))
       .filter((d) => !isNaN(d._y))
       .filter((d) => d[values] != null);
+
+    let array = data.map((d) => Math.abs(+d[values]));
+    let legval = [
+      d3.min(array),
+      size.invert(size(d3.max(array)) / 3),
+      size.invert(size(d3.max(array)) / 1.5),
+      d3.max(array),
+    ];
 
     if (dorling == true || demers == true) {
       // Collide function (for squares)
@@ -188,6 +196,36 @@ export function square(
     let viewdata = {};
     selection
       .append("g")
+      .attr("class", options.id)
+      .attr(
+        "data-layer",
+        JSON.stringify({
+          valmax,
+          k,
+          demers,
+          dorling,
+          iteration,
+          strokeWidth,
+          fill,
+          stroke,
+          values,
+          fixmax,
+          legval,
+          leg_x: options.leg_x,
+          leg_y: options.leg_y,
+          leg_round: options.leg_round,
+          leg_divisor: options.leg_divisor,
+          leg_stroke: options.leg_stroke,
+          leg_fill: options.leg_fill,
+          leg_strokeWidth: options.leg_strokeWidth,
+          leg_txtcol: options.leg_txtcol,
+          leg_title: options.leg_title,
+          leg_fontSize: options.leg_fontSize,
+          leg_fontSize2: options.leg_fontSize2,
+          leg_title: options.leg_title,
+        })
+      )
+      .attr("type", "square")
       .selectAll("squares")
       .data(
         data.sort((a, b) =>
@@ -283,14 +321,6 @@ export function square(
     legends(geojson, selection, fill, stroke, strokeWidth);
 
     // Legend (squares)
-
-    let array = data.map((d) => Math.abs(+d[values]));
-    let legval = [
-      d3.min(array),
-      size.invert(size(d3.max(array)) / 3),
-      size.invert(size(d3.max(array)) / 1.5),
-      d3.max(array),
-    ];
 
     legsquares(selection, {
       x: options.leg_x,
