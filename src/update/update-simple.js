@@ -1,19 +1,74 @@
-import { colorize } from "../helpers/colorize.js";
+import { getattr } from "../helpers/getattr.js";
 import { legends } from "../legend/legends.js";
+import { colorize } from "../helpers/colorize.js";
+import { thickness } from "../helpers/thickness.js";
 import { legsimple } from "../legend/leg-simple.js";
+import { min, max } from "d3-array";
+import {
+  symbol,
+  symbolCircle,
+  symbolDiamond,
+  symbolCross,
+  symbolSquare,
+  symbolStar,
+  symbolTriangle,
+  symbolWye,
+} from "d3-shape";
+const d3 = Object.assign(
+  {},
+  {
+    min,
+    max,
+    symbol,
+    symbolCircle,
+    symbolDiamond,
+    symbolCross,
+    symbolSquare,
+    symbolStar,
+    symbolTriangle,
+    symbolWye,
+  }
+);
+
 export function update_simple({
   svg,
   id = null,
   attr = null,
   value = null,
+  legend = null,
   duration = 0,
   delay = 0,
 } = {}) {
   let node = svg.select(`g.${id}`);
-  let leg = svg.select(`g.legbox_${id}`);
   let datalayer = JSON.parse(node.attr("data-layer"));
+  value =
+    typeof value == "object" && typeof datalayer[attr] == "object"
+      ? { ...datalayer[attr], ...value }
+      : value;
+  datalayer[attr] = value;
+  svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
 
-  if (attr == "fill" || attr == "stroke") {
+  // REPRENDRE ICI !!!!!!!!!!!!!!!
+
+  // VISIBLE
+  if (attr == "visibility") {
+    console.log(id);
+    let val = value ? 1 : 0;
+    svg
+      .selectAll(`g.${id}`, `g.legbox_${id}`, `g.legboxfill_${id}`)
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .style("opacity", val)
+      .attr("opacity", val);
+  }
+
+  // FINIR ICI ET REPRODUIRE SUR LES AUTRES
+
+  // FILL OR STROKE
+  else if (attr == "fill" || attr == "stroke") {
+    svg.selectAll(`g.legbox_${id}`).remove();
+
     switch (typeof value) {
       case "string":
         node
@@ -23,15 +78,18 @@ export function update_simple({
           .duration(duration)
           .style(attr, value);
 
-        leg.remove();
-        legsimple(svg, datalayer.leg, id);
+        if (datalayer.leg.x > 0 && datalayer.leg.y > 0) {
+          if (legend) {
+            datalayer.leg.text = legend;
+          }
+
+          datalayer.leg[attr] = value;
+          svg.select(`g.legbox_${id}`).remove();
+          legsimple(svg, datalayer.leg, id, delay, duration);
+        }
+
         break;
       case "object":
-        value =
-          typeof datalayer[attr] == "object"
-            ? { ...datalayer[attr], ...value }
-            : value;
-
         node
           .selectAll("path")
           .transition()
@@ -43,32 +101,112 @@ export function update_simple({
             )
           );
 
-        datalayer[attr] = value;
-        svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
-
-        leg.remove();
-
         legends(
           {
             type: "FeatureCollection",
             features: node.selectAll("path").data(),
           },
           svg,
-          value,
-          datalayer.stroke,
-          datalayer.strokeWidth,
+          attr == "fill" ? value : undefined,
+          attr == "stroke" ? value : undefined,
+          undefined,
           id,
           delay,
           duration
         );
+
         break;
     }
-  } else {
+  }
+  // STROKEWIDTH
+  else if (attr == "strokeWidth") {
+    svg.selectAll(`g.legthickness_${id}`).remove();
+
     node
       .selectAll("path")
       .transition()
       .delay(delay)
       .duration(duration)
-      .style(attr, value);
+      .style("stroke-width", (d) =>
+        thickness(node.selectAll("path").data(), value).getthickness(
+          d.properties[value.values] || undefined
+        )
+      )
+      .attr("stroke-width", (d) =>
+        thickness(node.selectAll("path").data(), value).getthickness(
+          d.properties[value.values] || undefined
+        )
+      );
+
+    if (typeof value == "object") {
+      legends(
+        {
+          type: "FeatureCollection",
+          features: node.selectAll("path").data(),
+        },
+        svg,
+        undefined,
+        undefined,
+        value,
+        id,
+        delay,
+        duration
+      );
+    }
+  } else if (attr == "symbol_size" || attr == "symbol") {
+    svg.selectAll(`g.legbox_${id}`).remove();
+
+    const symbols = new Map([
+      ["circle", d3.symbolCircle],
+      ["cross", d3.symbolCross],
+      ["diamond", d3.symbolDiamond],
+      ["square", d3.symbolSquare],
+      ["star", d3.symbolStar],
+      ["triangle", d3.symbolTriangle],
+      ["wye", d3.symbolWye],
+    ]);
+
+    if (attr == "symbol_size") {
+      node
+        .selectAll("path")
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("d", d3.symbol().size(value).type(symbols.get(datalayer.symbol)));
+    } else {
+      datalayer.leg.type = value;
+      node
+        .selectAll("path")
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr(
+          "d",
+          d3.symbol().size(datalayer.symbol_size).type(symbols.get(value))
+        );
+    }
+
+    if (datalayer.leg.x > 0 && datalayer.leg.y > 0) {
+      if (legend) {
+        datalayer.leg.text = legend;
+      }
+
+      datalayer[attr] = value;
+      datalayer.leg[attr] = value;
+
+      svg.select(`g.legbox_${id}`).remove();
+      legsimple(svg, datalayer.leg, id, delay, duration);
+    }
+  }
+
+  // OTHER
+  else {
+    node
+      .selectAll("path")
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr(getattr(attr), value)
+      .style(getattr(attr), value);
   }
 }

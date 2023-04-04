@@ -275,7 +275,6 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         {
           id: layer.id,
-          display: layer.display,
           geojson: layer.geojson,
           rewind: layer.rewind,
           fill: layer.fill,
@@ -367,7 +366,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
-          display: layer.display,
+          id: layer.id,
           geojson: layer.geojson,
           rewind: layer.rewind,
           values: layer.values,
@@ -390,6 +389,7 @@ export function draw({ params = {}, layers = {} } = {}) {
           leg_fontSize: layer.leg_fontSize,
           leg_fontSize2: layer.leg_fontSize2,
           leg_stroke: layer.leg_stroke,
+          leg_fill: layer.leg_fill,
           leg_fillOpacity: layer.leg_fillOpacity,
           leg_strokeWidth: layer.leg_strokeWidth,
           leg_txtcol: layer.leg_txtcol,
@@ -710,7 +710,6 @@ export function draw({ params = {}, layers = {} } = {}) {
         planar,
         {
           id: layer.id,
-          display: layer.display,
           geojson: layer.geojson,
           rewind: layer.rewind,
           values: layer.values,
@@ -1112,6 +1111,7 @@ export function draw({ params = {}, layers = {} } = {}) {
     id = null,
     attr = null,
     value = null,
+    legend = null,
     duration = 0,
     delay = 0,
   } = {}) {
@@ -1123,6 +1123,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       id,
       attr,
       value,
+      legend,
       duration,
       delay,
     });

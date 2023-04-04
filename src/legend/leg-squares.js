@@ -3,7 +3,13 @@ import { max, descending } from "d3-array";
 const d3 = Object.assign({}, { scaleSqrt, max, descending });
 import { rounding } from "../helpers/rounding.js";
 
-export function legsquares(selection, options = {}) {
+export function legsquares(
+  selection,
+  options = {},
+  id,
+  delay = 0,
+  duration = 0
+) {
   let values = options.values;
   let k = options.k ? options.k : 50;
   let stroke = options.stroke ? options.stroke : "black";
@@ -28,7 +34,19 @@ export function legsquares(selection, options = {}) {
   let sizemax = size(d3.max(values));
 
   if (x != null && y != null) {
-    let leg = selection.append("g").attr("class", "bertinlegend");
+    let leg = selection
+      .append("g")
+      .attr("class", "bertinlegend")
+      .attr("class", "legsquare_" + id);
+
+    if (duration != 0) {
+      leg
+        .attr("opacity", 0)
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("opacity", 1);
+    }
 
     leg
       .selectAll("rect")
@@ -64,14 +82,6 @@ export function legsquares(selection, options = {}) {
       .attr("stroke", stroke)
       .attr("stroke-width", strokeWidth)
       .attr("stroke-dasharray", 2);
-
-    // Position 0,0
-    // leg
-    //   .append("circle")
-    //   .attr("cx", x)
-    //   .attr("cy", y)
-    //   .attr("r", 4)
-    //   .attr("fill", "red");
 
     leg
       .append("g")

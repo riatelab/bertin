@@ -1,7 +1,7 @@
 import { scaleOrdinal } from "d3-scale";
 const d3 = Object.assign({}, { scaleOrdinal });
 
-export function legtypo(selection, options = {}) {
+export function legtypo(selection, options = {}, delay, duration) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
   let w = options.w ? options.w : 30;
@@ -19,15 +19,20 @@ export function legtypo(selection, options = {}) {
   let getcolor = d3.scaleOrdinal().domain(types).range(colors);
   const span = 3;
 
-  // x = 100;
-  // y = 100;
-  // title = "Title of the legend";
-
   if (x != null && y != null) {
     let leg = selection
       .append("g")
       .attr("class", "bertinlegend")
       .attr("class", options.id);
+
+    if (duration != 0) {
+      leg
+        .attr("opacity", 0)
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("opacity", 1);
+    }
 
     let delta = 0;
     if (title != null) {

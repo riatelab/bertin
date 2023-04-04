@@ -13,6 +13,7 @@ export function update_bubble({
   id = null,
   attr = null,
   value = null,
+  legend = null,
   projection,
   duration = 0,
   delay = 0,
@@ -25,8 +26,6 @@ export function update_bubble({
       : value;
   datalayer[attr] = value;
   svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
-
-  console.log(datalayer);
 
   // DORLING
   if (attr == "dorling") {
@@ -118,24 +117,34 @@ export function update_bubble({
     }
     svg.select(`g.legcircle_${id}`).remove();
 
-    legcircles(svg, id, {
-      x: datalayer.leg_x,
-      y: datalayer.leg_y,
-      round:
-        datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
-      divisor: datalayer.leg_divisor,
-      k: datalayer.k,
-      fixmax: datalayer.fixmax,
-      stroke: datalayer.leg_stroke,
-      fill: datalayer.leg_fill,
-      strokeWidth: datalayer.leg_strokeWidth,
-      txtcol: datalayer.leg_txtcol,
-      title: datalayer.leg_title,
-      fontSize: datalayer.leg_fontSize,
-      fontSize2: datalayer.leg_fontSize2,
-      title: datalayer.leg_title ? datalayer.leg_title : datalayer.values,
-      values: datalayer.legval,
-    });
+    legcircles(
+      svg,
+      id,
+      {
+        x: datalayer.leg_x,
+        y: datalayer.leg_y,
+        round:
+          datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
+        divisor: datalayer.leg_divisor,
+        k: datalayer.k,
+        fixmax: datalayer.fixmax,
+        stroke: datalayer.leg_stroke,
+        fill: datalayer.leg_fill,
+        strokeWidth: datalayer.leg_strokeWidth,
+        txtcol: datalayer.leg_txtcol,
+        title: datalayer.leg_title,
+        fontSize: datalayer.leg_fontSize,
+        fontSize2: datalayer.leg_fontSize2,
+        title: legend
+          ? legend
+          : datalayer.leg_title
+          ? datalayer.leg_title
+          : datalayer.values,
+        values: datalayer.legval,
+      },
+      delay + duration / 2,
+      duration / 2
+    );
   }
 
   // K (size of circles)
@@ -175,26 +184,37 @@ export function update_bubble({
         .duration(duration)
         .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
     }
-    svg.select(`g.legcircle_${id}`).remove();
 
-    legcircles(svg, id, {
-      x: datalayer.leg_x,
-      y: datalayer.leg_y,
-      round:
-        datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
-      divisor: datalayer.leg_divisor,
-      k: value,
-      fixmax: datalayer.fixmax,
-      stroke: datalayer.leg_stroke,
-      fill: datalayer.leg_fill,
-      strokeWidth: datalayer.leg_strokeWidth,
-      txtcol: datalayer.leg_txtcol,
-      title: datalayer.leg_title,
-      fontSize: datalayer.leg_fontSize,
-      fontSize2: datalayer.leg_fontSize2,
-      title: datalayer.leg_title ? datalayer.leg_title : datalayer.values,
-      values: datalayer.legval,
-    });
+    svg.selectAll(`g.legcircle_${id}`).remove();
+
+    legcircles(
+      svg,
+      id,
+      {
+        x: datalayer.leg_x,
+        y: datalayer.leg_y,
+        round:
+          datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
+        divisor: datalayer.leg_divisor,
+        k: value,
+        fixmax: datalayer.fixmax,
+        stroke: datalayer.leg_stroke,
+        fill: datalayer.leg_fill,
+        strokeWidth: datalayer.leg_strokeWidth,
+        txtcol: datalayer.leg_txtcol,
+        title: datalayer.leg_title,
+        fontSize: datalayer.leg_fontSize,
+        fontSize2: datalayer.leg_fontSize2,
+        title: legend
+          ? legend
+          : datalayer.leg_title
+          ? datalayer.leg_title
+          : datalayer.values,
+        values: datalayer.legval,
+      },
+      delay + duration / 2,
+      duration / 2
+    );
   }
 
   // FILL OR STROKE
@@ -232,7 +252,9 @@ export function update_bubble({
             attr == "fill" ? value : undefined,
             attr == "stroke" ? value : undefined,
             undefined,
-            id
+            id,
+            delay,
+            duration
           );
         }
 
@@ -303,7 +325,9 @@ export function update_bubble({
         undefined,
         undefined,
         value,
-        id
+        id,
+        delay,
+        duration
       );
     }
   }

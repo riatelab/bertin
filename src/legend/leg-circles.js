@@ -3,7 +3,13 @@ import { max, descending } from "d3-array";
 const d3 = Object.assign({}, { scaleSqrt, max, descending });
 import { rounding } from "../helpers/rounding.js";
 
-export function legcircles(selection, id, options = {}) {
+export function legcircles(
+  selection,
+  id,
+  options = {},
+  delay = 0,
+  duration = 0
+) {
   let values = options.values;
   let k = options.k ? options.k : 50;
   let stroke = options.stroke ? options.stroke : "black";
@@ -25,7 +31,6 @@ export function legcircles(selection, id, options = {}) {
   const valvax = fixmax != undefined ? fixmax : d3.max(values);
   let radius = d3.scaleSqrt([0, valvax], [0, k]);
 
-  //let radius = d3.scaleSqrt([0, d3.max(values)], [0, k]);
   let rmax = radius(d3.max(values));
 
   if (x != null && y != null) {
@@ -33,6 +38,15 @@ export function legcircles(selection, id, options = {}) {
       .append("g")
       .attr("class", "bertinlegend")
       .attr("class", "legcircle_" + id);
+
+    if (duration != 0) {
+      leg
+        .attr("opacity", 0)
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("opacity", 1);
+    }
 
     leg
       .selectAll("circle")

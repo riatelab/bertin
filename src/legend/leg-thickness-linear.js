@@ -1,5 +1,5 @@
 import { rounding } from "../helpers/rounding.js";
-export function legthicknesslinear(selection, options = {}) {
+export function legthicknesslinear(selection, options = {}, delay, duration) {
   let x = options.x != undefined ? options.x : null;
   let y = options.y != undefined ? options.y : null;
   let valmax = options.valmax;
@@ -24,6 +24,15 @@ export function legthicknesslinear(selection, options = {}) {
       .append("g")
       .attr("class", "bertinlegend")
       .attr("class", options.id);
+
+    if (duration != 0) {
+      leg
+        .attr("opacity", 0)
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("opacity", 1);
+    }
 
     let delta = 0;
     if (title != null) {

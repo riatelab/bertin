@@ -1,7 +1,7 @@
 import { reverse } from "d3-array";
 const d3 = Object.assign({}, { reverse });
 
-export function legthicknessquali(selection, options = {}) {
+export function legthicknessquali(selection, options = {}, delay, duration) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
   let w = options.w ? options.w : 30;
@@ -22,6 +22,15 @@ export function legthicknessquali(selection, options = {}) {
       .append("g")
       .attr("class", "bertinlegend")
       .attr("class", options.id);
+
+    if (duration != 0) {
+      leg
+        .attr("opacity", 0)
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("opacity", 1);
+    }
 
     let delta = 0;
     if (title != null) {

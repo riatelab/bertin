@@ -5,6 +5,7 @@ import { update_rhumbs } from "./update-rhumbs.js";
 import { update_bubble } from "./update-bubble.js";
 import { update_square } from "./update-square.js";
 import { update_simple } from "./update-simple.js";
+import { update_spikes } from "./update-spikes.js";
 
 export function update_main({
   svg,
@@ -14,6 +15,7 @@ export function update_main({
   id = null,
   attr = null,
   value = null,
+  legend = null,
   duration = 0,
   delay = 0,
 } = {}) {
@@ -38,6 +40,7 @@ export function update_main({
         width,
         height,
         value,
+        legend,
         projection,
         duration,
         delay,
@@ -52,6 +55,22 @@ export function update_main({
         width,
         height,
         value,
+        legend,
+        projection,
+        duration,
+        delay,
+      });
+      break;
+    case "spike":
+      console.log("update spike");
+      update_spikes({
+        svg,
+        id,
+        attr,
+        width,
+        height,
+        value,
+        legend,
         projection,
         duration,
         delay,
@@ -59,7 +78,17 @@ export function update_main({
       break;
     case "simple":
       console.log("update simple");
-      update_simple({ svg, id, attr, width, height, value, duration, delay });
+      update_simple({
+        svg,
+        id,
+        attr,
+        width,
+        height,
+        value,
+        duration,
+        delay,
+        legend,
+      });
       break;
     default:
       console.log("update default");

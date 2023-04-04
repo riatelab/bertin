@@ -331,17 +331,16 @@ bertin.draw({
 
 - **geojson**: a geojson (**compulsory**)
 - **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
-- **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties(**compulsory**)
 - **<ins>k</ins>**: size of the largest circle (default:50)
 - **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
-- **fill**: fill color (default: random color)
-- **stroke**: stroke color (default: "white")
-- **strokeWidth**: stroke width (default: 0.5)
-- **fillOpacity**: fill opacity (default: 1)
-- **dorling**: a boolean (default:false)
+- **<ins>fill</ins>**: fill color (default: random color)
+- **<ins>stroke</ins>**: stroke color (default: "white")
+- **<ins>strokeWidth</ins>**: stroke width (default: 0.5)
+- **<ins>fillOpacity</ins>**: fill opacity (default: 1)
+- **<ins>dorling</ins>**: a boolean (default:false)
 - **iteration**: an integer to define the number of iteration for the Dorling method (default: 200)
 - **tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin).
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 - **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
@@ -357,7 +356,6 @@ Parameters of the legend
 - **leg_divisor**: A number to divide to the values in the legend. For example, 1000 is used to convert units to thousands. 1000000 allows to convert units into millions (default: 1).
 - **leg_fontSize**: title legend font size (default: 14)
 - **leg_fontSize2**: values font size (default: 10)
-
 
 ### Square
 
@@ -385,17 +383,16 @@ bertin.draw({
 
 - **geojson**: a geojson (**compulsory**)
 - **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
-- **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
-- **k**: size of the largest circle (default:50)
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties(**compulsory**)
+- **<ins>k</ins>**: size of the largest circle (default:50)
 - **fixmax**: Max value to fix the size of the biggest circle, in order to make maps comparable (default:undefined)
-- **fill**: fill color (default: random color)
-- **stroke**: stroke color (default: "white")
-- **strokeWidth**: stroke width (default: 0.5)
-- **fillOpacity**: fill opacity (default: 1)
-- **demers**: a boolean to avoid overlay. Dorling parameter works also (default:false)
+- **<ins>fill</ins>**: fill color (default: random color)
+- **<ins>stroke</ins>**: stroke color (default: "white")
+- **<ins>strokeWidth</ins>**: stroke width (default: 0.5)
+- **<ins>fillOpacity</ins>**: fill opacity (default: 1)
+- **<ins>demers</ins>**: a boolean to avoid overlay. Dorling parameter works also (default:false) - EXPERIMENTAL
 - **iteration**: an integer to define the number of iteration for the Dorling method (default: 200)
 - **tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed. [Example](https://observablehq.com/@neocartocnrs/bertin-js-tooltips?collection=@neocartocnrs/bertin).
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 - **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend

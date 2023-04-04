@@ -1,6 +1,6 @@
 import { rounding } from "../helpers/rounding.js";
 
-export function legthickness(selection, options = {}) {
+export function legthickness(selection, options = {}, delay, duration) {
   let x = options.x != undefined ? options.x : null;
   let y = options.y != undefined ? options.y : null;
   let valmax = options.valmax;
@@ -20,7 +20,16 @@ export function legthickness(selection, options = {}) {
     let leg = selection
       .append("g")
       .attr("class", "bertinlegend")
-      .attr("class", "legthickness_" + id);
+      .attr("class", "legthickness_" + options.id);
+
+    if (duration != 0) {
+      leg
+        .attr("opacity", 0)
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("opacity", 1);
+    }
 
     let delta = 0;
     if (title != null) {

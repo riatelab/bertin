@@ -1,7 +1,7 @@
-import { legcircles } from "../legend/leg-circles.js";
+import { legsquares } from "../legend/leg-squares.js";
 import { getattr } from "../helpers/getattr.js";
 import { legends } from "../legend/legends.js";
-import { simulation_circles } from "../helpers/simulation-circles.js";
+import { simulation_squares } from "../helpers/simulation-squares.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
 import { scaleSqrt } from "d3-scale";
@@ -13,7 +13,7 @@ export function update_square({
   id = null,
   attr = null,
   value = null,
-  projection,
+  legend = null,
   duration = 0,
   delay = 0,
 } = {}) {
@@ -27,178 +27,194 @@ export function update_square({
   svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
 
   // DORLING
-  if (attr == "dorling") {
-    let radius = d3.scaleSqrt([0, datalayer.valmax], [0, datalayer.k]);
-
-    let features = node.selectAll("circle").data();
-
+  if (attr == "dorling" || attr == "demers") {
     if (value) {
-      const simulation = simulation_circles(
-        features,
-        datalayer.values,
-        datalayer.strokeWidth,
-        radius,
-        projection
-      );
+      const simulation = simulation_squares(node.selectAll("rect").data());
 
       for (let i = 0; i < datalayer.iteration; i++) {
         simulation.tick();
       }
 
       node
-        .selectAll("circle")
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
-        .attr("cx", (d) => d.x)
-        .attr("cy", (d) => d.y);
+        .attr("x", (d) => d._x - d._size / 2)
+        .attr("y", (d) => d._y - d._size / 2);
     } else {
       node
-        .selectAll("circle")
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
-        .attr("cx", (d) => projection(d.geometry.coordinates)[0])
-        .attr("cy", (d) => projection(d.geometry.coordinates)[1]);
+        .attr("x", (d) => d.ctrx - d._size / 2)
+        .attr("y", (d) => d.ctry - d._size / 2);
     }
   }
 
   // VALUES
   else if (attr == "values") {
     let array = node
-      .selectAll("circle")
+      .selectAll("rect")
       .data()
-      .map((d) => +d.properties[value]);
+      .map((d) => +d[value]);
 
     datalayer["valmax"] =
       datalayer["fixmax"] != undefined ? datalayer["fixmax"] : d3.max(array);
 
-    let radius = d3.scaleSqrt([0, datalayer.valmax], [0, datalayer.k]);
+    let size = d3.scaleSqrt([0, datalayer.valmax], [0, datalayer.k * 1.77]);
     datalayer["legval"] = [
       d3.min(array),
-      radius.invert(radius(d3.max(array)) / 3),
-      radius.invert(radius(d3.max(array)) / 1.5),
+      size.invert(size(d3.max(array)) / 3),
+      size.invert(size(d3.max(array)) / 1.5),
       d3.max(array),
     ];
 
-    svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
+    node.attr("data-layer", JSON.stringify(datalayer));
 
-    if (datalayer.dorling == true) {
-      let features = node.selectAll("circle").data();
+    if (datalayer.dorling == true || datalayer.demers == true) {
+      let data = node.selectAll("rect").data();
 
-      const simulation = simulation_circles(
-        features,
-        datalayer.values,
-        datalayer.strokeWidth,
-        radius,
-        projection
-      );
-
+      data.forEach((d) => {
+        d._size = size(Math.abs(d[datalayer.values]));
+      });
+      const simulation = simulation_squares(data);
       for (let i = 0; i < datalayer.iteration; i++) {
         simulation.tick();
       }
 
       node
-        .selectAll("circle")
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
-        .attr("cx", (d) => d.x)
-        .attr("cy", (d) => d.y)
-        .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
+        .attr("x", (d) => d._x - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("y", (d) => d._y - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("width", (d) => size(Math.abs(d[datalayer.values])))
+        .attr("height", (d) => size(Math.abs(d[datalayer.values])));
     } else {
       node
-        .selectAll("circle")
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
-        .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
+        .attr("x", (d) => d.ctrx - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("y", (d) => d.ctry - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("width", (d) => size(Math.abs(d[datalayer.values])))
+        .attr("height", (d) => size(Math.abs(d[datalayer.values])));
     }
-    svg.select(`g.legcircle_${id}`).remove();
 
-    legcircles(svg, id, {
-      x: datalayer.leg_x,
-      y: datalayer.leg_y,
-      round:
-        datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
-      divisor: datalayer.leg_divisor,
-      k: datalayer.k,
-      fixmax: datalayer.fixmax,
-      stroke: datalayer.leg_stroke,
-      fill: datalayer.leg_fill,
-      strokeWidth: datalayer.leg_strokeWidth,
-      txtcol: datalayer.leg_txtcol,
-      title: datalayer.leg_title,
-      fontSize: datalayer.leg_fontSize,
-      fontSize2: datalayer.leg_fontSize2,
-      title: datalayer.leg_title ? datalayer.leg_title : datalayer.values,
-      values: datalayer.legval,
-    });
+    svg.select(`g.legsquare_${id}`).remove();
+
+    legsquares(
+      svg,
+      {
+        x: datalayer.leg_x,
+        y: datalayer.leg_y,
+        round:
+          datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
+        divisor: datalayer.leg_divisor,
+        k: datalayer.k,
+        fixmax: datalayer.fixmax,
+        stroke: datalayer.leg_stroke,
+        fill: datalayer.leg_fill,
+        strokeWidth: datalayer.leg_strokeWidth,
+        txtcol: datalayer.leg_txtcol,
+        title: datalayer.leg_title,
+        fontSize: datalayer.leg_fontSize,
+        fontSize2: datalayer.leg_fontSize2,
+        title: legend
+          ? legend
+          : datalayer.leg_title
+          ? datalayer.leg_title
+          : datalayer.values,
+        values: datalayer.legval,
+      },
+      id,
+      delay + duration / 2,
+      duration / 2
+    );
   }
 
-  // K (size of circles)
+  // K (size of squares)
   else if (attr == "k") {
-    let radius = d3.scaleSqrt([0, datalayer.valmax], [0, datalayer.k]);
+    let size = d3.scaleSqrt([0, datalayer.valmax], [0, datalayer.k * 1.77]);
 
     // If dorling
 
-    if (datalayer.dorling == true) {
-      let features = node.selectAll("circle").data();
+    if (datalayer.dorling == true || datalayer.demers == true) {
+      let data = node.selectAll("rect").data();
 
-      const simulation = simulation_circles(
-        features,
-        datalayer.values,
-        datalayer.strokeWidth,
-        radius,
-        projection
-      );
-
+      data.forEach((d) => {
+        d._size = size(Math.abs(d[datalayer.values]));
+        d.x = d.ctrx;
+        d.y = d.ctry;
+        d._x = d.ctrx;
+        d._y = d.ctry;
+      });
+      const simulation = simulation_squares(data);
       for (let i = 0; i < datalayer.iteration; i++) {
         simulation.tick();
       }
 
       node
-        .selectAll("circle")
+        .join(data)
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
-        .attr("cx", (d) => d.x)
-        .attr("cy", (d) => d.y)
-        .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
+        .attr("x", (d) => d._x - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("y", (d) => d._y - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("width", (d) => size(Math.abs(d[datalayer.values])))
+        .attr("height", (d) => size(Math.abs(d[datalayer.values])));
     } else {
       node
-        .selectAll("circle")
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
-        .attr("r", (d) => radius(Math.abs(d.properties[datalayer.values])));
+        .attr("x", (d) => d.ctrx - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("y", (d) => d.ctry - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("width", (d) => size(Math.abs(d[datalayer.values])))
+        .attr("height", (d) => size(Math.abs(d[datalayer.values])));
     }
-    svg.select(`g.legcircle_${id}`).remove();
+    svg.select(`g.legsquare_${id}`).remove();
 
-    legcircles(svg, id, {
-      x: datalayer.leg_x,
-      y: datalayer.leg_y,
-      round:
-        datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
-      divisor: datalayer.leg_divisor,
-      k: value,
-      fixmax: datalayer.fixmax,
-      stroke: datalayer.leg_stroke,
-      fill: datalayer.leg_fill,
-      strokeWidth: datalayer.leg_strokeWidth,
-      txtcol: datalayer.leg_txtcol,
-      title: datalayer.leg_title,
-      fontSize: datalayer.leg_fontSize,
-      fontSize2: datalayer.leg_fontSize2,
-      title: datalayer.leg_title ? datalayer.leg_title : datalayer.values,
-      values: datalayer.legval,
-    });
+    legsquares(
+      svg,
+      {
+        x: datalayer.leg_x,
+        y: datalayer.leg_y,
+        round:
+          datalayer.leg_round !== undefined ? datalayer.leg_round : undefined,
+        divisor: datalayer.leg_divisor,
+        k: value,
+        fixmax: datalayer.fixmax,
+        stroke: datalayer.leg_stroke,
+        fill: datalayer.leg_fill,
+        strokeWidth: datalayer.leg_strokeWidth,
+        txtcol: datalayer.leg_txtcol,
+        title: datalayer.leg_title,
+        fontSize: datalayer.leg_fontSize,
+        fontSize2: datalayer.leg_fontSize2,
+        title: legend
+          ? legend
+          : datalayer.leg_title
+          ? datalayer.leg_title
+          : datalayer.values,
+        values: datalayer.legval,
+      },
+      id,
+      delay + duration / 2,
+      duration / 2
+    );
   }
 
   // FILL OR STROKE
   else if (attr == "fill" || attr == "stroke") {
     svg.selectAll(`g.legbox${attr}_${id}`).remove();
-    console.log(datalayer);
+
     switch (typeof value) {
       case "string":
         node
@@ -229,62 +245,71 @@ export function update_square({
             attr == "fill" ? value : undefined,
             attr == "stroke" ? value : undefined,
             undefined,
-            id
+            id,
+            delay,
+            duration
           );
         }
         break;
     }
   }
-  // STROKEWIDTH
+  // STROKEWIDTH (TODO)
   else if (attr == "strokeWidth") {
     svg.selectAll(`g.legthickness_${id}`).remove();
 
-    if (datalayer.dorling == true) {
-      let features = node.selectAll("circle").data();
+    let data = node.selectAll("rect").data();
+    data.map((d) => (d.properties = { [value.values]: +d[value.values] }));
+    let size = d3.scaleSqrt([0, datalayer.valmax], [0, datalayer.k * 1.77]);
 
-      const simulation = simulation_circles(
-        features,
-        datalayer.values,
-        datalayer.strokeWidth,
-        d3.scaleSqrt([0, datalayer.valmax], [0, datalayer.k]),
-        projection
-      );
+    if (datalayer.dorling == true || datalayer.demers == true) {
+      data.forEach((d) => {
+        d.x = d.ctrx;
+        d.y = d.ctry;
+        d._x = d.ctrx;
+        d._y = d.ctry;
+        d._padding =
+          thickness(data, value).getthickness(d.properties[value.values] || 0) /
+            2 +
+          0;
+      });
 
+      const simulation = simulation_squares(data);
       for (let i = 0; i < datalayer.iteration; i++) {
         simulation.tick();
       }
 
       node
-        .selectAll("circle")
+        .join(data)
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
-        .attr("cx", (d) => d.x)
-        .attr("cy", (d) => d.y)
+        .attr("x", (d) => d._x - size(Math.abs(d[datalayer.values])) / 2)
+        .attr("y", (d) => d._y - size(Math.abs(d[datalayer.values])) / 2)
         .style("stroke-width", (d) =>
-          thickness(node.selectAll("circle").data(), value).getthickness(
-            d.properties[value.values] || undefined
+          thickness(node.selectAll("rect").data(), value).getthickness(
+            d[value.values] || undefined
           )
         )
         .attr("stroke-width", (d) =>
-          thickness(node.selectAll("circle").data(), value).getthickness(
-            d.properties[value.values] || undefined
+          thickness(node.selectAll("rect").data(), value).getthickness(
+            d[value.values] || undefined
           )
         );
     } else {
       node
-        .selectAll("circle")
+        .selectAll("rect")
         .transition()
         .delay(delay)
         .duration(duration)
         .style("stroke-width", (d) =>
-          thickness(node.selectAll("circle").data(), value).getthickness(
-            d.properties[value.values] || undefined
+          thickness(node.selectAll("rect").data(), value).getthickness(
+            d[value.values] || undefined
           )
         )
         .attr("stroke-width", (d) =>
-          thickness(node.selectAll("circle").data(), value).getthickness(
-            d.properties[value.values] || undefined
+          thickness(node.selectAll("rect").data(), value).getthickness(
+            d[value.values] || undefined
           )
         );
     }
@@ -293,13 +318,15 @@ export function update_square({
       legends(
         {
           type: "FeatureCollection",
-          features: node.selectAll("circle").data(),
+          features: node.selectAll("rect").data(),
         },
         svg,
         undefined,
         undefined,
         value,
-        id
+        id,
+        delay,
+        duration
       );
     }
   }

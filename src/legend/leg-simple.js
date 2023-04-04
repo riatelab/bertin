@@ -22,7 +22,13 @@ const d3 = Object.assign(
   }
 );
 
-export function legsimple(selection, options = {}, id) {
+export function legsimple(
+  selection,
+  options = {},
+  id,
+  delay = 0,
+  duration = 0
+) {
   let type = options.type ? options.type : "box";
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
@@ -44,6 +50,15 @@ export function legsimple(selection, options = {}, id) {
       .append("g")
       .attr("class", "bertinlegend")
       .attr("class", "legbox_" + id);
+
+    if (duration != 0) {
+      leg
+        .attr("opacity", 0)
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("opacity", 1);
+    }
 
     let delta = 0;
     if (title != null) {
