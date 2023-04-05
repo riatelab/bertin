@@ -1,7 +1,12 @@
 import { reverse } from "d3-array";
 const d3 = Object.assign({}, { reverse });
 
-export function legthicknessquali(selection, options = {}, delay, duration) {
+export function legthicknessquali(
+  selection,
+  options = {},
+  delay = 0,
+  duration = 0
+) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
   let w = options.w ? options.w : 30;

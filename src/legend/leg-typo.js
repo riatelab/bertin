@@ -1,7 +1,7 @@
 import { scaleOrdinal } from "d3-scale";
 const d3 = Object.assign({}, { scaleOrdinal });
 
-export function legtypo(selection, options = {}, delay, duration) {
+export function legtypo(selection, options = {}, delay = 0, duration = 0) {
   let x = options.x ? options.x : null;
   let y = options.y ? options.y : null;
   let w = options.w ? options.w : 30;
@@ -19,7 +19,12 @@ export function legtypo(selection, options = {}, delay, duration) {
   let getcolor = d3.scaleOrdinal().domain(types).range(colors);
   const span = 3;
 
+  console.log(duration);
+  console.log(delay);
+
   if (x != null && y != null) {
+    console.log("legtypo2");
+
     let leg = selection
       .append("g")
       .attr("class", "bertinlegend")

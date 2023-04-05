@@ -219,5 +219,5 @@ export function spikes(
 
   // Legends
   legspikes(selection, leg, options.id);
-  legends(geojson, selection, fill, stroke, strokeWidth);
+  legends(geojson, selection, fill, stroke, strokeWidth, options.id);
 }

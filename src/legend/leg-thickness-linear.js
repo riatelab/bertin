@@ -1,5 +1,10 @@
 import { rounding } from "../helpers/rounding.js";
-export function legthicknesslinear(selection, options = {}, delay, duration) {
+export function legthicknesslinear(
+  selection,
+  options = {},
+  delay = 0,
+  duration = 0
+) {
   let x = options.x != undefined ? options.x : null;
   let y = options.y != undefined ? options.y : null;
   let valmax = options.valmax;

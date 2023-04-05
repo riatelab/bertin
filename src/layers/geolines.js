@@ -3,7 +3,6 @@ import { geoPath } from "d3-geo";
 const d3 = Object.assign({}, { geoPath });
 
 export function geolines(selection, projection, planar, options = {}, clipid) {
-
   let display = options.display == false ? false : true;
   if (display) {
     if (!planar) {
@@ -45,8 +44,12 @@ export function geolines(selection, projection, planar, options = {}, clipid) {
       let tr = lines.filter((d) => d.properties.name.includes("Tropic"));
       let po = lines.filter((d) => d.properties.name.includes("Circle"));
 
-      selection
+      let l = selection
         .append("g")
+        .attr("class", options.id)
+        .attr("type", "geolines");
+
+      l.append("g")
         .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
         .selectAll("path")
         .data(eq)
@@ -59,8 +62,7 @@ export function geolines(selection, projection, planar, options = {}, clipid) {
         .attr("stroke-dasharray", strokeDasharray[0])
         .attr("stroke-linecap", strokeLinecap[0]);
 
-      selection
-        .append("g")
+      l.append("g")
         .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
         .selectAll("path")
         .data(tr)
@@ -73,8 +75,7 @@ export function geolines(selection, projection, planar, options = {}, clipid) {
         .attr("stroke-dasharray", strokeDasharray[1])
         .attr("stroke-linecap", strokeLinecap[1]);
 
-      selection
-        .append("g")
+      l.append("g")
         .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
         .selectAll("path")
         .data(po)

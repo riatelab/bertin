@@ -244,7 +244,7 @@ export function square(
   }
 
   // legend (classes)
-  legends(geojson, selection, fill, stroke, strokeWidth);
+  legends(geojson, selection, fill, stroke, strokeWidth, options.id);
 
   // Legend (squares)
 

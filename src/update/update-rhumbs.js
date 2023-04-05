@@ -1,4 +1,5 @@
 import { getangle } from "../helpers/getangle.js";
+import { getattr } from "../helpers/getattr.js";
 
 export function update_rhumbs({
   svg,
@@ -12,12 +13,6 @@ export function update_rhumbs({
 } = {}) {
   let node = svg.select(`g.${id}`);
   let size = Math.max(width, height);
-  node
-    .transition()
-    .delay(delay)
-    .duration(duration)
-    .attr(attr, value)
-    .style(attr, value);
 
   if (attr == "nb") {
     let pos = node.selectAll("polyline").nodes()[0].animatedPoints[0];
@@ -34,9 +29,7 @@ export function update_rhumbs({
         let y2 = pos.y + Math.sin(d) * size;
         return pos.x + "," + pos.y + " " + x2 + "," + y2;
       });
-  }
-
-  if (attr == "position") {
+  } else if (attr == "position") {
     node
       .selectAll("polyline")
       .data(getangle(node.selectAll("polyline").size()))
@@ -49,5 +42,12 @@ export function update_rhumbs({
         let y2 = value[1] + Math.sin(d) * size;
         return value[0] + "," + value[1] + " " + x2 + "," + y2;
       });
+  } else {
+    node
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr(getattr(attr), value)
+      .style(getattr(attr), value);
   }
 }

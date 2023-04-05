@@ -331,15 +331,4 @@ export function update_bubble({
       );
     }
   }
-
-  // OTHER
-  else {
-    node
-      .selectAll("circle")
-      .transition()
-      .delay(delay)
-      .duration(duration)
-      .attr(getattr(attr), value)
-      .style(getattr(attr), value);
-  }
 }

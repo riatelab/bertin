@@ -191,7 +191,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
-          display: layer.display,
+          id: layer.id,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
           strokeOpacity: layer.strokeOpacity,
@@ -213,7 +213,7 @@ export function draw({ params = {}, layers = {} } = {}) {
         projection,
         planar,
         {
-          display: layer.display,
+          id: layer.id,
           stroke: layer.stroke,
           strokeWidth: layer.strokeWidth,
           strokeOpacity: layer.strokeOpacity,
@@ -583,7 +583,6 @@ export function draw({ params = {}, layers = {} } = {}) {
 
     if (layer.type == "rhumbs") {
       rhumbs(svg, width, height, clipid, {
-        visibility: layer.visibility,
         id: layer.id,
         nb: layer.nb,
         position: layer.position,
@@ -603,7 +602,6 @@ export function draw({ params = {}, layers = {} } = {}) {
         planar,
         {
           id: layer.id,
-          visibility: layer.visibility,
           step: layer.step,
           fill: layer.fill,
           fillOpacity: layer.fillOpacity,
@@ -972,26 +970,26 @@ export function draw({ params = {}, layers = {} } = {}) {
     // Header
     if (layer.type == "header") {
       addheader(svg, width, {
-        display: layer.display,
         fontSize: layer.fontSize,
         text: layer.text,
         fill: layer.fill,
         background: layer.background,
         backgroundOpacity: layer.backgroundOpacity,
         anchor: layer.anchor,
+        id: layer.id,
       });
     }
 
     // Footer
     if (layer.type == "footer") {
       addfooter(svg, width, height, {
-        display: layer.display,
         fontSize: layer.fontSize,
         text: layer.text,
         fill: layer.fill,
         background: layer.background,
         backgroundOpacity: layer.backgroundOpacity,
         anchor: layer.anchor,
+        id: layer.id,
       });
     }
 
@@ -1109,6 +1107,7 @@ export function draw({ params = {}, layers = {} } = {}) {
   // Update function
   svg.node().update = function update({
     id = null,
+    selectall = null,
     attr = null,
     value = null,
     legend = null,
@@ -1121,6 +1120,7 @@ export function draw({ params = {}, layers = {} } = {}) {
       width,
       height,
       id,
+      selectall,
       attr,
       value,
       legend,

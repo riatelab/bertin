@@ -1053,13 +1053,12 @@ bertin.draw({
 
 #### Parameters
 
-- **text**: text to be displayed (default:"")
+- **<ins>text</ins>**: text to be displayed (default:"")
 - **anchor**: text anchor. start, middle, end (default:"end")
 - **fontSize**: size of the text (default:15)
 - **fill**: color of the text (default:"#9e9696")
 - **background**: background color (default: "white")
 - **backgroundOpacity**: background opacity (default: 1)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Geolines
 
@@ -1085,12 +1084,11 @@ bertin.draw({
 
 *For each parameter, you can set a single value for all lines are an array in that order: [equator, tropics, polar].*
 
-- **stroke**: stroke color (default: "#020e21")
+- **<ins>stroke</ins>**: stroke color (default: "#020e21")
 - **strokeWidth**: stroke width (default: [1.5, 1.2, 0.7])
-- **strokeOpacity**: stroke opacity (default: 1)
+- **<ins>strokeOpacity</ins>**: stroke opacity (default: 1)
 - **strokeDasharray**: stroke-dasharray (default: ["none", 5, 3])
-- **strokeLinecap**: stroke-linecap (default: "butt")
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **<ins>strokeLinecap</ins>**: stroke-linecap (default: "butt")
 
 ### Graticule
 
@@ -1114,13 +1112,12 @@ bertin.draw({
 
 #### Parameters
 
-- **stroke**: stroke color (default:"white")
-- **strokeWidth**: stroke width (default:0.8)
-- **strokeOpacity**: stroke opacity (default:0.5)
-- **strokeDasharray**: stroke-dasharray (default:2)
+- **<ins>stroke</ins>**: stroke color (default:"white")
+- **<ins>strokeWidth</ins>**: stroke width (default:0.8)
+- **<ins>strokeOpacity</ins>**: stroke opacity (default:0.5)
+- **<ins>strokeDasharray</ins>**: stroke-dasharray (default:2)
 - **step**: gap between graticules. The value can be a number or an array of two values (default: [10, 10])
-- **spread**:  A value in degrees to extend the graticules beyond the geometries ss(default: 0)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **spread**:  A value in degrees to extend the graticules beyond the geometries (default: 0)
 
 ### hatch (or hatching)
 
@@ -1240,13 +1237,13 @@ bertin.draw({
 
 #### Parameters
 
-- **nb**: number of lines (default: 10)
-- **position**: position of the center in x and y (default: [height / 4, width - width / 4])
-- **stroke**: stroke color (default: "#786d6c")
-- **strokeWidth**: stroke color (default: 2)
-- **strokeOpacity**: stroke-opacity (default: 45)
-- **strokeDasharray**: stroke-dasharray (default:"none")
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **<ins>nb</ins>**: number of lines (default: 10)
+- **<ins>position</ins>**: position of the center in x and y (default: [height / 4, width - width / 4])
+- **<ins>stroke</ins>**: stroke color (default: "#786d6c")
+- **<ins>strokeWidth</ins>**: stroke color (default: 2)
+- **<ins>strokeOpacity</ins>**: stroke-opacity (default: 45)
+- **<ins>strokeDasharray</ins>**: stroke-dasharray (default:"none")
+
 
 #### Water lines (slow)
 
@@ -1331,13 +1328,12 @@ bertin.draw({
 
 #### Parameters
 
-- **text**: text to be displayed (default:"")
+- **<ins>text</ins>**: text to be displayed (default:"")
 - **anchor**: text anchor. start, middle, end (default:"middle")
 - **fontSize**: size of the text (default:20)
 - **fill**: color of the text (default:"#9e9696")
 - **background**: background color (default: "white")
 - **backgroundOpacity**: background opacity (default: 1)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Labels
 
@@ -1640,13 +1636,12 @@ bertin.draw({
 
 #### Parameters
 
-- **step**: step between circles
-- **fill**: fill (default: "#d91848")
-- **fillOpactity**: fill-opacity (default: 0.5)
-- **stroke**: stroke (default: "#d91848")
-- **strokeOpactity**: stroke-opacity (default: 0.6)
-- **strokeWidth**: stroke-width (default: 1.5)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+- **<ins>step</ins>**: step between circles
+- **<ins>fill</ins>**: fill (default: "#d91848")
+- **<ins>fillOpacity</ins>**: fill-opacity (default: 0.5)
+- **<ins>stroke</ins>**: stroke (default: "#d91848")
+- **<ins>strokeOpacity</ins>**: stroke-opacity (default: 0.6)
+- **<ins>strokeWidth</ins>**: stroke-width (default: 1.5)
 
 ## Custom Layer
 

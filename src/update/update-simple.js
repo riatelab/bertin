@@ -48,25 +48,8 @@ export function update_simple({
   datalayer[attr] = value;
   svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
 
-  // REPRENDRE ICI !!!!!!!!!!!!!!!
-
-  // VISIBLE
-  if (attr == "visibility") {
-    console.log(id);
-    let val = value ? 1 : 0;
-    svg
-      .selectAll(`g.${id}`, `g.legbox_${id}`, `g.legboxfill_${id}`)
-      .transition()
-      .delay(delay)
-      .duration(duration)
-      .style("opacity", val)
-      .attr("opacity", val);
-  }
-
-  // FINIR ICI ET REPRODUIRE SUR LES AUTRES
-
   // FILL OR STROKE
-  else if (attr == "fill" || attr == "stroke") {
+  if (attr == "fill" || attr == "stroke") {
     svg.selectAll(`g.legbox_${id}`).remove();
 
     switch (typeof value) {

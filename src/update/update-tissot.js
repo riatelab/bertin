@@ -1,3 +1,4 @@
+import { getattr } from "../helpers/getattr.js";
 import { tissot as ts } from "../helpers/tissot.js";
 import { geoPath } from "d3-geo";
 
@@ -11,12 +12,6 @@ export function update_tissot({
   delay = 0,
 } = {}) {
   let node = svg.select(`g.${id}`);
-  node
-    .transition()
-    .delay(delay)
-    .duration(duration)
-    .attr(attr, value)
-    .style(attr, value);
 
   if (attr == "step") {
     node
@@ -26,5 +21,12 @@ export function update_tissot({
       .delay(delay)
       .duration(duration)
       .attr("d", geoPath(projection));
+  } else {
+    node
+      .transition()
+      .delay(delay)
+      .duration(duration)
+      .attr(getattr(attr), value)
+      .style(getattr(attr), value);
   }
 }
