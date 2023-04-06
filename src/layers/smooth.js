@@ -24,7 +24,6 @@ export function smooth(
   height
 ) {
   // Variables
-  let display = options.display == false ? false : true;
   let clip = options.clip != undefined ? options.clip : undefined;
   let reverse = options.reverse == undefined ? false : options.reverse;
   let fill = options.fill ? options.fill : "RdYlGn";
@@ -51,60 +50,50 @@ export function smooth(
   let nbdots = 1000;
 
   let id = Date.now().toString(36) + Math.random().toString(36).substring(2);
-  if (display) {
-    let data;
 
-    if (figuration(options.geojson) == "z") {
-      if (options.clip) {
-        // test
+  let data;
 
-        selection
-          .append("clipPath")
-          .attr("id", `clip_${id}`)
-          .append("path")
-          .datum(options.geojson)
-          .attr("d", d3.geoPath(projection));
-      }
+  if (figuration(options.geojson) == "z") {
+    if (options.clip) {
+      // test
 
-      if (options.grid_step != undefined || options.grid_blur != undefined) {
-        let grid_step = options.grid_step != undefined ? options.grid_step : 20;
-        let grid_blur = options.grid_blur != undefined ? options.grid_blur : 0;
-        let grid_geoprocessing =
-          options.grid_geoprocessing != undefined
-            ? options.grid_geoprocessing
-            : "intersection";
-        let grid_operator =
-          options.grid_operator != undefined ? options.grid_operator : "sum";
-
-        let mygrid = grid({
-          geojson: options.geojson,
-          projection: projection,
-          width: width,
-          height: height,
-          step: grid_step,
-          blur: grid_blur,
-          operator: grid_operator,
-          geoprocessing: grid_geoprocessing,
-          values: options.values,
-        });
-        data = decompose({
-          geojson: mygrid,
-          values: "value",
-          nb: nbdots,
-          projection: d3.geoIdentity(),
-        });
-      } else {
-        options.geojson = centroid(options.geojson);
-        data = decompose({
-          geojson: options.geojson,
-          values: options.values,
-          nb: nbdots,
-          projection: projection,
-        });
-      }
+      selection
+        .append("clipPath")
+        .attr("id", `clip_${id}`)
+        .append("path")
+        .datum(options.geojson)
+        .attr("d", d3.geoPath(projection));
     }
 
-    if (figuration(options.geojson) == "p") {
+    if (options.grid_step != undefined || options.grid_blur != undefined) {
+      let grid_step = options.grid_step != undefined ? options.grid_step : 20;
+      let grid_blur = options.grid_blur != undefined ? options.grid_blur : 0;
+      let grid_geoprocessing =
+        options.grid_geoprocessing != undefined
+          ? options.grid_geoprocessing
+          : "intersection";
+      let grid_operator =
+        options.grid_operator != undefined ? options.grid_operator : "sum";
+
+      let mygrid = grid({
+        geojson: options.geojson,
+        projection: projection,
+        width: width,
+        height: height,
+        step: grid_step,
+        blur: grid_blur,
+        operator: grid_operator,
+        geoprocessing: grid_geoprocessing,
+        values: options.values,
+      });
+      data = decompose({
+        geojson: mygrid,
+        values: "value",
+        nb: nbdots,
+        projection: d3.geoIdentity(),
+      });
+    } else {
+      options.geojson = centroid(options.geojson);
       data = decompose({
         geojson: options.geojson,
         values: options.values,
@@ -112,95 +101,101 @@ export function smooth(
         projection: projection,
       });
     }
-
-    let contour = d3
-      .contourDensity()
-      .x((d) => d[0])
-      .y((d) => d[1])
-      .size([width, height])
-      .bandwidth(bandwidth)
-      .thresholds(thresholds)
-      .cellSize(cellsize);
-
-    let contours = contour(data);
-
-    let pal = new Map([
-      ["Blues", d3.interpolateBlues],
-      ["Greens", d3.interpolateGreens],
-      ["Greys", d3.interpolateGreys],
-      ["Oranges", d3.interpolateOranges],
-      ["Purples", d3.interpolatePurples],
-      ["Reds", d3.interpolateReds],
-      ["BrBG", d3.interpolateBrBG],
-      ["PRGn", d3.interpolatePRGn],
-      ["PiYG", d3.interpolatePiYG],
-      ["PuOr", d3.interpolatePuOr],
-      ["RdBu", d3.interpolateRdBu],
-      ["RdYlBu", d3.interpolateRdYlBu],
-      ["RdYlGn", d3.interpolateRdYlGn],
-      ["Spectral", d3.interpolateSpectral],
-      ["Turbo", d3.interpolateTurbo],
-      ["Viridis", d3.interpolateViridis],
-      ["Inferno", d3.interpolateInferno],
-      ["Magma", d3.interpolateMagma],
-      ["Plasma", d3.interpolatePlasma],
-      ["Cividis", d3.interpolateCividis],
-      ["Warm", d3.interpolateWarm],
-      ["Cool", d3.interpolateCool],
-      ["CubehelixDefault", d3.interpolateCubehelixDefault],
-      ["BuGn", d3.interpolateBuGn],
-      ["BuPu", d3.interpolateBuPu],
-      ["GnBu", d3.interpolateGnBu],
-      ["OrRd", d3.interpolateOrRd],
-      ["PuBuGn", d3.interpolatePuBuGn],
-      ["PuBu", d3.interpolatePuBu],
-      ["PuRd", d3.interpolatePuRd],
-      ["RdPu", d3.interpolateRdPu],
-      ["YlGnBu", d3.interpolateYlGnBu],
-      ["YlGn", d3.interpolateYlGn],
-      ["YlOrBr", d3.interpolateYlOrBr],
-      ["YlOrRd", d3.interpolateYlOrRd],
-      ["Rainbow", d3.interpolateRainbow],
-      ["Sinebow", d3.interpolateSinebow],
-    ]);
-
-    let color;
-
-    if (reverse) {
-      color = d3.scaleSequentialQuantile(
-        [...contours.map((d) => d.value)],
-        (t) => pal.get(fill)(Math.pow(0.01 + t, 1 / colorcurve))
-      );
-    } else {
-      color = d3.scaleSequentialQuantile(
-        [...contours.map((d) => d.value)],
-        (t) => pal.get(fill)(1 - Math.pow(0.01 + t, 1 / colorcurve))
-      );
-    }
-
-    contours.splice(0, remove);
-
-    // Smooth
-
-    selection
-      .append("g")
-      .attr(
-        "clip-path",
-        options.clip == undefined ? `none` : `url(#clip_${id})`
-      )
-      .selectAll("path")
-      .data(contours)
-      .join("path")
-      .attr("d", d3.geoPath())
-      .attr("fill", (d) => color(d.value))
-      .attr("stroke", stroke)
-      .attr("stroke-width", strokeWidth)
-      .attr("fill-opacity", fillOpacity)
-      .attr("stroke-opacity", strokeOpacity)
-      .attr("stroke-linecap", strokeLinecap)
-      .attr("stroke-linejoin", strokeLinejoin)
-      .attr("stroke-dasharray", strokeDasharray);
   }
+
+  if (figuration(options.geojson) == "p") {
+    data = decompose({
+      geojson: options.geojson,
+      values: options.values,
+      nb: nbdots,
+      projection: projection,
+    });
+  }
+
+  let contour = d3
+    .contourDensity()
+    .x((d) => d[0])
+    .y((d) => d[1])
+    .size([width, height])
+    .bandwidth(bandwidth)
+    .thresholds(thresholds)
+    .cellSize(cellsize);
+
+  let contours = contour(data);
+
+  let pal = new Map([
+    ["Blues", d3.interpolateBlues],
+    ["Greens", d3.interpolateGreens],
+    ["Greys", d3.interpolateGreys],
+    ["Oranges", d3.interpolateOranges],
+    ["Purples", d3.interpolatePurples],
+    ["Reds", d3.interpolateReds],
+    ["BrBG", d3.interpolateBrBG],
+    ["PRGn", d3.interpolatePRGn],
+    ["PiYG", d3.interpolatePiYG],
+    ["PuOr", d3.interpolatePuOr],
+    ["RdBu", d3.interpolateRdBu],
+    ["RdYlBu", d3.interpolateRdYlBu],
+    ["RdYlGn", d3.interpolateRdYlGn],
+    ["Spectral", d3.interpolateSpectral],
+    ["Turbo", d3.interpolateTurbo],
+    ["Viridis", d3.interpolateViridis],
+    ["Inferno", d3.interpolateInferno],
+    ["Magma", d3.interpolateMagma],
+    ["Plasma", d3.interpolatePlasma],
+    ["Cividis", d3.interpolateCividis],
+    ["Warm", d3.interpolateWarm],
+    ["Cool", d3.interpolateCool],
+    ["CubehelixDefault", d3.interpolateCubehelixDefault],
+    ["BuGn", d3.interpolateBuGn],
+    ["BuPu", d3.interpolateBuPu],
+    ["GnBu", d3.interpolateGnBu],
+    ["OrRd", d3.interpolateOrRd],
+    ["PuBuGn", d3.interpolatePuBuGn],
+    ["PuBu", d3.interpolatePuBu],
+    ["PuRd", d3.interpolatePuRd],
+    ["RdPu", d3.interpolateRdPu],
+    ["YlGnBu", d3.interpolateYlGnBu],
+    ["YlGn", d3.interpolateYlGn],
+    ["YlOrBr", d3.interpolateYlOrBr],
+    ["YlOrRd", d3.interpolateYlOrRd],
+    ["Rainbow", d3.interpolateRainbow],
+    ["Sinebow", d3.interpolateSinebow],
+  ]);
+
+  let color;
+
+  if (reverse) {
+    color = d3.scaleSequentialQuantile([...contours.map((d) => d.value)], (t) =>
+      pal.get(fill)(Math.pow(0.01 + t, 1 / colorcurve))
+    );
+  } else {
+    color = d3.scaleSequentialQuantile([...contours.map((d) => d.value)], (t) =>
+      pal.get(fill)(1 - Math.pow(0.01 + t, 1 / colorcurve))
+    );
+  }
+
+  contours.splice(0, remove);
+
+  // Smooth
+
+  selection
+    .append("g")
+    .attr("class", options.id)
+    .attr("data-layer", JSON.stringify({ _type: "smooth" }))
+    .attr("clip-path", options.clip == undefined ? `none` : `url(#clip_${id})`)
+    .selectAll("path")
+    .data(contours)
+    .join("path")
+    .attr("d", d3.geoPath())
+    .attr("fill", (d) => color(d.value))
+    .attr("stroke", stroke)
+    .attr("stroke-width", strokeWidth)
+    .attr("fill-opacity", fillOpacity)
+    .attr("stroke-opacity", strokeOpacity)
+    .attr("stroke-linecap", strokeLinecap)
+    .attr("stroke-linejoin", strokeLinejoin)
+    .attr("stroke-dasharray", strokeDasharray);
 }
 
 function decompose(_ = {}) {

@@ -23,6 +23,6 @@ export function regularsquare(
   });
 
   options.values = "value";
-
+  options._type = "regularsquare";
   square(selection, geoIdentity(), true, options, clipid, width, height);
 }

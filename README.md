@@ -1188,7 +1188,7 @@ bertin.draw({
     {
       type: "minimap",
       x: 50,
-      y: 50
+      y: 50,
       width:300,
       frame:{fill: "yellow", stroke: "none"}
     },

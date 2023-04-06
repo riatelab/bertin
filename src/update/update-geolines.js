@@ -1,18 +1,15 @@
 import { getattr } from "../helpers/getattr.js";
-export function update_default({
+export function update_geolines({
   svg,
   id = null,
-  selectall = null,
   attr = null,
   value = null,
   duration = 0,
   delay = 0,
 } = {}) {
-  console.log(selectall);
-  console.log(attr);
   svg
     .select(`g.${id}`)
-    .selectAll(selectall)
+    .selectAll("path")
     .transition()
     .delay(delay)
     .duration(duration)

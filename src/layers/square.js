@@ -126,6 +126,7 @@ export function square(
     .attr(
       "data-layer",
       JSON.stringify({
+        _type: options._type ? options._type : "square",
         valmax,
         k,
         demers,
@@ -151,7 +152,6 @@ export function square(
         leg_title: options.leg_title,
       })
     )
-    .attr("type", "square")
     .selectAll("squares")
     .data(
       data.sort((a, b) =>

@@ -50,7 +50,7 @@ export function graticule(
     selection
       .append("g")
       .attr("class", options.id)
-      .attr("type", "graticule")
+      .attr("data-layer", JSON.stringify({ _type: "graticule" }))
       .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
       .append("path")
       .datum(d3.geoGraticule().step(step).extent(bb2))

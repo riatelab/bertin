@@ -11,6 +11,7 @@ export function minimap({
     width: null,
     height: null,
   },
+  id,
   x = 5,
   y = 5,
   geojson = land,
@@ -74,6 +75,11 @@ export function minimap({
   // selection
   let selection = mainmap.selection;
 
+  let sel = selection
+    .append("g")
+    .attr("class", id)
+    .attr("data-layer", JSON.stringify({ _type: "minimap" }));
+
   // projection
   projection = getproj(projection);
   projection = projection.fitWidth(width, extent ? extent : outline);
@@ -83,7 +89,7 @@ export function minimap({
   let bb = "";
   if (extent != null) {
     bb = path.bounds(extent);
-    selection
+    sel
       .append("clipPath")
       .attr("id", `extent_${clipid}`)
       .append("rect")
@@ -96,7 +102,7 @@ export function minimap({
   // Outline (fill)
 
   if (extent == null) {
-    selection
+    sel
       .append("g")
       .append("path")
       .attr("d", path(outline))
@@ -105,7 +111,7 @@ export function minimap({
       .attr("stroke", "none")
       .attr("transform", `translate(${x} ${y})`);
   } else {
-    selection
+    sel
       .append("g")
       .append("rect")
       .attr("x", 0)
@@ -119,7 +125,7 @@ export function minimap({
   }
 
   // world
-  selection
+  sel
     .append("g")
     .append("path")
     .datum(geojson)
@@ -135,7 +141,7 @@ export function minimap({
   // Outline (stroke)
 
   if (extent == null) {
-    selection
+    sel
       .append("g")
       .append("path")
       .attr("d", path(outline))
@@ -145,7 +151,7 @@ export function minimap({
       .attr("stroke-opacity", background.strokeOpacity)
       .attr("transform", `translate(${x} ${y})`);
   } else {
-    selection
+    sel
       .append("g")
       .append("rect")
       .attr("x", 0)
@@ -186,7 +192,7 @@ export function minimap({
   };
 
   if (d3.geoArea(rect) > threshold) {
-    selection
+    sel
       .append("g")
       .append("path")
       .datum(rect)
@@ -200,14 +206,14 @@ export function minimap({
 
     // clip
 
-    selection
+    sel
       .append("clipPath")
       .attr("id", `clipminimap_${clipid}`)
       .append("path")
       .datum(rect)
       .attr("d", d3.geoPath(projection));
 
-    selection
+    sel
       .append("g")
       .append("path")
       .attr("clip-path", `url(#clipminimap_${clipid})`)
@@ -225,7 +231,7 @@ export function minimap({
       mainmap.height / 2,
     ]);
 
-    selection
+    sel
       .append("circle")
       .attr("cx", projection(center)[0])
       .attr("cy", projection(center)[1])

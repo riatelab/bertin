@@ -23,6 +23,6 @@ export function regularbubble(
   });
 
   options.values = "value";
-
+  options._type = "regularbubble";
   bubble(selection, geoIdentity(), true, options, clipid, width, height);
 }

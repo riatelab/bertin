@@ -1,4 +1,4 @@
-import { update_default } from "./update-default.js";
+import { update_geolines } from "./update-geolines.js";
 import { update_tissot } from "./update-tissot.js";
 import { update_rhumbs } from "./update-rhumbs.js";
 import { update_bubble } from "./update-bubble.js";
@@ -15,7 +15,6 @@ export function update_main({
   height,
   id = null,
   attr = null,
-  selectall = null,
   value = null,
   legend = null,
   duration = 0,
@@ -27,7 +26,7 @@ export function update_main({
     let val = value ? 1 : 0;
     svg
       .selectAll(
-        `g.${id}, g.legbox_${id}, g.legboxfill_${id}, g.legboxstroke_${id}, g.legthickness_${id}, g.legcircle_${id}, g.legsquare_${id}, g.legspike_${id}`
+        `g.${id}, g.legbox_${id}, g.legboxfill_${id}, g.legboxstroke_${id}, g.legthickness_${id}, g.legcircle_${id}, g.legsquare_${id}, g.legspike_${id}, g.legmushroom_${id}, info_${id},  g.legdotcartogram_${id}`
       )
       .transition()
       .delay(delay)
@@ -35,7 +34,7 @@ export function update_main({
       .style("opacity", val)
       .attr("opacity", val);
   } else {
-    let type = svg.select(`g.${id}`).attr("type");
+    let type = JSON.parse(svg.select(`g.${id}"}`).attr("data-layer"))._type;
 
     switch (type) {
       case "tissot":
@@ -108,42 +107,24 @@ export function update_main({
 
       case "header":
         console.log("update header");
-        update_header({
-          svg,
-          id,
-          attr,
-          value,
-          duration,
-          delay,
-        });
+        update_header({ svg, id, attr, value, duration, delay });
         break;
       case "footer":
         console.log("update footer");
-        update_footer({
-          svg,
-          id,
-          attr,
-          value,
-          duration,
-          delay,
-        });
+        update_footer({ svg, id, attr, value, duration, delay });
         break;
       case "graticule":
       case "geolines":
         console.log("update default");
-        update_default({
+        update_geolines({
           svg,
           id,
-          selectall: "path",
           attr,
           value,
           duration,
           delay,
         });
         break;
-      default:
-        console.log("update default");
-        update_default({ svg, id, selectall, attr, value, duration, delay });
     }
   }
 }

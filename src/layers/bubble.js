@@ -116,6 +116,7 @@ export function bubble(
     .attr(
       "data-layer",
       JSON.stringify({
+        _type: options._type ? options._type : "bubble",
         valmax,
         k,
         dorling,
@@ -140,7 +141,6 @@ export function bubble(
         leg_title: options.leg_title,
       })
     )
-    .attr("type", "bubble")
     .selectAll("circle")
     .data(
       features

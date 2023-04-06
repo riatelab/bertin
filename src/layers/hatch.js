@@ -25,8 +25,6 @@ export function hatch(selection, options = {}, width, height) {
     .attr("height", spacing)
     .attr("patternTransform", `rotate(${angle})`);
 
-  console.log(unique);
-
   pattern
     .append("line")
     .attr("x1", 0)
@@ -43,7 +41,7 @@ export function hatch(selection, options = {}, width, height) {
   selection
     .append("g")
     .attr("class", options.id)
-    .attr("type", "hatch")
+    .attr("data-layer", JSON.stringify({ _type: "hatch" }))
     .append("rect")
     .attr("x", 0)
     .attr("y", 0)

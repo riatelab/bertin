@@ -131,8 +131,16 @@ export function simple(
     selection
       .append("g")
       .attr("class", options.id)
-      .attr("data-layer", JSON.stringify({ fill, stroke, strokeWidth, leg }))
-      .attr("type", "simple")
+      .attr(
+        "data-layer",
+        JSON.stringify({
+          _type: options._type ? options._type : "simple",
+          fill,
+          stroke,
+          strokeWidth,
+          leg,
+        })
+      )
       .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
       .selectAll("path")
       .data(geojson.features)
@@ -259,9 +267,16 @@ export function simple(
       .attr("class", options.id)
       .attr(
         "data-layer",
-        JSON.stringify({ fill, stroke, strokeWidth, leg, symbol, symbol_size })
+        JSON.stringify({
+          _type: options._type ? options._type : "simple",
+          fill,
+          stroke,
+          strokeWidth,
+          leg,
+          symbol,
+          symbol_size,
+        })
       )
-      .attr("type", "simple")
       .selectAll("path")
       .data(geojson.features)
       .join("path")

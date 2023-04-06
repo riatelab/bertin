@@ -16,8 +16,8 @@ export function tissot(selection, projection, planar, options = {}, clipid) {
     // Display layer
     selection
       .append("g")
-      .attr("type", "tissot")
       .attr("class", options.id)
+      .attr("data-layer", JSON.stringify({ _type: "tissot" }))
       .style("fill", fill)
       .style("fill-opacity", fillOpacity)
       .style("stroke", stroke)

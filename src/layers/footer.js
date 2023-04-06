@@ -31,7 +31,7 @@ export function addfooter(selection, width, height, options = {}) {
   let footer = selection
     .append("g")
     .attr("class", options.id)
-    .attr("type", "footer");
+    .attr("data-layer", JSON.stringify({ _type: "footer" }));
 
   footer
     .append("rect")

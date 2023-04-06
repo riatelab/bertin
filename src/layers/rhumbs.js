@@ -23,7 +23,7 @@ export function rhumbs(selection, width, height, clipid, options = {}) {
   selection
     .append("g")
     .attr("class", options.id)
-    .attr("type", "rhumbs")
+    .attr("data-layer", JSON.stringify({ _type: "rhumbs" }))
     .attr("fill", "none")
     .attr("visibility", visibility)
     .attr("stroke", stroke)

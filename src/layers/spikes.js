@@ -101,9 +101,17 @@ export function spikes(
     .attr("class", options.id)
     .attr(
       "data-layer",
-      JSON.stringify({ fill, stroke, strokeWidth, values, k, w, leg })
+      JSON.stringify({
+        _type: "spikes",
+        fill,
+        stroke,
+        strokeWidth,
+        values,
+        k,
+        w,
+        leg,
+      })
     )
-    .attr("type", "spike")
     .selectAll("path")
     .data(
       features

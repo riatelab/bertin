@@ -30,7 +30,7 @@ export function addheader(selection, width, options = {}) {
   let header = selection
     .append("g")
     .attr("class", options.id)
-    .attr("type", "header");
+    .attr("data-layer", JSON.stringify({ _type: "header" }));
 
   header
     .append("rect")

@@ -35,5 +35,7 @@ export function regulargrid(
     options.fill.type = "choro";
   }
 
+  options._type = "regulargrid";
+
   simple(selection, geoIdentity(), options, clipid, width, height);
 }

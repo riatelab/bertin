@@ -89,6 +89,8 @@ export function ridge(
 
   let g = selection
     .append("g")
+    .attr("class", options.id)
+    .attr("data-layer", JSON.stringify({ _type: "ridge" }))
     .attr("fill", fill)
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
