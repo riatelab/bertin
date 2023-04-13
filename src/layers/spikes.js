@@ -96,6 +96,14 @@ export function spikes(
     k,
   };
 
+  // info
+  let infoid = options.id
+    ? `info_${options.id}`
+    : `info_${
+        Date.now().toString(36) + Math.random().toString(36).substring(2)
+      }`;
+  selection.append("g").attr("id", infoid).attr("class", "info");
+
   selection
     .append("g")
     .attr("class", options.id)
@@ -163,7 +171,7 @@ export function spikes(
         });
       }
       if (tooltip) {
-        selection.select("#info").call(
+        selection.select(`#${infoid}`).call(
           addtooltip,
 
           {
@@ -198,7 +206,7 @@ export function spikes(
       }
       if (tooltip) {
         selection
-          .select("#info")
+          .select(`#${infoid}`)
           .attr("transform", `translate(${d3.pointer(event, this)})`);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity - 0.3)
@@ -211,7 +219,7 @@ export function spikes(
         viewdata = {};
         selection.dispatch("input");
       }
-      selection.select("#info").call(addtooltip, null);
+      selection.select(`#${infoid}`).call(addtooltip, null);
       d3.select(this)
         .attr("stroke-opacity", strokeOpacity)
         .attr("fill-opacity", fillOpacity)

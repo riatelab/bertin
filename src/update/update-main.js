@@ -20,19 +20,33 @@ export function update_main({
   duration = 0,
   delay = 0,
 } = {}) {
-  //attr = getattr(attr);
-
   if (attr == "visibility") {
     let val = value ? 1 : 0;
-    svg
-      .selectAll(
-        `g.${id}, g.legbox_${id}, g.legboxfill_${id}, g.legboxstroke_${id}, g.legthickness_${id}, g.legcircle_${id}, g.legsquare_${id}, g.legspike_${id}, g.legmushroom_${id}, info_${id},  g.legdotcartogram_${id}`
-      )
-      .transition()
-      .delay(delay)
-      .duration(duration)
-      .style("opacity", val)
-      .attr("opacity", val);
+
+    if (val) {
+      svg
+        .selectAll(
+          `g.${id}, #info_${id}, g.legbox_${id}, g.legboxfill_${id}, g.legboxstroke_${id}, g.legthickness_${id}, g.legcircle_${id}, g.legsquare_${id}, g.legspike_${id}, g.legmushroom_${id}, info_${id},  g.legdotcartogram_${id}`
+        )
+        .attr("visibility", "visible")
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .style("opacity", 1)
+        .attr("opacity", 1);
+    } else {
+      svg
+        .selectAll(
+          `g.${id}, #info_${id}, g.legbox_${id}, g.legboxfill_${id}, g.legboxstroke_${id}, g.legthickness_${id}, g.legcircle_${id}, g.legsquare_${id}, g.legspike_${id}, g.legmushroom_${id}, info_${id},  g.legdotcartogram_${id}`
+        )
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .style("opacity", 0)
+        .attr("opacity", 0)
+        .transition()
+        .attr("visibility", "hidden");
+    }
   } else {
     let type = JSON.parse(svg.select(`g.${id}"}`).attr("data-layer"))._type;
 

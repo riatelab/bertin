@@ -126,6 +126,14 @@ export function simple(
     strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
   }
 
+  // tooltip
+  let infoid = options.id
+    ? `info_${options.id}`
+    : `info_${
+        Date.now().toString(36) + Math.random().toString(36).substring(2)
+      }`;
+  selection.append("g").attr("id", infoid).attr("class", "info");
+
   // If lines or polygons
   if (figuration(geojson) == "l" || figuration(geojson) == "z") {
     selection
@@ -176,7 +184,7 @@ export function simple(
         }
 
         if (tooltip) {
-          selection.select("#info").call(addtooltip, {
+          selection.select(`#${infoid}`).call(addtooltip, {
             fields: (function () {
               const fields = tooltip.fields;
               let result = [];
@@ -207,7 +215,7 @@ export function simple(
         }
         if (tooltip) {
           selection
-            .select("#info")
+            .select(`#${infoid}`)
             .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
@@ -220,7 +228,7 @@ export function simple(
           viewdata = {};
           selection.dispatch("input");
         }
-        selection.select("#info").call(addtooltip, null);
+        selection.select(`#${infoid}`).call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity)
@@ -261,6 +269,13 @@ export function simple(
       ["triangle", d3.symbolTriangle],
       ["wye", d3.symbolWye],
     ]);
+
+    // info
+    selection
+      .append("g")
+      .attr("id", "info")
+      .attr("class", "info")
+      .attr("class", options.id);
 
     selection
       .append("g")
@@ -316,7 +331,7 @@ export function simple(
           });
         }
         if (tooltip) {
-          selection.select("#info").call(
+          selection.select(`#${infoid}`).call(
             addtooltip,
 
             {
@@ -354,7 +369,7 @@ export function simple(
           );
         }
         if (tooltip) {
-          selection.select("#info").attr(
+          selection.select(`#${infoid}`).attr(
             "transform",
             `translate(
          ${symbol_shift ? d.x : projection(d.geometry.coordinates)[0]},
@@ -371,7 +386,7 @@ export function simple(
           viewdata = {};
           selection.dispatch("input");
         }
-        selection.select("#info").call(addtooltip, null);
+        selection.select(`#${infoid}`).call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity);
