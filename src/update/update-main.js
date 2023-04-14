@@ -8,6 +8,7 @@ import { update_spikes } from "./update-spikes.js";
 import { update_header } from "./update-header.js";
 import { update_footer } from "./update-footer.js";
 import { update_shadow } from "./update-shadow.js";
+import { update_ridge } from "./update-ridge.js";
 
 export function update_main({
   svg,
@@ -128,6 +129,18 @@ export function update_main({
           value,
           duration,
           delay,
+        });
+        break;
+      case "ridge":
+        console.log("update ridge");
+        update_ridge({
+          svg,
+          id,
+          attr,
+          value,
+          duration,
+          delay,
+          width,
         });
         break;
 

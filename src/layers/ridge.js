@@ -57,6 +57,11 @@ export function ridge(
     }))
     .sort((a, b) => d3.ascending(a.y, b.y) || d3.ascending(a.x, b.x));
 
+  let clip =
+    "ridge" + Date.now().toString(36) + Math.random().toString(36).substring(2);
+
+  let dd = JSON.stringify({ _type: "ridge", mygrid, clip, strokeWidth });
+
   let ycoords = Array.from(new Set(mygrid.map((d) => d.y)));
 
   let scale = d3
@@ -84,13 +89,10 @@ export function ridge(
     });
   });
 
-  let clip =
-    "ridge" + Date.now().toString(36) + Math.random().toString(36).substring(2);
-
   let g = selection
     .append("g")
     .attr("class", options.id)
-    .attr("data-layer", JSON.stringify({ _type: "ridge" }))
+    .attr("data-layer", dd)
     .attr("fill", fill)
     .attr("stroke", stroke)
     .attr("stroke-width", strokeWidth)
