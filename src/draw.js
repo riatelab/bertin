@@ -1064,18 +1064,11 @@ export function draw({ params = {}, layers = {} } = {}) {
     });
   }
 
-  // Tootltip
-  //svg.append("g").attr("id", "info").attr("class", "info");
-
   // Raise tooltip
   svg.selectAll(".info").raise();
 
   // Raise legends
   svg.selectAll(".bertinlegend").raise();
-
-  // Update
-
-  //svg.node().update = update;
 
   // Viewof coordinates
 
@@ -1109,7 +1102,6 @@ export function draw({ params = {}, layers = {} } = {}) {
   // Update function
   svg.node().update = function update({
     id = null,
-    selectall = null,
     attr = null,
     value = null,
     legend = null,

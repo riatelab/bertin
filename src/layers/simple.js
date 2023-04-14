@@ -117,6 +117,14 @@ export function simple(
   // viewof data
   let viewdata = {};
 
+  // tooltip
+  let infoid = options.id
+    ? `info_${options.id}`
+    : `info_${
+        Date.now().toString(36) + Math.random().toString(36).substring(2)
+      }`;
+  selection.append("g").attr("id", infoid).attr("class", "info");
+
   // If lines
   if (figuration(geojson) == "l") {
     stroke = options.stroke
@@ -125,14 +133,6 @@ export function simple(
     fill = options.fill ? options.fill : "none";
     strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
   }
-
-  // tooltip
-  let infoid = options.id
-    ? `info_${options.id}`
-    : `info_${
-        Date.now().toString(36) + Math.random().toString(36).substring(2)
-      }`;
-  selection.append("g").attr("id", infoid).attr("class", "info");
 
   // If lines or polygons
   if (figuration(geojson) == "l" || figuration(geojson) == "z") {
@@ -269,13 +269,6 @@ export function simple(
       ["triangle", d3.symbolTriangle],
       ["wye", d3.symbolWye],
     ]);
-
-    // info
-    selection
-      .append("g")
-      .attr("id", "info")
-      .attr("class", "info")
-      .attr("class", options.id);
 
     selection
       .append("g")

@@ -94,6 +94,14 @@ export function mushroom(
     const r_bottom = radius(features[i].properties[bottom_values]);
     const r_max = Math.max(r_top, r_bottom);
 
+    // info
+    let infoid = options.id
+      ? `info_${options.id}`
+      : `info_${
+          Date.now().toString(36) + Math.random().toString(36).substring(2)
+        }`;
+    selection.append("g").attr("id", infoid).attr("class", "info");
+
     let sel = selection
       .append("g")
       .attr("class", options.id)
@@ -123,7 +131,7 @@ export function mushroom(
         }
         if (top_tooltip) {
           let d = features[i];
-          selection.select("#info").call(
+          selection.select(`#${infoid}`).call(
             addtooltip,
 
             {
@@ -158,7 +166,7 @@ export function mushroom(
         }
         if (top_tooltip) {
           selection
-            .select("#info")
+            .select(`#${infoid}`)
             .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
@@ -171,7 +179,7 @@ export function mushroom(
           viewdata = {};
           selection.dispatch("input");
         }
-        selection.select("#info").call(addtooltip, null);
+        selection.select(`#${infoid}`).call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity);
@@ -211,7 +219,7 @@ export function mushroom(
         }
         if (bottom_tooltip) {
           let d = features[i];
-          selection.select("#info").call(
+          selection.select(`#${infoid}`).call(
             addtooltip,
 
             {
@@ -246,7 +254,7 @@ export function mushroom(
         }
         if (bottom_tooltip) {
           selection
-            .select("#info")
+            .select(`#${infoid}`)
             .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
@@ -259,7 +267,7 @@ export function mushroom(
           viewdata = {};
           selection.dispatch("input");
         }
-        selection.select("#info").call(addtooltip, null);
+        selection.select(`#${infoid}`).call(addtooltip, null);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity);

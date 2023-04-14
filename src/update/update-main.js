@@ -48,7 +48,7 @@ export function update_main({
         .attr("visibility", "hidden");
     }
   } else {
-    let type = JSON.parse(svg.select(`g.${id}"}`).attr("data-layer"))._type;
+    let type = JSON.parse(svg.select(`g.${id}`).attr("data-layer"))._type;
 
     switch (type) {
       case "tissot":
@@ -89,7 +89,7 @@ export function update_main({
           delay,
         });
         break;
-      case "spike":
+      case "spikes":
         console.log("update spike");
         update_spikes({
           svg,

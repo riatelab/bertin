@@ -21,10 +21,14 @@ _The project is under **active development**. Some of features and options are s
 - [Map components](#map-components)
 - [Custom Layer](#custom-layer)
 - [Geojson properties selections](#geojson-properties-selections)
-- [Other fubrowsernctions](#other-functions)
+- [Other functions](#other-functions)
+- [Update function](#update-function)
 - [Bonus: a cheat sheet](#bonus-a-cheat-sheet)
 
 `bertin` is an easy to use JavaScript library mainly based on [D3.js](https://github.com/d3/d3) makes creating thematic maps simple. The principle is to work with layers stacked on top of one other. Much like in Geographic Information Software (GIS) software, Bertin.js displays layers with a specific hierarchy. The layer at bottom are rendered and then followed by the layer right above it. Some of the layers are used to display various components of a map, some of common layers are: header, footer, graticule, outline, choro, typo, prop, shadow, scalebar, text etc.
+
+- The [**`draw()`**](#drawing-a-map) function is the most important function of the library. It allows you to draw all types of maps.
+- The [**`update()`**](#update-function) function allows you to modify specific elements of the map without the need to redraw everything. Only the parameters <ins>underlined</ins> in the documentation can be modified through this function.
 
 ## Who is Bertin?
 
@@ -44,7 +48,7 @@ Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.6.4"
+  src="https://cdn.jsdelivr.net/npm/bertin@1.7"
   charset="utf-8"
 ></script>
 ```
@@ -60,7 +64,7 @@ bertin = require("bertin@1");
 Latest version
 
 ```js
-bertin = require("bertin@1.6.4");
+bertin = require("bertin@1.7");
 ```
 
 #### In Quarto
@@ -73,7 +77,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.6.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.7"></script>
 
 <script>
   let geojson =
@@ -143,7 +147,6 @@ The _layer_ type allows to display a simple geojson layer (points, lines or poly
 
 ![](./img/simple.png)
 
-
 #### Code
 
 ```js
@@ -162,19 +165,18 @@ bertin.draw({
 
 - **geojson**: a geojson (**compulsory**)
 - **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
-- **fill**: fill color (default: a random color)
-- **stroke**: stroke color (default: "white")
-- **strokeWidth** stroke width (default:0.5)
-- **strokeLinecap**: stroke-linecap (default:"round")
-- **strokeLinejoin**: stroke-linejoin (default:"round")
-- **strokeDasharray**: stroke-dasharray (default:"none")
-- **fillOpacity**: fill opacity (default:1)
-- **strokeOpacity**: stroke opacity (default:1)
-- **symbol**: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
-- **symbol_size**: if it is a dot layer, a number indicating the size of the symbol (default: 5)
+- **<ins>fill</ins>**: fill color (default: a random color)
+- **<ins>stroke</ins>**: stroke color (default: "white")
+- **<ins>strokeWidth</ins>** stroke width (default:0.5)
+- **<ins>strokeLinecap</ins>**: stroke-linecap (default:"round")
+- **<ins>strokeLinejoin</ins>**: stroke-linejoin (default:"round")
+- **<ins>strokeDasharray</ins>**: stroke-dasharray (default:"none")
+- **<ins>fillOpacity</ins>**: fill opacity (default:1)
+- **<ins>strokeOpacity</ins>**: stroke opacity (default:1)
+- **<ins>symbol</ins>**: if it is a dot layer, the type of symbol. "circle", "cross", "diamond", "square", "star", "triangle", "wye" (default: "circle")
+- **<ins>symbol_size</ins>**: if it is a dot layer, a number indicating the size of the symbol (default: 5)
 - **symbol_shift**: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
 - **symbol_iteration**: Number of iteration to shift symbols (default: 200)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 - **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
@@ -224,33 +226,33 @@ bertin.draw({
 
 #### Parameters
 
-- **values**: a string corresponding to the targeted variable in the properties (**compulsory**)
-- **nbreaks**: Number of classes (default:5)
-- **breaks**: Class breaks (default:null)
-- **colors**: An array of colors or a palette of colors (Blues", "Greens", "Greys", "Oranges", "Purples", "Reds", "BrBG", "PRGn", "PiYG", "PuOr", "RdBu", "RdYlBu", "RdYlGn", "Spectral","Turbo","Viridis","Inferno", "Magma", "Plasma", "Cividis", "Warm", "Cool", "CubehelixDefault", "BuGn", "BuPu", "GnBu", "OrRd", "PuBuGn", "PuBu", "PuRd", "RdPu", "YlGnBu", "YlGn", "YlOrBr", "YlOrRd", "Rainbow", "Sinebow". default: Blues) [See](https://observablehq.com/@d3/color-schemes)
-- **method**: A method of classification. Jenks, q6, quantiles, geometric, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
-- **middle**: for msd method only. middle class or not (default:false);
-- **k**: for msd method only. number of sd. (default:1);
-- **col_missing**: Color for missing values (default "#f5f5f5")
-- **txt_missing**: Text for missing values (default "No data")
-- **stroke**: stroke color (default: "white")
-- **strokeWidth**: Stroke width (default: 0.5)
-- **fillOpacity**: Fill opacity (default: 1)
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties (**compulsory**)
+- **<ins>nbreaks</ins>**: Number of classes (default:5)
+- **<ins>breaks</ins>**: Class breaks (default:null)
+- **<ins>colors</ins>**: An array of colors or a palette of colors (Blues", "Greens", "Greys", "Oranges", "Purples", "Reds", "BrBG", "PRGn", "PiYG", "PuOr", "RdBu", "RdYlBu", "RdYlGn", "Spectral","Turbo","Viridis","Inferno", "Magma", "Plasma", "Cividis", "Warm", "Cool", "CubehelixDefault", "BuGn", "BuPu", "GnBu", "OrRd", "PuBuGn", "PuBu", "PuRd", "RdPu", "YlGnBu", "YlGn", "YlOrBr", "YlOrRd", "Rainbow", "Sinebow". default: Blues) [See](https://observablehq.com/@d3/color-schemes)
+- **<ins>method</ins>**: A method of classification. Jenks, q6, quantiles, geometric, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
+- **<ins>middle</ins>**: for msd method only. middle class or not (default:false);
+- **<ins>k</ins>**: for msd method only. number of sd. (default:1);
+- **<ins>col_missing</ins>**: Color for missing values (default "#f5f5f5")
+- **<ins>txt_missing</ins>**: Text for missing values (default "No data")
+- **<ins>stroke</ins>**: stroke color (default: "white")
+- **<ins>strokeWidth</ins>**: Stroke width (default: 0.5)
+- **<ins>fillOpacity</ins>**: Fill opacity (default: 1)
 
 Parameters of the legend
 
-- **leg_x**: position in x (if this value is not filled, the legend is not displayed)
-- **leg_y**: position in y (if this value is not filled, the legend is not displayed)
-- **leg_w**: width of the box (default: 30)
-- **leg_h**: height of the box (default:20)
-- **leg_text**: text of the box (default: "leg_text")
-- **leg_fontSize**: text font size (default: 10)
-- **leg_fill**: color of the box (same as the layer displayed)
-- **leg_stroke**: stroke of the box (default: "black")
-- **leg_strokeWidth**: stroke-width (default: 0.5)
-- **leg_fillOpacity**: stroke opacity (same as the layer displayed)
-- **leg_txtcol**: color of the text (default: "#363636")
-- **leg_round**: Number of digits (default: undefined)
+- **<ins>leg_x</ins>**: position in x (if this value is not filled, the legend is not displayed)
+- **<ins>leg_y</ins>**: position in y (if this value is not filled, the legend is not displayed)
+- **<ins>leg_w</ins>**: width of the box (default: 30)
+- **<ins>leg_h</ins>**: height of the box (default:20)
+- **<ins>leg_text</ins>**: text of the box (default: "leg_text")
+- **<ins>leg_fontSize</ins>**: text font size (default: 10)
+- **<ins>leg_fill</ins>**: color of the box (same as the layer displayed)
+- **<ins>leg_stroke</ins>**: stroke of the box (default: "black")
+- **<ins>leg_strokeWidth</ins>**: stroke-width (default: 0.5)
+- **<ins>leg_fillOpacity</ins>**: stroke opacity (same as the layer displayed)
+- **<ins>leg_txtcol</ins>**: color of the text (default: "#363636")
+- **<ins>leg_round</ins>**: Number of digits (default: undefined)
 
 ### Typology
 
@@ -282,28 +284,28 @@ bertin.draw({
 
 #### Parameters
 
-- **values**: a string corresponding to the targeted variable in the properties (**compulsory**)
-- **colors**: An array containing n colors for n types, or a a palette of categorical colors (default: "Tableau10"). See the handy [color scheme reference](https://observablehq.com/@d3/color-schemes) for full list of palettes.
-- **order**: an array of values to set the order of the colors
-- **col_missing**: Color for missing values (default "#f5f5f5")
-- **txt_missing**: Text for missing values (default "No data")
-- **stroke**: stroke color (default: "white")
-- **strokeWidth**: Stroke width (default: 0.5)
-- **fillOpacity**: Fill opacity (default: 1)
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties (**compulsory**)
+- **<ins>colors</ins>**: An array containing n colors for n types, or a a palette of categorical colors (default: "Tableau10"). See the handy [color scheme reference](https://observablehq.com/@d3/color-schemes) for full list of palettes.
+- **<ins>order</ins>**: an array of values to set the order of the colors
+- **<ins>col_missing</ins>**: Color for missing values (default "#f5f5f5")
+- **<ins>txt_missing</ins>**: Text for missing values (default "No data")
+- **<ins>stroke</ins>**: stroke color (default: "white")
+- **<ins>strokeWidth</ins>**: Stroke width (default: 0.5)
+- **<ins>fillOpacity</ins>**: Fill opacity (default: 1)
 
 Parameters of the legend
 
-- **leg_x**: position in x (if this value is not filled, the legend is not displayed)
-- **leg_y**: position in y (if this value is not filled, the legend is not displayed)
-- **leg_w**: width of the box (default: 30)
-- **leg_h**: height of the box (default:20)
-- **leg_title**: title of the legend (default; null)
-- **leg_fontSize**: title legend font size (default: 14)
-- **leg_fontSize2**: values font size (default: 10)
-- **leg_stroke**: stroke of the box (default: "black")
-- **leg_strokeWidth**: stroke-width (default: 0.5)
-- **leg_fillOpacity**: stroke opacity (same as the layer displayed)
-- **leg_txtcol**: color of the text (default: "#363636")
+- **<ins>leg_x</ins>**: position in x (if this value is not filled, the legend is not displayed)
+- **<ins>leg_y</ins>**: position in y (if this value is not filled, the legend is not displayed)
+- **<ins>leg_w</ins>**: width of the box (default: 30)
+- **<ins>leg_h</ins>**: height of the box (default:20)
+- **<ins>leg_title</ins>**: title of the legend (default; null)
+- **<ins>leg_fontSize</ins>**: title legend font size (default: 14)
+- **<ins>leg_fontSize2</ins>**: values font size (default: 10)
+- **<ins>leg_stroke</ins>**: stroke of the box (default: "black")
+- **<ins>leg_strokeWidth</ins>**: stroke-width (default: 0.5)
+- **<ins>leg_fillOpacity</ins>**: stroke opacity (same as the layer displayed)
+- **<ins>leg_txtcol</ins>**: color of the text (default: "#363636")
 
 ### Bubble
 
@@ -635,7 +637,6 @@ bertin.draw({
 - **fillOpacity**: fill opacity (default: 1)
 - **tooltip** an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **iteration** an integer to define the number of iteration for the Dorling method (default 200)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 - **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
@@ -689,7 +690,6 @@ bertin.draw({
 - **strokeOpacity**: stroke opacity (default: 1)
 - **top_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
 - **bottom_tooltip**: an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 - **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
@@ -744,7 +744,7 @@ bertin.draw({
 - **symbol_size**: if it is a dot layer, a number indicating the size of the symbol (default: 5)
 - **symbol_shift**: if it is a dot layer, use a value > 0 to switch symbols and avoid overlay (default: 0)
 - **symbol_iteration**: Number of iteration to shift symbols (default: 200)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
+
 
 Parameters of the legend
 
@@ -789,15 +789,14 @@ bertin.draw({
 
 - **geojson**: a geojson (**compulsory**)
 - **rewind**: a boolean. If true, the geojson is rewinded for a proper display (default: false)
-- **values**: a string corresponding to the targeted variable in the properties(**compulsory**)
-- **k**: height of the highest peak (default:50)
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties(**compulsory**)
+- **<ins>k</ins>**: height of the highest peak (default:50)
 - **w**: width of the spikes (default:10)
-- **fill**: fill color (default: #a31d88)
-- **stroke**: stroke color (default: #a31d88)
-- **strokeWidth**: stroke width (default: 0.7)
-- **fillOpacity**: fill opacity (default: 0.3)
+- **<ins>fill</ins>**: fill color (default: #a31d88)
+- **<ins>stroke</ins>**: stroke color (default: #a31d88)
+- **<ins>strokeWidth</ins>**: stroke width (default: 0.7)
+- **<ins>fillOpacity</ins>**: fill opacity (default: 0.3)
 - **tooltip** an array of values defining what to display within the tooltip. If you use a $, the value within the geojson is displayed.
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 - **viewof**: Boolean to use this layer as an Observable view. See [explanations](https://observablehq.com/@observablehq/views) (default: false)
 
 Parameters of the legend
@@ -852,12 +851,6 @@ bertin.draw({
 - **geoprocessing**: "intersection" (intersection between polygons and grid squares. Assignment of values in proportion to the intersected area) or "dotinpoly" (considers each grid square and assigns the value of the underlying polygon or the weighted average of intersecting polygons. ). (Default: "dotinpoly")
 - **blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0.4)
 
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
-
-
-
-ue)
-
 ### Smooth
 
 The _smooth_ type (or heatmap or contour) is a way to produce a continuous représentations from quantitative data. The algorithm is complex. The values produced do not really make sense. Explanations with the parameters. [Source](https://github.com/neocarto/bertin/blob/main/src/layers/smooth.js), [Example and methodology](https://observablehq.com/@neocartocnrs/smooth).
@@ -893,7 +886,6 @@ bertin.draw({
 - **strokeDasharray**: stroke-dasharray (default:"none")
 - **fillOpacity**: fill opacity (default:1)
 - **strokeOpacity**: stroke opacity (default:1)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Contour parameters
 
@@ -911,7 +903,6 @@ By default, the smooth layer is calculated from dots or centroids. But it is pos
 - **grid_blur**: radius of the kernel defined in [d3.blur2](https://github.com/d3/d3-array/blob/main/README.md#blur) (default: 0)
 - **grid_operator**: "sum" for absolute quantitative data or "mean" for relative data (default: "sum". highly recommended)
 - **grid_geoprocessing**: "intersection" (intersection between polygons and grid squares. Assignment of values in proportion to the intersected area) or "dotinpoly" (considers each grid square and assigns the value of the underlying polygon or the weighted average of intersecting polygons. ). (Default: "intersection")
-
 
 ### Thickness
 
@@ -956,10 +947,10 @@ bertin.draw({
 
 #### Parameters
 
-- **values**: a string corresponding to the targeted variable in the properties(compulsory)
-- **k**: thicken with the largest line (default:10)
-- **fixmax**: Max value to fix the size of the thickest line, in order to make maps comparable (default:undefined)
-- **fixmin**: Min value to fix the size of the thinest line. If true, the value is the min data. (default:0)
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties(compulsory)
+- **<ins>k</ins>**: thicken with the largest line (default:10)
+- **<ins>fixmax</ins>**: Max value to fix the size of the thickest line, in order to make maps comparable (default:undefined)
+- **<ins>fixmin</ins>**: Min value to fix the size of the thinest line. If true, the value is the min data. (default:0)
 
 #### Code - Discrete variation
 
@@ -978,15 +969,15 @@ bertin.draw({
 ```
 #### Parameters
 
-- **values**: a string corresponding to the targeted variable in the properties(compulsory)
-- **k**: thicken with the largest line (default:10)
-- **nbreaks**: Number of classes (default:5)
-- **breaks**: Class breaks (default:null)
-- **method**: A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles).
-- **middle**: for msd method only. middle class or not (default:false).
-- **sizes**: an array definig the sizes of each classes.
-- **nbsd**: for msd method only. number of sd. (default:1)
-- **sizes**: an array of thicknesses.
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties(compulsory)
+- **<ins>k</ins>**: thicken with the largest line (default:10)
+- **<ins>nbreaks</ins>**: Number of classes (default:5)
+- **<ins>breaks</ins>**: Class breaks (default:null)
+- **<ins>method</ins>**: A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles).
+- **<ins>middle</ins>**: for msd method only. middle class or not (default:false).
+- **<ins>sizes</ins>**: an array definig the sizes of each classes.
+- **<ins>nbsd</ins>**: for msd method only. number of sd. (default:1)
+- **<ins>sizes</ins>**: an array of thicknesses.
 
 #### Code - Categories
 
@@ -1008,26 +999,26 @@ bertin.draw({
 
 #### Parameters
 
-- **values**: a string corresponding to the targeted variable in the properties(compulsory)
-- **k**: thicken with the largest line (default:10)
-- **categories**: an array containing categories
-- **sizes**: an array definig the sizes of each classes.
-- **nbsd**: for msd method only. number of sd. (default:1)
-- **sizes**: an array of thicknesses.
+- **<ins>values</ins>**: a string corresponding to the targeted variable in the properties(compulsory)
+- **<ins>k</ins>**: thicken with the largest line (default:10)
+- **<ins>categories</ins>**: an array containing categories
+- **<ins>sizes</ins>**: an array definig the sizes of each classes.
+- **<ins>nbsd</ins>**: for msd method only. number of sd. (default:1)
+- **<ins>sizes</ins>**: an array of thicknesses.
 
 #### Parameters of the legends
 
-- **leg_x**: position in x (if this value is not filled, the legend is not displayed)
-- **leg_y**: position in y (if this value is not filled, the legend is not displayed)
-- **leg_w**: width of the lines (default: 30)
-- **leg_text**: text of the box (default: "leg_text")
-- **leg_fontSize**: text font size (default: 10)
-- **leg_fill**: color of the box (same as the layer displayed)
-- **leg_stroke**: stroke of the box (default: "black")
-- **leg_strokeWidth**: stroke-width (default: 0.5)
-- **leg_fillOpacity**: stroke opacity (same as the layer displayed)
-- **leg_txtcol**: color of the text (default: "#363636")
-- **leg_round**: Number of digits (default: undefined)
+- **<ins>leg_x</ins>**: position in x (if this value is not filled, the legend is not displayed)
+- **<ins>leg_y</ins>**: position in y (if this value is not filled, the legend is not displayed)
+- **<ins>leg_w</ins>**: width of the lines (default: 30)
+- **<ins>leg_text</ins>**: text of the box (default: "leg_text")
+- **<ins>leg_fontSize</ins>**: text font size (default: 10)
+- **<ins>leg_fill</ins>**: color of the box (same as the layer displayed)
+- **<ins>leg_stroke</ins>**: stroke of the box (default: "black")
+- **<ins>leg_strokeWidth</ins>**: stroke-width (default: 0.5)
+- **<ins>leg_fillOpacity</ins>**: stroke opacity (same as the layer displayed)
+- **<ins>leg_txtcol</ins>**: color of the text (default: "#363636")
+- **<ins>leg_round</ins>**: Number of digits (default: undefined)
 
 ## Map components
 
@@ -1137,6 +1128,7 @@ bertin.draw({
   ],
 });
 ```
+
 #### Parameters
 
 - **stroke**: stroke color (default: "#786d6c")
@@ -1145,7 +1137,6 @@ bertin.draw({
 - **strokeDasharray**: stroke-dasharray (default:"none")
 - **angle**: orientation of lines (default: 45)
 - **spacing**: spacing between lines (default: 8)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Inner
 
@@ -1174,7 +1165,6 @@ bertin.draw({
 - **fill**: fill color (default: "#9e9477")
 - **fillOpacity**: fill-opacity (default: 0.2)
 - **blur**: blur. feGaussianBlur stdDeviation value (default:4)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Minimap (location map)
 
@@ -1277,7 +1267,6 @@ bertin.draw({
 - **strokeDasharray**: stroke-dasharray (default: "none")
 - **strokeLinecap**: stroke-linecap (default: "round")
 - **strokeLinejoin**: stroke-linejoin (default: "round")
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 #### logo
 
@@ -1304,7 +1293,6 @@ bertin.draw({
 - **url**: a string containing an url(default: bertin logo)
 - **position**: an array of two cootdinates [x, y] or predefined positions as "left", "right" or "middle" (default: "left")
 - **size**: width of the logo. (default: 100)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Header
 
@@ -1369,7 +1357,6 @@ bertin.draw({
 - **opacity**: opacity (default: 1)
 - **halo**: boolean to display a halo below the text (default: false)
 - **halo_style**: an array defining the halo style. [color, thickness, opacity]  (default: ["white","4, 0.5)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Missing
 
@@ -1397,7 +1384,6 @@ bertin.draw({
 - **stroke**: stroke color (default: "white")
 - **strokeWidth**: stroke width (default: 0.5)
 - **fillOpacity**: fill opacity (default: 1)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 Parameters of the legend
 
@@ -1438,7 +1424,6 @@ bertin.draw({
 - **opacity**: opacity (default:1)
 - **stroke**: stroke color (default:"none")
 - **strokeWidth**: stroke width (default: 1)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Path
 
@@ -1463,7 +1448,6 @@ bertin.draw({
 
 #### Parameters
 
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 - **d**: string containg svg path
 - **x**: x position (default: 0)
 - **y**: y position (default: 0)
@@ -1500,7 +1484,6 @@ bertin.draw({
 - **x**: position in x (if this value is not filled, the legend is displayed on the left)
 - **y**: position in x (if this value is not filled, the legend is displayed at the bottom)
 - **units**: distance unit, miles or kilometers (default: "kilometers")
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Shadow
 
@@ -1530,7 +1513,6 @@ bertin.draw({
 - **dy**: shift in y (default: 3)
 - **stdDeviation**: blur (default: 1.5)
 - **opacity**: opacity (default: 0.7)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Texts
 
@@ -1570,7 +1552,6 @@ bertin.draw({
 - **frame_stroke**: frame stroke color (default: "none")
 - **frame_strokeWidth**: thickness of the frame contour (default: 1)
 - **frame_opacity**: frame opacity (default: 1)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ### Mercator Tiles
 
@@ -1613,7 +1594,6 @@ style: {
 -**clip**: a geojson to clip the image
 - **source**: position of the text. It can be an array with x,y coordinates. For example [100,200]. It can be also a string defining the position. "topleft", "top", "topright", "left", "middle", "right", "bottomleft", "bottom", "bottomright" (default: "topleft")
 - **increasetilesize**: a value to slightly increase the size of the tiles solve the problem of gap between the tiles with chromium (deafault: 1)
-- **display**: Boolean to allow to show or hide the layer. This parameter has no effect on the calculation of the extent. (default: true)
 
 ###  Tissot's indicatrix 
 
@@ -2092,6 +2072,53 @@ map
 ```
 
 If you do not specify any particular layer, map will return the coordinates of the mouse cursor.
+
+# Update function
+
+Since version 1.7 of bertin, an update function function is available. It allows you to modify specific attributes and styles without having to redraw the entire map. Not everything can be modified. Only the attributes underlined in the documentation are.
+
+To use it, you must first create a map with the `draw` function add an identifier to each layer.
+
+```js
+map = bertin.draw({
+  layers: [
+    {
+      id: "mylayerid",
+      geojson: data,
+      fill: "red"
+    }
+  ]
+})
+```
+
+Then you can apply the update function linked to the map to modify the styles and attributes. [example](https://observablehq.com/@neocartocnrs/update-layers-with-bertin)
+
+#### Code
+
+```js
+map.update({
+  id: "mylayerid",
+  attr: "fill",
+  value: "blue",
+  duration: 1000
+})
+```
+
+
+#### Parameters
+
+- **id**: the layer id
+- **attr**: the attribute to change
+- **value**: The new value to give to the attribute
+- **delay**: The time before making the change
+- **duration**: The time of transition
+- **legend**: In some cases, changing the attribute requires changing the title of the legend. You can do this via the legend parameter.
+
+
+ [Example 1](https://neocarto.github.io/bertin/examples/example1.html)
+
+NB: The update function will also allow you to show and hide the layers of your map. See an example [here](https://observablehq.com/@neocartocnrs/display-and-hide-layers-with-bertin).
+
 
 ## Bonus: a cheat sheet
 

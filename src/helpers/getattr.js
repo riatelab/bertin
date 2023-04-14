@@ -5,6 +5,7 @@ export function getattr(attr) {
     ["fillOpacity", "fill-opacity"],
     ["strokeDasharray", "stroke-dasharray"],
     ["strokeLinecap", "stroke-linecap"],
+    ["strokeLinejoin", "stroke-linejoin"],
   ]);
 
   let result = dico.get(attr);

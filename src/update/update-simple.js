@@ -51,6 +51,7 @@ export function update_simple({
   // FILL OR STROKE
   if (attr == "fill" || attr == "stroke") {
     svg.selectAll(`g.legbox_${id}`).remove();
+    svg.selectAll(`g.legbox${attr}_${id}`).remove();
 
     switch (typeof value) {
       case "string":
