@@ -38,34 +38,36 @@ Jacques Bertin (1918-2010) was a French cartographer, whose major contribution w
 
 #### In browser
 
-Latest major version
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/bertin@1" charset="utf-8"></script>
-```
-
 Latest version
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/bertin@1.7"
+  src="https://cdn.jsdelivr.net/npm/bertin"
   charset="utf-8"
 ></script>
 ```
 
-#### In Observable
+Pinned version
 
-Latest major version
-
-```js
-bertin = require("bertin@1");
+```html
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.7" charset="utf-8"></script>
 ```
+
+#### In Observable
 
 Latest version
 
 ```js
+bertin = require("bertin");
+```
+
+Pinned version
+
+```js
 bertin = require("bertin@1.7");
 ```
+
+
 
 #### In Quarto
 
@@ -77,7 +79,7 @@ In [Quarto](https://quarto.org/), you can use `bertin` with ojs cells. This allo
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="https://cdn.jsdelivr.net/npm/bertin@1.7"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin"></script>
 
 <script>
   let geojson =
@@ -1508,11 +1510,11 @@ bertin.draw({
 
 #### Parameters
 
-- **fill**: color (default: "#35383d")
-- **dx**: shift in x (default: 3)
-- **dy**: shift in y (default: 3)
+- **<ins>fill</ins>**: color (default: "#35383d")
+- **<ins>dx</ins>**: shift in x (default: 3)
+- **<ins>dy</ins>**: shift in y (default: 3)
 - **stdDeviation**: blur (default: 1.5)
-- **opacity**: opacity (default: 0.7)
+- **<ins>opacity</ins>**: opacity (default: 0.7)
 
 ### Texts
 
