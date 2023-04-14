@@ -15,7 +15,7 @@ export function shadow(selection, projection, clipid, options = {}) {
   let merged = union(geojson);
 
   let defs = selection.append("defs");
-  let blur = defs
+  defs
     .append("filter")
     .attr("id", "blur")
     .append("feGaussianBlur")
@@ -26,7 +26,7 @@ export function shadow(selection, projection, clipid, options = {}) {
   selection
     .append("g")
     .attr("class", options.id)
-    .attr("data-layer", JSON.stringify({ _type: "shadow" }))
+    .attr("data-layer", JSON.stringify({ _type: "shadow", dx, dy }))
     .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
     .append("path")
     .datum(merged)

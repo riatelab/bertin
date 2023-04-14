@@ -7,6 +7,7 @@ import { update_simple } from "./update-simple.js";
 import { update_spikes } from "./update-spikes.js";
 import { update_header } from "./update-header.js";
 import { update_footer } from "./update-footer.js";
+import { update_shadow } from "./update-shadow.js";
 
 export function update_main({
   svg,
@@ -116,6 +117,17 @@ export function update_main({
           duration,
           delay,
           legend,
+        });
+        break;
+      case "shadow":
+        console.log("update shadow");
+        update_shadow({
+          svg,
+          id,
+          attr,
+          value,
+          duration,
+          delay,
         });
         break;
 
