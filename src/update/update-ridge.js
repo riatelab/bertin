@@ -19,7 +19,6 @@ export function update_ridge({
   value = null,
   duration = 0,
   delay = 0,
-  width,
 } = {}) {
   let node = svg.select(`g.${id}`);
   let datalayer = JSON.parse(node.attr("data-layer"));
@@ -52,37 +51,24 @@ export function update_ridge({
       });
     });
 
-    console.log("ici");
-
-    node.selectAll("path").remove();
-    features.forEach((d, i) => {
+    if (duration == 0 && delay == 0) {
       node
-        .append("clipPath")
-        .attr("id", datalayer.clip + i)
-        .append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("height", d.properties.y - datalayer.strokeWidth - 1)
-        .attr("width", width);
-
+        .join(features)
+        .selectAll("path")
+        .data(features)
+        .join("path")
+        .attr("d", d3.geoPath());
+    } else {
       node
-        .append("path")
-        .datum(d)
-        // .transition()
-        // .delay(delay)
-        // .duration(duration)
-        .attr("d", d3.geoPath())
-        .attr("clip-path", "url(#" + datalayer.clip + i + ")");
-    });
-
-    // node
-    //   .join(features)
-    //   .selectAll("path")
-    //   .join(features)
-    //   .transition()
-    //   .delay(delay)
-    //   .duration(duration)
-    //   .attr("d", d3.geoPath());
+        .join(features)
+        .selectAll("path")
+        .data(features)
+        .join("path")
+        .transition()
+        .delay(delay)
+        .duration(duration)
+        .attr("d", d3.geoPath());
+    }
   } else {
     node
       .selectAll("path")

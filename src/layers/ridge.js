@@ -100,8 +100,10 @@ export function ridge(
     .attr("stroke-opacity", strokeOpacity)
     .attr("stroke-dasharray", strokeDasharray);
 
+  let g2 = selection.append("g");
+
   features.forEach((d, i) => {
-    g.append("clipPath")
+    g2.append("clipPath")
       .attr("id", clip + i)
       .append("rect")
       .attr("x", 0)
