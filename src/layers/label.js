@@ -35,6 +35,7 @@ export function label(selection, projection, planar, options = {}, clipid) {
         .filter((d) => d.properties[values] != undefined)
     )
     .join("text")
+    .attr("class", "onglobe_coords")
     .attr("x", (d) => projection(d.geometry.coordinates)[0])
     .attr("y", (d) => projection(d.geometry.coordinates)[1])
     .attr("fill", fill)

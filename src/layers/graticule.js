@@ -54,6 +54,7 @@ export function graticule(
       .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
       .append("path")
       .datum(d3.geoGraticule().step(step).extent(bb2))
+      .attr("class", "onglobe")
       .attr("d", d3.geoPath(projection))
       .style("fill", "none")
       .style("stroke", stroke)

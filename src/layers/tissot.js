@@ -27,6 +27,7 @@ export function tissot(selection, projection, planar, options = {}, clipid) {
       .append("path")
       .datum(ts(step))
       .attr("class", "test")
-      .attr("d", geoPath(projection));
+      .attr("d", geoPath(projection))
+      .attr("class", "onglobe");
   }
 }

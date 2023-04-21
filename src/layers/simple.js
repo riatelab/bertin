@@ -154,6 +154,7 @@ export function simple(
       .data(geojson.features)
       .join("path")
       .attr("d", d3.geoPath(projection))
+      .attr("class", "onglobe")
       .attr("fill", (d) =>
         colorize(geojson.features, fill).getcol(d.properties[fill.values])
       )
@@ -260,6 +261,11 @@ export function simple(
       }
     }
 
+    // coords
+    geojson.features.forEach((d) => {
+      d.coords = d3.geoPath(projection).centroid(d.geometry);
+    });
+
     const symbols = new Map([
       ["circle", d3.symbolCircle],
       ["cross", d3.symbolCross],
@@ -288,19 +294,22 @@ export function simple(
       .selectAll("path")
       .data(geojson.features)
       .join("path")
+      .attr("class", "onglobe_translate")
       .attr("d", d3.symbol().size(symbol_size).type(symbols.get(symbol)))
       .attr(
         "transform",
         (d) =>
           `translate(
-       ${symbol_shift ? d.x : projection(d.geometry.coordinates)[0]},
-       ${symbol_shift ? d.y : projection(d.geometry.coordinates)[1]})`
+       ${symbol_shift ? d.x : d.coords[0]},
+       ${symbol_shift ? d.y : d.coords[1]})`
       )
+
       .attr("fill", (d) =>
         colorize(geojson.features, fill).getcol(
           d.properties[fill.values] || undefined
         )
       )
+      .attr("visibility", (d) => (isNaN(d.coords[0]) ? "hidden" : "visible"))
       .attr("stroke", (d) =>
         colorize(geojson.features, stroke).getcol(d.properties[stroke.values])
       )

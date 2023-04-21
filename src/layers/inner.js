@@ -35,7 +35,8 @@ export function inner(selection, projection, options = {}) {
     .attr("id", `inner${id}`)
     .append("path")
     .datum(merged)
-    .attr("d", d3.geoPath(projection));
+    .attr("d", d3.geoPath(projection))
+    .attr("class", "onglobe");
 
   selection
     .append("g")
@@ -52,5 +53,6 @@ export function inner(selection, projection, options = {}) {
     .attr("stroke-opacity", fillOpacity)
     .attr("stroke-width", thickness * 2)
     .attr("filter", `url(#blur${id})`)
-    .attr("d", d3.geoPath(projection));
+    .attr("d", d3.geoPath(projection))
+    .attr("class", "onglobe");
 }

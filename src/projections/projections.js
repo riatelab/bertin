@@ -2,6 +2,7 @@ import { stringtod3proj } from "./stringtod3proj.js";
 import { Polar } from "./polar.js";
 import { HoaXiaoguang } from "./hoaxiaoguang.js";
 import { Spilhaus } from "./spilhaus.js";
+import { Globe } from "./globe.js";
 
 import { proj4d3 } from "./proj4d3.js";
 import { geoEquirectangular, geoIdentity } from "d3-geo";
@@ -30,13 +31,17 @@ export function getproj(projection) {
     projection = projection.replace(/\s/g, "");
 
     /* CUSTOM projections*/
-    if (projection == "Polar") {
+
+    if (projection.substring(0, 5).toLowerCase() == "globe") {
+      return Globe(projection);
+    }
+    if (projection.toLowerCase() == "polar") {
       return Polar();
     }
-    if (projection == "HoaXiaoguang") {
+    if (projection.toLowerCase() == "hoaxiaoguang") {
       return HoaXiaoguang();
     }
-    if (projection == "Spilhaus") {
+    if (projection.toLowerCase() == "spilhaus") {
       return Spilhaus();
     }
 

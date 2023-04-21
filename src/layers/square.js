@@ -168,6 +168,7 @@ export function square(
       )
     )
     .join("rect")
+    .attr("class", "onglobe_coords")
     .attr("fill", (d) => colorize(data, fill).getcol(d[fill.values]))
     .attr("stroke", (d) => colorize(data, stroke).getcol(d[stroke.values]))
     .attr("stroke-width", (d) =>

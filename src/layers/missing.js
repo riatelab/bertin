@@ -32,6 +32,7 @@ export function missing(selection, projection, options = {}, clipid) {
     .selectAll("path")
     .data(missing)
     .join("path")
+    .attr("class", "onglobe")
     .attr("d", d3.geoPath(projection))
     .attr("fill", fill)
     .attr("stroke", stroke)

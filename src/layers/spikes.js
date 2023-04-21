@@ -2,9 +2,10 @@ import { legspikes } from "../legend/leg-spikes.js";
 import { select, pointer } from "d3-selection";
 import { min, max, descending } from "d3-array";
 import { scaleLinear } from "d3-scale";
+import { geoPath } from "d3-geo";
 const d3 = Object.assign(
   {},
-  { select, pointer, min, max, descending, scaleLinear }
+  { select, pointer, min, max, descending, scaleLinear, geoPath }
 );
 
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
@@ -104,6 +105,11 @@ export function spikes(
       }`;
   selection.append("g").attr("id", infoid).attr("class", "info");
 
+  // coords
+  features.forEach((d) => {
+    d.coords = d3.geoPath(projection).centroid(d.geometry);
+  });
+
   selection
     .append("g")
     .attr("class", options.id)
@@ -130,6 +136,7 @@ export function spikes(
         )
     )
     .join("path")
+    .attr("class", "onglobe_translate")
     .attr("fill", (d) =>
       colorize(features, fill).getcol(d.properties[fill.values])
     )
@@ -148,16 +155,16 @@ export function spikes(
     .attr("stroke-dasharray", strokeDasharray)
     .attr(
       "d",
-      (d) =>
-        `M ${projection(d.geometry.coordinates)[0] - w / 2}, ${
-          projection(d.geometry.coordinates)[1]
-        } ${projection(d.geometry.coordinates)[0]}, ${
-          projection(d.geometry.coordinates)[1] - yScale(d.properties[values])
-        } ${projection(d.geometry.coordinates)[0] + w / 2}, ${
-          projection(d.geometry.coordinates)[1]
-        }`
+      (d) => `M ${-w / 2}, 0 0, ${0 - yScale(d.properties[values])} ${w / 2}, 0`
     )
-    //.attr("clip-path", `url(#clip_${clipid}_rectangle)`)
+    .attr(
+      "transform",
+      (d) =>
+        `translate(
+     ${d.coords[0]},
+     ${d.coords[1]})`
+    )
+
     .on("touchmove mousemove", function (event, d) {
       if (viewof) {
         d3.select(this)
@@ -200,14 +207,24 @@ export function spikes(
             fillOpacity: tooltip.fillOpacity,
             strokeOpacity: tooltip.strokeOpacity,
             col: tooltip.col,
-            type: tooltiptype(d3.pointer(event, this), width, height),
+            type: tooltiptype(d.coords, width, height),
           }
         );
       }
       if (tooltip) {
-        selection
-          .select(`#${infoid}`)
-          .attr("transform", `translate(${d3.pointer(event, this)})`);
+        selection.select(`#${infoid}`).attr(
+          "transform",
+          `translate(
+                ${
+                  projection(d.geometry.coordinates)[0] +
+                  d3.pointer(event, this)[0]
+                },
+                ${
+                  projection(d.geometry.coordinates)[1] +
+                  d3.pointer(event, this)[1]
+                })`
+        );
+
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity - 0.3)
           .attr("fill-opacity", fillOpacity - 0.3)

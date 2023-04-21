@@ -43,6 +43,7 @@
     "@turf/random": "^6.5.0",
     "d3-array": "^3.2.2",
     "d3-contour": "^4.0.0",
+    "d3-drag": "^3.0.0",
     "d3-force": "^3.0.0",
     "d3-geo": "^3.0.1",
     "d3-geo-projection": "^4.0.0",

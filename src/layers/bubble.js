@@ -1,6 +1,7 @@
 import { min, max, descending } from "d3-array";
 import { scaleSqrt } from "d3-scale";
 import { select, pointer } from "d3-selection";
+import { geoPath } from "d3-geo";
 const d3 = Object.assign(
   {},
   {
@@ -10,6 +11,7 @@ const d3 = Object.assign(
     scaleSqrt,
     select,
     pointer,
+    geoPath,
   }
 );
 import { simulation_circles } from "../helpers/simulation-circles.js";
@@ -106,6 +108,10 @@ export function bubble(
       simulation.tick();
     }
   }
+  // coords
+  features.forEach((d) => {
+    d.coords = d3.geoPath(projection).centroid(d.geometry);
+  });
 
   // info
   let infoid = options.id
@@ -162,6 +168,7 @@ export function bubble(
         )
     )
     .join("circle")
+    .attr("class", "onglobe_coords")
     .attr("fill", (d) =>
       colorize(features, fill).getcol(d.properties[fill.values])
     )
@@ -176,8 +183,9 @@ export function bubble(
     .attr("fill-opacity", fillOpacity)
     .attr("stroke-dasharray", strokeDasharray)
     .attr("stroke-opacity", strokeOpacity)
-    .attr("cx", (d) => (dorling ? d.x : projection(d.geometry.coordinates)[0]))
-    .attr("cy", (d) => (dorling ? d.y : projection(d.geometry.coordinates)[1]))
+    .attr("visibility", (d) => (isNaN(d.coords[0]) ? "hidden" : "visible"))
+    .attr("cx", (d) => (dorling ? d.x : d.coords[0]))
+    .attr("cy", (d) => (dorling ? d.y : d.coords[1]))
     .attr("r", (d) => radius(Math.abs(d.properties[values])))
     .on("touchmove mousemove", function (event, d) {
       if (viewof) {

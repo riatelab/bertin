@@ -1,8 +1,10 @@
 // Imports
+
 import { geoMercator } from "d3-geo";
 import { create } from "d3-selection";
 import { geoPath } from "d3-geo";
 import { transition } from "d3-transition";
+
 const d3 = Object.assign({}, { geoMercator, create, geoPath, transition });
 
 // Helpers
@@ -10,6 +12,7 @@ import { getheight } from "./helpers/height.js";
 import { bbox } from "./bbox.js";
 import { getproj } from "./projections/projections.js";
 import { geoimport } from "./helpers/geoimport.js";
+import { rotate } from "./projections/rotate.js";
 
 // Update
 import { update_main } from "./update/update-main.js";
@@ -1121,6 +1124,14 @@ export function draw({ params = {}, layers = {} } = {}) {
       delay,
     });
   };
+
+  // If globe (rotate on drag)
+
+  if (params.projection && typeof params.projection === "string") {
+    if (params.projection.substring(0, 5).toLowerCase() == "globe") {
+      rotate(svg, projection);
+    }
+  }
 
   // Output
   return svg.node();

@@ -5,7 +5,8 @@ import { thickness } from "../helpers/thickness.js";
 import { legspikes } from "../legend/leg-spikes.js";
 import { scaleLinear } from "d3-scale";
 import { min, max } from "d3-array";
-const d3 = Object.assign({}, { min, max, scaleLinear });
+import { geoPath } from "d3-geo";
+const d3 = Object.assign({}, { min, max, scaleLinear, geoPath });
 
 export function update_spikes({
   svg,
@@ -32,7 +33,9 @@ export function update_spikes({
   // VALUES
   if (attr == "values") {
     let features = node.selectAll("path").data();
-
+    features.forEach((d) => {
+      d.coords = d3.geoPath(projection).centroid(d.geometry);
+    });
     const yScale = d3
       .scaleLinear()
       .domain([0, d3.max(features.map((d) => +d.properties[value]))])
@@ -60,14 +63,16 @@ export function update_spikes({
       .attr(
         "d",
         (d) =>
-          `M ${projection(d.geometry.coordinates)[0] - datalayer.w / 2}, ${
-            projection(d.geometry.coordinates)[1]
-          } ${projection(d.geometry.coordinates)[0]}, ${
-            projection(d.geometry.coordinates)[1] -
-            yScale(d.properties[datalayer.values])
-          } ${projection(d.geometry.coordinates)[0] + datalayer.w / 2}, ${
-            projection(d.geometry.coordinates)[1]
-          }`
+          `M ${-datalayer.w / 2}, 0 0, ${
+            0 - yScale(d.properties[datalayer.values])
+          } ${datalayer.w / 2}, 0`
+      )
+      .attr(
+        "transform",
+        (d) =>
+          `translate(
+       ${d.coords[0]},
+       ${d.coords[1]})`
       );
 
     svg.select(`g.legspike_${id}`).remove();
@@ -79,6 +84,12 @@ export function update_spikes({
   else if (attr == "k") {
     datalayer.leg[attr] = value;
     svg.select(`g.${id}`).attr("data-layer", JSON.stringify(datalayer));
+
+    // coords
+    let features = node.selectAll("path").data();
+    features.forEach((d) => {
+      d.coords = d3.geoPath(projection).centroid(d.geometry);
+    });
 
     const yScale = d3
       .scaleLinear()
@@ -101,14 +112,16 @@ export function update_spikes({
       .attr(
         "d",
         (d) =>
-          `M ${projection(d.geometry.coordinates)[0] - datalayer.w / 2}, ${
-            projection(d.geometry.coordinates)[1]
-          } ${projection(d.geometry.coordinates)[0]}, ${
-            projection(d.geometry.coordinates)[1] -
-            yScale(d.properties[datalayer.values])
-          } ${projection(d.geometry.coordinates)[0] + datalayer.w / 2}, ${
-            projection(d.geometry.coordinates)[1]
-          }`
+          `M ${-datalayer.w / 2}, 0 0, ${
+            0 - yScale(d.properties[datalayer.values])
+          } ${datalayer.w / 2}, 0`
+      )
+      .attr(
+        "transform",
+        (d) =>
+          `translate(
+       ${d.coords[0]},
+       ${d.coords[1]})`
       );
 
     svg.select(`g.legspike_${id}`).remove();

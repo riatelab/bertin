@@ -30,6 +30,7 @@ export function shadow(selection, projection, clipid, options = {}) {
     .attr("clip-path", clipid == null ? `none` : `url(#clip_${clipid})`)
     .append("path")
     .datum(merged)
+    .attr("class", "onglobe")
     .attr("d", path)
     .attr("fill", fill)
     .attr("opacity", opacity)
