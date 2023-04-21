@@ -131,6 +131,10 @@ bertin.draw({
 })
 ```
 
+A globe view is available for some types of layers: **`simple`** (with symbol_shift == 0), **`spikes`**, **`bubble`** (with dorling == true), **`geolines`**, **`graticule`**, **`inner`**, **`missing`**, **`shadow`**, **`tissot`**, **`dotdensity`** and **`label`**.
+
+To use it, you juste have to use **`"globe"`** as projection. You can also define the center og the map by using **`"globe(x,y,rotate)"`**
+
 #### Parameters
 
 - **projection**: a d3 function or string defining the map projection. Refer [d3-geo-projection](https://github.com/d3/d3-geo-projection) and [spatialreference.org](https://spatialreference.org/) for more detailed explanation. (default: d3.geoEquirectangular() except if you use tiles. in this case, the projection is automatically set to d3.geoMercator()). Moreover, if you define projection as "user", you can display a basemap already projected. [Example](https://observablehq.com/@neocartocnrs/bertin-js-projections). Note alsa that custom projections are available. Try "Polar", "Spilhaus" or "HoaXiaoguang".
