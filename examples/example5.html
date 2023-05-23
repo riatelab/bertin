@@ -1,0 +1,25 @@
+<head><meta charset="UTF-8"></head>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/bertin@1.7.3"></script>
+
+<h1>Interactive globe</h1>
+
+<script>
+
+let geojson =   "../data/world.geojson"
+
+d3.json(geojson).then(r =>
+document.body.appendChild(bertin.draw({
+  params: {
+    projection: "Globe",
+    width:800
+  },
+  layers: [
+      {type: "layer", geojson: r,  tooltip: ["$ISO3", "$NAMEen"]},
+      {type:"outline"},
+      {type:"graticule"}
+    ]
+})));
+
+</script>
