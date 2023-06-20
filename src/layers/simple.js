@@ -220,8 +220,7 @@ export function simple(
             .attr("transform", `translate(${d3.pointer(event, this)})`);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
-            .attr("fill-opacity", fillOpacity - 0.3)
-            .raise();
+            .attr("fill-opacity", fillOpacity - 0.3);
         }
       })
       .on("touchend mouseleave", function () {
@@ -380,7 +379,6 @@ export function simple(
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
             .attr("fill-opacity", fillOpacity - 0.3);
-          //.raise();
         }
       })
       .on("touchend mouseleave", function () {
@@ -392,7 +390,6 @@ export function simple(
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity)
           .attr("fill-opacity", fillOpacity);
-        //.lower();
       });
   }
 

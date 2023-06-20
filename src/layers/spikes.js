@@ -227,8 +227,7 @@ export function spikes(
 
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity - 0.3)
-          .attr("fill-opacity", fillOpacity - 0.3)
-          .raise();
+          .attr("fill-opacity", fillOpacity - 0.3);
       }
     })
     .on("touchend mouseleave", function () {
@@ -239,8 +238,7 @@ export function spikes(
       selection.select(`#${infoid}`).call(addtooltip, null);
       d3.select(this)
         .attr("stroke-opacity", strokeOpacity)
-        .attr("fill-opacity", fillOpacity)
-        .lower();
+        .attr("fill-opacity", fillOpacity);
     });
 
   if (viewof) {
