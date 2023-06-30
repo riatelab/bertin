@@ -107,8 +107,7 @@ export function thickness(data, _) {
       .filter((d) => d != undefined && d != null && d != "");
 
     if (breaks == null) {
-      breaks = stat.breaks({
-        values: val,
+      breaks = stat.breaks(val, {
         method: method,
         nb: nbreaks,
         k: nbsd,

@@ -51,8 +51,7 @@ export function colorize(features, input) {
       arr.length === val.length ? null : [txt_missing, col_missing];
 
     if (breaks == null) {
-      breaks = stat.breaks({
-        values: val,
+      breaks = stat.breaks(val, {
         method: method,
         nb: nbreaks,
         k: k,

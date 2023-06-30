@@ -284,7 +284,7 @@ bertin.draw({
 
 -   <ins>method</ins>
 
-    : A method of classification. Jenks, q6, quantiles, geometric, msd (mean standard deviation), equal (default: quantiles). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
+    : A method of classification. "quantile", "q6", "equal", "msd" (mean standard deviation), "jenks", "geometric", "headtail" or "pretty" (default: "quantile"). See [statsbreaks](https://observablehq.com/@neocartocnrs/hello-statsbreaks) example for method implementation in action.
 
 -   <ins>middle</ins>
 
@@ -1256,7 +1256,7 @@ bertin.draw({
 
 -   <ins>method</ins>
 
-    : A method of classification. Jenks, q6, quantiles, msd (mean standard deviation), equal (default: quantiles).
+    : A method of classification. "quantile", "q6", "equal", "msd", "jenks", "geometric", "headtail" or "pretty" (default: "quantile").
 
 -   <ins>middle</ins>
 
