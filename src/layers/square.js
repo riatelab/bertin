@@ -20,6 +20,7 @@ import { figuration } from "../helpers/figuration.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
 import { legends } from "../legend/legends.js";
+import { isNumber } from "../helpers/isnumber.js";
 
 export function square(
   selection,
@@ -103,7 +104,11 @@ export function square(
     .filter((d) => !isNaN(d._y))
     .filter((d) => d[values] != null);
 
-  let array = data.map((d) => Math.abs(+d[values]));
+  let array = features
+    .map((d) => d.properties[values])
+    .filter((d) => isNumber(d))
+    .map((d) => Math.abs(d));
+
   let legval = [
     d3.min(array),
     size.invert(size(d3.max(array)) / 3),

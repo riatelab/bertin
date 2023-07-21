@@ -22,6 +22,7 @@ import { figuration } from "../helpers/figuration.js";
 import { colorize } from "../helpers/colorize.js";
 import { thickness } from "../helpers/thickness.js";
 import { legends } from "../legend/legends.js";
+import { isNumber } from "../helpers/isnumber.js";
 
 export function bubble(
   selection,
@@ -85,7 +86,11 @@ export function bubble(
       : d3.max(features, (d) => Math.abs(+d.properties[values]));
   let radius = d3.scaleSqrt([0, valmax], [0, k]);
 
-  let array = features.map((d) => Math.abs(+d.properties[values]));
+  let array = features
+    .map((d) => d.properties[values])
+    .filter((d) => isNumber(d))
+    .map((d) => Math.abs(d));
+
   let legval = [
     d3.min(array),
     radius.invert(radius(d3.max(array)) / 3),
