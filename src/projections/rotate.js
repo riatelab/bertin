@@ -1,8 +1,8 @@
 import { eulerAngles } from "./euler.js";
 import { drag } from "d3-drag";
 import { geoPath } from "d3-geo";
-import { pointer } from "d3-selection";
-const d3 = Object.assign({}, { geoPath, drag, pointer });
+import { pointers } from "d3-selection";
+const d3 = Object.assign({}, { geoPath, drag, pointers });
 export function rotate(svg, projection) {
   let p0, o0;
 
@@ -40,14 +40,14 @@ export function rotate(svg, projection) {
   }
 
   function dragStart(event) {
-    p0 = projection.invert(d3.pointer(event, this));
+    p0 = projection.invert(d3.pointers(event, this)[0]);
     o0 = projection.rotate();
   }
 
   function dragged(event) {
     o0 = projection.rotate();
 
-    var p1 = projection.invert(d3.pointer(event, this)),
+    var p1 = projection.invert(d3.pointers(event, this)[0]),
       o1 = eulerAngles(p0, p1, o0);
 
     projection.rotate(o1);

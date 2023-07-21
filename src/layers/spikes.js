@@ -1,11 +1,11 @@
 import { legspikes } from "../legend/leg-spikes.js";
-import { select, pointer } from "d3-selection";
+import { select, pointers } from "d3-selection";
 import { min, max, descending } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { geoPath } from "d3-geo";
 const d3 = Object.assign(
   {},
-  { select, pointer, min, max, descending, scaleLinear, geoPath }
+  { select, pointers, min, max, descending, scaleLinear, geoPath }
 );
 
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
@@ -217,11 +217,11 @@ export function spikes(
           `translate(
                 ${
                   projection(d.geometry.coordinates)[0] +
-                  d3.pointer(event, this)[0]
+                  d3.pointers(event, this)[0][0]
                 },
                 ${
                   projection(d.geometry.coordinates)[1] +
-                  d3.pointer(event, this)[1]
+                  d3.pointers(event, this)[0][1]
                 })`
         );
 

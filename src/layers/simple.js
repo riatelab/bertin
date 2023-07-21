@@ -1,4 +1,4 @@
-import { select, pointer } from "d3-selection";
+import { select, pointers } from "d3-selection";
 import {
   symbol,
   symbolCircle,
@@ -15,7 +15,7 @@ const d3 = Object.assign(
   {},
   {
     select,
-    pointer,
+    pointers,
     forceX,
     forceY,
     forceCollide,
@@ -211,13 +211,13 @@ export function simple(
             fillOpacity: tooltip.fillOpacity,
             strokeOpacity: tooltip.strokeOpacity,
             col: tooltip.col,
-            type: tooltiptype(d3.pointer(event, this), width, height),
+            type: tooltiptype(d3.pointers(event, this)[0], width, height),
           });
         }
         if (tooltip) {
           selection
             .select(`#${infoid}`)
-            .attr("transform", `translate(${d3.pointer(event, this)})`);
+            .attr("transform", `translate(${d3.pointers(event, this)[0]})`);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
             .attr("fill-opacity", fillOpacity - 0.3);

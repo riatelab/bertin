@@ -1,11 +1,10 @@
 import { descending, max } from "d3-array";
 import { scaleSqrt } from "d3-scale";
-import { select, pointer } from "d3-selection";
+import { select, pointers } from "d3-selection";
 
-const d3 = Object.assign({}, { descending, max, scaleSqrt, select, pointer });
+const d3 = Object.assign({}, { descending, max, scaleSqrt, select, pointers });
 
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
-import { legcircles } from "../legend/leg-circles.js";
 import { centroid } from "../helpers/centroid.js";
 
 export function mushroom(
@@ -160,14 +159,14 @@ export function mushroom(
               fillOpacity: top_tooltip.fillOpacity,
               strokeOpacity: top_tooltip.strokeOpacity,
               col: top_tooltip.col,
-              type: tooltiptype(d3.pointer(event, this), width, height),
+              type: tooltiptype(d3.pointers(event, this)[0], width, height),
             }
           );
         }
         if (top_tooltip) {
           selection
             .select(`#${infoid}`)
-            .attr("transform", `translate(${d3.pointer(event, this)})`);
+            .attr("transform", `translate(${d3.pointers(event, this)[0]})`);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
             .attr("fill-opacity", fillOpacity - 0.3);
@@ -246,14 +245,14 @@ export function mushroom(
               fillOpacity: bottom_tooltip.fillOpacity,
               strokeOpacity: bottom_tooltip.strokeOpacity,
               col: bottom_tooltip.col,
-              type: tooltiptype(d3.pointer(event, this), width, height),
+              type: tooltiptype(d3.pointers(event, this)[0], width, height),
             }
           );
         }
         if (bottom_tooltip) {
           selection
             .select(`#${infoid}`)
-            .attr("transform", `translate(${d3.pointer(event, this)})`);
+            .attr("transform", `translate(${d3.pointers(event, this)[0]})`);
           d3.select(this)
             .attr("stroke-opacity", strokeOpacity - 0.3)
             .attr("fill-opacity", fillOpacity - 0.3);

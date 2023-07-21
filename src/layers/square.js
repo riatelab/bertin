@@ -1,6 +1,6 @@
 import { min, max, descending } from "d3-array";
 import { scaleSqrt } from "d3-scale";
-import { select, pointer } from "d3-selection";
+import { select, pointers } from "d3-selection";
 import { simulation_squares } from "../helpers/simulation-squares.js";
 const d3 = Object.assign(
   {},
@@ -10,7 +10,7 @@ const d3 = Object.assign(
     descending,
     scaleSqrt,
     select,
-    pointer,
+    pointers,
   }
 );
 import { addtooltip, tooltiptype } from "../helpers/tooltip.js";
@@ -223,13 +223,13 @@ export function square(
           fillOpacity: tooltip.fillOpacity,
           strokeOpacity: tooltip.strokeOpacity,
           col: tooltip.col,
-          type: tooltiptype(d3.pointer(event, this), width, height),
+          type: tooltiptype(d3.pointers(event, this)[0], width, height),
         });
       }
       if (tooltip) {
         selection
           .select(`#${infoid}`)
-          .attr("transform", `translate(${d3.pointer(event, this)})`);
+          .attr("transform", `translate(${d3.pointers(event, this)[0]})`);
         d3.select(this)
           .attr("stroke-opacity", strokeOpacity - 0.3)
           .attr("fill-opacity", fillOpacity - 0.3);
