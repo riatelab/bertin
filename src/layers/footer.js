@@ -56,10 +56,10 @@ export function addfooter(selection, width, height, options = {}) {
     .attr("dominant-baseline", "hanging")
     .attr("fill", fill)
     .attr("font-family", "sans-serif")
-    .attr("fill-opacity", 1)
-    .text((d) => d)
-    .on("click", function () {
-      window.open("http://www.lemonde.fr");
-    })
-    .style("cursor", "pointer");
+    .attr("fill-opacity", 1);
+  // .text((d) => d)
+  // .on("click", function () {
+  //   window.open("http://www.lemonde.fr");
+  // })
+  // .style("cursor", "pointer");
 }
