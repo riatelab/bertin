@@ -57,9 +57,4 @@ export function addfooter(selection, width, height, options = {}) {
     .attr("fill", fill)
     .attr("font-family", "sans-serif")
     .attr("fill-opacity", 1);
-  // .text((d) => d)
-  // .on("click", function () {
-  //   window.open("http://www.lemonde.fr");
-  // })
-  // .style("cursor", "pointer");
 }
